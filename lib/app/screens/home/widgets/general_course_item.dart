@@ -35,13 +35,13 @@ class GeneralCourseItem extends StatelessWidget {
                         url:
                             'https://i0.wp.com/www.yogabasics.com/yogabasics2017/wp-content/uploads/2021/03/Ashtanga-Yoga.jpeg'),
                   ),
-                  const SizedBox(height: 5),
+                  const SizedBox(height: 10),
                   Row(
                     crossAxisAlignment: CrossAxisAlignment.center,
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       Text(
-                        'course name',
+                        'دوره فلان',
                         style: Theme.of(context)
                             .textTheme
                             .headlineMedium!
@@ -70,12 +70,13 @@ class GeneralCourseItem extends StatelessWidget {
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
+                      //todo here1
                       Text(
-                        '${345000} ${Translator.toman.tr}',
+                        Translator.toman.trParams({'number':'20000'}),
                         style: Theme.of(context)
                             .textTheme
                             .headlineMedium!
-                            .copyWith(color: black),
+                            .copyWith(color: black, overflow: TextOverflow.ellipsis),
                       ),
                       SizedBox(
                         width: 50,

@@ -30,7 +30,10 @@ class MainScreen extends StatelessWidget {
       PersistentBottomNavBarItem(
         icon: Transform.scale(
             scale: 1.5,
-            child: SvgPicture.asset('assets/images/home.svg'),),
+            child: ColorFiltered(
+              colorFilter: ColorFilter.mode(primaryColor, BlendMode.modulate),
+              child: SvgPicture.asset('assets/images/home.svg',),
+            ),),
         title: Translator.home.tr,
         activeColorPrimary: primaryColor,
         inactiveColorPrimary: textGray,

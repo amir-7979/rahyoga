@@ -119,7 +119,7 @@ class LoginForm extends StatelessWidget {
                 () => ElevatedButton(
                   style: ElevatedButton.styleFrom(
                     minimumSize: const Size.fromHeight(50),
-                    backgroundColor: white_button_color,
+                    backgroundColor: greenButtonColor,
                     elevation: 5,
                     shape: const StadiumBorder(),
                   ),

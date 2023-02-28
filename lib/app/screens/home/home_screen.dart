@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
+import 'package:rahyoga/app/screens/home/home_controller.dart';
 import 'package:rahyoga/core/theme/colors.dart';
 
 import '../../../core/languages/translator.dart';
@@ -11,7 +12,9 @@ import 'widgets/image_slider.dart';
 import 'widgets/mini_course_list.dart';
 
 class HomeScreen extends StatelessWidget {
-  const HomeScreen({Key? key}) : super(key: key);
+   HomeScreen({Key? key}) : super(key: key);
+  final HomeController _controller = Get.find<HomeController>();
+
 
   @override
   Widget build(BuildContext context) {
@@ -26,7 +29,7 @@ class HomeScreen extends StatelessWidget {
         actions: [
           IconButton(
             onPressed: () {
-              //todo search function
+              //todo search
             },
             icon: SvgPicture.asset('assets/images/search.svg'),
           ),
@@ -34,7 +37,7 @@ class HomeScreen extends StatelessWidget {
             padding: const EdgeInsetsDirectional.only(end: 10),
             child: IconButton(
               onPressed: () {
-                //todo buy function
+                _controller.gotoBasketScreen();
               },
               icon: SvgPicture.asset('assets/images/basket.svg'),
             ),
@@ -42,7 +45,7 @@ class HomeScreen extends StatelessWidget {
         ],
       ),
       body: Padding(
-        padding: const EdgeInsetsDirectional.fromSTEB(10, 5, 5, 20),
+        padding: const EdgeInsetsDirectional.fromSTEB(10, 5, 5, 0),
         child: ListView(
           children: [
             LastCourseItem(),
@@ -52,6 +55,7 @@ class HomeScreen extends StatelessWidget {
             ImageSlider(),
             SizedBox(height: 25),
             MiniCourseList(),
+            SizedBox(height: 5),
           ],
         ),
       ),

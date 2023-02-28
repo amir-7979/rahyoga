@@ -24,11 +24,13 @@ class LoginController extends GetxController {
   String? passwordValidation(String txt) => checkPasswordLogin(txt);
 
   Future<void> login() async {
+    gotoMainScreen();
+
     if (formKey.currentState!.validate()) {
       isLoading.value = true;
       errorText.value = '';
       update();
-      gotoMainScreen();
+      //gotoMainScreen();
 
       /*final response = await userApiService.login(
           usernameController.value.text, passwordController.value.text);

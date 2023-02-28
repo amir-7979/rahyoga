@@ -68,7 +68,7 @@ class ImageSlider extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
           Text(
-            Translator.generalYogaCourses.tr,
+            Translator.yogaMovements.tr,
             style: Theme.of(context)
                 .textTheme
                 .displayLarge!
@@ -98,7 +98,8 @@ class ImageSlider extends StatelessWidget {
             //autoPlay: true,
             height: 170,
             enlargeCenterPage: true,
-            aspectRatio: 2,
+
+            //aspectRatio: 20/9,
             onPageChanged: (index, reason) {
                  _ctrl.setSliderIndex(index);
                 }),

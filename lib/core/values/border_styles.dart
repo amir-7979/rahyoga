@@ -24,3 +24,27 @@ var errorBorder = OutlineInputBorder(
 
   ),
 );
+
+
+var focusedBorder2 = OutlineInputBorder(
+  borderRadius: BorderRadius.only(topRight: Radius.circular(12), bottomRight: Radius.circular(12),),
+  borderSide: const BorderSide(
+    color: generalItemBorderGray
+  ),
+);
+var enabledBorder2 = OutlineInputBorder(
+  borderRadius: BorderRadius.only(topRight: Radius.circular(12), bottomRight: Radius.circular(12),),
+  borderSide: const BorderSide(
+    color: generalItemBorderGray,
+  ),
+);
+var border2 = OutlineInputBorder(
+  borderRadius: BorderRadius.only(topRight: Radius.circular(12), bottomRight: Radius.circular(12),),
+);
+var errorBorder2 = OutlineInputBorder(
+  borderRadius: BorderRadius.only(topRight: Radius.circular(12), bottomRight: Radius.circular(12),),
+  borderSide: const BorderSide(
+    color: generalItemBorderGray,
+
+  ),
+);

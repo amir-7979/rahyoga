@@ -31,6 +31,8 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
+  flutter_localizations:
+    sdk: flutter
   cupertino_icons: ^1.0.2
   get: ^4.6.5
   dio: ^4.0.6
@@ -46,6 +48,7 @@ dependencies:
   carousel_slider: ^4.2.1
   tab_indicator_styler: ^2.0.0
   percent_indicator: ^4.2.2
+  dotted_line: ^3.1.0
 
 
 

@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:get/get.dart';
+import 'package:rahyoga/app/screens/buy_course/buy_course_screen.dart';
 import 'package:rahyoga/app/screens/login/login_screen.dart';
 import 'package:rahyoga/app/screens/signup/signup_screen.dart';
 import 'package:rahyoga/app/screens/splash/splash_screen.dart';
@@ -21,9 +23,17 @@ class MyApp extends StatelessWidget {
     Get.lazyPut<SplashController>(
           () => SplashController(),
     );
+    Get.lazyPut<BuyCourseScreen>(
+          () => BuyCourseScreen(),
+    );
     return GetMaterialApp(
       title: 'RahYoga',
       debugShowCheckedModeBanner: false,
+      localizationsDelegates: const [
+        GlobalCupertinoLocalizations.delegate,
+        GlobalMaterialLocalizations.delegate,
+        GlobalWidgetsLocalizations.delegate,
+      ], // set this property
       locale: const Locale('fa', 'IR'),
       //locale: Get.deviceLocale,
       fallbackLocale: const Locale('en', 'US'),
@@ -38,7 +48,9 @@ class MyApp extends StatelessWidget {
       ),
       getPages: AppPages.pages,
       //home: RecoveryPasswordScreen(),
-      home: SplashScreen(),
+      //home: SplashScreen(),
+      home: BuyCourseScreen(),
+
     );
   }
 }

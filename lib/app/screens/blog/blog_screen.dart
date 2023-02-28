@@ -6,6 +6,8 @@ import 'package:tab_indicator_styler/tab_indicator_styler.dart';
 
 import '../../../core/languages/translator.dart';
 import '../../../core/theme/colors.dart';
+import 'widgets/blogs_list.dart';
+import 'widgets/movement_list.dart';
 
 class BlogScreen extends StatelessWidget {
   const BlogScreen({Key? key}) : super(key: key);
@@ -84,8 +86,8 @@ class BlogScreen extends StatelessWidget {
                 padding: const EdgeInsetsDirectional.symmetric(horizontal: 7),
                 child: TabBarView(
                   children: [
-                    PurchasedCourseList(),
-                    FavoriteCourseList(),
+                    MovementList(),
+                    BlogList(),
                   ],
                 ),
               ),
