@@ -18,6 +18,12 @@ import '../app/screens/main/main_binding.dart';
 class AppPages {
   static final List<GetPage> pages = [
     GetPage(
+      name: AppRoutes.splashScreen,
+      page: () => SplashScreen(),
+      binding: SplashBinding(),
+    ),
+
+    GetPage(
       name: AppRoutes.loginScreen,
       page: () => LoginScreen(),
       binding: LoginBinding(),

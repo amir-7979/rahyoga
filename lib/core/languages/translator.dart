@@ -69,11 +69,23 @@ class Translator extends Translations {
   static const save = 'save';
   static const cost = 'cost';
   static const courseName = 'courseName';
+  static const session2 = 'session2';
+  static const more = 'more';
+  static const less = 'less';
+  static const courseSession = 'courseSession';
+  static const hour = 'hour';
+  static const min = 'min';
 
   @override
   // TODO: implement keys
   Map<String, Map<String, String>> get keys => {
         'en_US': {
+          courseSession: 'course session',
+          more: 'more',
+          hour: 'hour',
+          min: 'min',
+          less: 'less',
+          session2: '@number session ',
           courseName:'course name',
           cost:'cost',
           save:'save',
@@ -144,6 +156,12 @@ class Translator extends Translations {
           userOrEmail: 'username or email',
         },
         'fa_IR': {
+          session2: '@number جلسه ',
+          more: 'بیشتر',
+          hour: 'ساعت',
+          min: 'دقیقه',
+          less: 'کمتر',
+          courseSession: 'جلسات دوره',
           courseName:'عنوان دوره',
           cost:'قیمت',
           save:'ذخیره‌سازی',
@@ -188,8 +206,8 @@ class Translator extends Translations {
           lastActiveCourse: 'آخرین دوره فعال',
           generalYogaCourses: 'دوره‌های جامع یوگا',
           app_name: 'رهیـــــوگا',
-          splash_text1: 'جمله الهام بخش',
-          splash_text2: 'به آرامی نفس بکشید',
+          splash_text1: 'اینجا میتونه یه جمله الهام بخش بیاد',
+          splash_text2: 'به آرامی نفس عمیقی بکشید',
           welcome: 'به رهیوگا خوش آمدید!',
           email: 'ایمیل',
           password: 'رمزعبور',

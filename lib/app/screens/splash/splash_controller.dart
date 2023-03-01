@@ -1,5 +1,5 @@
 import 'package:get/get.dart';
-import 'package:rahyoga/routes/routes.dart';
+import '../../../routes/routes.dart';
 
 class SplashController extends GetxController {
 
@@ -9,8 +9,6 @@ class SplashController extends GetxController {
     //todo init function
     Get.offAndToNamed(AppRoutes.loginScreen);
   }
-
-
 
   @override
   Future<void> onInit() async {

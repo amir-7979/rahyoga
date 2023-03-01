@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:rahyoga/core/theme/text_theme.dart';
 
-const Color primaryColor = Color(0xFF798777);
+const Color primaryColor = Color(0xFF425C5A);
 const Color blueBackgroundButton = Color(0xFF6A77FB);
 const Color blue_text2 = Color(0xFF3C49C5);
 const Color white_bordre = Color(0x88FFFFFF);
@@ -10,6 +10,7 @@ const Color greenButtonColor = Color(0xFF425C5A);
 const Color gray_text = Color(0xFF8E8AA);
 const Color grayText2 = Color(0xFFAFB9C5);
 const Color grayText3 = Color(0xFF6E798D);
+const Color grayText4 = Color(0xFF424C5C);
 const Color textGray = Color(0xFF6E798D);
 const Color black = Color(0xFF2C3544);
 const Color splashGray = Color(0xD0D2D2D2);

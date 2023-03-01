@@ -15,13 +15,6 @@ class SignupScreen extends StatelessWidget {
         body: ListView(
           children: [
             SignupForm(),
-            SizedBox(height: screenHeight - screenWidth - 390 > 0 ? screenHeight - (screenWidth*4/5) - 475 - 53: 1),
-            SvgPicture.asset('assets/images/splash_image.svg',
-              fit: BoxFit.fitWidth,
-              width: screenWidth,
-              height: screenWidth *4/5,
-              alignment: Alignment.bottomCenter,
-            ),
           ],
         ),
       ),
