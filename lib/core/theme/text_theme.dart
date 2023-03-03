@@ -15,11 +15,10 @@ TextTheme persianTextTheme = TextTheme(
   displayMedium:PersianFonts.Yekan.copyWith(fontSize: 14, fontWeight: FontWeight.w500),
   bodyMedium:PersianFonts.Yekan.copyWith(fontSize: 14, fontWeight: FontWeight.w400),
 
-
+  titleSmall:PersianFonts.Yekan.copyWith(fontSize: 12, fontWeight: FontWeight.w700),
   labelSmall:PersianFonts.Yekan.copyWith(fontSize: 12, fontWeight: FontWeight.w400),
   headlineSmall:PersianFonts.Yekan.copyWith(fontSize: 12, fontWeight: FontWeight.w500),
   displaySmall:PersianFonts.Yekan.copyWith(fontSize: 10, fontWeight: FontWeight.w400),
-
 
 
 

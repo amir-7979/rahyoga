@@ -67,7 +67,7 @@ class CourseItem extends StatelessWidget {
                             .textTheme
                             .headlineSmall!
                             .copyWith(
-                            color: grayText3,
+                            color: textGray,
                             overflow: TextOverflow.ellipsis),
                       ),
                     ],

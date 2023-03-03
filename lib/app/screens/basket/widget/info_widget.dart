@@ -34,7 +34,7 @@ class InfoWidget extends StatelessWidget {
           Container(
             decoration:  BoxDecoration(
               borderRadius: BorderRadius.circular(16.0),
-              border: Border.all(color: generalItemBorderGray),),
+              border: Border.all(color: moreTextColor),),
           child: Padding(
             padding: const EdgeInsetsDirectional.symmetric(horizontal: 10),
             child: Column(
@@ -49,7 +49,7 @@ class InfoWidget extends StatelessWidget {
                         style: Theme.of(context)
                             .textTheme
                             .bodyLarge!
-                            .copyWith(color: grayText3),
+                            .copyWith(color: textGray),
                       ),
                       Text(
                         _ctrl.courseCount,
@@ -76,7 +76,7 @@ class InfoWidget extends StatelessWidget {
                         style: Theme.of(context)
                             .textTheme
                             .bodyLarge!
-                            .copyWith(color: grayText3),
+                            .copyWith(color: textGray),
                       ),
                       Text(
                         _ctrl.toman,
@@ -103,7 +103,7 @@ class InfoWidget extends StatelessWidget {
                         style: Theme.of(context)
                             .textTheme
                             .bodyLarge!
-                            .copyWith(color: grayText3),
+                            .copyWith(color: textGray),
                       ),
                       Text(
                         _ctrl.toman,

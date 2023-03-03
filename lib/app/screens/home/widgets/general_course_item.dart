@@ -21,7 +21,7 @@ class GeneralCourseItem extends StatelessWidget {
           child: Container(
             decoration: BoxDecoration(
               color: white,
-              border: Border.all(color: generalItemBorderGray),
+              border: Border.all(color: moreTextColor),
               borderRadius: BorderRadius.circular(15.0),
             ),
             child: Padding(

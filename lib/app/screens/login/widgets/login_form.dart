@@ -3,7 +3,7 @@ import 'package:get/get.dart';
 import '../../../../core/languages/translator.dart';
 import '../../../../core/theme/colors.dart';
 import '../../../../core/values/border_styles.dart';
-import '../../../widgets/email_dialog.dart';
+import '../../../widgets/recovey_dialog/recover_dialog1.dart';
 import '../login_controller.dart';
 
 class LoginForm extends StatelessWidget {
@@ -15,7 +15,7 @@ class LoginForm extends StatelessWidget {
     return Form(
       key: _controller.formKey,
       child: Padding(
-        padding: const EdgeInsets.fromLTRB(20, 40, 20, 0),
+        padding: const EdgeInsetsDirectional.fromSTEB(20, 50, 20, 0),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.start,
           children: [
@@ -34,68 +34,78 @@ class LoginForm extends StatelessWidget {
               height: 70,
               child: TextFormField(
                 style: const TextStyle(color: white),
-                  controller: _controller.usernameController,
-                  keyboardType: TextInputType.text,
-                  onEditingComplete: () => FocusScope.of(context).nextFocus(),
-                  decoration: InputDecoration(
-                    helperText: ' ',
-                    hintStyle: const TextStyle(color: grayText2),
-                      filled: true,
-                      fillColor: blueBackgroundButton,
-                      labelText: Translator.userOrEmail.tr,
-                      labelStyle: const TextStyle(color: white),
-                      focusedBorder: focusedBorder,
-                      enabledBorder: enabledBorder,
-                      border: border,
-                      errorBorder: errorBorder,
-                      ),
-                  validator: (txt) => _controller.usernameValidation(txt!),
+                controller: _controller.usernameController,
+                keyboardType: TextInputType.text,
+                onEditingComplete: () => FocusScope.of(context).nextFocus(),
+                decoration: InputDecoration(
+                  helperText: ' ',
+                  errorStyle: Theme.of(context)
+                      .textTheme
+                      .headlineSmall!
+                      .copyWith(color: errorText),
+                  hintStyle: const TextStyle(color: grayText2),
+                  filled: true,
+                  fillColor: fieldColor,
+                  labelText: Translator.userOrEmail.tr,
+                  labelStyle: const TextStyle(color: white),
+                  focusedBorder: focusedBorder,
+                  enabledBorder: enabledBorder,
+                  border: border,
+                  errorBorder: errorBorder,
+                  focusedErrorBorder: errorBorder,
                 ),
+                validator: (txt) => _controller.usernameValidation(txt!),
               ),
+            ),
             const SizedBox(height: 10),
             SizedBox(
               height: 70,
               child: TextFormField(
-                  style: const TextStyle(color: white),
-                  controller: _controller.passwordController,
-                  obscureText: _controller.passwordVisible.value,
-                  keyboardType: TextInputType.visiblePassword,
-                  onEditingComplete: () => FocusScope.of(context).nextFocus(),
-                  decoration: InputDecoration(
-                    helperText: '',
-                      suffixIcon: IconButton(
-                        icon: Icon(
-                          _controller.passwordVisible.value
-                              ? Icons.visibility_off
-                              : Icons.visibility,
-                          color: white,
-                        ),
-                        onPressed: _controller.toggle,
-                      ),
-                      filled: true,
-                      fillColor: blueBackgroundButton,
-                      labelText: Translator.password.tr,
-                      labelStyle: const TextStyle(color: white),
-                      focusedBorder: focusedBorder,
-                      enabledBorder: enabledBorder,
-                      errorBorder: errorBorder,
-                    border: border,
-
+                style: const TextStyle(color: white),
+                controller: _controller.passwordController,
+                obscureText: _controller.passwordVisible.value,
+                keyboardType: TextInputType.visiblePassword,
+                onEditingComplete: () => FocusScope.of(context).nextFocus(),
+                decoration: InputDecoration(
+                  errorStyle: Theme.of(context)
+                      .textTheme
+                      .headlineSmall!
+                      .copyWith(color: errorText),
+                  helperText: '',
+                  suffixIcon: IconButton(
+                    icon: Icon(
+                      _controller.passwordVisible.value
+                          ? Icons.visibility_off
+                          : Icons.visibility,
+                      color: white,
+                    ),
+                    onPressed: _controller.toggle,
                   ),
-                  validator: (txt) => _controller.passwordValidation(txt!),
-                  //onSubmitted: (txt) => function(controller.text),
+                  filled: true,
+                  fillColor: fieldColor,
+                  labelText: Translator.password.tr,
+                  labelStyle: const TextStyle(color: white),
+                  focusedBorder: focusedBorder,
+                  enabledBorder: enabledBorder,
+                  errorBorder: errorBorder,
+                  focusedErrorBorder: errorBorder,
+                  border: border,
                 ),
+                validator: (txt) => _controller.passwordValidation(txt!),
+                //onSubmitted: (txt) => function(controller.text),
               ),
+            ),
             Align(
               alignment: AlignmentDirectional.centerStart,
               child: TextButton(
                 onPressed: () {
-                  Get.dialog(emailDialog());
+                  Get.dialog(recoverDialog1());
                 },
                 child: Text(
                   Translator.forget_password.tr,
                   style: Theme.of(context).textTheme.displayMedium!.copyWith(
-                      color: loginGray, decoration: TextDecoration.underline),
+                      color: forgetPasswordColor,
+                      decoration: TextDecoration.underline),
                 ),
               ),
             ),
@@ -108,19 +118,19 @@ class LoginForm extends StatelessWidget {
                         _controller.errorText.value,
                         style: Theme.of(context)
                             .textTheme
-                            .displayMedium!
-                            .copyWith(color: redError),
+                            .headlineSmall!
+                            .copyWith(color: errorText),
                       ))
                   : Container(height: 0.01))),
             ),
             Padding(
-              padding: const EdgeInsets.fromLTRB(6, 10, 6, 0),
+              padding: const EdgeInsetsDirectional.fromSTEB(6, 10, 6, 0),
               child: Obx(
                 () => ElevatedButton(
                   style: ElevatedButton.styleFrom(
                     minimumSize: const Size.fromHeight(50),
-                    backgroundColor: greenButtonColor,
-                    elevation: 5,
+                    backgroundColor: white,
+                    elevation: 0,
                     shape: const StadiumBorder(),
                   ),
                   onPressed: () async {
@@ -129,7 +139,7 @@ class LoginForm extends StatelessWidget {
                   },
                   child: (_controller.isLoading.value)
                       ? const CircularProgressIndicator(
-                          color: primaryColor,
+                          color: fieldColor,
                           strokeWidth: 3,
                         )
                       : Text(
@@ -142,6 +152,7 @@ class LoginForm extends StatelessWidget {
                 ),
               ),
             ),
+            SizedBox(height: 10,),
             Align(
               alignment: AlignmentDirectional.center,
               child: Row(
@@ -152,7 +163,7 @@ class LoginForm extends StatelessWidget {
                     style: Theme.of(context)
                         .textTheme
                         .bodyLarge!
-                        .copyWith(color: loginGray),
+                        .copyWith(color: forgetPasswordColor),
                   ),
                   TextButton(
                     onPressed: () {

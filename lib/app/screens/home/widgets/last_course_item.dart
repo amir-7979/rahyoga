@@ -42,7 +42,7 @@ class LastCourseItem extends StatelessWidget {
             child: Container(
               decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(12.0),
-                  color: lastItemGray),
+                  color: bottomBarGray),
               child: Row(
                 children: [
                   Padding(
@@ -92,7 +92,7 @@ class LastCourseItem extends StatelessWidget {
                             style: Theme.of(context)
                                 .textTheme
                                 .labelSmall!
-                                .copyWith(color: grayText3),
+                                .copyWith(color: textGray),
                           ),
                           //todo pogress barRow(),
                         ],

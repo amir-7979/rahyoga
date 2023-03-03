@@ -91,7 +91,7 @@ class PurchasedCourseItem extends StatelessWidget {
                                     .textTheme
                                     .displayMedium!
                                     .copyWith(
-                                      color: grayText3,
+                                      color: textGray,
                                     ),
                               ),
                               Row(

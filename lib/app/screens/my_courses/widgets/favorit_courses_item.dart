@@ -18,7 +18,7 @@ class FavoriteCourseItem extends StatelessWidget {
         child: Container(
           decoration:  BoxDecoration(
               borderRadius: BorderRadius.circular(12.0),
-            border: Border.all(color: generalItemBorderGray),),
+            border: Border.all(color: moreTextColor),),
           child: Row(
             children: [
               SizedBox(
@@ -57,7 +57,7 @@ class FavoriteCourseItem extends StatelessWidget {
                                   .textTheme
                                   .labelSmall!
                                   .copyWith(
-                                color: favoriteGray
+                                color: black
                               ),
                             ),
                           ],

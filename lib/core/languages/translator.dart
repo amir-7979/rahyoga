@@ -75,11 +75,26 @@ class Translator extends Translations {
   static const courseSession = 'courseSession';
   static const hour = 'hour';
   static const min = 'min';
+  static const fullScreen = 'fullScreen';
+  static const nextSession = 'nextSession';
+  static const prevSession = 'prevSession';
+  static const confirmCode = 'confirmCode';
+  static const enterConfirmCode = 'enterConfirmCode';
+  static const confirm = 'confirm';
+  static const code = 'code';
+
 
   @override
   // TODO: implement keys
   Map<String, Map<String, String>> get keys => {
         'en_US': {
+          code: 'code',
+          confirm: 'confirm',
+          enterConfirmCode: 'enter your code',
+          confirmCode: 'confirm code',
+          nextSession: 'next session',
+          prevSession: 'previous session',
+          fullScreen: 'full screen',
           courseSession: 'course session',
           more: 'more',
           hour: 'hour',
@@ -156,6 +171,13 @@ class Translator extends Translations {
           userOrEmail: 'username or email',
         },
         'fa_IR': {
+          code: 'کد',
+          confirm: 'تایید',
+          enterConfirmCode: 'کد تایید ای که به ایمیل شما ارسال شده است را وارد کنید.',
+          confirmCode: 'کد تایید',
+          nextSession: 'جلسه‌ی بعد',
+          prevSession: 'جلسه‌ی قبل',
+          fullScreen: 'تمام صفحه',
           session2: '@number جلسه ',
           more: 'بیشتر',
           hour: 'ساعت',
@@ -210,17 +232,17 @@ class Translator extends Translations {
           splash_text2: 'به آرامی نفس عمیقی بکشید',
           welcome: 'به رهیوگا خوش آمدید!',
           email: 'ایمیل',
-          password: 'رمزعبور',
+          password: 'رمز عبور',
           confirm_password: 'تکرار رمز عبور',
           forget_password: 'رمز عبور خود را فراموش کرده ام',
           login: 'ورود',
           dont_have_accounte: 'هنوز عضو نشده اید؟',
-          have_accounte: 'ثبت نام کرده ام',
+          have_accounte: 'ثبت نام کرده ام.',
           signup: 'ثبت نام',
           username: 'نام کاربری',
-          password_recovery: 'بازیابی رمر عبور',
+          password_recovery: 'بازیابی رمز عبور',
           send_password_recover_request: 'ارسال درخواست',
-          email_example: 'example@example.com',
+          email_example: 'به فرمت example@example.com ',
           recovery_link_send: 'لینک بازیابی ارسال شد!',
           understand: 'متوجه شدم',
           recovery_text:

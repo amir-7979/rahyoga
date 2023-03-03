@@ -14,7 +14,7 @@ class SignupForm extends StatelessWidget {
     return Form(
       key: _controller.formKey,
       child: Padding(
-        padding: const EdgeInsets.fromLTRB(20, 40, 20, 0),
+        padding: const EdgeInsets.fromLTRB(20, 50, 20, 0),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.start,
           children: [
@@ -37,15 +37,20 @@ class SignupForm extends StatelessWidget {
                 keyboardType: TextInputType.text,
                 onEditingComplete: () => FocusScope.of(context).nextFocus(),
                 decoration: InputDecoration(
+                  errorStyle: Theme.of(context)
+                      .textTheme
+                      .headlineSmall!
+                      .copyWith(color: errorText),
                   helperText: ' ',
                   filled: true,
-                  fillColor: blueBackgroundButton,
+                  fillColor: fieldColor,
                   labelText: Translator.username.tr,
                   labelStyle: const TextStyle(color: white),
                   focusedBorder: focusedBorder,
                   enabledBorder: enabledBorder,
                   border: border,
                   errorBorder: errorBorder,
+                  focusedErrorBorder: errorBorder,
                 ),
                 validator: (txt) => _controller.usernameValidation(txt!),
                 //onSubmitted: (txt) => function(controller.text),
@@ -60,15 +65,21 @@ class SignupForm extends StatelessWidget {
                 keyboardType: TextInputType.emailAddress,
                 onEditingComplete: () => FocusScope.of(context).nextFocus(),
                 decoration: InputDecoration(
+                  errorStyle: Theme.of(context)
+                      .textTheme
+                      .headlineSmall!
+                      .copyWith(color: errorText),
                   helperText: '',
                   filled: true,
-                  fillColor: blueBackgroundButton,
+                  fillColor: fieldColor,
                   labelText: Translator.email.tr,
                   labelStyle: const TextStyle(color: white),
                   focusedBorder: focusedBorder,
                   enabledBorder: enabledBorder,
                   border: border,
                   errorBorder: errorBorder,
+                  focusedErrorBorder: errorBorder,
+
                 ),
                 validator: (txt) => _controller.emailValidation(txt!),
                 //onSubmitted: (txt) => function(controller.text),
@@ -84,6 +95,10 @@ class SignupForm extends StatelessWidget {
                 keyboardType: TextInputType.visiblePassword,
                 onEditingComplete: () => FocusScope.of(context).nextFocus(),
                 decoration: InputDecoration(
+                  errorStyle: Theme.of(context)
+                      .textTheme
+                      .headlineSmall!
+                      .copyWith(color: errorText),
                   helperText: '',
                   suffixIcon: IconButton(
                     icon: Icon(
@@ -95,13 +110,15 @@ class SignupForm extends StatelessWidget {
                     onPressed: _controller.toggle,
                   ),
                   filled: true,
-                  fillColor: blueBackgroundButton,
+                  fillColor: fieldColor,
                   labelText: Translator.password.tr,
                   labelStyle: const TextStyle(color: white),
                   focusedBorder: focusedBorder,
                   enabledBorder: enabledBorder,
                   border: border,
-                  errorBorder: errorBorder
+                  errorBorder: errorBorder,
+                  focusedErrorBorder: errorBorder,
+
                 ),
                 validator: (txt) => _controller.passwordValidation(txt!, _controller.passwordController2.value.text),
                 //onSubmitted: (txt) => function(controller.text),
@@ -117,6 +134,10 @@ class SignupForm extends StatelessWidget {
                 keyboardType: TextInputType.visiblePassword,
                 onEditingComplete: () => FocusScope.of(context).nextFocus(),
                 decoration: InputDecoration(
+                  errorStyle: Theme.of(context)
+                      .textTheme
+                      .headlineSmall!
+                      .copyWith(color: errorText),
                   helperText: '',
                   suffixIcon: IconButton(
                     icon: Icon(
@@ -128,13 +149,14 @@ class SignupForm extends StatelessWidget {
                     onPressed: _controller.toggle2,
                   ),
                   filled: true,
-                  fillColor: blueBackgroundButton,
+                  fillColor: fieldColor,
                   labelText: Translator.confirm_password.tr,
                   labelStyle: const TextStyle(color: white),
                   focusedBorder: focusedBorder,
                   enabledBorder: enabledBorder,
                   border: border,
                   errorBorder: errorBorder,
+                  focusedErrorBorder: errorBorder,
                 ),
                 validator: (txt) => _controller.passwordValidation(txt!, _controller.passwordController.value.text),
                 //onSubmitted: (txt) => function(controller.text),
@@ -160,8 +182,8 @@ class SignupForm extends StatelessWidget {
                 ()=> ElevatedButton(
                   style: ElevatedButton.styleFrom(
                     minimumSize: const Size.fromHeight(50),
-                    backgroundColor: greenButtonColor,
-                    elevation: 5,
+                    backgroundColor: white,
+                    elevation: 1,
                     shape: const StadiumBorder(),
                   ),
                   onPressed: () {
@@ -183,6 +205,7 @@ class SignupForm extends StatelessWidget {
                 ),
               ),
             ),
+            SizedBox(height: 16),
             Align(
               alignment: Alignment.center,
               child: Row(
@@ -193,9 +216,14 @@ class SignupForm extends StatelessWidget {
                     style: Theme.of(context)
                         .textTheme
                         .bodyLarge!
-                        .copyWith(color: loginGray),
+                        .copyWith(color: forgetPasswordColor),
                   ),
                   TextButton(
+                    style: TextButton.styleFrom(
+                      minimumSize: Size.zero,
+                      padding: EdgeInsetsDirectional.only(start: 5),
+                      tapTargetSize: MaterialTapTargetSize.shrinkWrap,
+                    ),
                     onPressed: () {
                       _controller.gotoLogin();
                     },

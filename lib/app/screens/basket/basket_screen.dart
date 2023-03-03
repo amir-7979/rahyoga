@@ -49,7 +49,7 @@ class BasketScreen extends StatelessWidget {
                         child: ElevatedButton(
                           style: ElevatedButton.styleFrom(
                             minimumSize: Size.fromWidth(200),
-                            backgroundColor: greenButtonColor,
+                            backgroundColor: primaryColor,
                             elevation: 0,
                             shape: const StadiumBorder(),
                           ),
@@ -74,7 +74,7 @@ class BasketScreen extends StatelessWidget {
                           Text(_ctrl.totalPrice, style: Theme.of(context)
                               .textTheme
                               .headlineSmall!
-                              .copyWith(color: grayText3)),
+                              .copyWith(color: textGray)),
                           SizedBox(height: 10,),
                           Row(
                             children: [

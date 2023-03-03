@@ -12,7 +12,7 @@ class ProfileWidget extends StatelessWidget {
     return Container(
       padding: const EdgeInsetsDirectional.all(14),
       decoration: const BoxDecoration(
-          color: profilePurple,
+          color: secondaryColor,
           borderRadius: BorderRadiusDirectional.all(Radius.circular(12))
       ),
       child: Column(
@@ -68,7 +68,7 @@ class ProfileWidget extends StatelessWidget {
                       .textTheme
                       .bodyLarge!
                       .copyWith(
-                      color: grayText3),
+                      color: textGray),
                 ),
                 Text(
                   '${1} ${Translator.course.tr}',
@@ -93,7 +93,7 @@ class ProfileWidget extends StatelessWidget {
                       .textTheme
                       .bodyLarge!
                       .copyWith(
-                      color: grayText3),
+                      color: textGray),
                 ),
                 Text(
                   '${1} ${Translator.session.tr}',
@@ -112,7 +112,7 @@ class ProfileWidget extends StatelessWidget {
                 .textTheme
                 .bodyLarge!
                 .copyWith(
-                color: grayText3),
+                color: textGray),
           ),
           Padding(padding: EdgeInsetsDirectional.fromSTEB(0, 20, 0, 20))
         ],

@@ -39,7 +39,7 @@ class BlogScreen extends StatelessWidget {
                       borderRadius: BorderRadius.all(
                         Radius.circular(30),
                       ),
-                      side: BorderSide(color: generalItemBorderGray)
+                      side: BorderSide(color: moreTextColor)
                   ),
                   title: TabBar(
                     automaticIndicatorColorAdjustment: true,
@@ -67,7 +67,7 @@ class BlogScreen extends StatelessWidget {
                       ),
                     ],
                     indicator: RectangularIndicator(
-                      color: tabBackground,
+                      color: secondaryColor,
                       bottomLeftRadius: 30,
                       bottomRightRadius: 30,
                       topLeftRadius: 30,

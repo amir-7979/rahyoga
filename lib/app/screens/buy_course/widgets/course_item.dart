@@ -26,14 +26,14 @@ class CourseItem extends StatelessWidget {
                     height: 24,
                     width: 24,
                     decoration: BoxDecoration(
-                        color: tabBackground,
+                        color: secondaryColor,
                         borderRadius: BorderRadiusDirectional.all(Radius.circular(12))
                     ),
                     child: Center(
                       child: Text('${1}', style: Theme.of(context)
                           .textTheme
                           .headlineMedium!
-                          .copyWith(color: greenButtonColor),),
+                          .copyWith(color: primaryColor),),
                     ),
                   ),
                   SizedBox(width: 8),
@@ -42,7 +42,7 @@ class CourseItem extends StatelessWidget {
                     style: Theme.of(context)
                         .textTheme
                         .headlineMedium!
-                        .copyWith(color: greenButtonColor),
+                        .copyWith(color: primaryColor),
                   ),
                 ],),
                 Text(

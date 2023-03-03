@@ -52,7 +52,7 @@ class RecoveryPasswordScreen extends StatelessWidget {
                 onPressed: _ctrl.toggle2(),
               ),
               filled: true,
-              fillColor: greenButtonColor,
+              fillColor: primaryColor,
               labelText: Translator.password.tr,
               labelStyle: const TextStyle(color: primaryColor),
               focusedBorder: OutlineInputBorder(
@@ -88,7 +88,7 @@ class RecoveryPasswordScreen extends StatelessWidget {
             child: Text(
               Translator.confirm_password.tr,
               style: const TextStyle(
-                  color: greenButtonColor,
+                  color: primaryColor,
                   fontSize: 16,
                   fontWeight: FontWeight.w700),
             ),

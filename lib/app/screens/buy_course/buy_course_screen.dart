@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
-import 'package:rahyoga/app/screens/buy_course/widgets/video_player.dart';
+import 'package:rahyoga/app/widgets/video_player.dart';
 import 'package:readmore/readmore.dart';
 
 import '../../../core/theme/colors.dart';
@@ -65,7 +65,7 @@ class BuyCourseScreen extends StatelessWidget {
                     child: ElevatedButton(
                       style: ElevatedButton.styleFrom(
                         minimumSize: const Size.fromWidth(200),
-                        backgroundColor: greenButtonColor,
+                        backgroundColor: primaryColor,
                         elevation: 0,
                         shape: const StadiumBorder(),
                       ),
@@ -90,7 +90,7 @@ class BuyCourseScreen extends StatelessWidget {
                       Text(_ctrl.cost, style: Theme.of(context)
                           .textTheme
                           .headlineSmall!
-                          .copyWith(color: grayText3)),
+                          .copyWith(color: textGray)),
                       const SizedBox(height: 10,),
                       Row(
                         children: [
@@ -158,7 +158,7 @@ class BuyCourseScreen extends StatelessWidget {
                 Container(
                 padding: const EdgeInsetsDirectional.fromSTEB(14, 12, 14, 12),
                 decoration: const BoxDecoration(
-                    color: profilePurple,
+                    color: secondaryColor,
                     borderRadius: BorderRadiusDirectional.all(Radius.circular(12))
                 ),
                 child: Column(

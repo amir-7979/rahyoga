@@ -13,7 +13,7 @@ class MovementItem extends StatelessWidget {
       child: Container(
           decoration:  BoxDecoration(
             borderRadius: BorderRadius.circular(12.0),
-            border: Border.all(color: generalItemBorderGray),),
+            border: Border.all(color: moreTextColor),),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [

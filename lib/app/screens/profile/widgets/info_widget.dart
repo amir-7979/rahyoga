@@ -14,7 +14,7 @@ class InfoWidget extends StatelessWidget {
       padding: const EdgeInsetsDirectional.fromSTEB(15, 15, 0, 15),
         decoration: BoxDecoration(
             borderRadius: const BorderRadiusDirectional.all(Radius.circular(12)),
-          border: Border.all(color: generalItemBorderGray),
+          border: Border.all(color: moreTextColor),
     ),
       child: Column(
         children: [
@@ -34,7 +34,7 @@ class InfoWidget extends StatelessWidget {
                             .textTheme
                             .bodyLarge!
                             .copyWith(
-                            color: grayText3),
+                            color: textGray),
                       ),
                     ),
                   ],
@@ -68,7 +68,7 @@ class InfoWidget extends StatelessWidget {
                             .textTheme
                             .bodyLarge!
                             .copyWith(
-                            color: grayText3),
+                            color: textGray),
                       ),
                     ),
                   ],
@@ -102,7 +102,7 @@ class InfoWidget extends StatelessWidget {
                             .textTheme
                             .bodyLarge!
                             .copyWith(
-                            color: grayText3),
+                            color: textGray),
                       ),
                     ),
                   ],
@@ -136,7 +136,7 @@ class InfoWidget extends StatelessWidget {
                             .textTheme
                             .bodyLarge!
                             .copyWith(
-                            color: grayText3),
+                            color: textGray),
                       ),
                     ),
                   ],
