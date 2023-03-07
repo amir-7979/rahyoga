@@ -28,7 +28,7 @@ class LastCourseItem extends StatelessWidget {
               ),
               TextButton(
                 onPressed: () {
-                  //todo go to see all screen
+                  //todo go to see_all screen
                 },
                 child: Text(
                   Translator.myCourses.tr,
