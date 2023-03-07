@@ -1,20 +1,32 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:get/get.dart';
-import 'package:rahyoga/app/screens/buy_course/buy_course_controller.dart';
-import 'package:rahyoga/app/screens/buy_course/buy_course_screen.dart';
-import 'package:rahyoga/app/screens/login/login_screen.dart';
-import 'package:rahyoga/app/screens/signup/signup_screen.dart';
+import 'package:rahyoga/app/data/services/storage_service.dart';
 import 'package:rahyoga/app/screens/splash/splash_screen.dart';
 import 'package:rahyoga/core/theme/colors.dart';
 import 'package:rahyoga/routes/pages.dart';
 
+import 'app/data/models/client.dart';
+import 'app/data/services/content_api_services.dart';
+import 'app/data/services/user_api_service.dart';
 import 'app/screens/splash/splash_binding.dart';
 import 'app/screens/splash/splash_controller.dart';
 import 'core/languages/translator.dart';
 import 'core/theme/text_theme.dart';
 
-void main() => runApp(const MyApp());
+Future<void> main() async {
+  await initServices();
+  runApp(const MyApp());
+}
+
+initServices() async {
+  await Get.putAsync<Client>(() async => Client());
+  await Get.putAsync<StorageService>(() async => StorageService());
+  await Get.putAsync<UserApiService>(() async => UserApiService());
+  await Get.putAsync<ContentApiService>(() async => ContentApiService());
+}
 
 class MyApp extends StatelessWidget {
   const MyApp({super.key});

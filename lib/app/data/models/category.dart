@@ -1,4 +1,5 @@
 import 'type.dart';
+
 class Category {
   Category({
     required this.id,
@@ -17,4 +18,5 @@ class Category {
     type = Type.fromJson(json['type']);
     description = json['description'];
   }
+
 }

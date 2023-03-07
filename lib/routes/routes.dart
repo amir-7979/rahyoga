@@ -9,4 +9,5 @@ class AppRoutes {
   static const String articleScreen = '/article_screen';
   static const String courseInfoScreen = '/course_info_screen';
 
+
 }

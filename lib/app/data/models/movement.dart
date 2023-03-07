@@ -31,4 +31,16 @@ class Movements {
     dateModifiedUnix = json['date_modified_unix'];
   }
 
+  Map<String, dynamic> toJson() {
+    final _data = <String, dynamic>{};
+    _data['id'] = id;
+    _data['header'] = header;
+    _data['author'] = author.toJson();
+    _data['image'] = image;
+    _data['date_modified'] = dateModified;
+    _data['date_published'] = datePublished;
+    _data['date_published_unix'] = datePublishedUnix;
+    _data['date_modified_unix'] = dateModifiedUnix;
+    return _data;
+  }
 }

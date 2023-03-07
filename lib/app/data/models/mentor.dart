@@ -19,14 +19,4 @@ class Mentor {
     lastName = null;
     email = json['email'];
   }
-
-  Map<String, dynamic> toJson() {
-    final _data = <String, dynamic>{};
-    _data['id'] = id;
-    _data['username'] = username;
-    _data['first_name'] = firstName;
-    _data['last_name'] = lastName;
-    _data['email'] = email;
-    return _data;
-  }
 }

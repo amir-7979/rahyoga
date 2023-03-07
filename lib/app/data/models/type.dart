@@ -13,5 +13,4 @@ class Type {
     name = json['name'];
     description = json['description'];
   }
-
 }

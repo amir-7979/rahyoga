@@ -1,21 +1,21 @@
 import 'package:rahyoga/app/data/models/progress.dart';
 import 'package:rahyoga/app/data/models/season.dart';
 
-import 'course_item.dart';
+import 'course.dart';
 
 class LastCourse {
   LastCourse({
     required this.course,
     required this.season,
-    required this.progres,
+    required this.progress,
   });
   late final Course course;
   late final Season season;
-  late final Progres progres;
+  late final double progress;
 
   LastCourse.fromJson(Map<String, dynamic> json){
     course = Course.fromJson(json['course']);
     season = Season.fromJson(json['season']);
-    progres = Progres.fromJson(json['progres']);
+    progress = json['progress'];
   }
 }

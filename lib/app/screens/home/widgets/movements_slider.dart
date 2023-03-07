@@ -8,8 +8,8 @@ import '../../../../core/theme/colors.dart';
 import '../../../widgets/cache_image.dart';
 import '../home_controller.dart';
 
-class ImageSlider extends StatelessWidget {
-  ImageSlider({Key? key}) : super(key: key);
+class MovementsSlider extends StatelessWidget {
+  MovementsSlider({Key? key}) : super(key: key);
   final HomeController _ctrl = Get.find<HomeController>();
 
   final CarouselController _controller = CarouselController();

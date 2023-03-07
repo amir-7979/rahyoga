@@ -82,6 +82,7 @@ class Translator extends Translations {
   static const enterConfirmCode = 'enterConfirmCode';
   static const confirm = 'confirm';
   static const code = 'code';
+  static const dontReciveEmail = 'code';
 
 
   @override

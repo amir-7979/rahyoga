@@ -4,15 +4,18 @@ import 'package:get/get.dart';
 import '../../../core/utils/authentication _format.dart';
 import '../../../core/values/consts.dart';
 import '../../../routes/routes.dart';
+import '../../data/services/user_api_service.dart';
 import '../../widgets/recovey_dialog/recover_dialog1.dart';
 import '../../widgets/recovey_dialog/recover_dialog2.dart';
+import '../../widgets/validate_dialog/validate_controller.dart';
+import '../../widgets/validate_dialog/validate_dialog.dart';
 
 class LoginController extends GetxController {
+  UserApiService userApiService = Get.find<UserApiService>();
   final usernameController = TextEditingController();
   final passwordController = TextEditingController();
   final emailController = TextEditingController();
   final codeController = TextEditingController();
-
   RxBool passwordVisible = true.obs;
   RxBool isLoading = false.obs;
   RxString errorText = ''.obs;
@@ -34,9 +37,6 @@ class LoginController extends GetxController {
 
   void gotoPrevDialog()=> Get.dialog(recoverDialog1());
 
-  //todo verificate
-  //todo check code
-
   Future<void> sendRecoveryCode() async{
     if (formKey2.currentState!.validate()) {
       errorText.value = '';
@@ -57,28 +57,28 @@ class LoginController extends GetxController {
   }
 
   Future<void> login() async {
-   // gotoMainScreen();
-
     if (formKey.currentState!.validate()) {
       isLoading.value = true;
       errorText.value = '';
       update();
-      //gotoMainScreen();
-
-      /*final response = await userApiService.login(
+      final response = await userApiService.login(
           usernameController.value.text, passwordController.value.text);
       isLoading.value = false;
       update();
-
-      if (response == '200') {
+      if (response == 200) {
         gotoMainScreen();
       } else {
-        errorText.value = 'error';
-*//*
-      errorText = response;
-*//*
-        update();
-      }*/
+        final response = await userApiService.verification(
+            usernameController.value.text);
+        if(response == 401){
+          Get.dialog(validateDialog(usernameController.value.text, passwordController.value.text), barrierDismissible: false,);
+        }
+        else{
+          errorText.value = 'error';
+          errorText.value = response.toString();
+          update();
+        }
+      }
     }
   }
 }

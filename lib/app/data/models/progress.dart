@@ -1,4 +1,4 @@
-import 'course_item.dart';
+import 'course.dart';
 
 class Progres {
   Progres({

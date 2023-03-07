@@ -19,6 +19,8 @@ import '../app/screens/home/home_binding.dart';
 import '../app/screens/login/login_binding.dart';
 import '../app/screens/main/main_binding.dart';
 
+
+
 class AppPages {
   static final List<GetPage> pages = [
 
@@ -75,5 +77,6 @@ class AppPages {
       page: () => CourseInfoScreen(),
       binding: CourseInfoBinding(),
     ),
+
   ];
 }

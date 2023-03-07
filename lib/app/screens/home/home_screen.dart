@@ -1,19 +1,21 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/rendering.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
-import 'package:rahyoga/app/screens/home/home_controller.dart';
-import 'package:rahyoga/core/theme/colors.dart';
-
 import '../../../core/languages/translator.dart';
+import '../../../core/theme/colors.dart';
+import '../../data/models/home.dart';
+import '../../data/services/content_api_services.dart';
+import '../../widgets/shimmer_screen.dart';
+import 'home_controller.dart';
 import 'widgets/general_course_list.dart';
 import 'widgets/last_course_item.dart';
-import 'widgets/image_slider.dart';
+import 'widgets/movements_slider.dart';
 import 'widgets/mini_course_list.dart';
 
 class HomeScreen extends StatelessWidget {
    HomeScreen({Key? key}) : super(key: key);
   final HomeController _controller = Get.find<HomeController>();
+   final ContentApiService _apiService = Get.find<ContentApiService>();
 
 
   @override
@@ -44,20 +46,26 @@ class HomeScreen extends StatelessWidget {
           ),
         ],
       ),
-      body: Padding(
-        padding: const EdgeInsetsDirectional.fromSTEB(10, 5, 5, 0),
-        child: ListView(
-          children: [
-            LastCourseItem(),
-            SizedBox(height: 25),
-            GeneralCourseList(),
-            SizedBox(height: 25),
-            ImageSlider(),
-            SizedBox(height: 25),
-            MiniCourseList(),
-            SizedBox(height: 5),
-          ],
-        ),
+      body: FutureBuilder(
+          future: _apiService.home(),
+          builder: (context, AsyncSnapshot snapshot) => (snapshot.hasData) ? home(snapshot.data) :  const SimmerScreen()),
+    );
+  }
+
+  Widget home(Home home){
+    return Padding(
+      padding: const EdgeInsetsDirectional.fromSTEB(10, 5, 0, 0),
+      child: ListView(
+        children: [
+          LastCourseItem(home.lastCourse),
+          const SizedBox(height: 25),
+          /*const GeneralCourseList(home.lastCourse),
+          const SizedBox(height: 25),
+          MovementsSlider(home.movements),
+          const SizedBox(height: 25),
+          const MiniCourseList(home.miniCourses),
+          const SizedBox(height: 5),*/
+        ],
       ),
     );
   }

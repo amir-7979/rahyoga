@@ -1,73 +1,57 @@
+import 'package:get/get.dart';
 import '../services/storage_service.dart';
-final StorageService _storageService =  StorageService();
 
-class Client {
+class Client extends GetxService{
 
-  Client({
-    required this.id,
-    required this.username,
-    required this.email,
-    required this.tokens,
-  });
-  late final int id;
-  late final String username;
-  late final String email;
-  late final Tokens tokens;
+  late  String _refresh;
+  late  String _access;
+  late  String _username;
+  late  String _email;
+  late  String _image;
+  late  bool _isActive;
+  late  int _accessTime;
+  late  int _refreshTime;
+  static final Client _instance = Client._internal();
+  final StorageService _storageService = Get.find<StorageService>();
 
-  Client.fromJson(Map<String, dynamic> json){
-    /*id = json['id'];
-    username = json['username'];
-    email = json['email'];*/
-    tokens = Tokens.fromJson(json['tokens']);
+  String get access => _access;
+  int get accessTime => _accessTime;
+
+  factory Client() => _instance;
+  Client._internal() {
+    _refresh = "";
+    _access = "";
+    _username = "";
+    _email = "";
+    _image = "";
+    _isActive = false;
+    _accessTime = 0;
+    _refreshTime = 0;
   }
 
-  void writeClientInfo() {
-    /*_storageService.writeData('id', id.toString());
-    _storageService.writeData('username', username);
-    _storageService.writeData('email', email);*/
-    tokens.writeToken();
+  fromJson(Map<String, dynamic> json){
+    _refresh = json['refresh'];
+    _access = json['access'];
+    _username = json['username'];
+    _email = json['email'];
+    _image = json['image'];
+    _isActive = json['is_active'];
+    _accessTime = json['access_time'];
+    _refreshTime = json['refresh_time'];
+    _writeClientInfo();
+  }
+
+  void _writeClientInfo() {
+    _storageService.writeData('refresh', _refresh);
+    _storageService.writeData('access', _access);
+    _storageService.writeData('access_time', _accessTime.toString());
+    _storageService.writeData('refresh_time', _refreshTime.toString());
+    _storageService.writeData('image', _image);
+    _storageService.writeData('username', _username);
+    _storageService.writeData('is_active', _isActive);
+    _storageService.writeData('email', _email);
+
   }
 
   void removeClientInfo()=> _storageService.deleteAllData();
-}
-
-class Tokens {
-  Tokens({
-    required this.refresh,
-    required this.access,
-    required this.username,
-    required this.email,
-    required this.image,
-    required this.enable,
-    required this.accessTime,
-    required this.refreshTime,
-  });
-  late final String refresh;
-  late final String access;
-  late final String username;
-  late final String email;
-  late final String image;
-  late final bool enable;
-  late final int accessTime;
-  late final int refreshTime;
-
-  Tokens.fromJson(Map<String, dynamic> json){
-    refresh = json['refresh'];
-    access = json['access'];
-    username = json['username'];
-    email = json['email'];
-    image = json['image'];
-    enable = json['enable'];
-    accessTime = json['access_time'];
-    refreshTime = json['refresh_time'];
-  }
-
-  void writeToken() {
-    _storageService.writeData('refresh', refresh);
-    _storageService.writeData('access', access);
-    _storageService.writeData('access_time', accessTime.toString());
-    _storageService.writeData('refresh_time', refreshTime.toString());
-    _storageService.writeData('image', image);
-
-  }
 }

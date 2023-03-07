@@ -11,6 +11,8 @@ class Course {
     required this.time,
     required this.price,
     required this.offer,
+    required this.theNumberOfSeasons,
+    required this.theNumberOfSeasonsPersian,
     required this.dateModified,
     required this.datePublished,
     required this.datePublishedUnix,
@@ -24,6 +26,8 @@ class Course {
   late final double time;
   late final int price;
   late final int offer;
+  late final int theNumberOfSeasons;
+  late final String theNumberOfSeasonsPersian;
   late final String dateModified;
   late final String datePublished;
   late final int datePublishedUnix;
@@ -38,6 +42,8 @@ class Course {
     time = json['time'];
     price = json['price'];
     offer = json['_offer'];
+    theNumberOfSeasons = json['the_number_of_seasons'];
+    theNumberOfSeasonsPersian = json['the_number_of_seasons_persian'];
     dateModified = json['date_modified'];
     datePublished = json['date_published'];
     datePublishedUnix = json['date_published_unix'];

@@ -1,6 +1,7 @@
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
+import 'package:get/get.dart';
 
-class StorageService {
+class StorageService extends GetxService{
 
   final FlutterSecureStorage _storage = const FlutterSecureStorage(
       aOptions: AndroidOptions(
