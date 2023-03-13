@@ -4,9 +4,11 @@ import 'package:get/get.dart';
 import 'package:rahyoga/core/theme/colors.dart';
 
 import '../../../../core/languages/translator.dart';
+import '../../../data/models/profile.dart';
 
 class Wallet extends StatelessWidget {
-  const Wallet({Key? key}) : super(key: key);
+   Wallet(this.profile, {Key? key}) : super(key: key);
+  Profile profile;
 
   @override
   Widget build(BuildContext context) {
@@ -19,7 +21,7 @@ class Wallet extends StatelessWidget {
             borderRadius: BorderRadiusDirectional.all(Radius.circular(12))
         ),
         child: Padding(
-          padding: EdgeInsetsDirectional.fromSTEB(10, 10, 10, 10),
+          padding: const EdgeInsetsDirectional.fromSTEB(10, 10, 10, 10),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
@@ -29,7 +31,7 @@ class Wallet extends StatelessWidget {
                 children: [
                   Row(
                     children: [
-                      SvgPicture.asset('assets/images/wallet.svg'),
+                      SvgPicture.asset('assets/images/profile/wallet.svg'),
                       Padding(
                         padding: const EdgeInsetsDirectional.fromSTEB(6, 0, 0, 0),
                         child: Text(
@@ -42,24 +44,24 @@ class Wallet extends StatelessWidget {
                       ),
                     ],
                   ),
-
+                  //todo add balance to user
                   Text(
-                    '${700000} ${Translator.toman.tr}',
+                    '${profile.phoneNumber} ${Translator.toman.tr}',
                     style: Theme.of(context)
                         .textTheme
                         .displayLarge!
                         .copyWith(color: white),
                   ),],
               ),
-              Divider(color: profilePurple2),
+              const Divider(color: profilePurple2),
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   TextButton(
                     onPressed: (){},
                     child: Row(children: [
-                      Icon(Icons.add_circle_outline, color: white),
-                      SizedBox(width: 4),
+                      const Icon(Icons.add_circle_outline, color: white),
+                      const SizedBox(width: 4),
                       Text('${Translator.addBalance.tr}',
                         style: Theme.of(context)
                             .textTheme

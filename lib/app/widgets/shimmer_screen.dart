@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:rahyoga/core/theme/colors.dart';
+import 'package:rahyoga/core/values/consts.dart';
 import 'package:shimmer/shimmer.dart';
 
 class SimmerScreen extends StatelessWidget {
@@ -7,11 +8,13 @@ class SimmerScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Expanded(
-      child: Shimmer.fromColors(
-        baseColor: secondaryColor,
-        highlightColor: tertiaryColor,
-        child: Container(),
+    return Shimmer.fromColors(
+      baseColor: secondaryColor,
+      highlightColor: tertiaryColor,
+      child: SizedBox(
+        height: screenHeight,
+        width: screenWidth,
+        child: Text('shimmer'),
       ),
     );
 

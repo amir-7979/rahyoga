@@ -1,12 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
+import 'package:rahyoga/app/screens/profile/profile_controller.dart';
 
 import '../../../../core/languages/translator.dart';
 import '../../../../core/theme/colors.dart';
+import '../../../data/models/profile.dart';
 
 class InfoWidget extends StatelessWidget {
-  const InfoWidget({Key? key}) : super(key: key);
+  InfoWidget(this.profile, {Key? key}) : super(key: key);
+  Profile profile;
+  final ProfileController _controller = Get.find<ProfileController>();
 
   @override
   Widget build(BuildContext context) {
@@ -25,7 +29,7 @@ class InfoWidget extends StatelessWidget {
               children: [
                 Row(
                   children: [
-                    SvgPicture.asset('assets/images/nav.svg'),
+                    SvgPicture.asset('assets/images/profile/nav.svg'),
                     Padding(
                       padding: const EdgeInsetsDirectional.only(start: 10),
                       child: Text(
@@ -59,7 +63,7 @@ class InfoWidget extends StatelessWidget {
               children: [
                 Row(
                   children: [
-                    SvgPicture.asset('assets/images/bag.svg'),
+                    SvgPicture.asset('assets/images/profile/bag.svg'),
                     Padding(
                       padding: const EdgeInsetsDirectional.only(start: 10),
                       child: Text(
@@ -93,7 +97,7 @@ class InfoWidget extends StatelessWidget {
               children: [
                 Row(
                   children: [
-                    SvgPicture.asset('assets/images/bookmark2.svg'),
+                    SvgPicture.asset('assets/images/profile/bookmark2.svg'),
                     Padding(
                       padding: const EdgeInsetsDirectional.only(start: 10),
                       child: Text(
@@ -127,7 +131,7 @@ class InfoWidget extends StatelessWidget {
               children: [
                 Row(
                   children: [
-                    SvgPicture.asset('assets/images/logo2.svg'),
+                    SvgPicture.asset('assets/images/profile/logo2.svg'),
                     Padding(
                       padding: const EdgeInsetsDirectional.only(start: 10),
                       child: Text(
@@ -155,13 +159,15 @@ class InfoWidget extends StatelessWidget {
           ),
 
           InkWell(
-            onTap: () {},
+            onTap: () {
+              _controller.logout();
+            },
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 Row(
                   children: [
-                    SvgPicture.asset('assets/images/logout.svg'),
+                    SvgPicture.asset('assets/images/profile/logout.svg'),
                     Padding(
                       padding: const EdgeInsetsDirectional.only(start: 10),
                       child: Text(
@@ -179,7 +185,6 @@ class InfoWidget extends StatelessWidget {
                   padding: EdgeInsetsDirectional.only(end: 10),
                   child: Icon(Icons.keyboard_arrow_left, color: profileGray,),
                 ),
-
               ],
             ),
           ),

@@ -3,7 +3,7 @@ import 'package:get/get.dart';
 import '../../../../core/languages/translator.dart';
 import '../../../../core/theme/colors.dart';
 import '../../../../core/values/border_styles.dart';
-import '../../../widgets/recovey_dialog/recover_dialog1.dart';
+import 'recover_dialog.dart';
 import '../login_controller.dart';
 
 class LoginForm extends StatelessWidget {
@@ -60,46 +60,47 @@ class LoginForm extends StatelessWidget {
             const SizedBox(height: 10),
             SizedBox(
               height: 70,
-              child: TextFormField(
-                style: const TextStyle(color: white),
-                controller: _controller.passwordController,
-                obscureText: _controller.passwordVisible.value,
-                keyboardType: TextInputType.visiblePassword,
-                onEditingComplete: () => FocusScope.of(context).nextFocus(),
-                decoration: InputDecoration(
-                  errorStyle: Theme.of(context)
-                      .textTheme
-                      .headlineSmall!
-                      .copyWith(color: errorText),
-                  helperText: '',
-                  suffixIcon: IconButton(
-                    icon: Icon(
-                      _controller.passwordVisible.value
-                          ? Icons.visibility_off
-                          : Icons.visibility,
-                      color: white,
+              child: Obx(()=> TextFormField(
+                  style: const TextStyle(color: white),
+                  controller: _controller.passwordController,
+                  obscureText: _controller.passwordVisible.value,
+                  keyboardType: TextInputType.visiblePassword,
+                  onEditingComplete: () => FocusScope.of(context).nextFocus(),
+                  decoration: InputDecoration(
+                    errorStyle: Theme.of(context)
+                        .textTheme
+                        .headlineSmall!
+                        .copyWith(color: errorText),
+                    helperText: '',
+                    suffixIcon: IconButton(
+                      icon: Icon(
+                        _controller.passwordVisible.value
+                            ? Icons.visibility_off
+                            : Icons.visibility,
+                        color: white,
+                      ),
+                      onPressed: _controller.toggle,
                     ),
-                    onPressed: _controller.toggle,
+                    filled: true,
+                    fillColor: fieldColor,
+                    labelText: Translator.password.tr,
+                    labelStyle: const TextStyle(color: white),
+                    focusedBorder: focusedBorder,
+                    enabledBorder: enabledBorder,
+                    errorBorder: errorBorder,
+                    focusedErrorBorder: errorBorder,
+                    border: border,
                   ),
-                  filled: true,
-                  fillColor: fieldColor,
-                  labelText: Translator.password.tr,
-                  labelStyle: const TextStyle(color: white),
-                  focusedBorder: focusedBorder,
-                  enabledBorder: enabledBorder,
-                  errorBorder: errorBorder,
-                  focusedErrorBorder: errorBorder,
-                  border: border,
+                  validator: (txt) => _controller.passwordValidation(txt!),
+                  //onSubmitted: (txt) => function(controller.text),
                 ),
-                validator: (txt) => _controller.passwordValidation(txt!),
-                //onSubmitted: (txt) => function(controller.text),
               ),
             ),
             Align(
               alignment: AlignmentDirectional.centerStart,
               child: TextButton(
                 onPressed: () {
-                  Get.dialog(recoverDialog1());
+                  Get.dialog(recoverDialog());
                 },
                 child: Text(
                   Translator.forget_password.tr,
@@ -135,7 +136,6 @@ class LoginForm extends StatelessWidget {
                   ),
                   onPressed: () async {
                     _controller.login();
-                    // TODO: Implement login functionality
                   },
                   child: (_controller.isLoading.value)
                       ? const CircularProgressIndicator(

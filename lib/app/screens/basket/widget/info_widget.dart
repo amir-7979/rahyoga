@@ -4,11 +4,13 @@ import 'package:get/get.dart';
 import 'package:rahyoga/core/values/consts.dart';
 
 import '../../../../core/theme/colors.dart';
+import '../../../data/models/basket.dart';
 import '../basket_controller.dart';
 
 class InfoWidget extends StatelessWidget {
-  InfoWidget({Key? key}) : super(key: key);
-  final BasketController _ctrl = Get.find<BasketController>();
+  InfoWidget(this.basket);
+  BasketController controller = Get.find<BasketController>();
+  Basket basket;
 
   @override
   Widget build(BuildContext context) {
@@ -19,10 +21,10 @@ class InfoWidget extends StatelessWidget {
           Row(
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
-              SvgPicture.asset('assets/images/finance.svg'),
+              SvgPicture.asset('assets/images/basket/finance.svg'),
               const SizedBox(width: 5),
               Text(
-                _ctrl.orderInfo,
+                controller.orderInfo,
                 style: Theme.of(context)
                     .textTheme
                     .displayLarge!
@@ -45,14 +47,14 @@ class InfoWidget extends StatelessWidget {
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       Text(
-                        _ctrl.numberOfCourses,
+                        controller.numberOfCourses,
                         style: Theme.of(context)
                             .textTheme
                             .bodyLarge!
                             .copyWith(color: textGray),
                       ),
                       Text(
-                        _ctrl.courseCount,
+                        basket.count.toString()??'0',
                         style: Theme.of(context)
                             .textTheme
                             .displayLarge!
@@ -72,14 +74,14 @@ class InfoWidget extends StatelessWidget {
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       Text(
-                        _ctrl.totalPrice,
+                        controller.totalPrice,
                         style: Theme.of(context)
                             .textTheme
                             .bodyLarge!
                             .copyWith(color: textGray),
                       ),
                       Text(
-                        _ctrl.toman,
+                        basket.totalOffer.toString()??'',
                         style: Theme.of(context)
                             .textTheme
                             .displayLarge!
@@ -99,14 +101,14 @@ class InfoWidget extends StatelessWidget {
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       Text(
-                        _ctrl.discount,
+                        controller.discount,
                         style: Theme.of(context)
                             .textTheme
                             .bodyLarge!
                             .copyWith(color: textGray),
                       ),
                       Text(
-                        _ctrl.toman,
+                        basket.difference.toString(),
                         style: Theme.of(context)
                             .textTheme
                             .displayLarge!
@@ -123,7 +125,6 @@ class InfoWidget extends StatelessWidget {
           ),
           ),
           const SizedBox(height: 10),
-
         ],
       ),
     );

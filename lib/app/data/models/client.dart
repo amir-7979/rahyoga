@@ -8,13 +8,13 @@ class Client extends GetxService{
   late  String _username;
   late  String _email;
   late  String _image;
-  late  bool _isActive;
   late  int _accessTime;
   late  int _refreshTime;
-  static final Client _instance = Client._internal();
+  static Client _instance = Client._internal();
   final StorageService _storageService = Get.find<StorageService>();
 
   String get access => _access;
+  String get refresh => _refresh;
   int get accessTime => _accessTime;
 
   factory Client() => _instance;
@@ -24,7 +24,6 @@ class Client extends GetxService{
     _username = "";
     _email = "";
     _image = "";
-    _isActive = false;
     _accessTime = 0;
     _refreshTime = 0;
   }
@@ -35,9 +34,8 @@ class Client extends GetxService{
     _username = json['username'];
     _email = json['email'];
     _image = json['image'];
-    _isActive = json['is_active'];
-    _accessTime = json['access_time'];
-    _refreshTime = json['refresh_time'];
+    _accessTime = json['access_time'].runtimeType == String ? int.parse(json['access_time']) : json['access_time'];
+    _refreshTime = json['refresh_time'].runtimeType ==String ? int.parse(json['refresh_time']) : json['refresh_time'];
     _writeClientInfo();
   }
 
@@ -48,10 +46,21 @@ class Client extends GetxService{
     _storageService.writeData('refresh_time', _refreshTime.toString());
     _storageService.writeData('image', _image);
     _storageService.writeData('username', _username);
-    _storageService.writeData('is_active', _isActive);
     _storageService.writeData('email', _email);
 
   }
 
-  void removeClientInfo()=> _storageService.deleteAllData();
+  Future<void> readClientInfo() async {
+    fromJson(await _storageService.readAllData());
+  }
+
+  void removeClientInfo() {
+    _storageService.deleteAllData();
+    Client._internal();
+  }
+
+  @override
+  String toString() {
+    return 'Client{_refresh: $_refresh, _access: $_access, _username: $_username, _email: $_email, _image: $_image, _accessTime: $_accessTime, _refreshTime: $_refreshTime}';
+  }
 }

@@ -1,15 +1,15 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
+import '../../../../core/languages/translator.dart';
 import '../../../../core/theme/colors.dart';
+import '../../../data/models/result.dart';
 import '../basket_controller.dart';
-import 'course_item.dart';
+import 'result_item.dart';
 
 class CourseList extends StatelessWidget {
-  CourseList({Key? key}) : super(key: key);
-  final BasketController _ctrl = Get.find<BasketController>();
-
-  var items = [1, 1, 1];
+  CourseList(this.results, {Key? key}) : super(key: key);
+  final BasketController controller = Get.find<BasketController>();
+  List<Result> results;
 
   @override
   Widget build(BuildContext context) {
@@ -21,36 +21,29 @@ class CourseList extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Text(
-                _ctrl.ordersTitle,
+            Translator.courses2.trParams({'number':results.length.toString()}),
                 style: Theme.of(context).textTheme.headlineLarge!.copyWith(
                       color: black,
                     ),
               ),
-              Row(
+             /* Row(
                 children: [
                   SvgPicture.asset('assets/images/red_delete.svg'),
                   const SizedBox(width: 8),
                   Text(
-                    '${_ctrl.deleteAll}',
+                    '${controller.deleteAll}',
                     style: Theme.of(context).textTheme.headlineMedium!.copyWith(
                       color: redError,
                     ),
                   ),
                 ],
-              ),
+              ),*/
             ],
           ),
         ),
-        for (int i in items)
-          Column(
-            children: [
-              CourseItem(),
-              const Padding(
-                padding: EdgeInsetsDirectional.fromSTEB(0, 10, 0, 20),
-                child: Divider(height: 1),
-              ),
-            ],
-          )
+         for(var item in results)
+           ResultItem(item)
+
       ],
     );
 

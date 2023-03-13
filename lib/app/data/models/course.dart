@@ -1,37 +1,45 @@
 import 'category.dart';
 import 'mentor.dart';
+import 'seasons.dart';
 
 class Course {
   Course({
-    required this.id,
-    required this.header,
-    required this.image,
-    required this.category,
-    required this.mentor,
-    required this.time,
-    required this.price,
-    required this.offer,
-    required this.theNumberOfSeasons,
-    required this.theNumberOfSeasonsPersian,
-    required this.dateModified,
-    required this.datePublished,
-    required this.datePublishedUnix,
-    required this.dateModifiedUnix,
+     this.id,
+     this.header,
+     this.image,
+     this.category,
+     this.mentor,
+     this.time,
+     this.price,
+     this.offer,
+     this.theNumberOfSeasons,
+     this.theNumberOfSeasonsPersian,
+     this.dateModified,
+     this.datePublished,
+     this.datePublishedUnix,
+     this.dateModifiedUnix,
+    this.progress,
+    this.seasons,
+
+
   });
-  late final int id;
-  late final String header;
-  late final String image;
-  late final Category category;
-  late final Mentor mentor;
-  late final double time;
-  late final int price;
-  late final int offer;
-  late final int theNumberOfSeasons;
-  late final String theNumberOfSeasonsPersian;
-  late final String dateModified;
-  late final String datePublished;
-  late final int datePublishedUnix;
-  late final int dateModifiedUnix;
+  late final int? id;
+  late final String? header;
+  late final String? image;
+  late final Category? category;
+  late final Mentor? mentor;
+  late final double? time;
+  late final int? price;
+  late final int? offer;
+  late final int? theNumberOfSeasons;
+  late final String? theNumberOfSeasonsPersian;
+  late final String? dateModified;
+  late final String? datePublished;
+  late final int? datePublishedUnix;
+  late final int? dateModifiedUnix;
+  late final Seasons? seasons;
+  late final double? progress;
+
 
   Course.fromJson(Map<String, dynamic> json){
     id = json['id'];
@@ -48,6 +56,8 @@ class Course {
     datePublished = json['date_published'];
     datePublishedUnix = json['date_published_unix'];
     dateModifiedUnix = json['date_modified_unix'];
+    progress = (json['progress'] != null) ? json['progress'].toDouble() : null;
+    seasons = (json['seasons'] != null) ? Seasons.fromJson(json['seasons']) : null;
   }
 
 }

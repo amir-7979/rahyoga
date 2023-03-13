@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
-import 'package:rahyoga/app/screens/profile/widgets/info_widget.dart';
-import 'package:rahyoga/app/screens/profile/widgets/profile_widget.dart';
-import 'package:rahyoga/app/screens/profile/widgets/wallet.dart';
-import 'package:rahyoga/core/theme/colors.dart';
-
 import '../../../core/languages/translator.dart';
+import '../../../core/theme/colors.dart';
+import '../../data/models/profile.dart';
+import '../../widgets/shimmer_screen.dart';
+import 'profile_controller.dart';
+import 'widgets/info_widget.dart';
+import 'widgets/profile_widget.dart';
 
-class ProfileScreen extends StatelessWidget {
+class ProfileScreen extends GetView<ProfileController> {
   const ProfileScreen({Key? key}) : super(key: key);
 
   @override
@@ -23,33 +23,43 @@ class ProfileScreen extends StatelessWidget {
                 .headlineLarge!
                 .copyWith(color: black),
           ),
-          actions: [
-            Row(
-              children: [
-                SvgPicture.asset('assets/images/edit.svg'),
-                Padding(
-                  padding: const EdgeInsetsDirectional.fromSTEB(6, 0, 15, 0),
-                  child: Text(
-                    Translator.edit.tr,
-                    style: Theme.of(context)
-                        .textTheme
-                        .headlineMedium!
-                        .copyWith(color: primaryColor),
+          /*actions: [
+            TextButton(
+              onPressed: (){
+                controller.fetchProfile();
+              },
+              child: Row(
+                children: [
+                  SvgPicture.asset('assets/images/profile/edit.svg'),
+                  Padding(
+                    padding: const EdgeInsetsDirectional.fromSTEB(6, 0, 15, 0),
+                    child: Text(
+                      Translator.edit.tr,
+                      style: Theme.of(context)
+                          .textTheme
+                          .headlineMedium!
+                          .copyWith(color: primaryColor),
+                    ),
                   ),
-                ),
-              ],
+                ],
+              ),
             )
-          ]),
-      body: ListView(
-        padding: EdgeInsetsDirectional.fromSTEB(15, 20, 15, 0),
-        children: [
-          ProfileWidget(),
-          Wallet(),
-          InfoWidget(),
-          SizedBox(height: 15),
-
-        ],
-      ),
+          ]*/),
+      body: FutureBuilder(
+          future: controller.fetchProfile(),
+          builder: (context, AsyncSnapshot snapshot) => (snapshot.hasData) ? profile(controller.profile.value) :  const SimmerScreen())
+    );
+  }
+  Widget profile(Profile? profile){
+    return profile == null ? const SimmerScreen() :ListView(
+      padding: const EdgeInsetsDirectional.fromSTEB(15, 20, 15, 0),
+      children: [
+        ProfileWidget(profile),
+       /* Wallet(profile!),*/
+        SizedBox(height: 15),
+        InfoWidget(profile),
+        SizedBox(height: 15),
+      ],
     );
   }
 }

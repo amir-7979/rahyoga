@@ -6,15 +6,13 @@ import 'user_api_service.dart';
 
 class TokenInterceptor implements Interceptor {
   final Client _client = Get.find<Client>();
-  final UserApiService _userApiService = Get.find<UserApiService>();
+  UserApiService userService = UserApiService();
 
   @override
   Future<void> onError(DioError err, ErrorInterceptorHandler handler) async {
-    //checkUserConnection();
-    if(err.response!.statusCode == 401){
-      //todo await logOutUser();
-      Get.offAndToNamed(AppRoutes.loginScreen);
-
+    print('error :::${err.response?.statusCode}');
+    if (err.response?.statusCode == 403 || err.response?.statusCode == 401) {
+      await userService.refreshToken();
     }
     handler.next(err);
   }
@@ -22,28 +20,23 @@ class TokenInterceptor implements Interceptor {
   @override
   Future<void> onRequest(
       RequestOptions options, RequestInterceptorHandler handler) async {
-    options.headers
-        .addEntries({"accessToken": _client.access}.entries);
-    if (
-        (_client.access.isEmpty ||
-            _client.accessTime -
-                DateTime.now().millisecondsSinceEpoch <
-                15000)) {
-      try {
-        await _userApiService.getToken(_client.access);
-      } catch (e) {
-        //todo find out how to repeat this
-        print(e.toString());
-      }
+    if (options.path.contains('login') ||
+        options.path.contains('signup') ||
+        options.path.contains('articles') ||
+        options.path.contains('movements')) {
+    } else {
+      options.headers
+          .addEntries({"Authorization": "Bearer ${_client.access}"}.entries);
+    }
+    if (_client.access.isEmpty ||
+        _client.accessTime - DateTime.now().millisecondsSinceEpoch < 60000) {
+        //await userService.refreshToken();
     }
     return handler.next(options);
   }
 
   @override
   void onResponse(Response response, ResponseInterceptorHandler handler) {
-    // TODO: implement onResponse
+    return handler.next(response);
   }
-
 }
-
-

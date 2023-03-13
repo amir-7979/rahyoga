@@ -1,45 +1,49 @@
 import 'package:dotted_line/dotted_line.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:percent_indicator/circular_percent_indicator.dart';
+import 'package:rahyoga/app/widgets/cache_image.dart';
 import '../../../../core/languages/translator.dart';
 import '../../../../core/theme/colors.dart';
+import '../../../data/models/profile.dart';
 
 class ProfileWidget extends StatelessWidget {
-  const ProfileWidget({Key? key}) : super(key: key);
+   ProfileWidget(this.profile, {super.key});
+  Profile profile;
 
   @override
   Widget build(BuildContext context) {
     return Container(
       padding: const EdgeInsetsDirectional.all(14),
       decoration: const BoxDecoration(
-          color: secondaryColor,
+          color: fourthColor,
           borderRadius: BorderRadiusDirectional.all(Radius.circular(12))
       ),
       child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
+        crossAxisAlignment: CrossAxisAlignment.center,
         children: [
           Row(
-            crossAxisAlignment: CrossAxisAlignment.start,
+            crossAxisAlignment: CrossAxisAlignment.center,
+            mainAxisAlignment: MainAxisAlignment.start,
             children: [
-              const CircleAvatar(
-                //todo change this later
-                backgroundImage: NetworkImage('https://d3544la1u8djza.cloudfront.net/APHI/Blog/2016/10_October/persians/Persian+Cat+Facts+History+Personality+and+Care+_+ASPCA+Pet+Health+Insurance+_+white+Persian+cat+resting+on+a+brown+sofa-min.jpg'),
-                radius: 45,
-              ),
+              //CacheImage(url: profile.image??'', imageBuilder: true),
+              CacheImage(url: profile.image??'', imageBuilder: true),
               Padding(
-                padding: const EdgeInsetsDirectional.fromSTEB(15, 20, 0, 0),
+                padding: const EdgeInsetsDirectional.fromSTEB(20, 0, 0, 0),
                 child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   Text(
-                    'آرمان سلحشور',
+                    profile.firstName??profile.username!,
                     style: Theme.of(context)
                         .textTheme
                         .headlineLarge!
                         .copyWith(color: black),
                   ),
-                  SizedBox(height: 15),
+                  const SizedBox(height: 15),
                   Text(
-                    '09117474747',
+                    profile.phoneNumber??profile.email!,
                     style: Theme.of(context)
                         .textTheme
                         .displayLarge!
@@ -47,10 +51,10 @@ class ProfileWidget extends StatelessWidget {
                   ),
                 ],
             ),
-              )],
+              ),],
           ),
-          Padding(
-            padding: const EdgeInsetsDirectional.symmetric(vertical: 20),
+          const Padding(
+            padding: EdgeInsetsDirectional.symmetric(vertical: 20),
             child: DottedLine(dashLength: 9,
                 dashGapLength: 9,
                 lineThickness: 1,
@@ -71,7 +75,7 @@ class ProfileWidget extends StatelessWidget {
                       color: textGray),
                 ),
                 Text(
-                  '${1} ${Translator.course.tr}',
+                  '${profile.courses} ${Translator.course.tr}',
                   style: Theme.of(context)
                       .textTheme
                       .bodyLarge!
@@ -82,7 +86,7 @@ class ProfileWidget extends StatelessWidget {
             ),
           ),
           Padding(
-            padding: const EdgeInsetsDirectional.fromSTEB(0, 10, 0, 40),
+            padding: const EdgeInsetsDirectional.fromSTEB(0, 10, 0, 15),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               crossAxisAlignment: CrossAxisAlignment.center,
@@ -96,7 +100,7 @@ class ProfileWidget extends StatelessWidget {
                       color: textGray),
                 ),
                 Text(
-                  '${1} ${Translator.session.tr}',
+                  '${profile.watched} ${Translator.session.tr}',
                   style: Theme.of(context)
                       .textTheme
                       .bodyLarge!
@@ -106,15 +110,37 @@ class ProfileWidget extends StatelessWidget {
               ],
             ),
           ),
-          Text(
-            Translator.progress.tr,
-            style: Theme.of(context)
-                .textTheme
-                .bodyLarge!
-                .copyWith(
-                color: textGray),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              Text(
+                Translator.progress.tr,
+                style: Theme.of(context)
+                    .textTheme
+                    .bodyLarge!
+                    .copyWith(
+                    color: textGray),
+              ),
+              Container(
+                child: CircularPercentIndicator(
+                  radius:30,
+                  lineWidth: 4.0,
+                  percent: profile.progress??0.0,
+                  center: Text(
+                    '${profile.progress.toString().substring(2)}%'
+                        '',
+                    style: Get.theme
+                        .textTheme
+                        .headlineMedium!
+                        .copyWith(color: primaryColor),
+                  ),
+                  circularStrokeCap: CircularStrokeCap.round,
+                  progressColor: primaryColor,
+                ),
+              ),
+            ],
           ),
-          Padding(padding: EdgeInsetsDirectional.fromSTEB(0, 20, 0, 20))
         ],
       ),
     );

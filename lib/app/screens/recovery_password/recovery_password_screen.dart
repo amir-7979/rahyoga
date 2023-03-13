@@ -1,101 +1,158 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:rahyoga/app/screens/recovery_password/recovery_password_controller.dart';
 import '../../../core/languages/translator.dart';
 import '../../../core/theme/colors.dart';
+import '../../../core/values/border_styles.dart';
+import 'recovery_password_controller.dart';
 
-class RecoveryPasswordScreen extends StatelessWidget {
+class RecoveryPasswordScreen extends GetView<RecoveryPasswordController> {
   RecoveryPasswordScreen({Key? key}) : super(key: key);
-  final RecoveryPasswordController _ctrl =
-      Get.put(RecoveryPasswordController());
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.white,
-
       appBar: AppBar(
         elevation: 1,
-        leading: BackButton(color: Colors.black, onPressed: () => Get.back()),
-        backgroundColor: Colors.white,
+        leading: BackButton(
+            color: Colors.black, onPressed: () => controller.gotoLogin()),
         title: Text(
-      Translator.password_recovery.tr,
-      style: const TextStyle(color: Colors.black
-          ),
-    ),
-
+          Translator.password_recovery.tr,
+          style: const TextStyle(color: Colors.black),
+        ),
       ),
-      body: Padding(
-    padding: const EdgeInsets.fromLTRB(20, 60, 20, 0),
-    child: Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        const Text('data'),
-        const SizedBox(height: 10),
-        SizedBox(
-          height: 50,
-          child: TextFormField(
-            //controller: controller,
-            obscureText: _ctrl.passwordVisible2,
-            keyboardType: TextInputType.visiblePassword,
-            onEditingComplete: () => FocusScope.of(context).nextFocus(),
-            decoration: InputDecoration(
-              hintStyle: TextStyle(color: grayText2),
-              focusColor: primaryColor,
-              suffixIcon: IconButton(
-                icon: Icon(
-                  _ctrl.passwordVisible2
-                      ? Icons.visibility_off
-                      : Icons.visibility,
-                  color: grayText2,
-                ),
-                onPressed: _ctrl.toggle2(),
-              ),
-              filled: true,
-              fillColor: primaryColor,
-              labelText: Translator.password.tr,
-              labelStyle: const TextStyle(color: primaryColor),
-              focusedBorder: OutlineInputBorder(
-                borderRadius: BorderRadius.circular(12.0),
-                borderSide: const BorderSide(
-                  color: primaryColor,
+      body: Form(
+        key: controller.formKey,
+        child: Padding(
+          padding: const EdgeInsets.fromLTRB(20, 40, 20, 0),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              SizedBox(
+                height: 70,
+                child: TextFormField(
+                  style: const TextStyle(color: black),
+                  controller: controller.codeController,
+                  keyboardType: TextInputType.text,
+                  onEditingComplete: () => FocusScope.of(context).nextFocus(),
+                  decoration: InputDecoration(
+                    errorStyle: Get.textTheme.headlineSmall!
+                        .copyWith(color: errorText),
+                    helperText: '',
+                    helperStyle: Get.textTheme.labelSmall!.copyWith(color: grayText2),
+                    filled: true,
+                    fillColor: Colors.white,
+                    labelText: Translator.code.tr,
+                    labelStyle: const TextStyle(color: primaryColor),
+                    focusedBorder: focusedBorder3,
+                    enabledBorder: enabledBorder3,
+                    border: border3,
+                    errorBorder: errorBorder3,
+                    focusedErrorBorder: errorBorder3,
+                  ),
+
+                  //onSubmitted: (txt) => function(controller.text),
                 ),
               ),
-              enabledBorder: OutlineInputBorder(
-                borderRadius: BorderRadius.circular(12.0),
-                borderSide: const BorderSide(
-                  color: grayText2,
+              const SizedBox(height: 10),
+              SizedBox(
+                height: 70,
+                child: Obx(
+                      ()=> TextFormField(
+                        style: const TextStyle(color: black),
+                    controller: controller.passwordController,
+                    obscureText: controller.passwordVisible.value,
+                    keyboardType: TextInputType.visiblePassword,
+                    onEditingComplete: () => FocusScope.of(context).nextFocus(),
+                    decoration: InputDecoration(
+                      suffixIcon: IconButton(
+                        icon: Icon(
+                          controller.passwordVisible.value
+                              ? Icons.visibility_off
+                              : Icons.visibility,
+                          color: primaryColor,
+                        ),
+                        onPressed: controller.toggle,
+                      ),
+                      errorStyle: Get.textTheme.headlineSmall!
+                          .copyWith(color: errorText),
+                      helperText: '',
+                      helperStyle: Get.textTheme.labelSmall!.copyWith(color: grayText2),
+                      filled: true,
+                      fillColor: Colors.white,
+                      labelText: Translator.password.tr,
+                      labelStyle: const TextStyle(color: primaryColor),
+                      focusedBorder: focusedBorder3,
+                      enabledBorder: enabledBorder3,
+                      border: border3,
+                      errorBorder: errorBorder3,
+                      focusedErrorBorder: errorBorder3,
+                    ),
+                    validator: (txt) => controller.passwordValidation(txt!, controller.passwordController2.value.text),
+                    //onSubmitted: (txt) => function(controller.text),
+                  ),
                 ),
               ),
-            ),
-            // validator: (txt) => function(),
-            //onSubmitted: (txt) => function(controller.text),
+              const SizedBox(height: 10),
+              SizedBox(
+                height: 70,
+                child: Obx(
+                      ()=> TextFormField(
+                        style: const TextStyle(color: black),
+                    controller: controller.passwordController2,
+                    obscureText: controller.passwordVisible2.value,
+                    keyboardType: TextInputType.visiblePassword,
+                    onEditingComplete: () => FocusScope.of(context).nextFocus(),
+                    decoration: InputDecoration(
+                      suffixIcon: IconButton(
+                        icon: Icon(
+                          controller.passwordVisible2.value
+                              ? Icons.visibility_off
+                              : Icons.visibility,
+                          color: primaryColor,
+                        ),
+                        onPressed: controller.toggle2,
+                      ),
+                      errorStyle: Get.textTheme.headlineSmall!
+                          .copyWith(color: errorText),
+                      helperText: '',
+                      helperStyle: Get.textTheme.labelSmall!.copyWith(color: grayText2),
+                      filled: true,
+                      fillColor: Colors.white,
+                      labelText: Translator.password.tr,
+                      labelStyle: const TextStyle(color: primaryColor),
+                      focusedBorder: focusedBorder3,
+                      enabledBorder: enabledBorder3,
+                      border: border3,
+                      errorBorder: errorBorder3,
+                      focusedErrorBorder: errorBorder3,
+                    ),
+                    validator: (txt) => controller.passwordValidation(txt!, controller.passwordController.value.text),
+                  ),
+                ),
+              ),
+              const SizedBox(height: 15),
+              Padding(
+                padding: const EdgeInsets.fromLTRB(6, 16, 6, 0),
+                child: ElevatedButton(
+                  style: ElevatedButton.styleFrom(
+                    minimumSize: const Size.fromHeight(50),
+                    backgroundColor: primaryColor,
+                    elevation: 5,
+                    shape: const StadiumBorder(),
+                  ),
+                  onPressed: () {
+                    controller.changePassword();
+                  },
+                  child: Text(
+                    Translator.confirm_and_change_password.tr,
+                    style: Get.textTheme.displayLarge!.copyWith(color: white),
+                  ),
+                ),
+              ),
+            ],
           ),
         ),
-        const SizedBox(height: 15),
-        Padding(
-          padding: const EdgeInsets.fromLTRB(6, 16, 6, 0),
-          child: ElevatedButton(
-            style: ElevatedButton.styleFrom(
-              minimumSize: const Size.fromHeight(50),
-              backgroundColor: primaryColor,
-              elevation: 5,
-              shape: const StadiumBorder(),
-            ),
-            onPressed: () {
-              // TODO: Implement functionality
-            },
-            child: Text(
-              Translator.confirm_password.tr,
-              style: const TextStyle(
-                  color: primaryColor,
-                  fontSize: 16,
-                  fontWeight: FontWeight.w700),
-            ),
-          ),
-        ),
-      ],
-    ),
       ),
     );
   }

@@ -2,12 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 import '../../../core/utils/authentication _format.dart';
-import '../../../core/values/consts.dart';
 import '../../../routes/routes.dart';
 import '../../data/services/user_api_service.dart';
-import '../../widgets/recovey_dialog/recover_dialog1.dart';
-import '../../widgets/recovey_dialog/recover_dialog2.dart';
-import '../../widgets/validate_dialog/validate_controller.dart';
+import 'widgets/recover_dialog.dart';
 import '../../widgets/validate_dialog/validate_dialog.dart';
 
 class LoginController extends GetxController {
@@ -27,6 +24,10 @@ class LoginController extends GetxController {
 
   void gotoSignupScreen() => Get.offAndToNamed(AppRoutes.signupScreen);
 
+  void gotoRecoveryPasswordScreen() =>
+      Get.toNamed(AppRoutes.recoveryPasswordScreen,
+          arguments: emailController.value.text);
+
   void gotoMainScreen() => Get.offAndToNamed(AppRoutes.mainScreen);
 
   String? emailValidation(String txt) => checkEmail(txt);
@@ -35,25 +36,36 @@ class LoginController extends GetxController {
 
   String? passwordValidation(String txt) => checkPasswordLogin(txt);
 
-  void gotoPrevDialog()=> Get.dialog(recoverDialog1());
+  void gotoPrevDialog() => Get.dialog(recoverDialog());
 
-  Future<void> sendRecoveryCode() async{
-    if (formKey2.currentState!.validate()) {
-      errorText.value = '';
-      update();
-      //todo go next screen and send request
-      /*final response = await userApiService.login(
-          usernameController.value.text, passwordController.value.text);
-      if (response == '200') {
-        Get.back();
-        Get.dialog(recoverDialog2(emailController.value.text));
-      } else {
-        snackbar();
-*/
-
+  Future<void> sendEmail() async {
+    final response = await userApiService.sendEmail(
+        usernameController.value.text, passwordController.value.text);
+    if (response == '200') {
       Get.back();
-      Get.dialog(recoverDialog2(emailController.value.text));
+      Get.dialog(validateDialog(
+          usernameController.value.text, passwordController.value.text));
+    } else {
+      //todo add snackbar
+      Get.back();
     }
+  }
+
+  Future<void> sendPasswordEmail() async {
+    final response =
+        await userApiService.sendPasswordEmail(emailController.value.text);
+    if (response == '200') {
+      Get.back();
+      gotoRecoveryPasswordScreen();
+    } else {
+      //todo add snackbar
+      Get.back();
+    }
+  }
+
+  Future<void> pureLogin() async {
+     await userApiService.login(
+        usernameController.value.text, passwordController.value.text);
   }
 
   Future<void> login() async {
@@ -65,19 +77,18 @@ class LoginController extends GetxController {
           usernameController.value.text, passwordController.value.text);
       isLoading.value = false;
       update();
-      if (response == 200) {
+      if (response == '200') {
         gotoMainScreen();
+      } else if (response == '405') {
+        Get.dialog(
+          validateDialog(
+              usernameController.value.text, passwordController.value.text),
+          barrierDismissible: false,
+        );
       } else {
-        final response = await userApiService.verification(
-            usernameController.value.text);
-        if(response == 401){
-          Get.dialog(validateDialog(usernameController.value.text, passwordController.value.text), barrierDismissible: false,);
-        }
-        else{
-          errorText.value = 'error';
-          errorText.value = response.toString();
-          update();
-        }
+        errorText.value = 'error';
+        errorText.value = response.toString();
+        update();
       }
     }
   }

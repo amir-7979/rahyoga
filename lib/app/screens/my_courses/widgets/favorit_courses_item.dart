@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:rahyoga/app/data/models/liked_course.dart';
+import 'package:rahyoga/app/screens/my_courses/my_courses_controller.dart';
 import 'package:rahyoga/core/values/consts.dart';
 
 import '../../../../core/languages/translator.dart';
@@ -7,7 +9,9 @@ import '../../../../core/theme/colors.dart';
 import '../../../widgets/cache_image.dart';
 
 class FavoriteCourseItem extends StatelessWidget {
-  const FavoriteCourseItem({Key? key}) : super(key: key);
+  FavoriteCourseItem(this.likedCourse, {Key? key}) : super(key: key);
+  var controller = Get.find<MyCoursesController>();
+  final LikedCourse likedCourse;
 
   @override
   Widget build(BuildContext context) {
@@ -16,85 +20,112 @@ class FavoriteCourseItem extends StatelessWidget {
       child: SizedBox(
         height: favoriteItemHeight,
         child: Container(
-          decoration:  BoxDecoration(
-              borderRadius: BorderRadius.circular(12.0),
-            border: Border.all(color: moreTextColor),),
+          decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(12.0),
+            border: Border.all(color: moreTextColor),
+          ),
           child: Row(
             children: [
               SizedBox(
                 height: favoriteItemHeight,
                 width: favoriteItemHeight,
-                child: const ClipRRect(
-                  borderRadius: BorderRadiusDirectional.horizontal(start: Radius.circular(12)),
-                  child: CacheImage(
-                      url:
-                      'https://i0.wp.com/www.yogabasics.com/yogabasics2017/wp-content/uploads/2021/03/Ashtanga-Yoga.jpeg'),
+                child: ClipRRect(
+                  borderRadius: const BorderRadiusDirectional.horizontal(
+                      start: Radius.circular(12)),
+                  child: CacheImage(url: likedCourse.image ?? ''),
                 ),
               ),
               Expanded(
                 child: Padding(
-                  padding:
-                  const EdgeInsetsDirectional.fromSTEB(10, 8, 5, 0),
+                  padding: const EdgeInsetsDirectional.fromSTEB(10, 7, 5, 0),
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Padding(
-                        padding: const EdgeInsetsDirectional.fromSTEB(0, 3, 10, 5),
+                        padding:
+                            const EdgeInsetsDirectional.fromSTEB(0, 3, 10, 5),
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           crossAxisAlignment: CrossAxisAlignment.center,
                           children: [
                             Text(
-                              'اسم دوره',
-                              style: Theme.of(context)
-                                  .textTheme
-                                  .displayMedium!
+                              likedCourse.header ?? '',
+                              style: Get.theme.textTheme.displayMedium!
                                   .copyWith(color: black),
                             ),
                             Text(
-                              '${1}${Translator.session.tr}',
-                              style: Theme.of(context)
-                                  .textTheme
-                                  .labelSmall!
-                                  .copyWith(
-                                color: black
-                              ),
+                              '${likedCourse.theNumberOfSeasons} ${Translator.session.tr}',
+                              style: Get.theme.textTheme.headlineSmall!
+                                  .copyWith(color: black),
                             ),
                           ],
                         ),
                       ),
-                      //todo maybe remove this
                       Padding(
-                        padding: const EdgeInsetsDirectional.symmetric(vertical: 7),
-                        child: Text('مربی : فلانی', style: Theme.of(context)
-                            .textTheme
-                            .headlineSmall!
-                            .copyWith(
-                            color: grayText2),),
+                        padding:
+                            const EdgeInsetsDirectional.symmetric(vertical: 6),
+                        child: Text(
+                          '${Translator.mentor.tr} : ${likedCourse.mentor!.fullname ?? ''}',
+                          style: Get.theme.textTheme.headlineSmall!
+                              .copyWith(color: grayText2),
+                        ),
                       ),
-                      Divider(height: 1),
-                      const SizedBox(height: 4),
+                      const Divider(height: 1),
                       Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        crossAxisAlignment: CrossAxisAlignment.center,
                         children: [
-                          Text('${700000} ${Translator.toman.tr}',
-                              style: Theme.of(context)
-                              .textTheme
-                              .displayLarge!
-                              .copyWith(
-                            color: black),),
-                          TextButton(
-                            onPressed: (){},
-                            child: Row(children: [
-                              Text('${Translator.buyCourse.tr}',
-                                style: Theme.of(context)
-                                    .textTheme
-                                    .bodyMedium!
-                                    .copyWith(
-                                    color: primaryColor),),
-                              SizedBox(width: 4),
-                              Icon(Icons.add_circle_outline, color: primaryColor,)
-                            ],),
+                          Text(
+                            Translator.toman.trParams(
+                                {'number': likedCourse.offer.toString() ?? ''}),
+                            style: Get.theme.textTheme.displayLarge!
+                                .copyWith(color: black),
+                          ),
+                          SizedBox(
+                            height: 40,
+                            child: Obx(
+                                  () => (controller.isLoading.value == likedCourse.id)
+                                  ?  Center(
+                                child: Row(
+                                  children: [
+                                    const SizedBox(
+                                      height: 30,
+                                      width: 30,
+                                      child: AspectRatio(
+                                        aspectRatio: 1,
+                                        child: CircularProgressIndicator(
+                                          color: primaryColor,
+                                          strokeWidth: 2,
+                                        ),
+                                      ),
+                                    ),
+                                    const SizedBox(width: 15,)
+                                  ],
+                                ),
+                              )
+                                  : TextButton(
+                                onPressed: () => controller
+                                    .addItemToBasket(likedCourse.id??0),
+                                child: Row(
+                                  crossAxisAlignment: CrossAxisAlignment.center,
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  children: [
+                                    Center(
+                                      child: Text(
+                                        '${Translator.buyCourse.tr}',
+                                        style: Get.theme.textTheme.bodyMedium!
+                                            .copyWith(color: primaryColor),
+                                      ),
+                                    ),
+                                    const SizedBox(width: 4),
+                                    const Icon(
+                                      Icons.add_circle_outline,
+                                      color: primaryColor,
+                                    )
+                                  ],
+                                ),
+                              ),
+                            ),
                           ),
                         ],
                       ),
@@ -108,5 +139,4 @@ class FavoriteCourseItem extends StatelessWidget {
       ),
     );
   }
-
 }

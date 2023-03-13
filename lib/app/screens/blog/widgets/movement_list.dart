@@ -1,27 +1,36 @@
 import 'package:flutter/widgets.dart';
+import 'package:get/get.dart';
+import 'package:rahyoga/app/data/models/movements.dart';
+import 'package:rahyoga/app/screens/blog/blog_controller.dart';
 import 'package:rahyoga/core/values/consts.dart';
-
-import '../../../../core/theme/colors.dart';
+import '../../../widgets/shimmer_screen.dart';
 import 'movment_item.dart';
 
-class MovementList extends StatelessWidget {
-   MovementList({Key? key}) : super(key: key);
-  var items = [1,1,1,1,1,1];
+class MovementList extends GetWidget<BlogController> {
+   const MovementList({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-      return GridView.builder(
+    return FutureBuilder(
+        future: controller.fetchMovements(),
+        builder: (context, AsyncSnapshot snapshot) => (snapshot.hasData) ? movements(controller.movements.value) :  const SimmerScreen());
+
+  }
+
+  Widget movements(Movements? movements){
+      return movements == null || movements.movements == null ? Container() : GridView.builder(
         cacheExtent: 500,
-        padding: const EdgeInsetsDirectional.fromSTEB(10, 2, 10, 10),
+        padding: const EdgeInsetsDirectional.fromSTEB(0, 2, 0, 10),
         gridDelegate:
-        const SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 2, childAspectRatio: 0.84),
-        itemCount: items.length,
+        const SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 2, childAspectRatio: 156/180),
+        //todo list shouldnt be null
+        itemCount: movements.movements!.length,
         itemBuilder: (BuildContext ctx, index) {
           return Padding(
             padding: const EdgeInsets.all(8.0),
             child: SizedBox(
                 height: screenWidth,
-                child: MovementItem()),
+                child: MovementItem(movements.movements![index])),
           );
         },
       );

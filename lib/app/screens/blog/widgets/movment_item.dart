@@ -1,15 +1,20 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:rahyoga/app/data/models/movement.dart';
 
 import '../../../../core/theme/colors.dart';
 import '../../../widgets/cache_image.dart';
+import '../blog_controller.dart';
 
 class MovementItem extends StatelessWidget {
-  const MovementItem({Key? key}) : super(key: key);
+  MovementItem(this.movement, {Key? key}) : super(key: key);
+   BlogController controller = Get.find<BlogController>();
+   final Movement movement;
 
   @override
   Widget build(BuildContext context) {
     return InkWell(
-      onTap: (){},
+      onTap: (){controller.gotoArticle(movement.id??1, 'حرکت یوگا');},
       child: Container(
           decoration:  BoxDecoration(
             borderRadius: BorderRadius.circular(12.0),
@@ -21,33 +26,31 @@ class MovementItem extends StatelessWidget {
                 padding: const EdgeInsetsDirectional.fromSTEB(8, 8, 8, 8),
                 child: ClipRRect(
                   borderRadius: BorderRadius.circular(12.0),
-                  child: const AspectRatio(
-                    aspectRatio: 1.1/1,
+                  child: AspectRatio(
+                    aspectRatio: 140/132,
                     child: CacheImage(
-                    url:
-                    'https://i0.wp.com/www.yogabasics.com/yogabasics2017/wp-content/uploads/2021/03/Ashtanga-Yoga.jpeg'),
+                    url: movement.image??''),
                   ),
                 ),
               ),
-              SizedBox(height: 10),
-              Expanded(
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.start,
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Padding(
-                      padding: const EdgeInsetsDirectional.fromSTEB(25, 0, 0, 0),
-                      child: Text(
-                        'حرکت فلان',
-                        style: Theme.of(context)
-                            .textTheme
-                            .headlineMedium!
-                            .copyWith(color: black),
-                      ),
+              SizedBox(height: 4),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.start,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Padding(
+                    padding: const EdgeInsetsDirectional.fromSTEB(20, 0, 0, 0),
+                    child: Text(
+                      movement.header??'',
+                      style: Theme.of(context)
+                          .textTheme
+                          .headlineMedium!
+                          .copyWith(color: black),
                     ),
-                  ],
-                ),
-              ),],
+                  ),
+                ],
+              ),
+            ],
           ),
         ),
     );

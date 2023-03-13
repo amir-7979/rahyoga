@@ -1,11 +1,17 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:rahyoga/app/screens/blog/blog_controller.dart';
 import 'package:rahyoga/core/theme/colors.dart';
 
 import '../../../../core/values/consts.dart';
+import '../../../data/models/blog.dart';
 import '../../../widgets/cache_image.dart';
 
 class BlogItem extends StatelessWidget {
-  const BlogItem({Key? key}) : super(key: key);
+  BlogItem(this.blog, {Key? key}) : super(key: key);
+  BlogController controller = Get.find<BlogController>();
+
+  final Blog blog;
 
   @override
   Widget build(BuildContext context) {
@@ -13,17 +19,17 @@ class BlogItem extends StatelessWidget {
       height: yogaMovementHeight,
       width: screenWidth,
       child: InkWell(
-        onTap: () {},
+        onTap: () {
+          controller.gotoArticle(blog.id??1, 'مقاله');
+        },
         child: Row(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             AspectRatio(
-              aspectRatio: 1.3,
+              aspectRatio: 96 / 72,
               child: ClipRRect(
                 borderRadius: BorderRadius.circular(12),
-                child: CacheImage(
-                    url:
-                    'https://i0.wp.com/www.yogabasics.com/yogabasics2017/wp-content/uploads/2021/03/Ashtanga-Yoga.jpeg'),
+                child: CacheImage(url: blog.image??''),
               ),
             ),
             Expanded(
@@ -33,19 +39,19 @@ class BlogItem extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      'عنوان مطلب که میتونه طولانی باشه عنوان مطلب که میتونه طولانی باشه ',
+                      blog.header??'',
                       style: Theme.of(context)
                           .textTheme
                           .headlineMedium!
-                          .copyWith(color: primaryColor, overflow: TextOverflow.ellipsis),
+                          .copyWith(
+                              color: primaryColor,
+                              overflow: TextOverflow.ellipsis),
                     ),
-                    SizedBox(height: 15),
+                    const SizedBox(height: 15),
                     Text(
-                      'یه خط راجع به اینکه چی قراره بخونه تو این قسمتیه خط راجع به اینکه چی قراره بخونه تو این قسمتیه خط راجع به اینکه چی قراره بخونه تو این قسمت',
-                      style: Theme.of(context)
-                          .textTheme
-                          .labelSmall!
-                          .copyWith(color: black,  overflow: TextOverflow.ellipsis),
+                      blog.subject??'',
+                      style: Theme.of(context).textTheme.headlineSmall!.copyWith(
+                          color: black, overflow: TextOverflow.ellipsis),
                       maxLines: 2,
                     ),
                   ],
@@ -57,9 +63,7 @@ class BlogItem extends StatelessWidget {
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 crossAxisAlignment: CrossAxisAlignment.center,
-                children: [
-                  Icon(Icons.keyboard_arrow_left)
-                ],
+                children: const [Icon(Icons.keyboard_arrow_left)],
               ),
             )
           ],
@@ -67,5 +71,4 @@ class BlogItem extends StatelessWidget {
       ),
     );
   }
-
 }

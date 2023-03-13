@@ -88,78 +88,82 @@ class SignupForm extends StatelessWidget {
             const SizedBox(height: 10),
             SizedBox(
               height: 70,
-              child: TextFormField(
-                style: const TextStyle(color: white),
-                controller: _controller.passwordController,
-                obscureText: _controller.passwordVisible.value,
-                keyboardType: TextInputType.visiblePassword,
-                onEditingComplete: () => FocusScope.of(context).nextFocus(),
-                decoration: InputDecoration(
-                  errorStyle: Theme.of(context)
-                      .textTheme
-                      .headlineSmall!
-                      .copyWith(color: errorText),
-                  helperText: '',
-                  suffixIcon: IconButton(
-                    icon: Icon(
-                      _controller.passwordVisible.value
-                          ? Icons.visibility_off
-                          : Icons.visibility,
-                      color: white,
+              child: Obx(
+                  ()=> TextFormField(
+                  style: const TextStyle(color: white),
+                  controller: _controller.passwordController,
+                  obscureText: _controller.passwordVisible.value,
+                  keyboardType: TextInputType.visiblePassword,
+                  onEditingComplete: () => FocusScope.of(context).nextFocus(),
+                  decoration: InputDecoration(
+                    errorStyle: Theme.of(context)
+                        .textTheme
+                        .headlineSmall!
+                        .copyWith(color: errorText),
+                    helperText: '',
+                    suffixIcon: IconButton(
+                      icon: Icon(
+                        _controller.passwordVisible.value
+                            ? Icons.visibility_off
+                            : Icons.visibility,
+                        color: white,
+                      ),
+                      onPressed: _controller.toggle,
                     ),
-                    onPressed: _controller.toggle,
-                  ),
-                  filled: true,
-                  fillColor: fieldColor,
-                  labelText: Translator.password.tr,
-                  labelStyle: const TextStyle(color: white),
-                  focusedBorder: focusedBorder,
-                  enabledBorder: enabledBorder,
-                  border: border,
-                  errorBorder: errorBorder,
-                  focusedErrorBorder: errorBorder,
+                    filled: true,
+                    fillColor: fieldColor,
+                    labelText: Translator.password.tr,
+                    labelStyle: const TextStyle(color: white),
+                    focusedBorder: focusedBorder,
+                    enabledBorder: enabledBorder,
+                    border: border,
+                    errorBorder: errorBorder,
+                    focusedErrorBorder: errorBorder,
 
+                  ),
+                  validator: (txt) => _controller.passwordValidation(txt!, _controller.passwordController2.value.text),
+                  //onSubmitted: (txt) => function(controller.text),
                 ),
-                validator: (txt) => _controller.passwordValidation(txt!, _controller.passwordController2.value.text),
-                //onSubmitted: (txt) => function(controller.text),
               ),
             ),
             const SizedBox(height: 10),
             SizedBox(
               height: 70,
-              child: TextFormField(
-                style: const TextStyle(color: white),
-                controller: _controller.passwordController2,
-                obscureText: _controller.passwordVisible2.value,
-                keyboardType: TextInputType.visiblePassword,
-                onEditingComplete: () => FocusScope.of(context).nextFocus(),
-                decoration: InputDecoration(
-                  errorStyle: Theme.of(context)
-                      .textTheme
-                      .headlineSmall!
-                      .copyWith(color: errorText),
-                  helperText: '',
-                  suffixIcon: IconButton(
-                    icon: Icon(
-                      _controller.passwordVisible2.value
-                          ? Icons.visibility_off
-                          : Icons.visibility,
-                      color: white,
+              child: Obx(
+                  ()=> TextFormField(
+                  style: const TextStyle(color: white),
+                  controller: _controller.passwordController2,
+                  obscureText: _controller.passwordVisible2.value,
+                  keyboardType: TextInputType.visiblePassword,
+                  onEditingComplete: () => FocusScope.of(context).nextFocus(),
+                  decoration: InputDecoration(
+                    errorStyle: Theme.of(context)
+                        .textTheme
+                        .headlineSmall!
+                        .copyWith(color: errorText),
+                    helperText: '',
+                    suffixIcon: IconButton(
+                      icon: Icon(
+                        _controller.passwordVisible2.value
+                            ? Icons.visibility_off
+                            : Icons.visibility,
+                        color: white,
+                      ),
+                      onPressed: _controller.toggle2,
                     ),
-                    onPressed: _controller.toggle2,
+                    filled: true,
+                    fillColor: fieldColor,
+                    labelText: Translator.confirm_password.tr,
+                    labelStyle: const TextStyle(color: white),
+                    focusedBorder: focusedBorder,
+                    enabledBorder: enabledBorder,
+                    border: border,
+                    errorBorder: errorBorder,
+                    focusedErrorBorder: errorBorder,
                   ),
-                  filled: true,
-                  fillColor: fieldColor,
-                  labelText: Translator.confirm_password.tr,
-                  labelStyle: const TextStyle(color: white),
-                  focusedBorder: focusedBorder,
-                  enabledBorder: enabledBorder,
-                  border: border,
-                  errorBorder: errorBorder,
-                  focusedErrorBorder: errorBorder,
+                  validator: (txt) => _controller.passwordValidation(txt!, _controller.passwordController.value.text),
+                  //onSubmitted: (txt) => function(controller.text),
                 ),
-                validator: (txt) => _controller.passwordValidation(txt!, _controller.passwordController.value.text),
-                //onSubmitted: (txt) => function(controller.text),
               ),
             ),
             Padding(

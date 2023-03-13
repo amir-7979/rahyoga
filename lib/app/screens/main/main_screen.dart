@@ -12,8 +12,10 @@ import 'main_controller.dart';
 
 class MainScreen extends StatelessWidget {
 
-  final PersistentTabController _controller = PersistentTabController(initialIndex: 0);
-  final MainController _ctrl = Get.find<MainController>();
+
+  final MainController ctrl = Get.find<MainController>();
+
+  MainScreen({super.key});
 
   List<Widget> _buildScreens() {
     return [
@@ -79,33 +81,32 @@ class MainScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return SafeArea(
       child: PersistentTabView(
-        navBarHeight: 60,
-        padding: NavBarPadding.symmetric(horizontal: 5),
-        context,
-
-        controller: _controller,
-        screens: _buildScreens(),
-        items: _navBarsItems(),
-        confineInSafeArea: true,
-        backgroundColor: bottomBarGray, // Default is Colors.white.
-        handleAndroidBackButtonPress: true, // Default is true.
-        resizeToAvoidBottomInset: true, // This needs to be true if you want to move up the screen when keyboard appears. Default is true.
-        stateManagement: true, // Default is true.
-        hideNavigationBarWhenKeyboardShows: true, // Recommended to set 'resizeToAvoidBottomInset' as true while using this argument. Default is true.
-
-        popAllScreensOnTapOfSelectedTab: true,
-        popActionScreens: PopActionScreensType.all,
-        itemAnimationProperties: const ItemAnimationProperties( // Navigation Bar's items animation properties.
-          duration: Duration(milliseconds: 200),
-          curve: Curves.ease,
+          navBarHeight: 60,
+          padding: NavBarPadding.symmetric(horizontal: 5),
+          context,
+          controller: ctrl.tabController,
+          screens: _buildScreens(),
+          items: _navBarsItems(),
+          confineInSafeArea: true,
+          backgroundColor: bottomBarGray, // Default is Colors.white.
+          handleAndroidBackButtonPress: true, // Default is true.
+          resizeToAvoidBottomInset: true, // This needs to be true if you want to move up the screen when keyboard appears. Default is true.
+          stateManagement: true, // Default is true.
+          hideNavigationBarWhenKeyboardShows: true, // Recommended to set 'resizeToAvoidBottomInset' as true while using this argument. Default is true.
+          popAllScreensOnTapOfSelectedTab: true,
+          popActionScreens: PopActionScreensType.all,
+          itemAnimationProperties: const ItemAnimationProperties( // Navigation Bar's items animation properties.
+            duration: Duration(milliseconds: 200),
+            curve: Curves.ease,
+          ),
+          screenTransitionAnimation: const ScreenTransitionAnimation( // Screen transition animation on change of selected tab.
+            animateTabTransition: true,
+            curve: Curves.ease,
+            duration: Duration(milliseconds: 200),
+          ),
+          navBarStyle: NavBarStyle.style3, // Choose the nav bar style with this property.
         ),
-        screenTransitionAnimation: const ScreenTransitionAnimation( // Screen transition animation on change of selected tab.
-          animateTabTransition: true,
-          curve: Curves.ease,
-          duration: Duration(milliseconds: 200),
-        ),
-        navBarStyle: NavBarStyle.style3, // Choose the nav bar style with this property.
-      ),
+
     );
   }
 }

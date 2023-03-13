@@ -63,6 +63,7 @@ class Translator extends Translations {
   static const numberOfCourses = 'numberOfCourses';
   static const discount = 'Discount';
   static const totalPrice = 'totalPrice';
+  static const totalPrice2 = 'totalPrice2';
   static const pay = 'pay';
   static const course2 = 'course2';
   static const courseDetail = 'courseDetail';
@@ -82,7 +83,6 @@ class Translator extends Translations {
   static const enterConfirmCode = 'enterConfirmCode';
   static const confirm = 'confirm';
   static const code = 'code';
-  static const dontReciveEmail = 'code';
 
 
   @override
@@ -111,6 +111,7 @@ class Translator extends Translations {
           discount:'discount',
           pay:'pay',
           totalPrice:'total price',
+          totalPrice2:'final price',
           orderInfo:'order summary',
           enterDiscount:'enter discount code',
           discountCode:'discount code',
@@ -194,6 +195,7 @@ class Translator extends Translations {
           discount:'تخفیف',
           pay:'پرداخت و شروع یادگیری',
           totalPrice:'قیمت کل',
+          totalPrice2:'جمع کل',
           orderInfo:'خلاصه سفارش',
           enterDiscount:'کد تخفیف خود را وارد کنید',
           discountCode:'کد تخفیف',

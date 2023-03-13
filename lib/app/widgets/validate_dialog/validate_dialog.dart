@@ -69,7 +69,19 @@ Dialog validateDialog(String userName, String password) {
                       ),
                     ),
                   ),
-                  const SizedBox(height: 30),
+                  const SizedBox(height: 25),
+                  TextButton(
+                    onPressed: () {
+                      //todo go to see_all screen
+                    },
+                    child: Text(
+                      'دریافت دوباره کد تاید',
+                      style:Get.theme.textTheme.displayMedium!.copyWith(
+                          color: primaryColor, decoration: TextDecoration.underline),
+                    ),
+                  ),
+                  const SizedBox(height: 15),
+
                   Padding(
                     padding: const EdgeInsetsDirectional.symmetric(horizontal: 10),
                     child: Text(

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:rahyoga/app/screens/my_courses/widgets/favorit_courses_list.dart';
 import 'package:rahyoga/app/screens/my_courses/widgets/purchased_courses_list.dart';
+import 'package:rahyoga/core/values/consts.dart';
 import 'package:tab_indicator_styler/tab_indicator_styler.dart';
 
 import '../../../core/languages/translator.dart';
@@ -33,6 +34,7 @@ class MyCoursesScreen extends StatelessWidget {
                 height: 50,
                   child: AppBar(
                     toolbarHeight: 50,
+                    titleSpacing: 5,
                     shape: const RoundedRectangleBorder(
                       borderRadius: BorderRadius.all(
                          Radius.circular(30),
@@ -42,6 +44,7 @@ class MyCoursesScreen extends StatelessWidget {
                     title: TabBar(
                       automaticIndicatorColorAdjustment: true,
                       padding: EdgeInsetsDirectional.zero,
+                      indicatorPadding: EdgeInsetsDirectional.zero,
                       tabs: [
                         Tab(
                           height: 40,
@@ -65,7 +68,7 @@ class MyCoursesScreen extends StatelessWidget {
                         ),
                       ],
                       indicator: RectangularIndicator(
-                        color: secondaryColor,
+                        color: fourthColor,
                         bottomLeftRadius: 30,
                         bottomRightRadius: 30,
                         topLeftRadius: 30,
@@ -81,12 +84,16 @@ class MyCoursesScreen extends StatelessWidget {
 
             Expanded(
               child: Padding(
-                padding: const EdgeInsetsDirectional.symmetric(horizontal: 7),
-                child: TabBarView(
-                  children: [
-                    PurchasedCourseList(),
-                    FavoriteCourseList(),
-                  ],
+
+                padding: const EdgeInsetsDirectional.symmetric(horizontal: 2),
+                child: SizedBox(
+                  width: screenWidth,
+                  child: TabBarView(
+                    children: [
+                      PurchasedCourseList(),
+                      FavoriteCourseList(),
+                    ],
+                  ),
                 ),
               ),
             ),

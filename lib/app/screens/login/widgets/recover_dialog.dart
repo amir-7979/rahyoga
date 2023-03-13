@@ -1,13 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:rahyoga/core/languages/translator.dart';
-import '../../../core/theme/colors.dart';
-import '../../../core/values/border_styles.dart';
-import '../../screens/login/login_controller.dart';
+import '../../../../core/theme/colors.dart';
+import '../../../../core/values/border_styles.dart';
+import '../../../../routes/routes.dart';
+import '../login_controller.dart';
 
 final LoginController _controller = Get.find<LoginController>();
 
-Dialog recoverDialog1() {
+Dialog recoverDialog() {
   return Dialog(
     elevation: 5,
     backgroundColor: Colors.transparent,
@@ -67,7 +68,7 @@ Dialog recoverDialog1() {
                         validator: (txt) => _controller.emailValidation(txt!),
                       ),
                     ),
-                    const SizedBox(height: 15),
+                    const SizedBox(height: 40),
                     Padding(
                       padding: const EdgeInsets.fromLTRB(6, 16, 6, 0),
                       child: ElevatedButton(
@@ -78,7 +79,7 @@ Dialog recoverDialog1() {
                           shape: const StadiumBorder(),
                         ),
                         onPressed: () {
-                          _controller.sendRecoveryCode();
+                          _controller.sendPasswordEmail();
                         },
                         child: Text(
                           Translator.send_password_recover_request.tr,

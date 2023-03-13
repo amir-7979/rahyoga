@@ -40,7 +40,6 @@ class SignupController extends GetxController {
       update();
       if (response == 201) {
           Get.dialog(validateDialog(usernameController.value.text, passwordController.value.text), barrierDismissible: false, );
-
       } else {
         errorText.value = 'error';
         update();

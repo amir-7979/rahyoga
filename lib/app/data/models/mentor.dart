@@ -1,22 +1,26 @@
 class Mentor {
   Mentor({
-    required this.id,
-    required this.username,
-    this.firstName,
-    this.lastName,
-    required this.email,
+     this.id,
+     this.username,
+     this.firstName,
+     this.lastName,
+     this.fullname,
+     this.email,
   });
-  late final int id;
-  late final String username;
-  late final Null firstName;
-  late final Null lastName;
-  late final String email;
 
-  Mentor.fromJson(Map<String, dynamic> json){
+  late final int? id;
+  late final String? username;
+  late final String? firstName;
+  late final String? lastName;
+  late final String? fullname;
+  late final String? email;
+
+  Mentor.fromJson(Map<String?, dynamic> json){
     id = json['id'];
     username = json['username'];
-    firstName = null;
-    lastName = null;
+    firstName = json['first_name'];
+    lastName = json['last_name'];
+    fullname = json['fullname'];
     email = json['email'];
   }
 }

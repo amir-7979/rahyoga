@@ -1,37 +1,43 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:percent_indicator/circular_percent_indicator.dart';
+import 'package:rahyoga/app/screens/my_courses/my_courses_controller.dart';
 import 'package:rahyoga/core/values/consts.dart';
 
 import '../../../../core/languages/translator.dart';
 import '../../../../core/theme/colors.dart';
+import '../../../data/models/course.dart';
 import '../../../widgets/cache_image.dart';
 
 class PurchasedCourseItem extends StatelessWidget {
-  const PurchasedCourseItem({super.key});
 
-  //final LastCourseModel _itemModel;
+   PurchasedCourseItem(this.course, {super.key});
+  final Course course;
+  MyCoursesController controller = Get.find<MyCoursesController>();
+
 
   @override
   Widget build(BuildContext context) {
     return Column(
       children: [
         InkWell(
-          onTap: () {},
+          onTap: () {
+            controller.gotoCourseInfo(course.id??1);
+          },
           child: SizedBox(
             height: purchasedItemHeight,
+            width: screenWidth,
             child: Row(
               children: [
                 Padding(
-                  padding: const EdgeInsetsDirectional.fromSTEB(5, 5, 5, 5),
+                  padding: const EdgeInsetsDirectional.fromSTEB(5, 5, 10, 5),
                   child: SizedBox(
                     height: purchasedItemHeight,
                     width: purchasedItemImageWidth,
                     child: ClipRRect(
                       borderRadius: BorderRadius.circular(12),
                       child: CacheImage(
-                          url:
-                              'https://i0.wp.com/www.yogabasics.com/yogabasics2017/wp-content/uploads/2021/03/Ashtanga-Yoga.jpeg'),
+                          url:course.image??''),
                     ),
                   ),
                 ),
@@ -45,20 +51,21 @@ class PurchasedCourseItem extends StatelessWidget {
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
                             Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
                                 Text(
-                                  'دوره حفظ و تعادل',
-                                  style: Theme.of(context)
+                                  course.header??'',
+                                  style: Get.theme
                                       .textTheme
                                       .displayLarge!
                                       .copyWith(color: black),
                                 ),
-                                SizedBox(height: 10),
+                                SizedBox(height: 6),
                                 Text(
-                                  '${Translator.lastSeen.tr} : ${DateTime.now().day}',
-                                  style: Theme.of(context)
+                                  '${Translator.mentor.tr} : ${course.mentor!.fullname??''}',
+                                  style: Get.theme
                                       .textTheme
-                                      .labelSmall!
+                                      .headlineSmall!
                                       .copyWith(color: grayText2),
                                 ),
                               ],
@@ -67,10 +74,10 @@ class PurchasedCourseItem extends StatelessWidget {
                               child: CircularPercentIndicator(
                                 radius:30,
                                 lineWidth: 4.0,
-                                percent: 0.7,
+                                percent: course.progress??0.0,
                                 center: Text(
-                                  "70%",
-                                  style: Theme.of(context)
+                                  '${course.progress.toString().substring(2)}%',
+                                  style: Get.theme
                                       .textTheme
                                       .headlineMedium!
                                       .copyWith(color: primaryColor),
@@ -86,8 +93,8 @@ class PurchasedCourseItem extends StatelessWidget {
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
                               Text(
-                                '${Translator.session.tr}${1}',
-                                style: Theme.of(context)
+                                '${Translator.session.tr} ${course.theNumberOfSeasonsPersian}',
+                                style: Get.theme
                                     .textTheme
                                     .displayMedium!
                                     .copyWith(
@@ -98,7 +105,7 @@ class PurchasedCourseItem extends StatelessWidget {
                                 children: [
                                   Text(
                                     '${Translator.continueCourse.tr}',
-                                    style: Theme.of(context)
+                                    style: Get.theme
                                         .textTheme
                                         .headlineMedium!
                                         .copyWith(
@@ -111,7 +118,8 @@ class PurchasedCourseItem extends StatelessWidget {
                                       )
                                 ],
                               )
-                            ]),
+                            ],
+                        ),
                       ],
                     ),
                   ),
@@ -120,6 +128,7 @@ class PurchasedCourseItem extends StatelessWidget {
             ),
           ),
         ),
+        Divider(),
       ],
     );
   }

@@ -1,9 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:rahyoga/app/screens/my_courses/widgets/favorit_courses_list.dart';
-import 'package:rahyoga/app/screens/my_courses/widgets/purchased_courses_list.dart';
 import 'package:tab_indicator_styler/tab_indicator_styler.dart';
-
 import '../../../core/languages/translator.dart';
 import '../../../core/theme/colors.dart';
 import 'widgets/blogs_list.dart';
@@ -35,7 +32,8 @@ class BlogScreen extends StatelessWidget {
                 height: 50,
                 child: AppBar(
                   toolbarHeight: 50,
-                  shape: const RoundedRectangleBorder(
+                    titleSpacing: 5,
+                    shape: const RoundedRectangleBorder(
                       borderRadius: BorderRadius.all(
                         Radius.circular(30),
                       ),
@@ -44,6 +42,7 @@ class BlogScreen extends StatelessWidget {
                   title: TabBar(
                     automaticIndicatorColorAdjustment: true,
                     padding: EdgeInsetsDirectional.zero,
+                    indicatorPadding: EdgeInsetsDirectional.zero,
                     tabs: [
                       Tab(
                           height: 40,
@@ -67,7 +66,7 @@ class BlogScreen extends StatelessWidget {
                       ),
                     ],
                     indicator: RectangularIndicator(
-                      color: secondaryColor,
+                      color: fourthColor,
                       bottomLeftRadius: 30,
                       bottomRightRadius: 30,
                       topLeftRadius: 30,
@@ -80,10 +79,9 @@ class BlogScreen extends StatelessWidget {
                 ),
               ),
             ),
-
-            Expanded(
+            const Expanded(
               child: Padding(
-                padding: const EdgeInsetsDirectional.symmetric(horizontal: 7),
+                padding: EdgeInsetsDirectional.symmetric(horizontal: 7),
                 child: TabBarView(
                   children: [
                     MovementList(),

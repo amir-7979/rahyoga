@@ -1,4 +1,3 @@
-import 'dart:developer';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
@@ -7,7 +6,6 @@ import 'package:rahyoga/app/data/services/storage_service.dart';
 import 'package:rahyoga/app/screens/splash/splash_screen.dart';
 import 'package:rahyoga/core/theme/colors.dart';
 import 'package:rahyoga/routes/pages.dart';
-
 import 'app/data/models/client.dart';
 import 'app/data/services/content_api_services.dart';
 import 'app/data/services/user_api_service.dart';
@@ -22,9 +20,10 @@ Future<void> main() async {
 }
 
 initServices() async {
-  await Get.putAsync<Client>(() async => Client());
   await Get.putAsync<StorageService>(() async => StorageService());
+  await Get.putAsync<Client>(() async => Client());
   await Get.putAsync<UserApiService>(() async => UserApiService());
+
   await Get.putAsync<ContentApiService>(() async => ContentApiService());
 }
 
@@ -54,8 +53,9 @@ class MyApp extends StatelessWidget {
           splashColor: Colors.transparent,
           highlightColor: Colors.transparent,
           hoverColor: Colors.transparent,
+
         primarySwatch: Colors.blue,
-        appBarTheme: AppBarTheme(toolbarHeight: 60, color: white, titleTextStyle: Theme.of(context).textTheme.headlineLarge!.copyWith(color: black, fontWeight: FontWeight.w700, fontSize: 18), elevation: 1),
+        appBarTheme: AppBarTheme(toolbarHeight: 60, color: white, titleTextStyle: Theme.of(context).textTheme.headlineLarge!.copyWith(color: black, fontWeight: FontWeight.w700, fontSize: 18), elevation: 0.5),
         textTheme: persianTextTheme
       ),
       getPages: AppPages.pages,
