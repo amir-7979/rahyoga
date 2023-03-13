@@ -19,10 +19,10 @@ class MainScreen extends StatelessWidget {
 
   List<Widget> _buildScreens() {
     return [
-      HomeScreen(),
-      MyCoursesScreen(),
-      BlogScreen(),
-      ProfileScreen(),
+      const HomeScreen(),
+      const MyCoursesScreen(),
+      const BlogScreen(),
+      const ProfileScreen(),
     ];
   }
 
@@ -33,7 +33,7 @@ class MainScreen extends StatelessWidget {
         icon: Transform.scale(
             scale: 1.5,
             child: ColorFiltered(
-              colorFilter: ColorFilter.mode(primaryColor, BlendMode.modulate),
+              colorFilter: const ColorFilter.mode(primaryColor, BlendMode.modulate),
               child: SvgPicture.asset('assets/images/home.svg',),
             ),),
         title: Translator.home.tr,
@@ -82,7 +82,7 @@ class MainScreen extends StatelessWidget {
     return SafeArea(
       child: PersistentTabView(
           navBarHeight: 60,
-          padding: NavBarPadding.symmetric(horizontal: 5),
+          padding: const NavBarPadding.symmetric(horizontal: 5),
           context,
           controller: ctrl.tabController,
           screens: _buildScreens(),
