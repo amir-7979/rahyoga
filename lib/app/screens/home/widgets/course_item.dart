@@ -17,7 +17,7 @@ class CourseItem extends StatelessWidget {
     return Padding(
       padding: const EdgeInsetsDirectional.only(end: 10),
       child: InkWell(
-        onTap: () {},
+        onTap: () => controller.gotoBuyCourse(course.id!.toInt()),
         child: SizedBox(
           height: generalYogaItemHeight,
           width: generalYogaItemWidth,

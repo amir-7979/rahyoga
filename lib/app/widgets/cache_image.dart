@@ -3,9 +3,10 @@ import 'package:flutter/material.dart';
 import 'package:rahyoga/core/values/consts.dart';
 
 class CacheImage extends StatelessWidget {
-  const CacheImage({required this.url, this.imageBuilder, Key? key})
+  const CacheImage({required this.url, this.imageBuilder, this.height ,Key? key})
       : super(key: key);
   final String url;
+  final double? height;
   final bool? imageBuilder;
 
   @override
@@ -17,12 +18,12 @@ class CacheImage extends StatelessWidget {
           ? null
           : imageBuilder == true
               ? (context, imageProvider) => Container(
-                    width: 72.0,
-                    height: 72.0,
+                    width: height,
+                    height: height,
                     decoration: BoxDecoration(
                       shape: BoxShape.circle,
                       image: DecorationImage(
-                          image: imageProvider, fit: BoxFit.cover),
+                          image: imageProvider, fit: BoxFit.cover, alignment: Alignment.center),
                     ),
                   )
               : null,

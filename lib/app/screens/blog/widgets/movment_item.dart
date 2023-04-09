@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:rahyoga/app/data/models/movement.dart';
+import 'package:rahyoga/core/values/consts.dart';
 
 import '../../../../core/theme/colors.dart';
 import '../../../widgets/cache_image.dart';
@@ -40,12 +41,15 @@ class MovementItem extends StatelessWidget {
                 children: [
                   Padding(
                     padding: const EdgeInsetsDirectional.fromSTEB(20, 0, 0, 0),
-                    child: Text(
-                      movement.header??'',
-                      style: Theme.of(context)
-                          .textTheme
-                          .headlineMedium!
-                          .copyWith(color: black),
+                    child: SizedBox(
+                      width: screenWidth-280,
+                      child: Text(
+                        movement.header??'',
+                        style: Theme.of(context)
+                            .textTheme
+                            .headlineMedium!
+                            .copyWith(color: black),
+                      ),
                     ),
                   ),
                 ],

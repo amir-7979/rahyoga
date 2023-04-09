@@ -27,7 +27,7 @@ class ProfileWidget extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.start,
             children: [
               //CacheImage(url: profile.image??'', imageBuilder: true),
-              CacheImage(url: profile.image??'', imageBuilder: true),
+              CacheImage(url: profile.image??'', imageBuilder: true, height: 72),
               Padding(
                 padding: const EdgeInsetsDirectional.fromSTEB(20, 0, 0, 0),
                 child: Column(

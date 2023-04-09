@@ -11,7 +11,7 @@ class CourseList extends StatelessWidget {
     const CourseList(this.title, this.courses, this.function, {Key? key}) : super(key: key);
     final String title;
     final List<Course> courses;
-  final Function function;
+    final Function function;
 
   @override
   Widget build(BuildContext context) {
@@ -30,7 +30,7 @@ class CourseList extends StatelessWidget {
                     .copyWith(color: black),
               ),
               TextButton(
-                onPressed: () {function();},
+                onPressed: () => function(),
                 child: Text(
                   Translator.seeAll.tr,
                   style: Theme.of(context)

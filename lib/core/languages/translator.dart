@@ -83,12 +83,19 @@ class Translator extends Translations {
   static const enterConfirmCode = 'enterConfirmCode';
   static const confirm = 'confirm';
   static const code = 'code';
+  static const saveStaff = 'saveStaff';
+  static const savedBlogs = 'savedBlogs';
+  static const savedMovements = 'savedMovements';
 
 
   @override
   // TODO: implement keys
   Map<String, Map<String, String>> get keys => {
         'en_US': {
+          saveStaff: 'saved ',
+          savedBlogs: 'saved blogs',
+          savedMovements: 'saved movements',
+
           code: 'code',
           confirm: 'confirm',
           enterConfirmCode: 'enter your code',
@@ -173,6 +180,9 @@ class Translator extends Translations {
           userOrEmail: 'username or email',
         },
         'fa_IR': {
+          saveStaff: 'مطالب ذخیره شده',
+          savedBlogs: 'مقالات ذخیره شده',
+          savedMovements: 'حرکات ذخیره شده',
           code: 'کد',
           confirm: 'تایید',
           enterConfirmCode: 'کد تایید ای که به ایمیل شما ارسال شده است را وارد کنید.',
@@ -184,7 +194,7 @@ class Translator extends Translations {
           more: 'بیشتر',
           hour: 'ساعت',
           min: 'دقیقه',
-          less: 'کمتر',
+          less: ' کمتر ',
           courseSession: 'جلسات دوره',
           courseName:'عنوان دوره',
           cost:'قیمت',

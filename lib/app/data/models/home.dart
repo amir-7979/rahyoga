@@ -10,11 +10,11 @@ class Home {
      this.miniCourses,
      this.paid,
   });
-  late final LastCourse? lastCourse;
-  late final List<Course>? courses;
-  late final List<Movement>? movements;
-  late final List<Course>? miniCourses;
-  late final List<Course>? paid;
+  late LastCourse? lastCourse;
+  late List<Course>? courses=[];
+  late List<Movement>? movements=[];
+  late List<Course>? miniCourses=[];
+  late List<Course>? paid=[];
 
 
   Home.fromJson(Map<String, dynamic> json){

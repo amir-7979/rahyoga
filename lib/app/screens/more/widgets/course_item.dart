@@ -17,7 +17,7 @@ class CourseItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return InkWell(
-      onTap: () {},
+      onTap: () => controller.gotoBuyCourse(likedCourse.id!.toInt()),
       child: SizedBox(
         height: favoriteItemHeight,
         child: Row(
@@ -44,10 +44,13 @@ class CourseItem extends StatelessWidget {
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         crossAxisAlignment: CrossAxisAlignment.center,
                         children: [
-                          Text(
-                            likedCourse.header ?? '',
-                            style: Get.theme.textTheme.displayMedium!
-                                .copyWith(color: black),
+                          SizedBox(
+                            width: screenWidth - 190,
+                            child: Text(
+                              likedCourse.header ?? '',
+                              style: Get.theme.textTheme.displayMedium!
+                                  .copyWith(color: black),
+                            ),
                           ),
                           Text(
                             '${likedCourse.theNumberOfSeasons} ${Translator.session.tr}',

@@ -110,10 +110,12 @@ class BasketScreen extends GetView<BasketController> {
             ),
           ),
         ),
-        body: GetX<BasketController>(
-          init: BasketController(),
-            builder: (snapshot) => !snapshot.initialized ? SimmerScreen(): basket(controller.basket.value!)
-                ),
+        body: GetBuilder<BasketController>(
+            init: controller,
+            builder: (context) => context.basket.value!.count == null
+                ? const SimmerScreen()
+                : basket(controller.basket.value!)
+        ),
       ),
     );
   }

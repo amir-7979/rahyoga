@@ -32,12 +32,15 @@ class SignupForm extends StatelessWidget {
             SizedBox(
               height: 70,
               child: TextFormField(
-                style: const TextStyle(color: white),
+                style: Get.theme
+                    .textTheme
+                    .labelMedium!
+                    .copyWith(color: white),
                 controller: _controller.usernameController,
                 keyboardType: TextInputType.text,
                 onEditingComplete: () => FocusScope.of(context).nextFocus(),
                 decoration: InputDecoration(
-                  errorStyle: Theme.of(context)
+                  errorStyle:  Get.theme
                       .textTheme
                       .headlineSmall!
                       .copyWith(color: errorText),
@@ -60,12 +63,15 @@ class SignupForm extends StatelessWidget {
             SizedBox(
               height: 70,
               child: TextFormField(
-                style: const TextStyle(color: white),
+                style: Get.theme
+                    .textTheme
+                    .labelMedium!
+                    .copyWith(color: white),
                 controller: _controller.emailController,
                 keyboardType: TextInputType.emailAddress,
                 onEditingComplete: () => FocusScope.of(context).nextFocus(),
                 decoration: InputDecoration(
-                  errorStyle: Theme.of(context)
+                  errorStyle:  Get.theme
                       .textTheme
                       .headlineSmall!
                       .copyWith(color: errorText),
@@ -90,13 +96,16 @@ class SignupForm extends StatelessWidget {
               height: 70,
               child: Obx(
                   ()=> TextFormField(
-                  style: const TextStyle(color: white),
+                  style: Get.theme
+                      .textTheme
+                      .labelMedium!
+                      .copyWith(color: white),
                   controller: _controller.passwordController,
                   obscureText: _controller.passwordVisible.value,
                   keyboardType: TextInputType.visiblePassword,
                   onEditingComplete: () => FocusScope.of(context).nextFocus(),
                   decoration: InputDecoration(
-                    errorStyle: Theme.of(context)
+                    errorStyle:  Get.theme
                         .textTheme
                         .headlineSmall!
                         .copyWith(color: errorText),
@@ -131,13 +140,16 @@ class SignupForm extends StatelessWidget {
               height: 70,
               child: Obx(
                   ()=> TextFormField(
-                  style: const TextStyle(color: white),
+                  style: Get.theme
+                      .textTheme
+                      .labelMedium!
+                      .copyWith(color: white),
                   controller: _controller.passwordController2,
                   obscureText: _controller.passwordVisible2.value,
                   keyboardType: TextInputType.visiblePassword,
                   onEditingComplete: () => FocusScope.of(context).nextFocus(),
                   decoration: InputDecoration(
-                    errorStyle: Theme.of(context)
+                    errorStyle:  Get.theme
                         .textTheme
                         .headlineSmall!
                         .copyWith(color: errorText),

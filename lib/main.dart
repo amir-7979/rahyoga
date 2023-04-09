@@ -13,6 +13,7 @@ import 'app/screens/splash/splash_binding.dart';
 import 'app/screens/splash/splash_controller.dart';
 import 'core/languages/translator.dart';
 import 'core/theme/text_theme.dart';
+import 'core/utils/scroll_behavior.dart';
 
 Future<void> main() async {
   await initServices();
@@ -23,7 +24,6 @@ initServices() async {
   await Get.putAsync<StorageService>(() async => StorageService());
   await Get.putAsync<Client>(() async => Client());
   await Get.putAsync<UserApiService>(() async => UserApiService());
-
   await Get.putAsync<ContentApiService>(() async => ContentApiService());
 }
 
@@ -61,8 +61,13 @@ class MyApp extends StatelessWidget {
       getPages: AppPages.pages,
       //home: RecoveryPasswordScreen(),
       //home: SplashScreen(),
+      builder: (context, child) {
+        return ScrollConfiguration(
+          behavior: MyBehavior(),
+          child: child??Container(),
+        );
+      },
       home: SplashScreen(),
-
     );
   }
 }

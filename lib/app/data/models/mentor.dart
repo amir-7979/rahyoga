@@ -1,19 +1,20 @@
 class Mentor {
   Mentor({
-     this.id,
-     this.username,
-     this.firstName,
-     this.lastName,
-     this.fullname,
-     this.email,
+    this.id,
+    this.username,
+    this.firstName,
+    this.lastName,
+    this.fullname,
+    this.email,
+    this.image,
   });
-
-  late final int? id;
-  late final String? username;
-  late final String? firstName;
-  late final String? lastName;
-  late final String? fullname;
-  late final String? email;
+  late int? id;
+  late String? username;
+  late String? firstName;
+  late String? lastName;
+  late String? fullname;
+  late String? email;
+  late String? image;
 
   Mentor.fromJson(Map<String?, dynamic> json){
     id = json['id'];
@@ -22,5 +23,5 @@ class Mentor {
     lastName = json['last_name'];
     fullname = json['fullname'];
     email = json['email'];
-  }
-}
+    image = json['image'];
+  }}

@@ -19,7 +19,7 @@ class Blogs {
     count = json['count'];
     next = json['next'];
     previous = json['previous'];
-    articles = List.from(json['articles']).map((e)=>Blog.fromJson(e)).toList();
+    articles =List.from(json['articles']).map((e)=>Blog.fromJson(e)).toList();
     total = json['total'];
   }
 

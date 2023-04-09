@@ -2,17 +2,22 @@ import 'package:get/get.dart';
 import 'package:infinite_scroll_pagination/infinite_scroll_pagination.dart';
 
 import '../../../core/utils/snack_bar.dart';
+import '../../../routes/routes.dart';
 import '../../data/models/liked_course.dart';
 import '../../data/services/content_api_services.dart';
 
 class MoreController extends GetxController {
   final ContentApiService _apiService = Get.find<ContentApiService>();
   RxInt isLoading = 0.obs;
+  RxString title = ''.obs;
+  Function? function;
   final PagingController<int, LikedCourse> pagingController = PagingController(firstPageKey: 1);
   void back() => Get.back();
 
   @override
   void onInit() {
+    title.value = Get.arguments[0];
+    function = Get.arguments[1];
     pagingController.addPageRequestListener((pageKey) {
       _fetchPage(pageKey);
     });
@@ -33,7 +38,7 @@ class MoreController extends GetxController {
 
   Future<void> _fetchPage(int pageKey) async {
     try {
-      final newItems = await _apiService.getCourses(pageKey);
+      final newItems = await function!(pageKey);
       if(newItems!.likedCourses == []) {
         pagingController.appendLastPage([]);
         return;
@@ -49,4 +54,6 @@ class MoreController extends GetxController {
       pagingController.error = error;
     }
   }
+  void gotoBuyCourse(int i) => Get.toNamed(AppRoutes.byuCourseScreen ,arguments: i);
+
 }

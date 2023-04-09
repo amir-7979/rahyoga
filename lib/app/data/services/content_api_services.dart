@@ -1,21 +1,21 @@
 import 'dart:async';
 import 'dart:convert';
-import 'dart:developer';
 import 'package:dio/dio.dart';
 import 'package:get/get.dart';
-import 'package:rahyoga/app/data/models/liked_courses.dart';
-import 'package:rahyoga/app/data/models/paid_course_info.dart';
-import 'package:rahyoga/app/data/services/interceptors.dart';
-
 import '../../../core/values/consts.dart';
 import '../models/article.dart';
 import '../models/basket.dart';
 import '../models/blogs.dart';
+import '../models/buy_course_info.dart';
 import '../models/client.dart';
 import '../models/home.dart';
+import '../models/liked_blogs.dart';
+import '../models/liked_courses.dart';
 import '../models/movements.dart';
 import '../models/paid.dart';
+import '../models/paid_course_info.dart';
 import '../models/profile.dart';
+import 'interceptors.dart';
 
 class ContentApiService extends GetxService{
   final Client _client = Get.find<Client>();
@@ -25,7 +25,6 @@ class ContentApiService extends GetxService{
   Future<Home?> home() async {
     try {
       final response = await _dio.get('/api/root/home/');
-      //print(response.data.toString());
       return Home.fromJson(response.data);
     } catch (error) {
       userErrorHandler(error);
@@ -46,7 +45,6 @@ class ContentApiService extends GetxService{
   Future<Blogs?> blogs(int page) async {
     try {
       final response = await _dio.get('/api/article/list/?page=$page');
-      //print(response.data.toString());
       return Blogs.fromJson(response.data);
     } catch (error) {
       userErrorHandler(error);
@@ -57,31 +55,26 @@ class ContentApiService extends GetxService{
   Future<LikedCourses?> getCourses(int page) async {
     try {
       final response = await _dio.get('/api/course/list/?page=$page');
-      print(response.data.toString());
       return LikedCourses.fromJson(response.data);
     } catch (error) {
-      print(error.toString());
-
       userErrorHandler(error);
       return null;
     }
   }
-  Future<Movements?> movements(int page) async {
+
+  Future<LikedCourses?> getMiniCourses(int page) async {
     try {
-      final response = await _dio.get('/api/article/movement/list/?page=$page');
-      //print(response.data.toString());
-      return Movements.fromJson(response.data);
+      final response = await _dio.get('/api/course/mini/list/?page=$page');
+      return LikedCourses.fromJson(response.data);
     } catch (error) {
       userErrorHandler(error);
       return null;
     }
   }
-
 
   Future<Paid?> paid(int page) async {
     try {
       final response = await _dio.get('/api/course/allprogress/?page=$page');
-      //print(response.data.toString());
       return Paid.fromJson(response.data);
     } catch (error) {
       userErrorHandler(error);
@@ -89,7 +82,7 @@ class ContentApiService extends GetxService{
     }
   }
 
-  Future<PaidCourseInfo?> paidCourse(int id) async {
+  Future<PaidCourseInfo?> paidCourse(dynamic id) async {
     try {
       final response = await _dio.get('/api/course/item/$id/');
       print(response.data.toString());
@@ -100,10 +93,33 @@ class ContentApiService extends GetxService{
     }
   }
 
-  Future<LikedCourses?> liked(int page) async {
+  Future<BuyCourseInfo?> buyCourse(int id) async {
+    try {
+      final response = await _dio.get('/api/course/item/$id/');
+      return BuyCourseInfo.fromJson(response.data);
+    } catch (error) {
+      userErrorHandler(error);
+      return null;
+    }
+  }
+  Future<String?> likeCourse(String id, bool like) async {
+    try {
+      final response = await _dio.post('/api/course/liked/change/',
+          data: jsonEncode(<String, dynamic>{
+            'course': id,
+            'liked': like.toString().capitalizeFirst,
+          }));
+      print(response.data.toString());
+      return response.statusCode.toString();
+    } catch (error) {
+      return userErrorHandler(error);
+    }
+  }
+
+
+  Future<LikedCourses?> getLikedCourse(int page) async {
     try {
       final response = await _dio.get('/api/course/liked/?page=$page');
-      print(response.data.toString());
       return LikedCourses.fromJson(response.data);
     } catch (error) {
       userErrorHandler(error);
@@ -111,10 +127,11 @@ class ContentApiService extends GetxService{
     }
   }
 
-  Future<Basket?> basket() async {
+
+
+  Future<Basket?> getCart() async {
     try {
       final response = await _dio.get('/api/course/cart/');
-      //print(response.data);
       return Basket.fromJson(response.data);
     } catch (error) {
       userErrorHandler(error);
@@ -150,7 +167,6 @@ class ContentApiService extends GetxService{
   Future<Article?> article(int id) async {
     try {
       final response = await _dio.get('/api/article/item/$id/');
-      print(response.data.toString());
       return Article.fromJson(response.data);
     } catch (error) {
       userErrorHandler(error);
@@ -158,10 +174,57 @@ class ContentApiService extends GetxService{
     }
   }
 
+  Future<dynamic> getLikedArticles(int page) async {
+    try {
+      final response = await _dio.get('/api/article/liked/?page=$page');
+      return LikedBlogs.fromJson(response.data);
+    } catch (error) {
+      userErrorHandler(error);
+      return null;
+    }
+  }
+
+  Future<Movements?> movements(int page) async {
+    try {
+      final response = await _dio.get('/api/article/movement/list/?page=$page');
+      return Movements.fromJson(response.data);
+    } catch (error) {
+      userErrorHandler(error);
+      return null;
+    }
+  }
+
+
+  Future<String?> likeArticle(String id, bool like) async {
+    try {
+      final response = await _dio.post('/api/article/liked/change/',
+          data: jsonEncode(<String, dynamic>{
+            'article': id,
+            'liked': like.toString().capitalizeFirst,
+          }));
+      return response.statusCode.toString();
+    } catch (error) {
+      return userErrorHandler(error);
+    }
+  }
+
+
+
+  Future<LikedBlogs?> getLikedMovements(int page) async {
+    try {
+      final response = await _dio.get('/api/article/movement/liked/?page=$page');
+      return LikedBlogs.fromJson(response.data);
+    } catch (error) {
+      userErrorHandler(error);
+      return null;
+    }
+  }
+
+
   Future<int?> logOutUser() async {
     try {
-      final response = await _dio.post('/api/user/logout/', data: {"refresh": _client.refresh});
       _client.removeClientInfo();
+      final response = await _dio.post('/api/user/logout/', data: {"refresh": _client.refresh});
       return response.statusCode;
     } catch (error) {
       print(error);
@@ -169,10 +232,14 @@ class ContentApiService extends GetxService{
     }
   }
 
+
   String userErrorHandler(dynamic error) {
+    print(error.toString());
     if (error is DioError) {
-      return (error.response!.data['messages'] == null) ? error.response!.data['detail']:
-       error.response!.data['messages'][0]['message'].toString();
+      //todo structure ??
+      return'error';
+      /*return (error.response!.data['messages'] == null) ? error.response!.data['detail']:
+       error.response!.data['messages'][0]['message'].toString();*/
     } else if (error is TimeoutException) {
       return error.message!;
     } else if (error is DioErrorType) {

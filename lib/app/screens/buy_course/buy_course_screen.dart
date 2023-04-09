@@ -1,17 +1,20 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
-import 'package:rahyoga/app/widgets/video_player.dart';
 import 'package:readmore/readmore.dart';
-
+import 'package:webview_flutter/webview_flutter.dart';
+import '../../../core/languages/translator.dart';
 import '../../../core/theme/colors.dart';
 import '../../../core/values/consts.dart';
+import '../../data/models/buy_course_info.dart';
+import '../../widgets/cache_image.dart';
+import '../../widgets/shimmer_screen.dart';
 import 'buy_course_controller.dart';
+import 'widgets/bottom_bar.dart';
 import 'widgets/course_list.dart';
 
-class BuyCourseScreen extends StatelessWidget {
+class BuyCourseScreen extends GetView<BuyCourseController> {
   BuyCourseScreen({Key? key}) : super(key: key);
-  final BuyCourseController _ctrl = Get.find<BuyCourseController>();
 
   @override
   Widget build(BuildContext context) {
@@ -20,201 +23,153 @@ class BuyCourseScreen extends StatelessWidget {
         backgroundColor: white,
         appBar: AppBar(
           leading: BackButton(
-            onPressed: _ctrl.back,
+            onPressed: controller.back,
             color: black,
           ),
           title: Text(
-            _ctrl.courseDetail,
-            style: Theme.of(context)
-                .textTheme
-                .headlineLarge!
-                .copyWith(color: black),
+            controller.courseDetail,
+            style: Get.theme.textTheme.headlineLarge!.copyWith(color: black),
           ),
           actions: [
             Padding(
               padding: const EdgeInsetsDirectional.only(end: 15),
-              child: Row(
-                children: [
-                  SvgPicture.asset('assets/images/star.svg'),
-                  const SizedBox(width: 4),
-                  Text(
-                    _ctrl.save,
-                    style: Theme.of(context).textTheme.headlineMedium!.copyWith(
-                      color: black,
-                    ),
-                  ),
-                ],
-              ),
-            ),],
-        ),
-        bottomNavigationBar: SizedBox(
-          height:80,
-          child: Container(
-            decoration: const BoxDecoration(
-              color: favoriteGray2,
-              borderRadius: BorderRadiusDirectional.vertical(top: Radius.circular(20),),
-            ),
-            child: SizedBox(
-              width: screenWidth,
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: [
-                  Padding(
-                    padding: const EdgeInsetsDirectional.symmetric(vertical: 15),
-                    child: ElevatedButton(
-                      style: ElevatedButton.styleFrom(
-                        minimumSize: const Size.fromWidth(200),
-                        backgroundColor: primaryColor,
-                        elevation: 0,
-                        shape: const StadiumBorder(),
-                      ),
-                      onPressed: () async {
-
-                        // TODO: Implement paymet method
-                      },
-                      child: Text(
-                        _ctrl.buyCourse,
-                        style: Theme.of(context)
-                            .textTheme
-                            .displayLarge!
-                            .copyWith(color: white),
-                      ),
-                    ),
-                  ),
-                  const SizedBox(width: 40),
-                  Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Text(_ctrl.cost, style: Theme.of(context)
-                          .textTheme
-                          .headlineSmall!
-                          .copyWith(color: textGray)),
-                      const SizedBox(height: 10,),
-                      Row(
-                        children: [
-                          Text('1234000', style: Theme.of(context)
-                              .textTheme
-                              .bodySmall!
-                              .copyWith(color: black)),
-                          Text(_ctrl.toman2, style: Theme.of(context)
-                              .textTheme
-                              .displayMedium!
-                              .copyWith(color: black)),
-                        ],
-                      ),
-                    ],
-                  ),
-                ],
-              ),),
-          ),
-        ),
-        body: ListView(
-          children: [
-            const VideoPlayer(),
-            const SizedBox(height: 10),
-            Padding(
-              padding: const EdgeInsetsDirectional.symmetric(horizontal: 20),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              child: InkWell(
+                onTap: controller.addToFavorite,
+                child: Row(
                   children: [
+                    //todo like course
+                    Obx(() => SvgPicture.asset(controller.isLiked.value == true
+                        ? 'assets/images/filled_star.svg'
+                        : 'assets/images/star.svg')),
+                    const SizedBox(width: 4),
                     Text(
-                      _ctrl.courseName,
-                      style: Theme.of(context)
-                          .textTheme
-                          .headlineLarge!
-                          .copyWith(color: black),
-                    ),
-                    Text(
-                      _ctrl.session2,
-                      style: Theme.of(context)
-                          .textTheme
-                          .bodyMedium!
-                          .copyWith(color: grayText4),
+                      controller.save,
+                      style: Get.theme.textTheme.headlineMedium!.copyWith(
+                        color: black,
+                      ),
                     ),
                   ],
                 ),
-                const SizedBox(height: 15),
-                ReadMoreText('jgjhgf hg fhgfk hgkhgxkh gxk hg fljkbm bvbvxbf dag eewytrt iuoiyiu[p ojgj hgfhgf hgfkh gkhgxk hgxkhgfljkb,'
-                    'mnbvbvxb fdag eewytr tiu oiyiu[pojg jh gfhgfhgfkhg  hgxkhgxkhgf ljkb,mnbv bvxbfdage ew ytrtiuoiyiu[po'
-                    'jgjhgf gfh gfkhgkhgxk hgxkhgflj kbmnbvb vxbfdageew trtiuoiyiu[pojgjh hgfhgfkhgkh xkhgxkhgfljkb,'
-                    'mn bvbvxbfdag eewytrti uoiyiu[ pojgjhgfhgfhg fkhgkhgxkh gxkhgfljkb,mnb vbvxbfda geewytr tiuoiyiu[po',
-                  trimLines: 3,
-                  style: Theme.of(context)
-                      .textTheme
-                      .bodyMedium!
-                      .copyWith(color: profileGray),
-                  colorClickableText: profileGray,
-                  trimMode: TrimMode.Line,
-                  trimCollapsedText: _ctrl.more,
-                  trimExpandedText: _ctrl.less,
-                  textDirection: Directionality.of(context),
-                ),
-                const SizedBox(height: 16),
-                Container(
+              ),
+            ),
+          ],
+
+        ),
+        bottomNavigationBar: Obx(()=> (controller.course.value!.offer != null) ? BottomBar() : SizedBox(height: 1,)),
+        body: GetBuilder<BuyCourseController>(
+            init: BuyCourseController(),
+            builder: (context) =>
+                context.isLoading.value || controller.course.value!.id == null
+                    ? const SimmerScreen()
+                    : buyCourse(controller.course.value!)),
+      ),
+    );
+  }
+
+  Widget buyCourse(BuyCourseInfo course) {
+    return ListView(
+      children: [
+        if(controller.course.value!.preview != null) SizedBox(
+            height: 200,
+            width: screenWidth,
+            child: WebViewWidget(controller: controller.videoPlayerController!,),),
+        Padding(
+          padding: const EdgeInsetsDirectional.fromSTEB(15, 15, 10, 15),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  SizedBox(
+                    width: screenWidth - 80,
+                    child: Text(
+                      course.header ?? '',
+                      style: Get.theme.textTheme.headlineLarge!
+                          .copyWith(color: black),
+                    ),
+                  ),
+                  Text(
+                    Translator.session2.trParams(
+                        {'number': course.theNumberOfSeasons.toString()}),
+                    style: Get.theme.textTheme.bodyMedium!
+                        .copyWith(color: grayText4),
+                  ),
+                ],
+              ),
+              SizedBox(height: 15),
+              SizedBox(height: 15),
+              ReadMoreText(
+                course.description ?? '',
+                trimLines: 5,
+                style: Get.theme.textTheme.bodyMedium!
+                    .copyWith(color: profileGray, height: 1.3),
+                moreStyle: Get.theme.textTheme.bodyMedium!
+                    .copyWith(color: moreTextColor),
+                lessStyle: Get.theme.textTheme.bodyMedium!
+                    .copyWith(color: moreTextColor),
+                colorClickableText: profileGray,
+                trimMode: TrimMode.Line,
+                trimCollapsedText: controller.more,
+                trimExpandedText: ' ${controller.less}',
+              ),
+              const SizedBox(height: 25),
+              Container(
                 padding: const EdgeInsetsDirectional.fromSTEB(14, 12, 14, 12),
                 decoration: const BoxDecoration(
-                    color: secondaryColor,
-                    borderRadius: BorderRadiusDirectional.all(Radius.circular(12))
-                ),
+                    color: bottomBarGray,
+                    borderRadius:
+                        BorderRadiusDirectional.all(Radius.circular(12))),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Row(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                         const CircleAvatar(
-                          //todo change this later
-                          backgroundImage: NetworkImage('https://ddd3544la1u8djza.cloudfront.net/APHI/Blog/2016/10_October/persians/Persian+Cat+Facts+History+Personality+and+Care+_+ASPCA+Pet+Health+Insurance+_+white+Persian+cat+resting+on+a+brown+sofa-min.jpg'),
-                          radius: 24,
-                        ),
+                        CacheImage(
+                            url: course.mentor!.image ?? '',
+                            imageBuilder: true,
+                            height: 54),
                         Padding(
-                          padding: const EdgeInsetsDirectional.fromSTEB(12, 5, 0, 5),
+                          padding:
+                              const EdgeInsetsDirectional.fromSTEB(12, 5, 0, 5),
                           child: Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
                               Text(
-                                _ctrl.mentor,
-                                style: Theme.of(context)
-                                    .textTheme
-                                    .labelSmall!
-                                    .copyWith(color: Colors.black),
+                                controller.mentor,
+                                style: Get.theme.textTheme.headlineSmall!
+                                    .copyWith(color: black),
                               ),
-                              const SizedBox(height: 15),
+                              const SizedBox(height: 12),
                               Text(
-                                'نوشین جوادی',
-                                style: Theme.of(context)
-                                    .textTheme
-                                    .headlineMedium!
-                                    .copyWith(color: Colors.black),
+                                course.mentor!.fullname ?? '',
+                                style: Get.theme.textTheme.headlineMedium!
+                                    .copyWith(color: black),
                               ),
                             ],
                           ),
-                        )],
+                        )
+                      ],
                     ),
                   ],
                 ),
               ),
-                const SizedBox(height: 18),
-                Text(
-                  _ctrl.courseSession,
-                  style: Theme.of(context)
-                      .textTheme
-                      .displayLarge!
-                      .copyWith(color: black),
-                ),
-              ],),
-            ),
-            CourseList(),
-            const SizedBox(height: 2),
-          ],
+              const SizedBox(height: 30),
+              Text(
+                controller.courseSession,
+                style: Get.theme.textTheme.displayLarge!.copyWith(color: black),
+              ),
+              const SizedBox(height: 5),
+            ],
+          ),
         ),
-      ),
+        Padding(
+          padding: const EdgeInsetsDirectional.fromSTEB(15, 0, 0, 5),
+          child: CourseList(course.progress!.seasons.all ?? []),
+        ),
+      ],
     );
-
   }
+
 }

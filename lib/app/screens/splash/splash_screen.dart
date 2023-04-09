@@ -25,19 +25,17 @@ class SplashScreen extends StatelessWidget {
             children: <Widget>[
               Column(
                 children: [
-                  Image.asset(
-                    'assets/images/splash/logo.png',
-                  ),
+                  SvgPicture.asset('assets/images/splash/logo.svg'),
                   const SizedBox(height: 15),
                   Text(
                       Translator.app_name.tr,
                     style: Theme.of(context).textTheme.labelLarge!.copyWith(color: white),
                   ),
                    const SizedBox(height: 30),
-                  Text(
+                  /*Text(
                       Translator.splash_text1.tr,
                     style: Theme.of(context).textTheme.bodyLarge!.copyWith(color: splashGray),
-                  ),
+                  ),*/
                 ],
               ),
               Column(

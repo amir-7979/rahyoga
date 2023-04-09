@@ -1,9 +1,11 @@
 import 'package:get/get.dart';
+import 'package:rahyoga/app/screens/bookmark/bookmark_binding.dart';
+import 'package:rahyoga/app/screens/bookmark/bookmark_screen.dart';
 import 'package:rahyoga/app/screens/more/more_screen.dart';
 import 'package:rahyoga/app/screens/recovery_password/recovery_password_screen.dart';
 
 import '../app/screens/article/article_binding.dart';
-import '../app/screens/article/article_scree.dart';
+import '../app/screens/article/article_screen.dart';
 import '../app/screens/basket/basket_binding.dart';
 import '../app/screens/basket/basket_screen.dart';
 import '../app/screens/buy_course/buy_course_binding.dart';
@@ -64,12 +66,6 @@ class AppPages {
     ),
 
     GetPage(
-      name: AppRoutes.buyCourseScreen,
-      page: () => BuyCourseScreen(),
-      binding: BuyCourseBinding(),
-    ),
-
-    GetPage(
       name: AppRoutes.articleScreen,
       page: () => ArticleScreen(),
       binding: ArticleBinding(),
@@ -91,6 +87,18 @@ class AppPages {
       name: AppRoutes.moreScreen,
       page: () => const MoreScreen(),
       binding: MoreBinding(),
+    ),
+
+    GetPage(
+      name: AppRoutes.byuCourseScreen,
+      page: () => BuyCourseScreen(),
+      binding: BuyCourseBinding(),
+    ),
+
+    GetPage(
+      name: AppRoutes.bookmarkScreen,
+      page: () => BookmarkScreen(),
+      binding: BookmarkBinding(),
     ),
   ];
 }

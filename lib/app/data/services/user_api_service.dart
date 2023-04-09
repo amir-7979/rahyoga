@@ -15,8 +15,7 @@ import 'interceptors.dart';
 class UserApiService extends GetxService {
   final Client _client = Get.find<Client>();
   final Dio _dio = Dio(BaseOptions(baseUrl: baseUrl));
-
-  final mutex = Mutex();
+  final Mutex mutex = Mutex();
 
   Future<String> login(String userName, String password) async {
     try {
@@ -112,19 +111,14 @@ class UserApiService extends GetxService {
       print('get token');
       final response = await _dio.put(
         '/api/auth/login/refresh/',
-        data: jsonEncode(<String, String>{'refresh': _client.refresh}),
+        data: jsonEncode(<String, String>{'refresh': _client.refresh})
       );
       _client.fromJson(response.data);
-      mutex.release();
-      return response.statusCode;
     } catch (error) {
-      mutex.release();
-     if (error is DioError && error.response!.statusCode == 401) {
-       _client.removeClientInfo();
-       Get.offNamed(AppRoutes.loginScreen);
-      }
       return error.toString();
-    }
+    }finally{
+    mutex.release();
+  }
   }
 
   //todo ask arman

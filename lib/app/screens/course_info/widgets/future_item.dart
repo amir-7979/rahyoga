@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
-import 'package:rahyoga/core/theme/colors.dart';
-
+import '../../../../core/theme/colors.dart';
+import '../../../data/models/all.dart';
 import '../course_info_controller.dart';
 
-class FutureItem extends StatelessWidget {
-  FutureItem({Key? key}) : super(key: key);
-  final CourseInfoController _ctrl = Get.find<CourseInfoController>();
+class FutureItem extends GetView<CourseInfoController> {
+  FutureItem(this.session, {Key? key}) : super(key: key);
+  All session;
 
   @override
   Widget build(BuildContext context) {
@@ -15,6 +15,7 @@ class FutureItem extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
+        if (session.order!=1)
         Padding(
           padding: const EdgeInsetsDirectional.fromSTEB(14, 5, 0, 5),
           child: Container(
@@ -28,18 +29,34 @@ class FutureItem extends StatelessWidget {
           Row(children: [
             SizedBox(
                 height:30, width:30,
-                child: Center(child: SvgPicture.asset('assets/images/course_info/play2.svg', height:26, width:26,))),
+                child: Center(child: (controller.index == session.order! - 1) ? SvgPicture.asset('assets/images/course_info/play.svg', height:28, width:28,) : SvgPicture.asset('assets/images/course_info/play2.svg', height:24, width:24,),),),
             SizedBox(width: 10),
-            Text(_ctrl.courseTitle, style: Theme.of(context)
-                .textTheme
-                .displayMedium!
-                .copyWith(color: profileGray),),
+            Text(
+              session.header ?? '',
+              style: (controller.index == session.order! - 1)
+                  ? Theme.of(context)
+                  .textTheme
+                  .headlineMedium!
+                  .copyWith(color: primaryColor)
+                  : Theme.of(context)
+                  .textTheme
+                  .headlineSmall!
+                  .copyWith(color: textGray2),
+            ),
           ],
           ),
-          Text(_ctrl.duration, style: Theme.of(context)
-              .textTheme
-              .headlineSmall!
-              .copyWith(color: profileGray),),
+          Text(
+            session.durationPersian ?? '',
+            style: (controller.index == session.order! - 1)
+                ? Theme.of(context)
+                .textTheme
+                .headlineMedium!
+                .copyWith(color: primaryColor)
+                : Theme.of(context)
+                .textTheme
+                .headlineSmall!
+                .copyWith(color: textGray2),
+          ),
         ],),
       ],
     );

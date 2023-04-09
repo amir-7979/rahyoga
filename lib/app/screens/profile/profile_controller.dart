@@ -12,12 +12,20 @@ class ProfileController extends GetxController {
 
   Future<Profile?> fetchProfile() async {
     profile.value = await _contentApiService.profile();
+    update();
     return profile.value;
   }
+
+  void gotoBookmark() => Get.toNamed(AppRoutes.bookmarkScreen);
 
   Future<void> logout() async {
      _contentApiService.logOutUser();
       Get.offAndToNamed(AppRoutes.loginScreen);
   }
 
+  @override
+  void onInit() {
+    fetchProfile();
+    super.onInit();
+  }
 }

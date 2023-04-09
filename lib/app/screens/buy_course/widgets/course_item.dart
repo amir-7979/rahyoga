@@ -1,74 +1,84 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:rahyoga/core/values/consts.dart';
 
 import '../../../../core/theme/colors.dart';
+import '../../../data/models/all.dart';
 import '../buy_course_controller.dart';
 
 class CourseItem extends StatelessWidget {
-  CourseItem({Key? key}) : super(key: key);
+  CourseItem(this.course, {Key? key}) : super(key: key);
   final BuyCourseController _ctrl = Get.find<BuyCourseController>();
+  All course;
 
   @override
   Widget build(BuildContext context) {
     return Column(
       children: [
         Theme(
-          data: Theme.of(context).copyWith(dividerColor: Colors.transparent),
+          data: Get.theme.copyWith(dividerColor: Colors.transparent),
           child: ExpansionTile(
-
-            childrenPadding: EdgeInsetsDirectional.zero,
-
-            title: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Row(children: [
+            expandedAlignment: Alignment.centerRight,
+              iconColor: primaryColor,
+              childrenPadding: EdgeInsetsDirectional.zero,
+              tilePadding: EdgeInsetsDirectional.only(end: 10),
+              title: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
                   Container(
                     height: 24,
                     width: 24,
-                    decoration: BoxDecoration(
-                        color: secondaryColor,
-                        borderRadius: BorderRadiusDirectional.all(Radius.circular(12))
-                    ),
+                    decoration: const BoxDecoration(
+                        color: fourthColor,
+                        borderRadius: BorderRadiusDirectional.all(
+                            Radius.circular(12))),
                     child: Center(
-                      child: Text('${1}', style: Theme.of(context)
-                          .textTheme
-                          .headlineMedium!
-                          .copyWith(color: primaryColor),),
+                      child: Text(
+                        course.order.toString(),
+                        style: Get.theme.textTheme.headlineMedium!
+                            .copyWith(color: primaryColor),
+                      ),
                     ),
                   ),
-                  SizedBox(width: 8),
-                  Text(
-                    _ctrl.title,
-                    style: Theme.of(context)
-                        .textTheme
-                        .headlineMedium!
-                        .copyWith(color: primaryColor),
+                  const SizedBox(width: 5),
+                  Expanded(
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        SizedBox(
+                          width: screenWidth-230,
+                          child: Text(
+                            course.header ?? '',
+                            style: Get.theme.textTheme.headlineMedium!
+                                .copyWith(color: primaryColor),
+                          ),
+                        ),
+                        Text(
+                          course.durationPersian ?? '',
+                          style: Get.theme.textTheme.headlineSmall!
+                              .copyWith(color: grayText2),
+                        ),
+                      ],
+                    ),
                   ),
-                ],),
-                Text(
-                  _ctrl.duration,
-                  style: Theme.of(context)
-                      .textTheme
-                      .labelSmall!
-                      .copyWith(color: grayText2),
+                ],
+              ),
+              children: [
+                Padding(
+                  padding:
+                      const EdgeInsetsDirectional.symmetric(horizontal: 47),
+                  child: Text(
+                    course.description ?? '',
+                    maxLines: 4,
+                    style: Get.theme.textTheme.headlineSmall!
+                        .copyWith(color: grayText2),
+                  ),
                 ),
-              ],
-            ),
-            // Contents
-            children: [
-              Padding(
-                padding: const EdgeInsetsDirectional.symmetric(horizontal: 47),
-                child: Text(
-                  '${'long text'}${'\n'}',
-                  style: Theme.of(context)
-                      .textTheme
-                      .labelSmall!
-                      .copyWith(color: grayText2),
-                ),
-              ),]),
+                const SizedBox(height: 5),
+              ]),
         ),
-        Padding(
-          padding: const EdgeInsetsDirectional.symmetric(horizontal: 2),
+        const Padding(
+          padding: EdgeInsetsDirectional.symmetric(horizontal: 47),
           child: Divider(height: 1),
         ),
       ],

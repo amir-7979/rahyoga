@@ -45,13 +45,15 @@ class ProfileScreen extends GetView<ProfileController> {
               ),
             )
           ]*/),
-      body: FutureBuilder(
-          future: controller.fetchProfile(),
-          builder: (context, AsyncSnapshot snapshot) => (snapshot.hasData) ? profile(controller.profile.value) :  const SimmerScreen())
+      body: GetBuilder<ProfileController>(
+          init: controller,
+          builder: (context) => controller.profile.value!.id == null
+              ? const SimmerScreen()
+              : profile(controller.profile.value!))
     );
   }
-  Widget profile(Profile? profile){
-    return profile == null ? const SimmerScreen() :ListView(
+  Widget profile(Profile profile){
+    return ListView(
       padding: const EdgeInsetsDirectional.fromSTEB(15, 20, 15, 0),
       children: [
         ProfileWidget(profile),

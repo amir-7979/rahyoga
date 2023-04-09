@@ -1,9 +1,12 @@
 
+const String baseUrl = 'http://194.62.43.212:9090';
+/*
 const String baseUrl = 'http://62.106.95.151';
+*/
 const waitTime = Duration(seconds: 4);
 late double screenWidth;
 late double screenHeight;
-double lastCourseHeight = 110;
+double lastCourseHeight = 106;
 double lastCourseImageWidth = 130;
 
 double generalYogaItemHeight = 230;

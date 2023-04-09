@@ -10,10 +10,9 @@ import 'course_item.dart';
 import 'paid_item.dart';
 
 class PaidList extends StatelessWidget {
-  PaidList(this.title, this.courses, this.function, {super.key});
+  PaidList(this.title, this.courses, {super.key});
     final String title;
     final List<Course> courses;
-  final Function function;
   HomeController controller = Get.find<HomeController>();
 
   @override

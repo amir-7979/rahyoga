@@ -5,13 +5,13 @@ import '../theme/colors.dart';
 var focusedBorder = OutlineInputBorder(
   borderRadius: BorderRadius.circular(12.0),
   borderSide: const BorderSide(
-    color: whiteBordre,
+    color: whiteBorder,
   ),
 );
 var enabledBorder = OutlineInputBorder(
   borderRadius: BorderRadius.circular(12.0),
   borderSide: const BorderSide(
-    color: whiteBordre,
+    color: whiteBorder,
   ),
 );
 var border = OutlineInputBorder(

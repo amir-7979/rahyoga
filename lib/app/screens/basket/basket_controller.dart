@@ -27,8 +27,8 @@ class BasketController extends GetxController{
   RxInt isLoading = 0.obs;
 
   void gotoMainScreen() => Get.offAndToNamed(AppRoutes.mainScreen);
-  void deleteAllCourses() => courses = [];
-  void deleteCourse(int i) => courses.removeAt(i);
+/*  void deleteAllCourses() => courses = [];
+  void deleteCourse(int i) => courses.removeAt(i);*/
   void setDiscount(String discount){
     //todo ask arman
     shopList = shopList;
@@ -41,7 +41,8 @@ class BasketController extends GetxController{
   void back()=>Get.back();
 
   Future<Basket?> fetchBasket() async {
-  basket.value = await _apiService.basket();
+  basket.value = await _apiService.getCart();
+  update();
   return basket.value;
 }
 

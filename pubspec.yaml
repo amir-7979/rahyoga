@@ -38,7 +38,6 @@ dependencies:
   dio: ^4.0.6
   flutter_secure_storage: ^7.0.1
   mutex: ^3.0.1
-  google_fonts: ^4.0.3
   persian_fonts: ^1.0.5
   regexpattern: ^2.1.0
   persistent_bottom_nav_bar: ^5.0.2
@@ -54,12 +53,21 @@ dependencies:
   flutter_widget_from_html: ^0.10.0
   step_progress_indicator: ^1.0.2
   infinite_scroll_pagination: ^3.2.0
-
+  flutter_launcher_icons: ^0.12.0
+  flutter_native_splash: ^2.2.19
+  webview_flutter: ^4.0.6
+  intl: ^0.17.0
 
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
+
+flutter_icons:
+  android: true
+  ios: true
+  image_path: "assets/images/splash/logo.png"
+  cupertino_icons: ^1.0.5
 
   # The "flutter_lints" package below contains a set of recommended lints to
   # encourage good coding practices. The lint set provided by the package is
@@ -80,6 +88,7 @@ flutter:
   uses-material-design: true
 
   assets:
+    - assets/images/main/
     - assets/images/basket/
     - assets/images/splash/
     - assets/images/profile/

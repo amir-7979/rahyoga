@@ -11,7 +11,8 @@ class Course {
      this.mentor,
      this.time,
      this.price,
-     this.offer,
+    this.offer,
+    this.offer_percent,
      this.theNumberOfSeasons,
      this.theNumberOfSeasonsPersian,
      this.dateModified,
@@ -30,6 +31,7 @@ class Course {
   late final Mentor? mentor;
   late final double? time;
   late final int? price;
+  late final int?  offer_percent;
   late final int? offer;
   late final int? theNumberOfSeasons;
   late final String? theNumberOfSeasonsPersian;
@@ -50,6 +52,7 @@ class Course {
     time = json['time'];
     price = json['price'];
     offer = json['_offer'];
+    offer_percent = json['offer_percent'];
     theNumberOfSeasons = json['the_number_of_seasons'];
     theNumberOfSeasonsPersian = json['the_number_of_seasons_persian'];
     dateModified = json['date_modified'];

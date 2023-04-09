@@ -25,7 +25,7 @@ class Article {
   late final String? description;
   late final int? datePublishedUnix;
   late final int? dateModifiedUnix;
-  late final bool? liked;
+  late bool? liked;
 
   Article.fromJson(Map<String, dynamic> json) {
     id = json['id'];
@@ -35,7 +35,7 @@ class Article {
     image = json['image'];
     dateModified = json['date_modified'];
     datePublished = json['date_published'];
-    description = ''''
+    description = '''
                      
 <!DOCTYPE html>
 <html lang="en">

@@ -1,8 +1,10 @@
 import 'package:dio/dio.dart';
 import 'package:get/get.dart' hide Response, FormData, MultipartFile;
+import 'package:mutex/mutex.dart';
 import '../../../routes/routes.dart';
 import '../models/client.dart';
 import 'user_api_service.dart';
+
 
 class TokenInterceptor implements Interceptor {
   final Client _client = Get.find<Client>();
@@ -11,8 +13,12 @@ class TokenInterceptor implements Interceptor {
   @override
   Future<void> onError(DioError err, ErrorInterceptorHandler handler) async {
     print('error :::${err.response?.statusCode}');
-    if (err.response?.statusCode == 403 || err.response?.statusCode == 401) {
-      await userService.refreshToken();
+    if (err.response?.statusCode == 403) {
+        await userService.refreshToken();
+    }
+    if (err.response?.statusCode == 401) {
+      _client.removeClientInfo();
+      Get.offAndToNamed(AppRoutes.loginScreen);
     }
     handler.next(err);
   }
@@ -29,8 +35,9 @@ class TokenInterceptor implements Interceptor {
           .addEntries({"Authorization": "Bearer ${_client.access}"}.entries);
     }
     if (_client.access.isEmpty ||
-        _client.accessTime - DateTime.now().millisecondsSinceEpoch < 60000) {
-        //await userService.refreshToken();
+        _client.accessTime * 1000
+            - DateTime.now().millisecondsSinceEpoch < 60000) {
+      userService.refreshToken();
     }
     return handler.next(options);
   }

@@ -91,7 +91,7 @@ class InfoWidget extends StatelessWidget {
           ),
 
           InkWell(
-            onTap: () {},
+            onTap: () => _controller.gotoBookmark(),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [

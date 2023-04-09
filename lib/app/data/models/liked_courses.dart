@@ -16,9 +16,9 @@ class LikedCourses {
 
   LikedCourses.fromJson(Map<String, dynamic> json){
     count = json['count'];
-    next = null;
-    previous = null;
-    likedCourses = json['liked_courses'] != null ? List.from(json['liked_courses']).map((e)=>LikedCourse.fromJson(e)).toList() : List.from(json['courses']).map((e)=>LikedCourse.fromJson(e)).toList();
+    next = json['next'];
+    previous = json['previous'];
+    likedCourses = json['liked_courses'] != null ? List.from(json['liked_courses']).map((e)=>LikedCourse.fromJson(e)).toList() : json['courses'] == null ? List.from(json['mini_courses']).map((e)=>LikedCourse.fromJson(e)).toList() : List.from(json['courses']).map((e)=>LikedCourse.fromJson(e)).toList();
     total = json['total'];
   }
 }

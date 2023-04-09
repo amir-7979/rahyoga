@@ -12,7 +12,7 @@ class Basket {
      this.totalOffer,
      this.difference,
   });
-  late  int? count=0;
+  late  int? count;
   late  String? next;
   late  String? previous;
   late  List<Result>? results = [];

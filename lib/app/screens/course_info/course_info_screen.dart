@@ -1,16 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
-import 'package:rahyoga/app/screens/course_info/course_info_controller.dart';
-import 'package:rahyoga/app/screens/course_info/widgets/current_itrm.dart';
-import 'package:rahyoga/app/screens/course_info/widgets/future_item.dart';
-import 'package:rahyoga/app/screens/course_info/widgets/passed_item.dart';
 import 'package:readmore/readmore.dart';
+import '../../../core/languages/translator.dart';
 import '../../../core/theme/colors.dart';
+import '../../../core/values/consts.dart';
 import '../../data/models/paid_course_info.dart';
 import '../../widgets/shimmer_screen.dart';
-import '../../widgets/video_player.dart';
+import 'widgets/course_list.dart';
+import 'course_info_controller.dart';
 import 'widgets/bottom_app_bar_nav.dart';
+import 'package:chewie/chewie.dart';
 
 class CourseInfoScreen extends GetView<CourseInfoController> {
   CourseInfoScreen({Key? key}) : super(key: key);
@@ -25,19 +25,23 @@ class CourseInfoScreen extends GetView<CourseInfoController> {
             onPressed: controller.back,
             color: black,
           ),
-          title: Text(
-            controller.course != null
-                ? controller.course.value!.header ?? ''
-                : '',
-            style: Get.theme.textTheme.headlineLarge!.copyWith(color: black),
+          title: Obx(
+            () => Text(
+              controller.course.value!.header != null
+                  ? controller.course.value!.header ?? ''
+                  : '',
+              style: Get.theme.textTheme.headlineLarge!.copyWith(color: black),
+            ),
           ),
         ),
         bottomNavigationBar: BottomAppBarNav(),
-        body: FutureBuilder(
-            future: controller.fetchCourse(),
-            builder: (context, AsyncSnapshot snapshot) => (snapshot.hasData)
-                ? favoriteCourses(controller.course.value)
-                : const SimmerScreen()),
+        body: GetBuilder<CourseInfoController>(
+          init: CourseInfoController(),
+          builder: (context) =>
+              context.isLoading.value || controller.course.value!.id == null
+                  ? const SimmerScreen()
+                  : favoriteCourses(controller.course.value),
+        ),
       ),
     );
   }
@@ -47,7 +51,12 @@ class CourseInfoScreen extends GetView<CourseInfoController> {
         ? Container()
         : ListView(
             children: [
-              const VideoPlayer(),
+              if (controller.chewieController != null)
+                SizedBox(
+                    height: 200,
+                    width: screenWidth,
+                    child: Chewie(controller: controller.chewieController!)),
+              //todo with index item
               Padding(
                 padding: const EdgeInsetsDirectional.fromSTEB(16, 16, 16, 0),
                 child: Column(
@@ -64,16 +73,17 @@ class CourseInfoScreen extends GetView<CourseInfoController> {
                               padding: const EdgeInsetsDirectional.fromSTEB(
                                   12, 6, 12, 4),
                               minimumSize: const Size.fromWidth(107),
-                              backgroundColor: secondaryColor,
+                              backgroundColor: fourthColor,
                               elevation: 0,
                               shape: const StadiumBorder(),
                             ),
                             onPressed: () async {
-                              // TODO: fullscreen
+                              // TODO: done session
                             },
                             child: Row(
                               children: [
                                 SvgPicture.asset(
+                                  // TODO: done session
                                   'assets/images/course_info/full_screen.svg',
                                   width: 16,
                                   height: 16,
@@ -90,18 +100,18 @@ class CourseInfoScreen extends GetView<CourseInfoController> {
                         )
                       ],
                     ),
-                    SizedBox(height: 40),
+                    SizedBox(height: 30),
                     Text(
-                      controller.courseTitle,
+                      '${Translator.session.tr} ${controller.course.value!.theNumberOfSeasonsPersian ?? ''} - ${controller.course.value!.header}',
                       style:
                           Get.theme.textTheme.bodySmall!.copyWith(color: black),
                     ),
-                    SizedBox(height: 8),
+                    SizedBox(height: 12),
                     ReadMoreText(
-                      course.description??'',
+                      course.description ?? '',
                       trimLines: 3,
                       style: Get.theme.textTheme.bodyMedium!
-                          .copyWith(color: profileGray),
+                          .copyWith(color: profileGray, height: 1.3),
                       moreStyle: Get.theme.textTheme.bodyMedium!
                           .copyWith(color: moreTextColor),
                       lessStyle: Get.theme.textTheme.bodyMedium!
@@ -111,48 +121,22 @@ class CourseInfoScreen extends GetView<CourseInfoController> {
                       trimCollapsedText: controller.more,
                       trimExpandedText: controller.less,
                     ),
-                    SizedBox(height: 24),
-                    Text(
-                      controller.courseSession,
-                      style:
-                          Get.theme.textTheme.bodySmall!.copyWith(color: black),
-                    ),
-                    SizedBox(height: 12),
-                    Padding(
-                      padding: const EdgeInsetsDirectional.fromSTEB(5, 5, 5, 0),
-                      child: Column(
-                        children:[
-                          /*for(int x = 1; x<=5;x++)...[
-                            Container(
-                                child: Text("$x")
-                            ),
-                          ],*/
-                        /*PassedItem(
-                          first: true,
-                        ),
-                          PassedItem(),
-                          CurrentItem(),
-                          FutureItem(),
-                          FutureItem(),
-                          FutureItem(),
-                          controller.course.value!.progress!.seasons.all!.map((i) {
-                            if(i. < controller.preIndex.value){
-                            return Text(i.toString());
-                            }else{
-
-                            }
-                          }).toList()*/
-
-
-
-],
+                    SizedBox(height: 25),
+                    if (controller.course.value!.progress!.seasons.all != null)
+                      Text(
+                        controller.courseSession,
+                        style: Get.theme.textTheme.bodySmall!
+                            .copyWith(color: black),
                       ),
-                    ),
+                    if (controller.course.value!.progress!.seasons.all != null)
+                      SizedBox(height: 15),
+                    if (controller.course.value!.progress!.seasons.all != null)
+                      CourseList(
+                          controller.course.value!.progress!.seasons.all!),
                   ],
                 ),
               ),
             ],
           );
   }
-
 }

@@ -76,15 +76,11 @@ class MyCoursesScreen extends StatelessWidget {
                         paintingStyle: PaintingStyle.fill,
                       ),
                     ),
-
-
                   ),
                 ),
               ),
-
             Expanded(
               child: Padding(
-
                 padding: const EdgeInsetsDirectional.symmetric(horizontal: 2),
                 child: SizedBox(
                   width: screenWidth,

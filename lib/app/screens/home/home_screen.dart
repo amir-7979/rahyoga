@@ -41,31 +41,30 @@ class HomeScreen extends GetWidget<HomeController> {
           ),
         ],
       ),
-      body:GetX<HomeController>(
-          init: HomeController(),
-          builder: (snapshot) => !snapshot.initialized ? SimmerScreen(): home(controller.home.value!)
+      body:GetBuilder<HomeController>(
+          init: controller,
+          builder: (context) => context.home.value!.courses == null
+              ? const SimmerScreen()
+              : home(controller.home.value!)
       ),
-      /*FutureBuilder(
-          future: controller.fetchHome(),
-          builder: (context, AsyncSnapshot snapshot) => (snapshot.hasData) ? home(controller.home.value) :  const SimmerScreen()),*/
     );
   }
 
-  Widget home(Home? home){
-    return  home == null ? Container() : Padding(
+  Widget home(Home home){
+    return  Padding(
       padding: const EdgeInsetsDirectional.fromSTEB(8, 10, 0, 0),
       child: ListView(
         cacheExtent: 700,
         children: [
           if (home.lastCourse != null) LastCourseItem(home.lastCourse!),
           const SizedBox(height: 25),
-          if (home.courses!.isNotEmpty) CourseList(Translator.generalYogaCourses.tr, home.courses!, controller.gotoMoreScreen),
+          if (home.courses != null && home.courses!.isNotEmpty) CourseList(Translator.generalYogaCourses.tr, home.courses!, controller.gotoMoreScreen),
           const SizedBox(height: 25),
-          if (home.miniCourses!.isNotEmpty) PaidList(Translator.purchasedCourses.tr, home.paid!, (){},),
+          if (home.miniCourses != null &&home.miniCourses!.isNotEmpty) PaidList(Translator.purchasedCourses.tr, home.paid!),
           const SizedBox(height: 25),
-          if (home.movements!.isNotEmpty) MovementsSlider(home.movements!),
+          if (home.movements != null &&home.movements!.isNotEmpty) MovementsSlider(home.movements!),
           const SizedBox(height: 15),
-          if (home.miniCourses!.isNotEmpty) CourseList(Translator.miniYogaCourses.tr, home.miniCourses!, controller.gotoMoreScreen),
+          if (home.miniCourses != null &&home.miniCourses!.isNotEmpty) CourseList(Translator.miniYogaCourses.tr, home.miniCourses!, controller.gotoMiniMoreScreen),
           const SizedBox(height: 5),
         ],
       ),
