@@ -2,6 +2,7 @@ import 'dart:async';
 import 'dart:convert';
 import 'package:dio/dio.dart';
 import 'package:get/get.dart';
+import 'package:dio_smart_retry/dio_smart_retry.dart';
 import '../../../core/values/consts.dart';
 import '../models/article.dart';
 import '../models/basket.dart';
@@ -16,11 +17,30 @@ import '../models/paid.dart';
 import '../models/paid_course_info.dart';
 import '../models/profile.dart';
 import 'interceptors.dart';
+import 'dart:developer' as developer;
 
-class ContentApiService extends GetxService{
-  final Client _client = Get.find<Client>();
-  final Dio _dio = Dio(BaseOptions(baseUrl: baseUrl))..interceptors.add(TokenInterceptor());
+class ContentApiService extends GetxService {
+  late final Client _client;
+  late final Dio _dio;
 
+  ContentApiService() {
+    _client = Get.find<Client>();
+    _dio = Dio(BaseOptions(baseUrl: baseUrl));
+    _dio.interceptors.addAll(
+        [
+          TokenInterceptor(),
+          RetryInterceptor(
+            dio: _dio,
+            logPrint: print,
+            retries: 2,
+            retryDelays: const [
+              Duration(seconds: 3),
+              Duration(seconds: 6),
+            ],
+          ),
+        ],
+      );
+  }
 
   Future<Home?> home() async {
     try {
@@ -82,10 +102,24 @@ class ContentApiService extends GetxService{
     }
   }
 
+  Future<PaidCourseInfo?> updateSessionState(int course, int season) async {
+    try {
+      final response = await _dio.post('/api/course/makeProgress/',
+          data: jsonEncode(<String, int>{
+        'course': course,
+        'season': season,
+      }));
+      print(response.data.toString());
+      return PaidCourseInfo.fromJson(response.data);
+    } catch (error) {
+      userErrorHandler(error);
+      return null;
+    }
+  }
+
   Future<PaidCourseInfo?> paidCourse(dynamic id) async {
     try {
       final response = await _dio.get('/api/course/item/$id/');
-      print(response.data.toString());
       return PaidCourseInfo.fromJson(response.data);
     } catch (error) {
       userErrorHandler(error);
@@ -102,6 +136,7 @@ class ContentApiService extends GetxService{
       return null;
     }
   }
+
   Future<String?> likeCourse(String id, bool like) async {
     try {
       final response = await _dio.post('/api/course/liked/change/',
@@ -116,7 +151,6 @@ class ContentApiService extends GetxService{
     }
   }
 
-
   Future<LikedCourses?> getLikedCourse(int page) async {
     try {
       final response = await _dio.get('/api/course/liked/?page=$page');
@@ -126,8 +160,6 @@ class ContentApiService extends GetxService{
       return null;
     }
   }
-
-
 
   Future<Basket?> getCart() async {
     try {
@@ -194,7 +226,6 @@ class ContentApiService extends GetxService{
     }
   }
 
-
   Future<String?> likeArticle(String id, bool like) async {
     try {
       final response = await _dio.post('/api/article/liked/change/',
@@ -208,8 +239,6 @@ class ContentApiService extends GetxService{
     }
   }
 
-
-
   Future<LikedBlogs?> getLikedMovements(int page) async {
     try {
       final response = await _dio.get('/api/article/movement/liked/?page=$page');
@@ -220,11 +249,11 @@ class ContentApiService extends GetxService{
     }
   }
 
-
   Future<int?> logOutUser() async {
     try {
       _client.removeClientInfo();
-      final response = await _dio.post('/api/user/logout/', data: {"refresh": _client.refresh});
+      final response = await _dio
+          .post('/api/user/logout/', data: {"refresh": _client.refresh});
       return response.statusCode;
     } catch (error) {
       print(error);
@@ -232,14 +261,17 @@ class ContentApiService extends GetxService{
     }
   }
 
-
   String userErrorHandler(dynamic error) {
     print(error.toString());
     if (error is DioError) {
-      //todo structure ??
-      return'error';
-      /*return (error.response!.data['messages'] == null) ? error.response!.data['detail']:
-       error.response!.data['messages'][0]['message'].toString();*/
+      developer.log(
+        'rahuoga',
+        name: 'my.app.category',
+        error: error.response.toString(),
+      );
+      //todo which one??
+      return (error.response!.data['messages'] != null && error.response!.data['messages'][0]['message'] != null ) ?
+      error.response!.data['messages'][0]['message'].toString(): 'خظا ذر سرور';
     } else if (error is TimeoutException) {
       return error.message!;
     } else if (error is DioErrorType) {

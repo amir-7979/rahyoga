@@ -33,7 +33,7 @@ class CourseItem extends StatelessWidget {
             ),
             Expanded(
               child: Padding(
-                padding: const EdgeInsetsDirectional.fromSTEB(5, 8, 5, 0),
+                padding: const EdgeInsetsDirectional.fromSTEB(10, 8, 5, 0),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
@@ -44,8 +44,7 @@ class CourseItem extends StatelessWidget {
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         crossAxisAlignment: CrossAxisAlignment.center,
                         children: [
-                          SizedBox(
-                            width: screenWidth - 190,
+                          Expanded(
                             child: Text(
                               likedCourse.header ?? '',
                               style: Get.theme.textTheme.displayMedium!
@@ -69,43 +68,18 @@ class CourseItem extends StatelessWidget {
                             .copyWith(color: grayText2),
                       ),
                     ),
-                    const SizedBox(height: 2),
+                    const SizedBox(height: 8),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       crossAxisAlignment: CrossAxisAlignment.center,
                       children: [
                         Text(
                           Translator.toman.trParams(
-                              {'number': likedCourse.offer.toString() ?? ''}),
+                              {'number': likedCourse.offer??''}),
                           style: Get.theme.textTheme.displayLarge!
                               .copyWith(color: black),
                         ),
-                        SizedBox(
-                          height: 40,
-                          child: Obx(
-                                () => (controller.isLoading.value == likedCourse.id)
-                                ?  Center(
-                              child: Row(
-                                children: [
-                                  const SizedBox(
-                                    height: 30,
-                                    width: 30,
-                                    child: AspectRatio(
-                                      aspectRatio: 1,
-                                      child: CircularProgressIndicator(
-                                        color: primaryColor,
-                                        strokeWidth: 2,
-                                      ),
-                                    ),
-                                  ),
-                                  const SizedBox(width: 15,)
-                                ],
-                              ),
-                            )
-                                : TextButton(
-                              onPressed: () => controller
-                                  .addItemToBasket(likedCourse.id??0),
-                              child: Row(
+                        Row(
                                 crossAxisAlignment: CrossAxisAlignment.center,
                                 mainAxisAlignment: MainAxisAlignment.center,
                                 children: [
@@ -122,9 +96,6 @@ class CourseItem extends StatelessWidget {
                                     color: primaryColor,
                                   )
                                 ],
-                              ),
-                            ),
-                          ),
                         ),
                       ],
                     ),

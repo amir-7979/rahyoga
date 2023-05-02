@@ -5,6 +5,7 @@ import '../../../core/theme/colors.dart';
 import '../../../routes/routes.dart';
 import '../../data/models/profile.dart';
 import '../../data/services/content_api_services.dart';
+import 'widgets/exit_confirm_dialog.dart';
 
 class ProfileController extends GetxController {
   final ContentApiService _contentApiService = Get.find<ContentApiService>();
@@ -21,6 +22,10 @@ class ProfileController extends GetxController {
   Future<void> logout() async {
      _contentApiService.logOutUser();
       Get.offAndToNamed(AppRoutes.loginScreen);
+  }
+
+  void exit(){
+      Get.dialog(exitConfirmDialog());
   }
 
   @override

@@ -4,12 +4,8 @@ import 'package:persistent_bottom_nav_bar/persistent_tab_view.dart';
 import 'package:rahyoga/core/theme/colors.dart';
 import 'main_controller.dart';
 
-class MainScreen extends StatelessWidget {
-  final MainController controller = Get.find<MainController>();
-
+class MainScreen extends GetWidget<MainController> {
   MainScreen({super.key});
-
-
 
   @override
   Widget build(BuildContext context) {
@@ -22,16 +18,11 @@ class MainScreen extends StatelessWidget {
         screens: controller.buildScreens(),
         items: controller.navBarsItems(),
         confineInSafeArea: true,
-        backgroundColor: bottomBarGray,
-        // Default is Colors.white.
+        backgroundColor: fourthColor,
         handleAndroidBackButtonPress: true,
-        // Default is true.
         resizeToAvoidBottomInset: true,
-        // This needs to be true if you want to move up the screen when keyboard appears. Default is true.
         stateManagement: true,
-        // Default is true.
         hideNavigationBarWhenKeyboardShows: true,
-        // Recommended to set 'resizeToAvoidBottomInset' as true while using this argument. Default is true.
         popAllScreensOnTapOfSelectedTab: true,
         popActionScreens: PopActionScreensType.all,
         itemAnimationProperties: const ItemAnimationProperties(
@@ -45,8 +36,13 @@ class MainScreen extends StatelessWidget {
           curve: Curves.ease,
           duration: Duration(milliseconds: 200),
         ),
+        decoration: NavBarDecoration(
+          borderRadius: BorderRadius.vertical(
+            top: Radius.circular(35),
+          ),
+        ),
         navBarStyle:
-            NavBarStyle.style3, // Choose the nav bar style with this property.
+            NavBarStyle.style3,
       ),
     );
   }

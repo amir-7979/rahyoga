@@ -19,8 +19,7 @@ class CourseList extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: courses.map((item) {
-
-          return (item.passed == true) ? PassedItem(item):FutureItem(item);
+          return (item.passed == true) ? PassedItem(item) : FutureItem(item);
         }).toList()
       ),
     );

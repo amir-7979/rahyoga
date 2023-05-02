@@ -1,26 +1,29 @@
 import 'package:dio/dio.dart';
 import 'package:get/get.dart' hide Response, FormData, MultipartFile;
-import 'package:mutex/mutex.dart';
 import '../../../routes/routes.dart';
 import '../models/client.dart';
 import 'user_api_service.dart';
-
+import 'dart:developer' as developer;
 
 class TokenInterceptor implements Interceptor {
   final Client _client = Get.find<Client>();
   UserApiService userService = UserApiService();
 
   @override
-  Future<void> onError(DioError err, ErrorInterceptorHandler handler) async {
-    print('error :::${err.response?.statusCode}');
-    if (err.response?.statusCode == 403) {
+  Future<void> onError(DioError error, ErrorInterceptorHandler handler) async {
+    developer.log(
+      'rahuoga',
+      name: 'my.app.category',
+      error: error.error.toString(),
+    );
+    if (error.response?.statusCode == 403) {
         await userService.refreshToken();
     }
-    if (err.response?.statusCode == 401) {
+    if (error.response?.statusCode == 401) {
       _client.removeClientInfo();
       Get.offAndToNamed(AppRoutes.loginScreen);
     }
-    handler.next(err);
+    handler.next(error);
   }
 
   @override
@@ -44,6 +47,11 @@ class TokenInterceptor implements Interceptor {
 
   @override
   void onResponse(Response response, ResponseInterceptorHandler handler) {
-    return handler.next(response);
+    developer.log(
+      'rahuoga',
+      name: 'my.app.category',
+      error: response.toString(),
+    );
+    handler.next(response);
   }
 }

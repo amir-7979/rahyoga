@@ -1,7 +1,5 @@
 import 'package:get/get.dart';
 import 'package:rahyoga/app/screens/my_courses/my_courses_controller.dart';
-import 'package:rahyoga/core/theme/colors.dart';
-import 'package:video_player/video_player.dart';
 import 'package:webview_flutter/webview_flutter.dart';
 import '../../../core/languages/translator.dart';
 import '../../../core/utils/snack_bar.dart';
@@ -11,7 +9,6 @@ import '../../data/services/content_api_services.dart';
 class BuyCourseController extends GetxController {
   final ContentApiService _contentApiService = Get.find<ContentApiService>();
   WebViewController? videoPlayerController;
-  late WebViewController _controller;
   Rx<BuyCourseInfo?> course = BuyCourseInfo().obs;
   late int id;
   RxBool isLoading = false.obs;
@@ -41,25 +38,6 @@ class BuyCourseController extends GetxController {
     course.value = await _contentApiService.buyCourse(id);
     isLiked.value = course.value!.liked!;
     update();
-    /*if(course.value!.preview != null) videoPlayerController = WebViewController()
-      ..setJavaScriptMode(JavaScriptMode.unrestricted)
-      ..setBackgroundColor(black)
-      ..setNavigationDelegate(
-        NavigationDelegate(
-
-          onProgress: (int progress) {
-            // Update loading bar.
-          },
-          onPageStarted: (String url) {},
-          onPageFinished: (String url) {},
-          onWebResourceError: (WebResourceError error) {},
-          onNavigationRequest: (NavigationRequest request) {
-            return NavigationDecision.navigate;
-          },
-
-        ),
-      )
-      ..loadRequest(Uri.parse(course.value!.preview!));*/
     return course.value;
   }
 
@@ -68,7 +46,7 @@ class BuyCourseController extends GetxController {
     update();
     String? response = await _contentApiService.likeCourse(
         id.toString(), !course.value!.liked!);
-    //todo ask arman about status code
+
     if (response == '200' || response == '201') {
       course.value!.liked = !course.value!.liked!;
       isLiked.value = course.value!.liked!;
@@ -93,25 +71,6 @@ class BuyCourseController extends GetxController {
     update();
   }
 
-  /*@override
-  void onClose() {
-    if(course.value!.preview != null) _videoPlayerController!.dispose();
-    if(course.value!.preview != null) chewieController!.dispose();
-    super.onClose();
-  }*/
-  void modifyPlayerControls() async {
-    final script = '''
-      const video = document.querySelector('video');
-      if (video) {
-        const controls = video.controls;
-        if (controls) {
-          controls.style.height = '50px';
-          controls.style.backgroundColor = 'red';
-          controls.style.color = 'white';
-        }
-      }
-    ''';
 
-    //await videoPlayerController!.evaluateJavascript(script);
-  }
+
 }

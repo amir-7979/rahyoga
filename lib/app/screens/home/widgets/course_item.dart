@@ -7,9 +7,8 @@ import '../../../../core/values/consts.dart';
 import '../../../data/models/course.dart';
 import '../../../widgets/cache_image.dart';
 
-class CourseItem extends StatelessWidget {
+class CourseItem extends GetWidget<HomeController> {
   CourseItem(this.course, {Key? key}) : super(key: key);
-  HomeController controller = Get.find<HomeController>();
   final Course course;
 
   @override
@@ -39,30 +38,28 @@ class CourseItem extends StatelessWidget {
                       child: CacheImage(url: course.image ?? ''),
                     ),
                   ),
+                  const SizedBox(height: 8),
+                  Text(
+                    course.header ?? '',
+                    style: Theme.of(context)
+                        .textTheme
+                        .headlineMedium!
+                        .copyWith(color: black),
+                  ),
                   const SizedBox(height: 10),
                   Row(
-                    crossAxisAlignment: CrossAxisAlignment.end,
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    mainAxisAlignment: MainAxisAlignment.end,
                     children: [
-                      Expanded(
-                        child: Text(
-                          course.header ?? '',
-                          style: Theme.of(context)
-                              .textTheme
-                              .headlineMedium!
-                              .copyWith(color: black),
-                        ),
-                      ),
                       Text(
                         '${course.theNumberOfSeasons} ${Translator.session.tr}',
                         style: Theme.of(context)
                             .textTheme
                             .displaySmall!
                             .copyWith(color: grayText2),
-                      )
+                      ),
                     ],
                   ),
-                  const SizedBox(height: 10),
+                  const SizedBox(height: 7),
                   Text(
                     '${Translator.mentor.tr} : ${course.mentor!.fullname ?? ''}',
                     style: Theme.of(context)
@@ -70,56 +67,22 @@ class CourseItem extends StatelessWidget {
                         .headlineSmall!
                         .copyWith(color: grayText2),
                   ),
-                  const Spacer(),
+                  const SizedBox(height: 10),
                   Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    crossAxisAlignment: CrossAxisAlignment.center,
+                    mainAxisAlignment: MainAxisAlignment.end,
                     children: [
-                      //todo here1
                       Text(
                         Translator.toman.trParams(
-                            {'number': course.price.toString() ?? ''}),
+                            {'number': course.offer??''}),
                         style: Theme.of(context)
                             .textTheme
-                            .headlineSmall!
+                            .bodyMedium!
                             .copyWith(color: black),
                       ),
-                      SizedBox(
-                        width: 50,
-                        height: 30,
-                        child: Obx(
-                          () => (controller.isLoading.value == course.id)
-                              ? const Center(
-                                child: SizedBox(
-                                    height: 30,
-                                    width: 30,
-                                    child: AspectRatio(
-                                      aspectRatio: 1,
-                                      child: CircularProgressIndicator(
-                                        color: primaryColor,
-                                        strokeWidth: 2,
-                                      ),
-                                    ),
-                                  ),
-                              )
-                              : OutlinedButton(
-                                  onPressed: () => controller
-                                      .addItemToBasket(course.id ?? 0),
-                                  style: OutlinedButton.styleFrom(
-                                    side: const BorderSide(
-                                        width: 1, color: primaryColor),
-                                  ),
-                                  child: const Icon(
-                                    Icons.add,
-                                    color: primaryColor,
-                                    size: 20,
-                                  ),
-                                ),
-                        ),
-                      )
+
                     ],
                   ),
-                  const SizedBox(height: 5),
+                  const SizedBox(height: 2),
                 ],
               ),
             ),

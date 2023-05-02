@@ -1,3 +1,5 @@
+import 'package:intl/intl.dart';
+
 import 'mentor.dart';
 
 class LikedCourse {
@@ -22,8 +24,8 @@ class LikedCourse {
   late final int? dateUnix;
   late final String? image;
   late final int? theNumberOfSeasons;
-  late final int? price;
-  late final int? offer;
+  late final String? price;
+  late final String? offer;
   late final String? header;
   late final Mentor? mentor;
   late final bool? liked;
@@ -36,8 +38,8 @@ class LikedCourse {
     date = json['date'];
     dateUnix = json['date_unix'];
     image = json['image'];
-    price = json['price'];
-    offer = json['_offer'];
+    price = NumberFormat('#,###.##').format(json['price']);
+    offer = NumberFormat('#,###.##').format(json['_offer']);
     theNumberOfSeasons = json['the_number_of_seasons'];
     header = json['header'];
     mentor = Mentor.fromJson(json['mentor']);

@@ -63,7 +63,7 @@ class Profile {
     age = json['age'];
     image = json['image'];
     email = json['email'];
-    phoneNumber = '0${json['phone_number'].substring(3)}';
+    phoneNumber = json['phone_number'] == null ? null : '0${json['phone_number'].substring(3)}';
     address = json['address'];
     postalCode = json['postal_code'];
     isSuperuser = json['is_superuser'];

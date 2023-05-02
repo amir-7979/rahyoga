@@ -1,3 +1,5 @@
+import 'package:intl/intl.dart';
+
 import 'category.dart';
 import 'mentor.dart';
 import 'seasons.dart';
@@ -30,9 +32,9 @@ class Course {
   late final Category? category;
   late final Mentor? mentor;
   late final double? time;
-  late final int? price;
+  late final String? price;
   late final int?  offer_percent;
-  late final int? offer;
+  late final String? offer;
   late final int? theNumberOfSeasons;
   late final String? theNumberOfSeasonsPersian;
   late final String? dateModified;
@@ -49,9 +51,9 @@ class Course {
     image = json['image'];
     category = Category.fromJson(json['category']);
     mentor = Mentor.fromJson(json['mentor']);
-    time = json['time'];
-    price = json['price'];
-    offer = json['_offer'];
+    time = double.parse(json['time']);
+    price = NumberFormat('#,###.##').format(json['price']);
+    offer = NumberFormat('#,###.##').format(json['_offer']);
     offer_percent = json['offer_percent'];
     theNumberOfSeasons = json['the_number_of_seasons'];
     theNumberOfSeasonsPersian = json['the_number_of_seasons_persian'];

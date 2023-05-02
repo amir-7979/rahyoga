@@ -15,7 +15,7 @@ class MovementItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return InkWell(
-      onTap: (){controller.gotoArticle(movement.id??1, 'حرکت یوگا');},
+      onTap: ()=> controller.gotoArticle(movement.id!, 'حرکت یوگا'),
       child: Container(
           decoration:  BoxDecoration(
             borderRadius: BorderRadius.circular(12.0),
@@ -35,24 +35,15 @@ class MovementItem extends StatelessWidget {
                 ),
               ),
               SizedBox(height: 4),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.start,
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Padding(
-                    padding: const EdgeInsetsDirectional.fromSTEB(20, 0, 0, 0),
-                    child: SizedBox(
-                      width: screenWidth-280,
-                      child: Text(
-                        movement.header??'',
-                        style: Theme.of(context)
-                            .textTheme
-                            .headlineMedium!
-                            .copyWith(color: black),
-                      ),
-                    ),
-                  ),
-                ],
+              Padding(
+                padding: const EdgeInsetsDirectional.fromSTEB(20, 0, 0, 0),
+                child: Text(
+                  movement.header??'',
+                  style: Theme.of(context)
+                      .textTheme
+                      .headlineMedium!
+                      .copyWith(color: black),
+                ),
               ),
             ],
           ),

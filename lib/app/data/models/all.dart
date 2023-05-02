@@ -16,7 +16,7 @@ class All {
   late final String? orderPersian;
   late final String? header;
   late final String? description;
-  late final bool? passed;
+  late bool? passed;
 
   All.fromJson(Map<String, dynamic> json){
     id = json['id'];

@@ -1,12 +1,12 @@
 import 'package:get/get.dart';
 import 'package:rahyoga/app/data/models/article.dart';
+import 'package:rahyoga/app/screens/bookmark/bookmark_controller.dart';
 
 import '../../../core/languages/translator.dart';
 import '../../../core/utils/snack_bar.dart';
 import '../../data/services/content_api_services.dart';
 
-
-class ArticleController extends GetxController{
+class ArticleController extends GetxController {
   final ContentApiService _contentApiService = Get.find<ContentApiService>();
 
   int? id;
@@ -15,11 +15,11 @@ class ArticleController extends GetxController{
   Rx<Article?> article = Article().obs;
   String save = Translator.save.tr;
 
-  void back()=> Get.back();
+  void back() => Get.back();
 
   Future<Article?> fetchArticle() async {
-    article.value = await _contentApiService.article(id??1);
-    if(article.value != null) isLiked.value = article.value!.liked!;
+    article.value = await _contentApiService.article(id!);
+    if (article.value != null) isLiked.value = article.value!.liked!;
     update();
     return article.value;
   }
@@ -31,6 +31,9 @@ class ArticleController extends GetxController{
     if (response == '200' || response == '201') {
       article.value!.liked = !article.value!.liked!;
       isLiked.value = article.value!.liked!;
+      try {
+        Get.find<BookmarkController>().refreshPage();
+      } catch (error) {}
     } else {
       redSnackBar(response ?? 'خطا در ارتباط با سرور');
     }

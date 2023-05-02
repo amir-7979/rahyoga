@@ -1,15 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:rahyoga/app/screens/my_courses/my_courses_controller.dart';
 import '../../../core/languages/translator.dart';
 import '../../../routes/routes.dart';
 import '../../data/models/basket.dart';
 import '../../data/services/content_api_services.dart';
+import 'widget/cart_dialog.dart';
 
 class BasketController extends GetxController{
   final ContentApiService _apiService = Get.find<ContentApiService>();
   final discountController = TextEditingController();
   Rx<Basket?> basket =  Basket().obs;
-
   var shopList = '';
   List courses = [].obs;
   String screenTitle = Translator.order.tr;
@@ -27,17 +28,7 @@ class BasketController extends GetxController{
   RxInt isLoading = 0.obs;
 
   void gotoMainScreen() => Get.offAndToNamed(AppRoutes.mainScreen);
-/*  void deleteAllCourses() => courses = [];
-  void deleteCourse(int i) => courses.removeAt(i);*/
-  void setDiscount(String discount){
-    //todo ask arman
-    shopList = shopList;
-    update();
-  }
-  void goPay(String discount){
-    //todo ask arman
 
-  }
   void back()=>Get.back();
 
   Future<Basket?> fetchBasket() async {
@@ -60,4 +51,13 @@ class BasketController extends GetxController{
     super.onInit();
   }
 
+  void closeDialog(){
+    back();
+    Get.find<MyCoursesController>().refreshPage2();
+    update();
+  }
+
+  void showDialog(){
+    Get.dialog(CartDialog());
+  }
 }

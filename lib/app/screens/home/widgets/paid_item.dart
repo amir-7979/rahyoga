@@ -39,30 +39,28 @@ class PaidItem extends StatelessWidget {
                       child: CacheImage(url: course.image ?? ''),
                     ),
                   ),
+                  const SizedBox(height: 8),
+                  Text(
+                    course.header ?? '',
+                    style: Theme.of(context)
+                        .textTheme
+                        .headlineMedium!
+                        .copyWith(color: black),
+                  ),
                   const SizedBox(height: 10),
                   Row(
-                    crossAxisAlignment: CrossAxisAlignment.end,
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    mainAxisAlignment: MainAxisAlignment.end,
                     children: [
-                      Expanded(
-                        child: Text(
-                          course.header ?? '',
-                          style: Theme.of(context)
-                              .textTheme
-                              .headlineMedium!
-                              .copyWith(color: black),
-                        ),
-                      ),
                       Text(
                         '${course.theNumberOfSeasons} ${Translator.session.tr}',
                         style: Theme.of(context)
                             .textTheme
                             .displaySmall!
                             .copyWith(color: grayText2),
-                      )
+                      ),
                     ],
                   ),
-                  const SizedBox(height: 15),
+                  const SizedBox(height: 7),
                   Text(
                     '${Translator.mentor.tr} : ${course.mentor!.fullname ?? ''}',
                     style: Theme.of(context)
@@ -70,8 +68,7 @@ class PaidItem extends StatelessWidget {
                         .headlineSmall!
                         .copyWith(color: grayText2),
                   ),
-                  const Spacer(),
-                  const SizedBox(height: 5),
+                  const SizedBox(height: 2),
                 ],
               ),
             ),

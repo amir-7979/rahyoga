@@ -12,7 +12,7 @@ import 'widgets/movements_slider.dart';
 import 'widgets/paid_list.dart';
 
 class HomeScreen extends GetWidget<HomeController> {
-   const HomeScreen({Key? key}) : super(key: key);
+  HomeScreen({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -42,6 +42,7 @@ class HomeScreen extends GetWidget<HomeController> {
         ],
       ),
       body:GetBuilder<HomeController>(
+          key: Key('home'),
           init: controller,
           builder: (context) => context.home.value!.courses == null
               ? const SimmerScreen()
@@ -51,23 +52,26 @@ class HomeScreen extends GetWidget<HomeController> {
   }
 
   Widget home(Home home){
+    print('rebuild');
     return  Padding(
       padding: const EdgeInsetsDirectional.fromSTEB(8, 10, 0, 0),
       child: ListView(
         cacheExtent: 700,
         children: [
-          if (home.lastCourse != null) LastCourseItem(home.lastCourse!),
-          const SizedBox(height: 25),
+          if (home.lastCourse != null && home.lastCourse!=[]) LastCourseItem(home.lastCourse!),
+          if (home.lastCourse != null && home.lastCourse!=[]) const SizedBox(height: 25),
           if (home.courses != null && home.courses!.isNotEmpty) CourseList(Translator.generalYogaCourses.tr, home.courses!, controller.gotoMoreScreen),
-          const SizedBox(height: 25),
-          if (home.miniCourses != null &&home.miniCourses!.isNotEmpty) PaidList(Translator.purchasedCourses.tr, home.paid!),
-          const SizedBox(height: 25),
+          if (home.courses != null && home.courses!.isNotEmpty)const SizedBox(height: 25),
+          if (home.paid != null &&home.paid!.isNotEmpty) PaidList(Translator.purchasedCourses.tr, home.paid!),
+          if (home.paid != null &&home.paid!.isNotEmpty) const SizedBox(height: 25),
           if (home.movements != null &&home.movements!.isNotEmpty) MovementsSlider(home.movements!),
-          const SizedBox(height: 15),
+          if (home.movements != null &&home.movements!.isNotEmpty) const SizedBox(height: 15),
           if (home.miniCourses != null &&home.miniCourses!.isNotEmpty) CourseList(Translator.miniYogaCourses.tr, home.miniCourses!, controller.gotoMiniMoreScreen),
-          const SizedBox(height: 5),
+          if (home.miniCourses != null &&home.miniCourses!.isNotEmpty) const SizedBox(height: 5),
         ],
       ),
     );
   }
 }
+
+

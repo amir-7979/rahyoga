@@ -20,7 +20,6 @@ class PurchasedCourseList extends GetWidget<MyCoursesController> {
         padding: EdgeInsetsDirectional.symmetric(vertical: 5),
         child: Divider(),
       ),
-
       padding: const EdgeInsetsDirectional.fromSTEB(10, 10, 10, 0),
       pagingController: controller.pagingController2,
       builderDelegate: PagedChildBuilderDelegate<Course>(
@@ -34,6 +33,7 @@ class PurchasedCourseList extends GetWidget<MyCoursesController> {
           ),
           ),
         ),
+        newPageErrorIndicatorBuilder: (_)=>Container(),
         newPageProgressIndicatorBuilder: (_)=>Padding(
           padding: const EdgeInsetsDirectional.only(bottom: 10),
           child: Center(

@@ -48,12 +48,13 @@ class FavoriteCourseItem extends StatelessWidget {
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           crossAxisAlignment: CrossAxisAlignment.center,
                           children: [
-                            SizedBox(
-                              width: screenWidth - 220,
+                            Expanded(
                               child: Text(
                                 likedCourse.header ?? '',
                                 style: Get.theme.textTheme.displayMedium!
-                                    .copyWith(color: black, overflow: TextOverflow.ellipsis),
+                                    .copyWith(
+                                        color: black,
+                                        overflow: TextOverflow.ellipsis),
                               ),
                             ),
                             Text(
@@ -87,47 +88,54 @@ class FavoriteCourseItem extends StatelessWidget {
                           SizedBox(
                             height: 40,
                             child: Obx(
-                                  () => (controller.isLoading.value == likedCourse.id)
-                                  ?  Center(
-                                child: Row(
-                                  children: [
-                                    const SizedBox(
-                                      height: 30,
-                                      width: 30,
-                                      child: AspectRatio(
-                                        aspectRatio: 1,
-                                        child: CircularProgressIndicator(
-                                          color: primaryColor,
-                                          strokeWidth: 2,
-                                        ),
+                              () => (controller.isLoading.value ==
+                                      likedCourse.id)
+                                  ? Center(
+                                      child: Row(
+                                        children: [
+                                          const SizedBox(
+                                            height: 30,
+                                            width: 30,
+                                            child: AspectRatio(
+                                              aspectRatio: 1,
+                                              child: CircularProgressIndicator(
+                                                color: primaryColor,
+                                                strokeWidth: 2,
+                                              ),
+                                            ),
+                                          ),
+                                          const SizedBox(
+                                            width: 15,
+                                          )
+                                        ],
                                       ),
-                                    ),
-                                    const SizedBox(width: 15,)
-                                  ],
-                                ),
-                              )
-                                  : TextButton(
-                                onPressed: () => controller
-                                    .addItemToBasket(likedCourse.id??0),
-                                child: Row(
-                                  crossAxisAlignment: CrossAxisAlignment.center,
-                                  mainAxisAlignment: MainAxisAlignment.center,
-                                  children: [
-                                    Center(
-                                      child: Text(
-                                        '${Translator.buyCourse.tr}',
-                                        style: Get.theme.textTheme.bodyMedium!
-                                            .copyWith(color: primaryColor),
-                                      ),
-                                    ),
-                                    const SizedBox(width: 4),
-                                    const Icon(
-                                      Icons.add_circle_outline,
-                                      color: primaryColor,
                                     )
-                                  ],
-                                ),
-                              ),
+                                  : TextButton(
+                                      onPressed: () => controller
+                                          .addItemToBasket(likedCourse.id!),
+                                      child: Row(
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.center,
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.center,
+                                        children: [
+                                          Center(
+                                            child: Text(
+                                              '${Translator.buyCourse.tr}',
+                                              style: Get
+                                                  .theme.textTheme.bodyMedium!
+                                                  .copyWith(
+                                                      color: primaryColor),
+                                            ),
+                                          ),
+                                          const SizedBox(width: 4),
+                                          const Icon(
+                                            Icons.add_circle_outline,
+                                            color: primaryColor,
+                                          )
+                                        ],
+                                      ),
+                                    ),
                             ),
                           ),
                         ],

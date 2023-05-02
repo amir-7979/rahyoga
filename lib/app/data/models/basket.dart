@@ -1,5 +1,5 @@
-import 'category.dart';
-import 'mentor.dart';
+import 'package:intl/intl.dart';
+import 'package:rahyoga/app/data/models/seller.dart';
 import 'result.dart';
 
 class Basket {
@@ -16,18 +16,22 @@ class Basket {
   late  String? next;
   late  String? previous;
   late  List<Result>? results = [];
-  late  int? totalPrice=0;
-  late  int? totalOffer=0;
-  late  int? difference=0;
+  late  String? totalPrice;
+  late  String? totalOffer;
+  late  String? difference;
+  late final Seller seller;
+
 
   Basket.fromJson(Map<String?, dynamic> json){
     count = json['count'];
     next = null;
     previous = null;
     results = List.from(json['results']).map((e)=>Result.fromJson(e)).toList();
-    totalPrice = json['total_price']??0;
-    totalOffer = json['total_offer']??0;
-    difference = json['difference']??0;
+    totalPrice = NumberFormat('#,###.##').format(json['total_price']??0);
+    totalOffer = NumberFormat('#,###.##').format(json['total_offer']??0);
+    difference = NumberFormat('#,###.##').format(json['difference']??0);
+    seller = Seller.fromJson(json['seller']);
+
   }
 }
 

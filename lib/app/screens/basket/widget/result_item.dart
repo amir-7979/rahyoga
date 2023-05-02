@@ -82,59 +82,64 @@ class ResultItem extends GetView<BasketController> {
                                   color: black,
                                   overflow: TextOverflow.ellipsis),
                         ),
-                        const SizedBox(height: 15),
-                        Text(
-                          '${Translator.mentor.tr} : ${result.mentor!.fullname ?? ''}',
-                          style: Theme.of(context)
-                              .textTheme
-                              .headlineSmall!
-                              .copyWith(
+                        const SizedBox(height: 20),
+                        Row(
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Text(
+                              '${Translator.mentor.tr} : ${result.mentor!.fullname ?? ''}',
+                              style: Theme.of(context)
+                                  .textTheme
+                                  .headlineSmall!
+                                  .copyWith(
                                   color: textGray,
                                   overflow: TextOverflow.ellipsis),
+                            ),
+                            (result.offerPercent == 0)
+                                ? Text(
+                              Translator.toman
+                                  .trParams({'number': result.offer.toString()}),
+                              style:
+                              Theme.of(context).textTheme.labelMedium!.copyWith(
+                                color: black,
+                              ),
+                            )
+                                : Column(
+                              crossAxisAlignment: CrossAxisAlignment.end,
+                              children: [
+                                Text(
+                                  Translator.toman.trParams(
+                                      {'number': result.price??''}),
+                                  style: Theme.of(context)
+                                      .textTheme
+                                      .headlineMedium!
+                                      .copyWith(
+                                    color: profileGray,
+                                    decoration: TextDecoration.lineThrough,
+                                  ),
+                                ),
+                                const SizedBox(height: 7),
+                                Text(
+                                  Translator.toman.trParams(
+                                      {'number': result.offer??''}),
+                                  style: Theme.of(context)
+                                      .textTheme
+                                      .labelMedium!
+                                      .copyWith(
+                                    color: black,
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ],
                         ),
+
                       ],
                     ),
                   ),
                 ),
-                Padding(
-                  padding: const EdgeInsetsDirectional.fromSTEB(0, 10, 0, 0),
-                  child: (result.offerPercent == 0)
-                      ? Text(
-                          Translator.toman
-                              .trParams({'number': result.offer.toString()}),
-                          style:
-                              Theme.of(context).textTheme.labelMedium!.copyWith(
-                                    color: black,
-                                  ),
-                        )
-                      : Column(
-                          crossAxisAlignment: CrossAxisAlignment.end,
-                          children: [
-                            Text(
-                              Translator.toman.trParams(
-                                  {'number': result.price.toString()}),
-                              style: Theme.of(context)
-                                  .textTheme
-                                  .headlineMedium!
-                                  .copyWith(
-                                    color: profileGray,
-                                    decoration: TextDecoration.lineThrough,
-                                  ),
-                            ),
-                            const SizedBox(height: 7),
-                            Text(
-                              Translator.toman.trParams(
-                                  {'number': result.offer.toString()}),
-                              style: Theme.of(context)
-                                  .textTheme
-                                  .labelMedium!
-                                  .copyWith(
-                                    color: black,
-                                  ),
-                            ),
-                          ],
-                        ),
-                ),
+
               ],
             ),
           ),

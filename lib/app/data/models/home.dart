@@ -10,19 +10,21 @@ class Home {
      this.miniCourses,
      this.paid,
   });
-  late LastCourse? lastCourse;
-  late List<Course>? courses=[];
-  late List<Movement>? movements=[];
-  late List<Course>? miniCourses=[];
-  late List<Course>? paid=[];
+  LastCourse? lastCourse;
+  List<Course>? courses;
+  List<Movement>? movements;
+  List<Course>? miniCourses;
+  List<Course>? paid;
 
 
   Home.fromJson(Map<String, dynamic> json){
-    lastCourse = LastCourse.fromJson(json['last_course']);
-    courses = List.from(json['courses']).map((e)=>Course.fromJson(e)).toList();
-    movements = List.from(json['movements']).map((e)=>Movement.fromJson(e)).toList();
-    miniCourses = List.from(json['mini_courses']).map((e)=>Course.fromJson(e)).toList();
-    paid = List.from(json['paid']).map((e)=>Course.fromJson(e)).toList();
+    lastCourse = (json['last_course'] != null)
+        ? LastCourse.fromJson(json['last_course'])
+        : null;
+    courses = (json['courses'] != []) ? List.from(json['courses']).map((e)=>Course.fromJson(e)).toList(): null;
+    movements = (json['movements'] != []) ? List.from(json['movements']).map((e)=>Movement.fromJson(e)).toList(): null;
+    miniCourses = (json['mini_courses'] != []) ? List.from(json['mini_courses']).map((e)=>Course.fromJson(e)).toList(): null;
+    paid = (json['paid'] != []) ? List.from(json['paid']).map((e)=>Course.fromJson(e)).toList() : null;
   }
 }
 

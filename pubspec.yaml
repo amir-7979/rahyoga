@@ -35,7 +35,7 @@ dependencies:
     sdk: flutter
   cupertino_icons: ^1.0.2
   get: ^4.6.5
-  dio: ^4.0.6
+  dio: ^5.1.1
   flutter_secure_storage: ^7.0.1
   mutex: ^3.0.1
   persian_fonts: ^1.0.5
@@ -57,6 +57,8 @@ dependencies:
   flutter_native_splash: ^2.2.19
   webview_flutter: ^4.0.6
   intl: ^0.17.0
+  dio_smart_retry: ^5.0.0
+  flutter_html: ^3.0.0-alpha.6
 
 
 dev_dependencies:

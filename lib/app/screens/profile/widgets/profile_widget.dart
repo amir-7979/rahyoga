@@ -8,7 +8,8 @@ import '../../../../core/theme/colors.dart';
 import '../../../data/models/profile.dart';
 
 class ProfileWidget extends StatelessWidget {
-   ProfileWidget(this.profile, {super.key});
+  ProfileWidget(this.profile, {super.key});
+
   Profile profile;
 
   @override
@@ -17,8 +18,7 @@ class ProfileWidget extends StatelessWidget {
       padding: const EdgeInsetsDirectional.all(14),
       decoration: const BoxDecoration(
           color: fourthColor,
-          borderRadius: BorderRadiusDirectional.all(Radius.circular(12))
-      ),
+          borderRadius: BorderRadiusDirectional.all(Radius.circular(12))),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
@@ -26,39 +26,44 @@ class ProfileWidget extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.center,
             mainAxisAlignment: MainAxisAlignment.start,
             children: [
-              //CacheImage(url: profile.image??'', imageBuilder: true),
-              CacheImage(url: profile.image??'', imageBuilder: true, height: 72),
-              Padding(
-                padding: const EdgeInsetsDirectional.fromSTEB(20, 0, 0, 0),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Text(
-                    profile.firstName??profile.username!,
-                    style: Theme.of(context)
-                        .textTheme
-                        .headlineLarge!
-                        .copyWith(color: black),
+              CacheImage(
+                  url: profile.image ?? '', imageBuilder: true, height: 72),
+              Expanded(
+                child: Padding(
+                  padding: const EdgeInsetsDirectional.fromSTEB(20, 0, 0, 0),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Text(
+                        profile.firstName ?? profile.username!,
+                        style: Theme.of(context)
+                            .textTheme
+                            .headlineLarge!
+                            .copyWith(color: black),
+                      ),
+                      const SizedBox(height: 15),
+                      Text(
+                        profile.phoneNumber ?? profile.email!,
+                        style: Theme.of(context)
+                            .textTheme
+                            .displayLarge!
+                            .copyWith(color: textGray),
+                      ),
+                    ],
                   ),
-                  const SizedBox(height: 15),
-                  Text(
-                    profile.phoneNumber??profile.email!,
-                    style: Theme.of(context)
-                        .textTheme
-                        .displayLarge!
-                        .copyWith(color: textGray),
-                  ),
-                ],
-            ),
-              ),],
+                ),
+              ),
+            ],
           ),
           const Padding(
             padding: EdgeInsetsDirectional.symmetric(vertical: 20),
-            child: DottedLine(dashLength: 9,
-                dashGapLength: 9,
-                lineThickness: 1,
-              dashColor: profilePurple2,),
+            child: DottedLine(
+              dashLength: 9,
+              dashGapLength: 9,
+              lineThickness: 1,
+              dashColor: profilePurple2,
+            ),
           ),
           Padding(
             padding: const EdgeInsetsDirectional.fromSTEB(0, 0, 0, 10),
@@ -71,16 +76,14 @@ class ProfileWidget extends StatelessWidget {
                   style: Theme.of(context)
                       .textTheme
                       .bodyLarge!
-                      .copyWith(
-                      color: textGray),
+                      .copyWith(color: textGray),
                 ),
                 Text(
                   '${profile.courses} ${Translator.course.tr}',
                   style: Theme.of(context)
                       .textTheme
                       .bodyLarge!
-                      .copyWith(
-                      color: black),
+                      .copyWith(color: black),
                 )
               ],
             ),
@@ -96,16 +99,14 @@ class ProfileWidget extends StatelessWidget {
                   style: Theme.of(context)
                       .textTheme
                       .bodyLarge!
-                      .copyWith(
-                      color: textGray),
+                      .copyWith(color: textGray),
                 ),
                 Text(
                   '${profile.watched} ${Translator.session.tr}',
                   style: Theme.of(context)
                       .textTheme
                       .bodyLarge!
-                      .copyWith(
-                      color: black),
+                      .copyWith(color: black),
                 )
               ],
             ),
@@ -119,20 +120,17 @@ class ProfileWidget extends StatelessWidget {
                 style: Theme.of(context)
                     .textTheme
                     .bodyLarge!
-                    .copyWith(
-                    color: textGray),
+                    .copyWith(color: textGray),
               ),
               Container(
                 child: CircularPercentIndicator(
-                  radius:30,
+                  radius: 30,
                   lineWidth: 4.0,
-                  percent: profile.progress??0.0,
+                  percent: profile.progress ?? 0.0,
                   center: Text(
                     '${profile.progress.toString().substring(2)}%'
-                        '',
-                    style: Get.theme
-                        .textTheme
-                        .headlineMedium!
+                    '',
+                    style: Get.theme.textTheme.headlineMedium!
                         .copyWith(color: primaryColor),
                   ),
                   circularStrokeCap: CircularStrokeCap.round,

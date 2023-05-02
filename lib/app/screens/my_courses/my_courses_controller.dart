@@ -40,7 +40,6 @@ class MyCoursesController extends GetxController {
   }
 
   Future<Paid?> fetchPaid(int i) async {
-    print(i);
     paid.value = await _contentApiService.paid(i);
     return paid.value;
   }
@@ -68,11 +67,11 @@ class MyCoursesController extends GetxController {
   Future<void> _fetchPage2(int pageKey) async {
     try {
       final newItems = await fetchPaid(pageKey);
-      if(newItems == null || newItems.courses == []) {
+      if(newItems == null || newItems.courses == []|| newItems.courses == null) {
         pagingController2.appendLastPage([]);
         return;
       }
-      final isLastPage = newItems.courses == [];
+      final isLastPage = newItems.next == null;
       if (isLastPage) {
         pagingController2.appendLastPage(newItems.courses??[]);
       } else {
@@ -83,7 +82,6 @@ class MyCoursesController extends GetxController {
       pagingController2.error = error;
     }
     update();
-
   }
 
   Future<void> refreshPage1() async{

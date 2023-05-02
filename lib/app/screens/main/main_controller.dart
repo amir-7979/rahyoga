@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 import 'package:persistent_bottom_nav_bar/persistent_tab_view.dart';
-
 import '../../../core/languages/translator.dart';
 import '../../../core/theme/colors.dart';
 import '../blog/blog_screen.dart';
@@ -15,10 +14,10 @@ class MainController extends GetxController{
 
   List<Widget> buildScreens() {
     return [
-      const HomeScreen(),
-      const MyCoursesScreen(),
-      const BlogScreen(),
-      const ProfileScreen(),
+       HomeScreen(),
+       MyCoursesScreen(),
+       BlogScreen(),
+       ProfileScreen(),
     ];
   }
 
@@ -70,9 +69,6 @@ class MainController extends GetxController{
         activeColorPrimary: primaryColor,
         inactiveColorPrimary: textGray,
         contentPadding: 5,
-
-        //activeColorPrimary: primaryColor,
-        //inactiveColorPrimary: textGray,
       ),
       PersistentBottomNavBarItem(
         icon: Transform.scale(
@@ -90,9 +86,9 @@ class MainController extends GetxController{
       ),
     ];
   }
+
   void setTab(int i){
     tabController.jumpToTab(i);
-    update();
   }
 
 }

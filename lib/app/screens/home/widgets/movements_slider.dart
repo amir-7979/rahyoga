@@ -51,6 +51,7 @@ class MovementsSlider extends StatelessWidget {
           },
           carouselController: _controller,
           options: CarouselOptions(
+            enableInfiniteScroll: false,
             height: 210,
               enlargeCenterPage: true,
               disableCenter: true,

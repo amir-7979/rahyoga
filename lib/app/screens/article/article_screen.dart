@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_html/flutter_html.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:flutter_widget_from_html/flutter_widget_from_html.dart';
 import 'package:get/get.dart';
@@ -78,12 +79,15 @@ class ArticleScreen extends GetWidget<ArticleController> {
               ),
               Padding(
                 padding: EdgeInsetsDirectional.fromSTEB(5, 10, 0, 0),
-                child: HtmlWidget(
+                child:
+                HtmlWidget(
                   article.description ?? '',
-
                   textStyle: Get.theme.textTheme.bodyMedium!
-                      .copyWith(color: profileGray),
+                      .copyWith(color: profileGray, height: 1.2),
                 ),
+                /*Html(
+                  data: "${article.description}"
+                )*/
               ),
             ],
           ),

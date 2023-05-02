@@ -1,49 +1,39 @@
 import 'package:flutter/material.dart';
+import 'package:shimmer/shimmer.dart';
 
-class DiagonalLinePainter extends CustomPainter {
-  final Color color;
+import '../../core/theme/colors.dart';
 
-  DiagonalLinePainter(this.color);
+class ShimmerProgressBar extends StatelessWidget {
+  ShimmerProgressBar(this.progress);
 
-  @override
-  void paint(Canvas canvas, Size size) {
-    Paint paint = Paint()
-      ..color = color
-      ..strokeWidth = 2;
-
-    canvas.drawLine(
-      Offset(0, size.height),
-      Offset(size.width, 0),
-      paint,
-    );
-  }
-
-  @override
-  bool shouldRepaint(CustomPainter oldDelegate) => false;
-}
-
-class StripedProgressIndicator extends StatelessWidget {
-  final List<Color> colors;
-
-  const StripedProgressIndicator({required this.colors});
+  double progress;
 
   @override
   Widget build(BuildContext context) {
-    return SizedBox(
-      height: 20,
-      child: Stack(
-        children: [
-          LinearProgressIndicator(
-            valueColor: AlwaysStoppedAnimation<Color>(colors[0]),
-          ),
-          CustomPaint(
-            painter: DiagonalLinePainter(Colors.white),
-            child: LinearProgressIndicator(
-              valueColor: AlwaysStoppedAnimation<Color>(colors[1]),
-              value: 0.5,
+    return Expanded(
+      child: SizedBox(
+        height: 7,
+        child: Stack(
+          children: [
+            Container(
+              decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(8.0),
+                  color: progressBackgroundColor),
             ),
-          ),
-        ],
+            FractionallySizedBox(
+              widthFactor: progress,
+              child: Shimmer.fromColors(
+                  child: Container(
+                    decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(8.0),
+                        color: primaryColor),
+                  ),
+                  period: Duration(milliseconds: 2500),
+                  baseColor: primaryColor,
+                  highlightColor: shimmerGreen),
+            )
+          ],
+        ),
       ),
     );
   }

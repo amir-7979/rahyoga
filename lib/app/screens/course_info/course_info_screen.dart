@@ -2,15 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
 import 'package:readmore/readmore.dart';
-import '../../../core/languages/translator.dart';
 import '../../../core/theme/colors.dart';
-import '../../../core/values/consts.dart';
 import '../../data/models/paid_course_info.dart';
 import '../../widgets/shimmer_screen.dart';
 import 'widgets/course_list.dart';
 import 'course_info_controller.dart';
 import 'widgets/bottom_app_bar_nav.dart';
-import 'package:chewie/chewie.dart';
 
 class CourseInfoScreen extends GetView<CourseInfoController> {
   CourseInfoScreen({Key? key}) : super(key: key);
@@ -51,12 +48,11 @@ class CourseInfoScreen extends GetView<CourseInfoController> {
         ? Container()
         : ListView(
             children: [
-              if (controller.chewieController != null)
-                SizedBox(
+              /*SizedBox(
                     height: 200,
                     width: screenWidth,
-                    child: Chewie(controller: controller.chewieController!)),
-              //todo with index item
+                    child: Chewie(controller: controller.chewieController!)),*/
+
               Padding(
                 padding: const EdgeInsetsDirectional.fromSTEB(16, 16, 16, 0),
                 child: Column(
@@ -67,7 +63,7 @@ class CourseInfoScreen extends GetView<CourseInfoController> {
                       children: [
                         SizedBox(
                           height: 32,
-                          width: 107,
+                          width: 115,
                           child: ElevatedButton(
                             style: ElevatedButton.styleFrom(
                               padding: const EdgeInsetsDirectional.fromSTEB(
@@ -78,16 +74,27 @@ class CourseInfoScreen extends GetView<CourseInfoController> {
                               shape: const StadiumBorder(),
                             ),
                             onPressed: () async {
-                              // TODO: done session
+                              controller.updateSession();
                             },
                             child: Row(
+                              mainAxisAlignment: MainAxisAlignment.center,
                               children: [
-                                SvgPicture.asset(
-                                  // TODO: done session
-                                  'assets/images/course_info/full_screen.svg',
-                                  width: 16,
-                                  height: 16,
-                                ),
+                                controller
+                                        .course
+                                        .value!
+                                        .progress!
+                                        .seasons
+                                        .all![controller.index.value - 1]
+                                        .passed!
+                                    ? SvgPicture.asset(
+                                        'assets/images/course_info/green_check.svg',
+                                        height: 23,
+                                        width: 23)
+                                    : SvgPicture.asset(
+                                        'assets/images/course_info/play2.svg',
+                                        height: 23,
+                                        width: 23,
+                                      ),
                                 const SizedBox(width: 5),
                                 Text(
                                   controller.fullScreen,
@@ -102,14 +109,16 @@ class CourseInfoScreen extends GetView<CourseInfoController> {
                     ),
                     SizedBox(height: 30),
                     Text(
-                      '${Translator.session.tr} ${controller.course.value!.theNumberOfSeasonsPersian ?? ''} - ${controller.course.value!.header}',
+                      '${controller.course.value!.progress!.seasons.all![controller.index.value - 1].header ?? ''}',
                       style:
                           Get.theme.textTheme.bodySmall!.copyWith(color: black),
                     ),
                     SizedBox(height: 12),
                     ReadMoreText(
-                      course.description ?? '',
-                      trimLines: 3,
+                      controller.course.value!.progress!.seasons
+                              .all![controller.index.value - 1].description ??
+                          '',
+                      trimLines: 4,
                       style: Get.theme.textTheme.bodyMedium!
                           .copyWith(color: profileGray, height: 1.3),
                       moreStyle: Get.theme.textTheme.bodyMedium!
@@ -121,7 +130,7 @@ class CourseInfoScreen extends GetView<CourseInfoController> {
                       trimCollapsedText: controller.more,
                       trimExpandedText: controller.less,
                     ),
-                    SizedBox(height: 25),
+                    SizedBox(height: 45),
                     if (controller.course.value!.progress!.seasons.all != null)
                       Text(
                         controller.courseSession,
@@ -129,10 +138,11 @@ class CourseInfoScreen extends GetView<CourseInfoController> {
                             .copyWith(color: black),
                       ),
                     if (controller.course.value!.progress!.seasons.all != null)
-                      SizedBox(height: 15),
+                      SizedBox(height: 30),
                     if (controller.course.value!.progress!.seasons.all != null)
                       CourseList(
                           controller.course.value!.progress!.seasons.all!),
+                    SizedBox(height: 10),
                   ],
                 ),
               ),

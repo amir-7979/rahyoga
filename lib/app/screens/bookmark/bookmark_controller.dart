@@ -24,6 +24,9 @@ class BookmarkController extends GetxController {
     Get.toNamed(AppRoutes.articleScreen, arguments: [i, txt]);
   }
 
+  Future<void> refreshPage() async{
+    pagingController.refresh();
+  }
 
   Future<void> _fetchPage(int pageKey) async {
     try {

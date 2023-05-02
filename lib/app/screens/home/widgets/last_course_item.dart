@@ -9,10 +9,9 @@ import '../../../data/models/last_course.dart';
 import '../../../widgets/cache_image.dart';
 import '../../../widgets/proggress_bar.dart';
 
-class LastCourseItem extends StatelessWidget {
+class LastCourseItem extends GetWidget<HomeController> {
    LastCourseItem(this.lastCourse, {super.key});
-  final LastCourse lastCourse;
-  HomeController controller = Get.find<HomeController>();
+   LastCourse lastCourse;
 
   @override
   Widget build(BuildContext context) {
@@ -46,9 +45,7 @@ class LastCourseItem extends StatelessWidget {
             ),
           ),
           InkWell(
-            onTap: () {
-              controller.gotoCourseInfo(lastCourse.course!.id!.toInt()??1);
-               },
+            onTap: () => controller.gotoCourseInfo(lastCourse.course!.id!.toInt()),
             child: Padding(
               padding: const EdgeInsetsDirectional.only(end: 10),
               child: Container(
@@ -59,7 +56,7 @@ class LastCourseItem extends StatelessWidget {
                 child: Row(
                   children: [
                     Padding(
-                      padding: const EdgeInsetsDirectional.fromSTEB(8, 8, 5, 8),
+                      padding: const EdgeInsetsDirectional.all(5),
                       child: SizedBox(
                         height: lastCourseHeight,
                         width: lastCourseImageWidth,
@@ -85,15 +82,14 @@ class LastCourseItem extends StatelessWidget {
                     Expanded(
                       child: Padding(
                         padding:
-                            const EdgeInsetsDirectional.fromSTEB(5, 15, 15, 5),
+                            const EdgeInsetsDirectional.fromSTEB(5, 15, 10, 5),
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             Row(
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: [
-                                SizedBox(
-                                  width: screenWidth - 240,
+                                Expanded(
                                   child: Text(
                                     lastCourse.course!.header??'',
                                     style: Theme.of(context)
@@ -131,18 +127,13 @@ class LastCourseItem extends StatelessWidget {
                             Row(
                               mainAxisAlignment: MainAxisAlignment.end,
                               children: [
-                                SizedBox(
-                                    width: 100,
-                                    height:10,
-                                    child:StripedProgressIndicator(colors: [primaryColor, tertiaryColor],),
-
-                                ),
-                                SizedBox(width: 7),
+                                ShimmerProgressBar(lastCourse.progress??0.0),
+                                SizedBox(width: 15),
                                 Text(
                                   '${(lastCourse.progress).toString().substring(2)}%',
                                   style: Theme.of(context)
                                       .textTheme
-                                      .headlineSmall!
+                                      .displayMedium!
                                       .copyWith(
                                     color: black,
                                   ),

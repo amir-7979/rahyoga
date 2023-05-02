@@ -160,7 +160,7 @@ class InfoWidget extends StatelessWidget {
 
           InkWell(
             onTap: () {
-              _controller.logout();
+              _controller.exit();
             },
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -188,6 +188,7 @@ class InfoWidget extends StatelessWidget {
               ],
             ),
           ),
+
           SizedBox(height: 5)
         ],
       ),

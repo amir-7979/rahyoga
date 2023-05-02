@@ -14,7 +14,7 @@ class BottomBar extends GetView<BuyCourseController> {
       height: 80,
       child: Container(
         decoration: const BoxDecoration(
-          color: favoriteGray2,
+          color: fourthColor,
           borderRadius: BorderRadiusDirectional.vertical(
             top: Radius.circular(20),
           ),

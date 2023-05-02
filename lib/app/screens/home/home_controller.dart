@@ -1,6 +1,5 @@
 import 'package:get/get.dart';
 import 'package:rahyoga/app/data/models/liked_courses.dart';
-import 'package:rahyoga/core/utils/snack_bar.dart';
 import '../../../core/languages/translator.dart';
 import '../../../routes/routes.dart';
 import '../../data/models/home.dart';
@@ -9,17 +8,16 @@ import '../main/main_controller.dart';
 
 class HomeController extends GetxController {
   final ContentApiService _apiService = Get.find<ContentApiService>();
-  final MainController homeController = Get.find<MainController>();
+  final MainController mainController = Get.find<MainController>();
   Rx<Home?> home =  Home().obs;
   RxInt sliderIndex = 0.obs;
-  RxInt isLoading = 0.obs;
 
   void setSliderIndex(int i) {
     sliderIndex.value = i;
   }
 
   void gotoTab(int i){
-    homeController.setTab(i);
+    mainController.setTab(i);
   }
 
   Future<LikedCourses?> getMiniCourses(int i) async {
@@ -31,6 +29,12 @@ class HomeController extends GetxController {
   }
 
   void gotoBasketScreen() => Get.toNamed(AppRoutes.basketScreen);
+
+  void minorUpdate() {
+    home.value!.courses = null;
+    update();
+    fetchHome();
+  }
 
   void gotoCourseInfo(int i) => Get.toNamed(AppRoutes.courseInfoScreen ,arguments: i);
 
@@ -46,29 +50,16 @@ class HomeController extends GetxController {
     return home.value;
   }
 
-  Future<void> addItemToBasket(int id) async {
-    isLoading.value = id;
-    String? response = await _apiService.addItemFromBasket(id.toString());
-    if(response=='201') {
-      greenSnackBar('دوره به سبد خرید اضافه شد');
-    } else {
-      redSnackBar(response??'');
-    }
-    isLoading.value = 0;
-    home.refresh();
-    update();
-  }
-
   void gotoArticle(int i, String txt){
     Get.toNamed(AppRoutes.articleScreen, arguments: [i, txt]);
   }
 
-
   @override
   void onInit() {
-
     fetchHome();
     super.onInit();
   }
+
+
 
 }

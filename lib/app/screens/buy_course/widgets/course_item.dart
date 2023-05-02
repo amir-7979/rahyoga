@@ -45,14 +45,14 @@ class CourseItem extends StatelessWidget {
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        SizedBox(
-                          width: screenWidth-230,
+                        Expanded(
                           child: Text(
                             course.header ?? '',
                             style: Get.theme.textTheme.headlineMedium!
                                 .copyWith(color: primaryColor),
                           ),
                         ),
+                        SizedBox(width: 5),
                         Text(
                           course.durationPersian ?? '',
                           style: Get.theme.textTheme.headlineSmall!

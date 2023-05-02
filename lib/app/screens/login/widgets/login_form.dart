@@ -60,40 +60,48 @@ class LoginForm extends StatelessWidget {
                 validator: (txt) => _controller.usernameValidation(txt!),
               ),
             ),
+            const SizedBox(height: 10),
             SizedBox(
               height: 70,
-              child: TextFormField(
-                style: Get.theme
-                    .textTheme
-                    .labelMedium!
-                    .copyWith(color: white),
-                controller: _controller.usernameController,
-                keyboardType: TextInputType.text,
-                onEditingComplete: () => FocusScope.of(context).nextFocus(),
-                decoration: InputDecoration(
-                  helperText: ' ',
-                  errorStyle: Get.theme
+              child: Obx(()=> TextFormField(
+                  style: Get.theme
                       .textTheme
-                      .headlineSmall!
-                      .copyWith(color: errorText),
-                  hintStyle: const TextStyle(color: grayText2),
-                  filled: true,
-                  fillColor: fieldColor,
-                  labelText: Translator.userOrEmail.tr,
-                  labelStyle: const TextStyle(color: white),
-                  focusedBorder: focusedBorder,
-                  enabledBorder: enabledBorder,
-                  border: border,
-                  errorBorder: errorBorder,
-                  focusedErrorBorder: errorBorder,
+                      .labelMedium!
+                      .copyWith(color: white),
+                  controller: _controller.passwordController,
+                  obscureText: _controller.passwordVisible.value,
+                  keyboardType: TextInputType.visiblePassword,
+                  onEditingComplete: () => FocusScope.of(context).nextFocus(),
+                  decoration: InputDecoration(
+                    errorStyle: Get.theme
+                        .textTheme
+                        .headlineSmall!
+                        .copyWith(color: errorText),
+                    helperText: '',
+                    suffixIcon: IconButton(
+                      icon: Icon(
+                        _controller.passwordVisible.value
+                            ? Icons.visibility_off
+                            : Icons.visibility,
+                        color: white,
+                      ),
+                      onPressed: _controller.toggle,
+                    ),
+                    filled: true,
+                    fillColor: fieldColor,
+                    labelText: Translator.password.tr,
+                    labelStyle: const TextStyle(color: white),
+                    focusedBorder: focusedBorder,
+                    enabledBorder: enabledBorder,
+                    errorBorder: errorBorder,
+                    focusedErrorBorder: errorBorder,
+                    border: border,
+                  ),
+                  validator: (txt) => _controller.passwordValidation(txt!),
+                  //onSubmitted: (txt) => function(controller.text),
                 ),
-                validator: (txt) => _controller.usernameValidation(txt!),
               ),
             ),
-            const SizedBox(height: 10),
-            TextFormField(
-              cursorHeight: 50
-                ),
             Align(
               alignment: AlignmentDirectional.centerStart,
               child: TextButton(

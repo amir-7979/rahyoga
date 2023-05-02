@@ -19,12 +19,9 @@ class PurchasedCourseItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return InkWell(
-      onTap: () {
-        controller.gotoCourseInfo(course.id??1);
-      },
+      onTap: () => controller.gotoCourseInfo(course.id??1),
       child: SizedBox(
         height: purchasedItemHeight,
-        width: screenWidth,
         child: Row(
           children: [
             Padding(
@@ -48,30 +45,30 @@ class PurchasedCourseItem extends StatelessWidget {
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            SizedBox(
-                              width: screenWidth - 240,
-                              child: Text(
-                                course.header??'',
+                        Expanded(
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Text(
+                                course.header ??'',
                                 style: Get.theme
                                     .textTheme
                                     .displayLarge!
                                     .copyWith(color: black),
                               ),
-                            ),
-                            SizedBox(height: 6),
-                            Text(
-                              '${Translator.mentor.tr} : ${course.mentor!.fullname??''}',
-                              style: Get.theme
-                                  .textTheme
-                                  .headlineSmall!
-                                  .copyWith(color: grayText2),
-                            ),
-                          ],
+                              SizedBox(height: 6),
+                              Text(
+                                '${Translator.mentor.tr} : ${course.mentor!.fullname??''}',
+                                style: Get.theme
+                                    .textTheme
+                                    .headlineSmall!
+                                    .copyWith(color: grayText2),
+                              ),
+                            ],
+                          ),
                         ),
                         Container(
+                          padding: EdgeInsetsDirectional.only(start: 10),
                           child: CircularPercentIndicator(
                             radius:30,
                             lineWidth: 4.0,
@@ -94,7 +91,7 @@ class PurchasedCourseItem extends StatelessWidget {
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
                           Text(
-                            '${Translator.session.tr} ${course.theNumberOfSeasonsPersian}',
+                            '${course.theNumberOfSeasons} ${Translator.session.tr}',
                             style: Get.theme
                                 .textTheme
                                 .displayMedium!

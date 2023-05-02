@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:rahyoga/core/theme/text_theme.dart';
 
-
 const Color primaryColor = Color(0xFF425C5A);
 const Color secondaryColor = Color(0xFF798777);
-const Color tertiaryColor = Color(0xFF56706E);
+const Color shimmerGreen = Color(0xFF4D734D);
+const Color tertiaryColor = Color(0xFF5E7977);
 const Color fourthColor = Color(0xFFEBEEEB);
 const Color progressBackgroundColor = Color(0xFFDCE2DC);
 const Color fieldColor = Color(0xFF556C6A);
@@ -20,15 +20,11 @@ const Color white = Color(0xFFFFFFFF);
 const Color errorText = Color(0xFFFF8282);
 const Color errorSnackBar = Color(0xFFB76060);
 const Color redError = Color(0xFFF43141);
-const Color bottomBarGray = Color(0xFFF5F7FA);
 const Color moreTextColor = Color(0xFFDEE3E7);
 const Color sliderDotGray = Color(0xFFC6C8CC);
-const Color favoriteGray2 = Color(0xFFEBF0F4);
 const Color profilePurple2 = Color(0xFFCDD2FF);
 const Color profileGray = Color(0xFF8D99A8);
 const Color textGray2 = Color(0xFFC1C9C0);
-
-
 
 final darkThem = ThemeData(
   primaryColor: primaryColor,

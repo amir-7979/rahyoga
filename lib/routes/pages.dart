@@ -37,13 +37,13 @@ class AppPages {
 
     GetPage(
       name: AppRoutes.loginScreen,
-      page: () => const LoginScreen(),
+      page: () =>  LoginScreen(),
       binding: LoginBinding(),
     ),
 
     GetPage(
       name: AppRoutes.signupScreen,
-      page: () => const SignupScreen(),
+      page: () =>  SignupScreen(),
       binding: SignUpBinding(),
     ),
 
@@ -55,7 +55,7 @@ class AppPages {
 
     GetPage(
       name: AppRoutes.homeScreen,
-      page: () => const HomeScreen(),
+      page: () => HomeScreen(),
       binding: HomeBinding(),
     ),
 
@@ -85,7 +85,7 @@ class AppPages {
 
     GetPage(
       name: AppRoutes.moreScreen,
-      page: () => const MoreScreen(),
+      page: () => MoreScreen(),
       binding: MoreBinding(),
     ),
 

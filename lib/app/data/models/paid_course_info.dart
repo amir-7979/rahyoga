@@ -57,11 +57,11 @@ class PaidCourseInfo {
     mentor = Mentor.fromJson(json['mentor']);
     description = json['description'];
     requirements = json['requirements'];
-    time = json['time'];
+    time = double.parse(json['time']);
     durationPersian = json['duration_persian'];
     price = json['price'];
     offer = json['_offer'];
-    theNumberOfSeasons = json['the_number_of_seasons'];
+    theNumberOfSeasons = json['the_number_of_seasons']??0;
     theNumberOfSeasonsPersian = json['the_number_of_seasons_persian'];
     dateModified = json['date_modified'];
     datePublished = json['date_published'];
@@ -78,7 +78,7 @@ class Progress {
     required this.seasons,
     required this.progress,
   });
-  late final Seasons seasons;
+  late  Seasons seasons;
   late final double progress;
 
   Progress.fromJson(Map<String, dynamic> json){

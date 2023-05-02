@@ -53,7 +53,6 @@ class BuyCourseScreen extends GetView<BuyCourseController> {
               ),
             ),
           ],
-
         ),
         bottomNavigationBar: Obx(()=> (controller.course.value!.offer != null) ? BottomBar() : SizedBox(height: 1,)),
         body: GetBuilder<BuyCourseController>(
@@ -82,7 +81,7 @@ class BuyCourseScreen extends GetView<BuyCourseController> {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   SizedBox(
-                    width: screenWidth - 80,
+                    width: screenWidth - 95,
                     child: Text(
                       course.header ?? '',
                       style: Get.theme.textTheme.headlineLarge!
@@ -117,7 +116,7 @@ class BuyCourseScreen extends GetView<BuyCourseController> {
               Container(
                 padding: const EdgeInsetsDirectional.fromSTEB(14, 12, 14, 12),
                 decoration: const BoxDecoration(
-                    color: bottomBarGray,
+                    color: fourthColor,
                     borderRadius:
                         BorderRadiusDirectional.all(Radius.circular(12))),
                 child: Column(
@@ -155,17 +154,25 @@ class BuyCourseScreen extends GetView<BuyCourseController> {
                   ],
                 ),
               ),
-              const SizedBox(height: 30),
-              Text(
-                controller.courseSession,
-                style: Get.theme.textTheme.displayLarge!.copyWith(color: black),
+              const SizedBox(height: 35),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Text(
+                    controller.courseSession,
+                    style: Get.theme.textTheme.displayLarge!.copyWith(color: black),
+                  ),
+                  Text(
+                    controller.course.value!.durationPersian??'',
+                    style:Get.theme.textTheme.displayMedium!.copyWith(color: black),
+                  ),
+                ],
               ),
-              const SizedBox(height: 5),
             ],
           ),
         ),
         Padding(
-          padding: const EdgeInsetsDirectional.fromSTEB(15, 0, 0, 5),
+          padding: const EdgeInsetsDirectional.fromSTEB(15, 5, 0, 5),
           child: CourseList(course.progress!.seasons.all ?? []),
         ),
       ],

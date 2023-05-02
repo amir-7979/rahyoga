@@ -54,7 +54,7 @@ class InfoWidget extends StatelessWidget {
                             .copyWith(color: textGray),
                       ),
                       Text(
-                        basket.count.toString()??'0',
+                        basket.count.toString(),
                         style: Theme.of(context)
                             .textTheme
                             .displayLarge!
@@ -81,7 +81,7 @@ class InfoWidget extends StatelessWidget {
                             .copyWith(color: textGray),
                       ),
                       Text(
-                        basket.totalOffer.toString()??'',
+                        basket.totalOffer??'',
                         style: Theme.of(context)
                             .textTheme
                             .displayLarge!
@@ -108,7 +108,7 @@ class InfoWidget extends StatelessWidget {
                             .copyWith(color: textGray),
                       ),
                       Text(
-                        basket.difference.toString(),
+                        basket.difference??'',
                         style: Theme.of(context)
                             .textTheme
                             .displayLarge!
