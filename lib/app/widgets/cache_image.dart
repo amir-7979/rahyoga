@@ -16,15 +16,16 @@ class CacheImage extends StatelessWidget {
       imageUrl: '$baseUrl$url',
       imageBuilder: imageBuilder == null
           ? null
-          : (context, imageProvider) => Container(
-                    width: width,
+          : imageBuilder == true
+              ? (context, imageProvider) => Container(
+                    width: height,
                     height: height,
                     decoration: BoxDecoration(
                       shape: BoxShape.circle,
                       image: DecorationImage(
                           image: imageProvider, fit: BoxFit.fill, alignment: Alignment.center),
                     ),
-                  ),
+                  ) :  null,
       errorWidget: (context, url, error) => Image.network('${baseUrl}default_image.jpg'),
       fit: BoxFit.fill,
     );

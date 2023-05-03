@@ -10,7 +10,6 @@ import 'movement_item.dart';
 
 class MovementsSlider extends StatelessWidget {
   MovementsSlider(this.movements, {super.key});
-
   final List<Movement> movements;
   final HomeController controller = Get.find<HomeController>();
   final CarouselController _controller = CarouselController();
@@ -52,7 +51,7 @@ class MovementsSlider extends StatelessWidget {
           carouselController: _controller,
           options: CarouselOptions(
             enableInfiniteScroll: false,
-            height: 210,
+            height: 200,
               enlargeCenterPage: true,
               disableCenter: true,
               onPageChanged: (index, reason) {
@@ -60,7 +59,7 @@ class MovementsSlider extends StatelessWidget {
               }),
         ),
       ),
-      //const SizedBox(height: 5),
+      const SizedBox(height: 5),
       Row(
         mainAxisAlignment: MainAxisAlignment.center,
         children: movements.asMap().entries.map((entry) {

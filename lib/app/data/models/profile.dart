@@ -25,7 +25,7 @@ class Profile {
     this.progress,
   });
 
-  late final int? id;
+  late  int? id;
   late final String? lastLogin;
   late final String? username;
   late final String? firstName;
@@ -47,7 +47,7 @@ class Profile {
   late final bool? isVolunteer;
   late final int? watched;
   late final int? courses;
-  late final double? progress;
+  late  double? progress;
 
   Profile.fromJson(Map<String, dynamic> json) {
     id = json['id'];
@@ -72,6 +72,6 @@ class Profile {
     isVolunteer = json['is_volunteer'];
     watched = json['watched'];
     courses = json['courses'];
-    progress = json['progress'];
+    progress = json['progress']??0;
   }
 }

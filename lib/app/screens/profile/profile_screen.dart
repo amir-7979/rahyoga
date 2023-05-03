@@ -60,7 +60,8 @@ class ProfileScreen extends GetView<ProfileController> {
        /* Wallet(profile!),*/
         SizedBox(height: 15),
         InfoWidget(profile),
-        SizedBox(height: 15),
+        const SizedBox(height: 30),
+
       ],
     );
   }

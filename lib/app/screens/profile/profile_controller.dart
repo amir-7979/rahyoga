@@ -17,6 +17,12 @@ class ProfileController extends GetxController {
     return profile.value;
   }
 
+  void minorUpdate() {
+    profile.value!.id = null;
+    update();
+    fetchProfile();
+  }
+
   void gotoBookmark() => Get.toNamed(AppRoutes.bookmarkScreen);
 
   Future<void> logout() async {

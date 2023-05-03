@@ -54,7 +54,7 @@ class HomeScreen extends GetWidget<HomeController> {
   Widget home(Home home){
     print('rebuild');
     return  Padding(
-      padding: const EdgeInsetsDirectional.fromSTEB(8, 10, 0, 0),
+      padding: const EdgeInsetsDirectional.fromSTEB(8, 0, 0, 0),
       child: ListView(
         cacheExtent: 700,
         children: [
@@ -68,6 +68,7 @@ class HomeScreen extends GetWidget<HomeController> {
           if (home.movements != null &&home.movements!.isNotEmpty) const SizedBox(height: 15),
           if (home.miniCourses != null &&home.miniCourses!.isNotEmpty) CourseList(Translator.miniYogaCourses.tr, home.miniCourses!, controller.gotoMiniMoreScreen),
           if (home.miniCourses != null &&home.miniCourses!.isNotEmpty) const SizedBox(height: 5),
+          const SizedBox(height: 30),
         ],
       ),
     );

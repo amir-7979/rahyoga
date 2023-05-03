@@ -270,8 +270,8 @@ class ContentApiService extends GetxService {
         error: error.response.toString(),
       );
       //todo which one??
-      return (error.response!.data['messages'] != null && error.response!.data['messages'][0]['message'] != null ) ?
-      error.response!.data['messages'][0]['message'].toString(): 'خظا ذر سرور';
+      return (error.response!.data['messages'] != null && error.response!.data['messages'][0]['message_per'] != null ) ?
+      error.response!.data['messages'][0]['message_per'].toString(): 'خظا ذر سرور';
     } else if (error is TimeoutException) {
       return error.message!;
     } else if (error is DioErrorType) {

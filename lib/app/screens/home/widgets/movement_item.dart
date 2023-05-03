@@ -28,7 +28,6 @@ class MovementItem extends StatelessWidget {
               child: CacheImage(url: movement.image ?? ''),
             ),
           ),
-
           Padding(
             padding: const EdgeInsetsDirectional.fromSTEB(12, 5, 0, 0),
             child: Text(

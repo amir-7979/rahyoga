@@ -16,7 +16,7 @@ class LastCourseItem extends GetWidget<HomeController> {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsetsDirectional.only(end: 5),
+      padding: const EdgeInsetsDirectional.fromSTEB(0, 5, 0, 0),
       child: Column(
         children: [
           Padding(
@@ -127,15 +127,20 @@ class LastCourseItem extends GetWidget<HomeController> {
                             Row(
                               mainAxisAlignment: MainAxisAlignment.end,
                               children: [
-                                ShimmerProgressBar(lastCourse.progress??0.0),
+                                ShimmerProgressBar(lastCourse.progress!),
                                 SizedBox(width: 15),
-                                Text(
-                                  '${(lastCourse.progress).toString().substring(2)}%',
-                                  style: Theme.of(context)
-                                      .textTheme
-                                      .displayMedium!
-                                      .copyWith(
-                                    color: black,
+                                Container(
+                                  width: 50,
+                                  child: Center(
+                                    child: Text(
+                                      '${(lastCourse.progress!*100).toInt()}%',
+                                      style: Theme.of(context)
+                                          .textTheme
+                                          .displayMedium!
+                                          .copyWith(
+                                        color: black,
+                                      ),
+                                    ),
                                   ),
                                 ),
                               ],

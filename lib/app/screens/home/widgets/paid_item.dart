@@ -39,7 +39,7 @@ class PaidItem extends StatelessWidget {
                       child: CacheImage(url: course.image ?? ''),
                     ),
                   ),
-                  const SizedBox(height: 8),
+                  const SizedBox(height: 10),
                   Text(
                     course.header ?? '',
                     style: Theme.of(context)
@@ -47,10 +47,17 @@ class PaidItem extends StatelessWidget {
                         .headlineMedium!
                         .copyWith(color: black),
                   ),
-                  const SizedBox(height: 10),
+                  const SizedBox(height: 15),
                   Row(
-                    mainAxisAlignment: MainAxisAlignment.end,
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
+                      Text(
+                        '${Translator.mentor.tr}: ${course.mentor!.fullname ?? ''}',
+                        style: Theme.of(context)
+                            .textTheme
+                            .headlineSmall!
+                            .copyWith(color: grayText2),
+                      ),
                       Text(
                         '${course.theNumberOfSeasons} ${Translator.session.tr}',
                         style: Theme.of(context)
@@ -60,15 +67,7 @@ class PaidItem extends StatelessWidget {
                       ),
                     ],
                   ),
-                  const SizedBox(height: 7),
-                  Text(
-                    '${Translator.mentor.tr} : ${course.mentor!.fullname ?? ''}',
-                    style: Theme.of(context)
-                        .textTheme
-                        .headlineSmall!
-                        .copyWith(color: grayText2),
-                  ),
-                  const SizedBox(height: 2),
+                  Spacer(),
                 ],
               ),
             ),

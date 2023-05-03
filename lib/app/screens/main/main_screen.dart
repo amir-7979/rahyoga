@@ -37,6 +37,8 @@ class MainScreen extends GetWidget<MainController> {
           duration: Duration(milliseconds: 200),
         ),
         decoration: NavBarDecoration(
+
+          adjustScreenBottomPaddingOnCurve: true,
           borderRadius: BorderRadius.vertical(
             top: Radius.circular(35),
           ),
@@ -44,6 +46,7 @@ class MainScreen extends GetWidget<MainController> {
         navBarStyle:
             NavBarStyle.style3,
       ),
+
     );
   }
 }

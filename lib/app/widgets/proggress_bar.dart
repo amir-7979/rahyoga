@@ -28,7 +28,7 @@ class ShimmerProgressBar extends StatelessWidget {
                         borderRadius: BorderRadius.circular(8.0),
                         color: primaryColor),
                   ),
-                  period: Duration(milliseconds: 2500),
+                  period: Duration(milliseconds: 2000),
                   baseColor: primaryColor,
                   highlightColor: shimmerGreen),
             )

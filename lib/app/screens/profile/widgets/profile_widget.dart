@@ -128,7 +128,7 @@ class ProfileWidget extends StatelessWidget {
                   lineWidth: 4.0,
                   percent: profile.progress ?? 0.0,
                   center: Text(
-                    '${profile.progress.toString().substring(2)}%'
+                    '${(profile.progress!*100).toInt()}%'
                     '',
                     style: Get.theme.textTheme.headlineMedium!
                         .copyWith(color: primaryColor),

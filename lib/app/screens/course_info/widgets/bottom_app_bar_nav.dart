@@ -46,11 +46,16 @@ class BottomAppBarNav extends GetView<CourseInfoController> {
                             ShimmerProgressBar(
                                 controller.course.value!.progress!.progress),
                             SizedBox(width: 12),
-                            Text(
-                              '${(controller.course.value!.progress!.progress).toString().substring(2)}%',
-                              style:
-                                  Get.theme.textTheme.displayMedium!.copyWith(
-                                color: black,
+                            Container(
+                              width: 40,
+                              child: Center(
+                                child: Text(
+                                  '${(controller.course.value!.progress!.progress * 100).toInt()}%',
+                                  style: Get.theme.textTheme.displayMedium!
+                                      .copyWith(
+                                    color: black,
+                                  ),
+                                ),
                               ),
                             ),
                           ],

@@ -2,6 +2,7 @@ import 'package:get/get.dart';
 import 'package:rahyoga/app/data/models/paid_course_info.dart';
 import 'package:rahyoga/app/screens/home/home_controller.dart';
 import 'package:rahyoga/app/screens/main/main_controller.dart';
+import 'package:rahyoga/app/screens/profile/profile_controller.dart';
 import '../../../core/languages/translator.dart';
 import '../../data/models/all.dart';
 import '../../data/services/content_api_services.dart';
@@ -49,6 +50,8 @@ class CourseInfoController extends GetxController {
     }
     update();
     Get.find<HomeController>().minorUpdate();
+    Get.find<ProfileController>().minorUpdate();
+
   }
 
   Future<PaidCourseInfo?> fetchCourse(int id) async {
