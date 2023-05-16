@@ -80,8 +80,7 @@ class BuyCourseScreen extends GetView<BuyCourseController> {
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  SizedBox(
-                    width: screenWidth - 95,
+                  Expanded(
                     child: Text(
                       course.header ?? '',
                       style: Get.theme.textTheme.headlineLarge!

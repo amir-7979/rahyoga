@@ -1,8 +1,12 @@
+import 'package:chewie/chewie.dart';
+import 'package:flick_video_player/flick_video_player.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
 import 'package:readmore/readmore.dart';
+import 'package:video_player/video_player.dart';
 import '../../../core/theme/colors.dart';
+import '../../../core/values/consts.dart';
 import '../../data/models/paid_course_info.dart';
 import '../../widgets/shimmer_screen.dart';
 import 'widgets/course_list.dart';
@@ -48,13 +52,16 @@ class CourseInfoScreen extends GetView<CourseInfoController> {
         ? Container()
         : ListView(
             children: [
-              /*SizedBox(
-                    height: 200,
-                    width: screenWidth,
-                    child: Chewie(controller: controller.chewieController!)),*/
+              SizedBox(
+                width: screenWidth,
+                height: 200,
+                child:FlickVideoPlayer(
+                    flickManager: controller.flickManager
+                ),
+              ),
 
               Padding(
-                padding: const EdgeInsetsDirectional.fromSTEB(16, 16, 16, 0),
+                padding: const EdgeInsetsDirectional.fromSTEB(16, 30, 16, 0),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [

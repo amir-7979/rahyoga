@@ -1,3 +1,6 @@
+import 'package:chewie/chewie.dart';
+import 'package:flick_video_player/flick_video_player.dart';
+import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:rahyoga/app/data/models/paid_course_info.dart';
 import 'package:rahyoga/app/screens/home/home_controller.dart';
@@ -6,6 +9,7 @@ import 'package:rahyoga/app/screens/profile/profile_controller.dart';
 import '../../../core/languages/translator.dart';
 import '../../data/models/all.dart';
 import '../../data/services/content_api_services.dart';
+import 'package:video_player/video_player.dart';
 
 class CourseInfoController extends GetxController {
   final ContentApiService _contentApiService = Get.find<ContentApiService>();
@@ -21,11 +25,19 @@ class CourseInfoController extends GetxController {
   String next = Translator.nextSession.tr;
   String prev = Translator.prevSession.tr;
   String duration = '${1} ${Translator.hour.tr} ${40} ${Translator.min.tr}';
+  late final FlickManager flickManager;
+
+
 
   @override
   void onInit() {
     id = Get.arguments;
     fetchCourse(id!);
+    flickManager = FlickManager(
+      videoPlayerController:
+      VideoPlayerController.network('https://flutter.github.io/assets-for-api-docs/assets/videos/butterfly.mp4'),
+      autoPlay: false,
+    );
     super.onInit();
   }
 
@@ -59,5 +71,10 @@ class CourseInfoController extends GetxController {
     isLoading.value = false;
     update();
     return course.value;
+  }
+
+  void dispose() {
+    flickManager.dispose();
+    super.dispose();
   }
 }

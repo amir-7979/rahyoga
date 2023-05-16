@@ -69,7 +69,7 @@ class LastCourseItem extends GetWidget<HomeController> {
                               ),
                             ),
                             Padding(
-                              padding: const EdgeInsetsDirectional.fromSTEB(7, 7, 0, 0),
+                              padding: const EdgeInsetsDirectional.fromSTEB(5, 5, 0, 0),
                               child: Align(
                                 alignment: AlignmentDirectional.topStart,
                                 child: SvgPicture.asset('assets/images/red_dot.svg'),

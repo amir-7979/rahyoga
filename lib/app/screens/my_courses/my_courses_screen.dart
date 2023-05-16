@@ -94,7 +94,6 @@ class MyCoursesScreen extends StatelessWidget {
               ),
             ),
             const SizedBox(height: 30),
-
           ],
         ),
       ),

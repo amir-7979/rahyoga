@@ -59,6 +59,9 @@ dependencies:
   intl: ^0.17.0
   dio_smart_retry: ^5.0.0
   flutter_html: ^3.0.0-alpha.6
+  video_player: ^2.1.6
+  chewie: ^1.4.0
+  flick_video_player: ^0.5.0
 
 
 dev_dependencies:

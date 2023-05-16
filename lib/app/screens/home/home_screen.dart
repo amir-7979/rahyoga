@@ -58,8 +58,8 @@ class HomeScreen extends GetWidget<HomeController> {
       child: ListView(
         cacheExtent: 700,
         children: [
-          if (home.lastCourse != null && home.lastCourse!=[]) LastCourseItem(home.lastCourse!),
-          if (home.lastCourse != null && home.lastCourse!=[]) const SizedBox(height: 25),
+          if (home.lastCourse != null) LastCourseItem(home.lastCourse!),
+          if (home.lastCourse != null) const SizedBox(height: 25),
           if (home.courses != null && home.courses!.isNotEmpty) CourseList(Translator.generalYogaCourses.tr, home.courses!, controller.gotoMoreScreen),
           if (home.courses != null && home.courses!.isNotEmpty)const SizedBox(height: 25),
           if (home.paid != null &&home.paid!.isNotEmpty) PaidList(Translator.purchasedCourses.tr, home.paid!),

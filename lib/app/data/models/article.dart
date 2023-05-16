@@ -22,7 +22,7 @@ class Article {
   late final String? image;
   late final String? dateModified;
   late final String? datePublished;
-  late final String? description;
+  late String? description;
   late final int? datePublishedUnix;
   late final int? dateModifiedUnix;
   late bool? liked;
@@ -34,39 +34,16 @@ class Article {
     subject = json['subject'];
     image = json['image'];
     dateModified = json['date_modified'];
+    description = json['description'];
+    final imgRegex = RegExp(r'<img(.*?)>');
+
+    // Replace all img tags with modified versions that include the centering style
+    final modifiedHtml = description!.replaceAllMapped(
+      imgRegex,
+          (match) => '<div style="text-align: center">${match.group(0)}</div>',
+    );
+    description = modifiedHtml;
     datePublished = json['date_published'];
-    description = '''
-                     
-<!DOCTYPE html>
-<html lang="en">
-  <!--<![endif]-->
-  <head>
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <meta
-      name="viewport"
-      content="width=device-width, initial-scale=1, maximum-scale=1"
-    />
-
-    <!-- STYLES -->
-    <link
-      href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,300;1,400;1,500;1,600;1,700;1,800&display=swap"
-      rel="stylesheet"
-    />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"
-      rel="stylesheet"
-    />
-    <link href="https://cdn.quilljs.com/1.3.6/quill.snow.css" rel="stylesheet">
-  </head>
-    <body>
-        <div class="ql-editor" data-gramm="false" contenteditable="false">
-            ${json['description']}
-        </div>
-
-    </body>
-</html>
-
-''';
     datePublishedUnix = json['date_published_unix'];
     dateModifiedUnix = json['date_modified_unix'];
     liked = json['liked'];

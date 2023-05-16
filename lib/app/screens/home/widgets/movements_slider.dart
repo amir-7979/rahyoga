@@ -10,6 +10,7 @@ import 'movement_item.dart';
 
 class MovementsSlider extends StatelessWidget {
   MovementsSlider(this.movements, {super.key});
+
   final List<Movement> movements;
   final HomeController controller = Get.find<HomeController>();
   final CarouselController _controller = CarouselController();
@@ -30,7 +31,9 @@ class MovementsSlider extends StatelessWidget {
                   .copyWith(color: black),
             ),
             TextButton(
-              onPressed: () {controller.gotoTab(2);},
+              onPressed: () {
+                controller.gotoTab(2);
+              },
               child: Text(
                 Translator.seeAll.tr,
                 style: Theme.of(context).textTheme.displayMedium!.copyWith(
@@ -41,23 +44,26 @@ class MovementsSlider extends StatelessWidget {
         ),
       ),
       const SizedBox(height: 10),
-      SizedBox(
-        width: screenWidth,
-        child: CarouselSlider.builder(
-          itemCount: movements.length,
-          itemBuilder: (BuildContext ctx, index, index2) {
-            return MovementItem(movements[index]);
-          },
-          carouselController: _controller,
-          options: CarouselOptions(
-            enableInfiniteScroll: false,
-            height: 200,
-              enlargeCenterPage: true,
-              disableCenter: true,
-              onPageChanged: (index, reason) {
-                controller.setSliderIndex(index);
-              }),
-        ),
+      Row(
+        children: [
+          Expanded(
+            child: CarouselSlider.builder(
+              itemCount: movements.length,
+              itemBuilder: (BuildContext ctx, index, index2) {
+                return Center(child: MovementItem(movements[index]));
+              },
+              carouselController: _controller,
+              options: CarouselOptions(
+                  enableInfiniteScroll: false,
+                  height: 200,
+                  enlargeCenterPage: true,
+                  disableCenter: true,
+                  onPageChanged: (index, reason) {
+                    controller.setSliderIndex(index);
+                  }),
+            ),
+          ),
+        ],
       ),
       const SizedBox(height: 5),
       Row(
@@ -75,8 +81,9 @@ class MovementsSlider extends StatelessWidget {
                     color: (controller.sliderIndex.value == entry.key
                             ? primaryColor
                             : sliderDotGray)
-                        .withOpacity(
-                            controller.sliderIndex.value == entry.key ? 0.99 : 0.5)),
+                        .withOpacity(controller.sliderIndex.value == entry.key
+                            ? 0.99
+                            : 0.5)),
               ),
             ),
           );

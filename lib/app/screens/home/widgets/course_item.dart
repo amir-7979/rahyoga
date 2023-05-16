@@ -31,12 +31,26 @@ class CourseItem extends GetWidget<HomeController> {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  ClipRRect(
-                    borderRadius: BorderRadius.circular(10.0),
-                    child: AspectRatio(
-                      aspectRatio: 140 / 105,
-                      child: CacheImage(url: course.image ?? ''),
-                    ),
+                  Stack(
+                    children: [
+                      ClipRRect(
+                        borderRadius: BorderRadius.circular(10.0),
+                        child: AspectRatio(
+                          aspectRatio: 140 / 105,
+                          child: CacheImage(url: course.image ?? ''),
+                        ),
+                      ),
+                      if(course.offer_percent! > 0)Container(
+                        height: 20,width: 37,
+                        decoration: BoxDecoration(
+                          color: Colors.redAccent,
+                          borderRadius: BorderRadius.all(Radius.circular(10)),
+                        ),child: Center(
+                          child: Text('% ${course.offer_percent}',style: Theme.of(context)
+                              .textTheme
+                              .labelSmall!
+                              .copyWith(color: black),)),)
+                    ],
                   ),
                   const SizedBox(height: 10),
                   Text(
