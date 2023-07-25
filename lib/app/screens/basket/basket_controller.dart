@@ -5,6 +5,7 @@ import '../../../core/languages/translator.dart';
 import '../../../routes/routes.dart';
 import '../../data/models/basket.dart';
 import '../../data/services/content_api_services.dart';
+import '../home/home_controller.dart';
 import 'widget/cart_dialog.dart';
 
 class BasketController extends GetxController{
@@ -42,6 +43,7 @@ class BasketController extends GetxController{
     basket.value = await _apiService.deleteItemFromBasket(id.toString());
     isLoading.value = 0;
     update();
+    Get.find<HomeController>().minorUpdate();
     return basket.value;
   }
 

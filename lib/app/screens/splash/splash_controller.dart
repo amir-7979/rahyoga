@@ -4,6 +4,7 @@ import '../../../core/values/consts.dart';
 import '../../../routes/routes.dart';
 import '../../data/models/client.dart';
 import '../../data/services/user_api_service.dart';
+import 'package:path_provider/path_provider.dart';
 
 class SplashController extends GetxController {
   StorageService storageService = Get.find<StorageService>();
@@ -12,7 +13,7 @@ class SplashController extends GetxController {
 
   Future<void> navigateToNextScreen() async {
     final result2 = await Future.sync(() async {
-      if (await storageService.containsKey('refresh')) {
+      if(await storageService.containsKey('refresh')) {
         _client.readClientInfo();
         userService.refreshToken();
         return true;
@@ -28,6 +29,8 @@ class SplashController extends GetxController {
 
   @override
   Future<void> onInit() async {
+    appDirectory = await getApplicationDocumentsDirectory();
+
     await navigateToNextScreen();
     super.onInit();
   }

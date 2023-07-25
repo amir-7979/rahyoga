@@ -1,12 +1,9 @@
-import 'package:chewie/chewie.dart';
 import 'package:flick_video_player/flick_video_player.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
 import 'package:readmore/readmore.dart';
-import 'package:video_player/video_player.dart';
 import '../../../core/theme/colors.dart';
-import '../../../core/values/consts.dart';
 import '../../data/models/paid_course_info.dart';
 import '../../widgets/shimmer_screen.dart';
 import 'widgets/course_list.dart';
@@ -37,7 +34,7 @@ class CourseInfoScreen extends GetView<CourseInfoController> {
         ),
         bottomNavigationBar: BottomAppBarNav(),
         body: GetBuilder<CourseInfoController>(
-          init: CourseInfoController(),
+          init: controller,
           builder: (context) =>
               context.isLoading.value || controller.course.value!.id == null
                   ? const SimmerScreen()
@@ -52,14 +49,19 @@ class CourseInfoScreen extends GetView<CourseInfoController> {
         ? Container()
         : ListView(
             children: [
-              SizedBox(
-                width: screenWidth,
-                height: 200,
-                child:FlickVideoPlayer(
-                    flickManager: controller.flickManager
+              FittedBox(
+                fit: BoxFit.contain,
+                child: SizedBox(
+                  width: Get.width,
+                  height: Get.width * 9/16,
+                  child: AspectRatio(
+                    aspectRatio: 16/9,
+                    child: FlickVideoPlayer(
+                      flickManager: controller.flickManager,
+                    ),
+                  ),
                 ),
               ),
-
               Padding(
                 padding: const EdgeInsetsDirectional.fromSTEB(16, 30, 16, 0),
                 child: Column(
@@ -86,13 +88,15 @@ class CourseInfoScreen extends GetView<CourseInfoController> {
                             child: Row(
                               mainAxisAlignment: MainAxisAlignment.center,
                               children: [
-                                controller
-                                        .course
-                                        .value!
-                                        .progress!
-                                        .seasons
-                                        .all![controller.index.value - 1]
-                                        .passed!
+                                controller.course.value!.progress!.seasons.all!
+                                            .isNotEmpty &&
+                                        controller
+                                            .course
+                                            .value!
+                                            .progress!
+                                            .seasons
+                                            .all![controller.index.value - 1]
+                                            .passed!
                                     ? SvgPicture.asset(
                                         'assets/images/course_info/green_check.svg',
                                         height: 23,
@@ -111,32 +115,59 @@ class CourseInfoScreen extends GetView<CourseInfoController> {
                               ],
                             ),
                           ),
-                        )
+                        ),
+                        SizedBox(
+                          height: 32,
+                          width: 100,
+                          child: ElevatedButton(
+                            style: ElevatedButton.styleFrom(
+                              backgroundColor: primaryColor,
+                              padding: const EdgeInsetsDirectional.fromSTEB(
+                                  12, 6, 12, 4),
+                              minimumSize: const Size.fromWidth(100),
+                              elevation: 0,
+                              shape: const StadiumBorder(),
+                            ),
+                            onPressed: () async {
+                              controller.download();
+                            },
+                            child: Obx(
+                                  () => Text(
+                                "${controller.downloadProgress.value.toStringAsFixed(0)}%",
+                                style: TextStyle(fontSize: 20),
+                              ),
+                            ),
+                          ),
+                        ),
                       ],
                     ),
                     SizedBox(height: 30),
-                    Text(
-                      '${controller.course.value!.progress!.seasons.all![controller.index.value - 1].header ?? ''}',
-                      style:
-                          Get.theme.textTheme.bodySmall!.copyWith(color: black),
-                    ),
+                    if (controller
+                        .course.value!.progress!.seasons.all!.isNotEmpty)
+                      Text(
+                        '${controller.course.value!.progress!.seasons.all![controller.index.value - 1].header ?? ''}',
+                        style: Get.theme.textTheme.bodySmall!
+                            .copyWith(color: black),
+                      ),
                     SizedBox(height: 12),
-                    ReadMoreText(
-                      controller.course.value!.progress!.seasons
-                              .all![controller.index.value - 1].description ??
-                          '',
-                      trimLines: 4,
-                      style: Get.theme.textTheme.bodyMedium!
-                          .copyWith(color: profileGray, height: 1.3),
-                      moreStyle: Get.theme.textTheme.bodyMedium!
-                          .copyWith(color: moreTextColor),
-                      lessStyle: Get.theme.textTheme.bodyMedium!
-                          .copyWith(color: moreTextColor),
-                      colorClickableText: profileGray,
-                      trimMode: TrimMode.Line,
-                      trimCollapsedText: controller.more,
-                      trimExpandedText: controller.less,
-                    ),
+                    if (controller
+                        .course.value!.progress!.seasons.all!.isNotEmpty)
+                      ReadMoreText(
+                        controller.course.value!.progress!.seasons
+                                .all![controller.index.value - 1].description ??
+                            '',
+                        trimLines: 4,
+                        style: Get.theme.textTheme.bodyMedium!
+                            .copyWith(color: profileGray, height: 1.3),
+                        moreStyle: Get.theme.textTheme.bodyMedium!
+                            .copyWith(color: moreTextColor),
+                        lessStyle: Get.theme.textTheme.bodyMedium!
+                            .copyWith(color: moreTextColor),
+                        colorClickableText: profileGray,
+                        trimMode: TrimMode.Line,
+                        trimCollapsedText: controller.more,
+                        trimExpandedText: controller.less,
+                      ),
                     SizedBox(height: 45),
                     if (controller.course.value!.progress!.seasons.all != null)
                       Text(

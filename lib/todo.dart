@@ -1,6 +1,4 @@
 //todo download
-//todo align
-//todo regex
 
 
 

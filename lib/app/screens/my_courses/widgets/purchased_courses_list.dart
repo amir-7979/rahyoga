@@ -33,7 +33,6 @@ class PurchasedCourseList extends GetWidget<MyCoursesController> {
           ),
           ),
         ),
-        newPageErrorIndicatorBuilder: (_)=>Container(),
         newPageProgressIndicatorBuilder: (_)=>Padding(
           padding: const EdgeInsetsDirectional.only(bottom: 10),
           child: Center(

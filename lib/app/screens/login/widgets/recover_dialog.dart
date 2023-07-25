@@ -46,24 +46,23 @@ Dialog recoverDialog() {
                         height: 70,
                         child: TextFormField(
                           style: const TextStyle(color: black),
-                          controller: _controller.emailController,
-                          keyboardType: TextInputType.emailAddress,
+                          controller: _controller.phoneController,
+                          keyboardType: TextInputType.phone,
                           textAlign: TextAlign.start,
                           textAlignVertical: TextAlignVertical.center,
                           decoration: InputDecoration(
                             errorStyle: Get.textTheme.headlineSmall!
                                 .copyWith(color: errorText),
-                            helperText:  Translator.email_example.tr,
-                            helperStyle: Get.textTheme.labelSmall!.copyWith(color: grayText2),
                             filled: true,
                             fillColor: Colors.white,
-                            labelText: Translator.email.tr,
+                            labelText: Translator.phone.tr,
                             labelStyle: const TextStyle(color: primaryColor),
                             focusedBorder: focusedBorder3,
                             enabledBorder: enabledBorder3,
                             border: border3,
                             errorBorder: errorBorder3,
                             focusedErrorBorder: errorBorder3,
+
                           ),
                           validator: (txt) => _controller.emailValidation(txt!),
                         ),
@@ -106,7 +105,7 @@ Dialog recoverDialog() {
                               },
                               child: Text(
                                 Translator.signup.tr,
-                                style: Get.textTheme.displayLarge!.copyWith(color: primaryColor, decoration: TextDecoration.underline),
+                                style: Get.textTheme.bodyLarge!.copyWith(color: primaryColor),
                               ),
                             ),
                           ],

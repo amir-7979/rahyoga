@@ -34,18 +34,39 @@ Dialog exitConfirmDialog() {
               ],
             ),
             const Divider(height: 1),
-            SizedBox(height: 30),
-            Text('آیا می خواهید خارج شوید؟', style: Get.textTheme.displayLarge!.copyWith(color: black)),
-            SizedBox(height: 30,),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.center,
+            Spacer(),
+            Column(mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                ElevatedButton(onPressed: _controller.logout, child: Text('بله', style: Get.textTheme.displayLarge!.copyWith(color: Colors.white)), style: ElevatedButton.styleFrom(backgroundColor: Colors.red)),
-                SizedBox(width: 20),
-                ElevatedButton(onPressed: Get.back, child: Text('خیر', style: Get.textTheme.displayLarge!.copyWith(color: black)), style: ElevatedButton.styleFrom(backgroundColor: white, elevation: 0))
+                Text('آیا می خواهید خارج شوید؟', style: Get.textTheme.displayLarge!.copyWith(color: black)),
+                SizedBox(height: 30,),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    SizedBox(
+                      height: 40,
+                      width: 80,
+                      child: ElevatedButton(onPressed: _controller.logout, child: Text('بله', style: Get.textTheme.displayLarge!.copyWith(color: Colors.white)), style: ElevatedButton.styleFrom(
+                        backgroundColor: forgetPasswordColor,
+                        elevation: 0,
+                        shape: const StadiumBorder(),
+                      ),),
+                    ),
+                    SizedBox(width: 20),
+                    SizedBox(
+                      height: 40,
+                      width: 80,
+                      child: ElevatedButton(onPressed: Get.back, child: Text('خیر', style: Get.textTheme.displayLarge!.copyWith(color: black)), style: ElevatedButton.styleFrom(
+                        backgroundColor: forgetPasswordColor,
+                        elevation: 0,
+                        shape: const StadiumBorder(),
+                      ),),
+                    )
 
+                  ],
+                ),
               ],
             ),
+            Spacer(flex: 2),
           ],
         ),
       ),

@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:rahyoga/app/data/models/movement.dart';
-import 'package:rahyoga/core/values/consts.dart';
-
 import '../../../../core/theme/colors.dart';
 import '../../../widgets/cache_image.dart';
 import '../blog_controller.dart';
@@ -27,16 +25,12 @@ class MovementItem extends StatelessWidget {
                 padding: const EdgeInsetsDirectional.fromSTEB(8, 8, 8, 8),
                 child: ClipRRect(
                   borderRadius: BorderRadius.circular(12.0),
-                  child: AspectRatio(
-                    aspectRatio: 140/132,
-                    child: CacheImage(
-                    url: movement.image??''),
-                  ),
+                  child: CacheImage(
+                  url: movement.image??''),
                 ),
               ),
-              SizedBox(height: 4),
-              Padding(
-                padding: const EdgeInsetsDirectional.fromSTEB(20, 0, 0, 0),
+              SizedBox(height: 15),
+              Center(
                 child: Text(
                   movement.header??'',
                   style: Theme.of(context)

@@ -7,6 +7,7 @@ import '../../../routes/routes.dart';
 import '../../data/models/course.dart';
 import '../../data/models/paid.dart';
 import '../../data/services/content_api_services.dart';
+import '../home/home_controller.dart';
 
 class MyCoursesController extends GetxController {
   final ContentApiService _contentApiService = Get.find<ContentApiService>();
@@ -32,6 +33,8 @@ class MyCoursesController extends GetxController {
     isLoading.value = 0;
     liked.refresh();
     update();
+    Get.find<HomeController>().minorUpdate();
+
   }
 
   Future<LikedCourses?> fetchliked(int i) async {

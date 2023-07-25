@@ -36,6 +36,12 @@ String? checkEmail(String txt) {
   return null;
 }
 
+String? checkPhoneNumberSignUp(String txt) {
+  if (txt.isEmpty) return 'Please enter phone number';
+  if (!txt.isPhoneNumber) return 'Please enter valid phone number';
+  return null;
+}
+
 String? checkPasswordLogin(String txt1) {
   if (txt1.isEmpty) return 'Please enter password';
   if (!txt1.contains(RegExp(r'[0-9]'))) return "Password Must Contain A Number";

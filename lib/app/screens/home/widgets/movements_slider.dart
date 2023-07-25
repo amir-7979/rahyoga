@@ -2,7 +2,6 @@ import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:rahyoga/app/data/models/movement.dart';
-import 'package:rahyoga/core/values/consts.dart';
 import '../../../../core/languages/translator.dart';
 import '../../../../core/theme/colors.dart';
 import '../home_controller.dart';

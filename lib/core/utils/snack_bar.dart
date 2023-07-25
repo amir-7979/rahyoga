@@ -19,9 +19,11 @@ greenSnackBar(String txt){
   );
 }
 redSnackBar(String txt){
+  print(txt);
   Get.snackbar(
       '',
       txt,
+      messageText: Text(txt),
       snackPosition: SnackPosition.BOTTOM,
       backgroundColor: errorSnackBar,
       colorText: white,

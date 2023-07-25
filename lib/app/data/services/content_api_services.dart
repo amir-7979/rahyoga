@@ -23,6 +23,8 @@ class ContentApiService extends GetxService {
   late final Client _client;
   late final Dio _dio;
 
+  Dio get dio => _dio;
+
   ContentApiService() {
     _client = Get.find<Client>();
     _dio = Dio(BaseOptions(baseUrl: baseUrl));
@@ -46,6 +48,18 @@ class ContentApiService extends GetxService {
     try {
       final response = await _dio.get('/api/root/home/');
       return Home.fromJson(response.data);
+    } catch (error) {
+      userErrorHandler(error);
+      return null;
+    }
+  }
+
+
+  Future<String?> getVideoUrl(int courseId, int sessionId) async {
+    try {
+      final response = await _dio.get('/api/season/hls/$sessionId/', queryParameters: {'course': courseId});
+      print(response.data.toString());
+      return response.data['hls_url'].toString();
     } catch (error) {
       userErrorHandler(error);
       return null;

@@ -25,8 +25,7 @@ class BlogItem extends StatelessWidget {
         child: Row(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            AspectRatio(
-              aspectRatio: 96 / 72,
+            SizedBox(
               child: ClipRRect(
                 borderRadius: BorderRadius.circular(12),
                 child: CacheImage(url: blog.image??''),
@@ -42,7 +41,7 @@ class BlogItem extends StatelessWidget {
                       blog.header??'',
                       style: Theme.of(context)
                           .textTheme
-                          .headlineMedium!
+                          .labelMedium!
                           .copyWith(
                               color: primaryColor,
                               overflow: TextOverflow.ellipsis),
@@ -50,7 +49,7 @@ class BlogItem extends StatelessWidget {
                     const SizedBox(height: 15),
                     Text(
                       blog.subject??'',
-                      style: Theme.of(context).textTheme.headlineSmall!.copyWith(
+                      style: Theme.of(context).textTheme.headlineMedium!.copyWith(
                           color: black, overflow: TextOverflow.ellipsis),
                       maxLines: 2,
                     ),

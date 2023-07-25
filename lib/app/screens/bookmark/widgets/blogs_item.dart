@@ -1,19 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:rahyoga/app/data/models/like_blog.dart';
-import 'package:rahyoga/app/screens/blog/blog_controller.dart';
+import 'package:rahyoga/app/screens/bookmark/bookmark_controller.dart';
 import 'package:rahyoga/core/theme/colors.dart';
-
 import '../../../../core/values/consts.dart';
-import '../../../data/models/blog.dart';
 import '../../../widgets/cache_image.dart';
-import '../bookmark_controller.dart';
 
 class BlogItem extends StatelessWidget {
   BlogItem(this.blog, {Key? key}) : super(key: key);
   BookmarkController controller = Get.find<BookmarkController>();
 
-  final dynamic blog;
+  final LikedBlog blog;
 
   @override
   Widget build(BuildContext context) {
@@ -22,13 +19,12 @@ class BlogItem extends StatelessWidget {
       width: screenWidth,
       child: InkWell(
         onTap: () {
-          controller.gotoArticle(blog.id!, 'مقاله');
+          controller.gotoArticle(blog.id??1, 'مقاله');
         },
         child: Row(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            AspectRatio(
-              aspectRatio: 96 / 72,
+            SizedBox(
               child: ClipRRect(
                 borderRadius: BorderRadius.circular(12),
                 child: CacheImage(url: blog.image??''),
@@ -42,9 +38,9 @@ class BlogItem extends StatelessWidget {
                   children: [
                     Text(
                       blog.header??'',
-                      style: Get.theme
+                      style: Theme.of(context)
                           .textTheme
-                          .headlineMedium!
+                          .labelMedium!
                           .copyWith(
                               color: primaryColor,
                               overflow: TextOverflow.ellipsis),
@@ -52,7 +48,7 @@ class BlogItem extends StatelessWidget {
                     const SizedBox(height: 15),
                     Text(
                       blog.subject??'',
-                      style: Get.theme.textTheme.headlineSmall!.copyWith(
+                      style: Theme.of(context).textTheme.headlineMedium!.copyWith(
                           color: black, overflow: TextOverflow.ellipsis),
                       maxLines: 2,
                     ),

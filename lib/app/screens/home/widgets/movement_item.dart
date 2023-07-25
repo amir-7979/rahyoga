@@ -29,7 +29,7 @@ class MovementItem extends StatelessWidget {
             ),
           ),
           Padding(
-            padding: const EdgeInsetsDirectional.fromSTEB(12, 5, 0, 0),
+            padding: const EdgeInsetsDirectional.fromSTEB(12, 10, 0, 0),
             child: Text(
               movement.header ?? '',
               style: Theme.of(context)

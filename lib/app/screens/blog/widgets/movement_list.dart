@@ -4,6 +4,7 @@ import 'package:get/get.dart';
 import 'package:infinite_scroll_pagination/infinite_scroll_pagination.dart';
 import 'package:rahyoga/app/data/models/movement.dart';
 import 'package:rahyoga/app/screens/blog/blog_controller.dart';
+import 'package:rahyoga/core/values/consts.dart';
 import '../../../../core/theme/colors.dart';
 import '../../../widgets/shimmer_screen.dart';
 import 'movment_item.dart';
@@ -16,7 +17,7 @@ class MovementList extends GetWidget<BlogController> {
     return PagedGridView(
       padding: const EdgeInsetsDirectional.fromSTEB(10, 10, 10, 10),
       pagingController: controller.pagingController1,
-      gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 2, childAspectRatio: 156 / 180),
+      gridDelegate: SliverGridDelegateWithMaxCrossAxisExtent(maxCrossAxisExtent: screenWidth > 450 ? 280 : 190),
       builderDelegate: PagedChildBuilderDelegate<Movement>(
         firstPageProgressIndicatorBuilder: (_)=>SimmerScreen(),
         noItemsFoundIndicatorBuilder: (_) =>Center(

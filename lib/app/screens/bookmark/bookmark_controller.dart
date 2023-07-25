@@ -1,7 +1,6 @@
 import 'package:get/get.dart';
 import 'package:infinite_scroll_pagination/infinite_scroll_pagination.dart';
 import '../../../routes/routes.dart';
-import '../../data/models/blogs.dart';
 import '../../data/models/like_blog.dart';
 import '../../data/models/liked_blogs.dart';
 import '../../data/services/content_api_services.dart';
@@ -31,7 +30,7 @@ class BookmarkController extends GetxController {
   Future<void> _fetchPage(int pageKey) async {
     try {
       final newItems = await fetchBlogs(pageKey);
-      if(newItems == null || newItems.likedArticles == []) {
+      if(newItems.likedArticles == []) {
         pagingController.appendLastPage([]);
         return;
       }

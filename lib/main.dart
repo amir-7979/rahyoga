@@ -1,19 +1,24 @@
 
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:get/get.dart';
 import 'package:rahyoga/app/data/services/storage_service.dart';
+import 'package:rahyoga/app/data/services/video_service.dart';
 import 'package:rahyoga/app/screens/splash/splash_screen.dart';
 import 'package:rahyoga/core/theme/colors.dart';
+import 'package:rahyoga/core/values/consts.dart';
 import 'package:rahyoga/routes/pages.dart';
 import 'app/data/models/client.dart';
 import 'app/data/services/content_api_services.dart';
+import 'app/data/services/database_service.dart';
 import 'app/data/services/user_api_service.dart';
 import 'app/screens/splash/splash_binding.dart';
 import 'app/screens/splash/splash_controller.dart';
 import 'core/languages/translator.dart';
 import 'core/theme/text_theme.dart';
 import 'core/utils/scroll_behavior.dart';
+import 'package:path_provider/path_provider.dart';
 
 Future<void> main() async {
   await initServices();
@@ -25,6 +30,8 @@ initServices() async {
   await Get.putAsync<Client>(() async => Client());
   await Get.putAsync<UserApiService>(() async => UserApiService());
   await Get.putAsync<ContentApiService>(() async => ContentApiService());
+  await Get.putAsync<DataBaseService>(() async => DataBaseService());
+  await Get.putAsync<VideoService>(() async => VideoService());
 }
 
 class MyApp extends StatelessWidget {
@@ -32,11 +39,14 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+
+    SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]);
     Get.lazyPut<SplashController>(
           () => SplashController(),
     );
 
     return GetMaterialApp(
+
       initialBinding: SplashBinding(),
       title: 'RahYoga',
       debugShowCheckedModeBanner: false,
@@ -46,7 +56,6 @@ class MyApp extends StatelessWidget {
         GlobalWidgetsLocalizations.delegate,
       ], // set this property
       locale: const Locale('fa', 'IR'),
-      //locale: Get.deviceLocale,
       fallbackLocale: const Locale('en', 'US'),
       translations: Translator(),
       theme: ThemeData(
@@ -59,8 +68,6 @@ class MyApp extends StatelessWidget {
         textTheme: persianTextTheme
       ),
       getPages: AppPages.pages,
-      //home: RecoveryPasswordScreen(),
-      //home: SplashScreen(),
       builder: (context, child) {
         return ScrollConfiguration(
           behavior: MyBehavior(),

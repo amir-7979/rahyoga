@@ -5,6 +5,7 @@ import '../../../core/languages/translator.dart';
 import '../../../core/utils/snack_bar.dart';
 import '../../data/models/buy_course_info.dart';
 import '../../data/services/content_api_services.dart';
+import '../home/home_controller.dart';
 
 class BuyCourseController extends GetxController {
   final ContentApiService _contentApiService = Get.find<ContentApiService>();
@@ -69,6 +70,8 @@ class BuyCourseController extends GetxController {
     }
     isLoading.value = false;
     update();
+    Get.find<HomeController>().minorUpdate();
+
   }
 
 

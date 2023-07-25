@@ -25,12 +25,10 @@ Dialog validateDialog(String userName, String password) {
           children: [
             Row(
               children: [
-               /* todo check after IconButton(
-                    onPressed: () => Get.back(), icon: const Icon(Icons.close)),*/
                 Padding(
                   padding: const EdgeInsetsDirectional.fromSTEB(15, 15, 0, 15),
                   child: Text(
-                    Translator.password_recovery.tr,
+                    Translator.confirmation.tr,
                     style: const TextStyle(fontSize: 18),
                   ),
                 ),
@@ -75,7 +73,7 @@ Dialog validateDialog(String userName, String password) {
                       //todo go to see_all screen
                     },
                     child: Text(
-                      'دریافت دوباره کد تاید',
+                      'دریافت دوباره کد تایید',
                       style:Get.theme.textTheme.displayMedium!.copyWith(
                           color: primaryColor, decoration: TextDecoration.underline),
                     ),
@@ -91,7 +89,7 @@ Dialog validateDialog(String userName, String password) {
                     ),
                   ),
                   Padding(
-                    padding: const EdgeInsets.fromLTRB(6, 16, 6, 0),
+                    padding: const EdgeInsets.fromLTRB(6, 20, 6, 0),
                     child: ElevatedButton(
                       style: ElevatedButton.styleFrom(
                         minimumSize: const Size.fromHeight(50),
@@ -108,14 +106,6 @@ Dialog validateDialog(String userName, String password) {
                       ),
                     ),
                   ),
-                 /*todo  Padding(
-                    padding: const EdgeInsetsDirectional.symmetric(horizontal: 10),
-                    child: Text(
-                      Translator.enterConfirmCode.tr,
-                      maxLines: 3,
-                      style: Get.textTheme.displayMedium!.copyWith(color: textGray),
-                    ),
-                  ),*/
                 ],
               ),
             ),

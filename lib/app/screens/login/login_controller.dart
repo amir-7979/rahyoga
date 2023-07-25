@@ -11,7 +11,7 @@ class LoginController extends GetxController {
   UserApiService userApiService = Get.find<UserApiService>();
   final usernameController = TextEditingController();
   final passwordController = TextEditingController();
-  final emailController = TextEditingController();
+  final phoneController = TextEditingController();
   final codeController = TextEditingController();
   RxBool passwordVisible = true.obs;
   RxBool isLoading = false.obs;
@@ -26,7 +26,7 @@ class LoginController extends GetxController {
 
   void gotoRecoveryPasswordScreen() =>
       Get.toNamed(AppRoutes.recoveryPasswordScreen,
-          arguments: emailController.value.text);
+          arguments: phoneController.value.text);
 
   void gotoMainScreen() => Get.offAndToNamed(AppRoutes.mainScreen);
 
@@ -53,7 +53,7 @@ class LoginController extends GetxController {
 
   Future<void> sendPasswordEmail() async {
     final response =
-        await userApiService.sendPasswordEmail(emailController.value.text);
+        await userApiService.sendPasswordEmail(phoneController.value.text);
     if (response == '200') {
       Get.back();
       gotoRecoveryPasswordScreen();
@@ -86,7 +86,7 @@ class LoginController extends GetxController {
           barrierDismissible: false,
         );
       } else {
-        errorText.value = 'error';
+        errorText.value = 'خطا در سرور';
         errorText.value = response.toString();
         update();
       }

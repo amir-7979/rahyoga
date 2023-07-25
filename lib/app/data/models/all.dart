@@ -7,6 +7,7 @@ class All {
     this.orderPersian,
     this.header,
     this.description,
+    this.hls,
     this.passed
   });
   late final int? id;
@@ -16,6 +17,7 @@ class All {
   late final String? orderPersian;
   late final String? header;
   late final String? description;
+  late final String? hls;
   late bool? passed;
 
   All.fromJson(Map<String, dynamic> json){
@@ -27,6 +29,7 @@ class All {
     header = json['header'];
     description = json['description'];
     passed = json['passed'];
+    hls = json['hls_code'];
   }
 
 }

@@ -14,6 +14,9 @@ class MainScreen extends GetWidget<MainController> {
         navBarHeight: 60,
         padding: const NavBarPadding.symmetric(horizontal: 5),
         context,
+        onItemSelected: (val){
+          controller.setTab(val);
+        },
         controller: controller.tabController,
         screens: controller.buildScreens(),
         items: controller.navBarsItems(),

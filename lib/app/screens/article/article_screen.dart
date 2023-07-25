@@ -31,7 +31,7 @@ class ArticleScreen extends GetWidget<ArticleController> {
             Padding(
               padding: const EdgeInsetsDirectional.only(end: 15),
               child: InkWell(
-                onTap: ()=> controller.addToFavorite(),
+                onTap: () => controller.addToFavorite(),
                 child: Row(
                   children: [
                     Obx(() => SvgPicture.asset(controller.isLiked.value == true
@@ -62,28 +62,30 @@ class ArticleScreen extends GetWidget<ArticleController> {
   Widget articleWidget(Article article) {
     return ListView(
       children: [
-        SizedBox(
-          height: 200,
-          width: screenWidth,
-          child: CacheImage(url: article.image ?? ''),
-        ),
         Padding(
-          padding: const EdgeInsetsDirectional.fromSTEB(15, 20, 10, 0),
+          padding: const EdgeInsetsDirectional.fromSTEB(25, 20, 25, 0),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Text(
-                article.header ?? '',
-                style: Get.theme.textTheme.bodySmall!
-                    .copyWith(color: primaryColor),
+              Center(
+                child: Text(
+                  article.header ?? '',
+                  style: Get.theme.textTheme.headlineLarge!
+                      .copyWith(color: primaryColor),
+                ),
               ),
               Padding(
-                padding: EdgeInsetsDirectional.fromSTEB(5, 10, 0, 0),
-                child:
-                HtmlWidget(
-                  article.description ?? '',
-                  textStyle: Get.theme.textTheme.bodyMedium!
-                      .copyWith(color: profileGray, height: 1.2),
+                padding: EdgeInsetsDirectional.fromSTEB(5, 20, 0, 0),
+                child: HtmlWidget(
+                  '''
+      <div style="text-align: justify;">
+        ${article.description}
+      </div>
+    ''',
+                  textStyle: Get.theme.textTheme.bodyMedium!.copyWith(
+                    color: profileGray,
+                    height: 1.2,
+                  ),
                 ),
                 /*Html(
                   data: "${article.description}"

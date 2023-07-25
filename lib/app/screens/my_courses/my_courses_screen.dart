@@ -82,18 +82,15 @@ class MyCoursesScreen extends StatelessWidget {
             Expanded(
               child: Padding(
                 padding: const EdgeInsetsDirectional.symmetric(horizontal: 2),
-                child: SizedBox(
-                  width: screenWidth,
-                  child: TabBarView(
-                    children: [
-                      PurchasedCourseList(),
-                      FavoriteCourseList(),
-                    ],
-                  ),
+                child: TabBarView(
+                  children: [
+                    PurchasedCourseList(),
+                    FavoriteCourseList(),
+                  ],
                 ),
               ),
             ),
-            const SizedBox(height: 30),
+            const SizedBox(height: 35),
           ],
         ),
       ),

@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:rahyoga/app/screens/bookmark/bookmark_controller.dart';
-import 'package:tab_indicator_styler/tab_indicator_styler.dart';
 
 import '../../../core/languages/translator.dart';
 import '../../../core/theme/colors.dart';

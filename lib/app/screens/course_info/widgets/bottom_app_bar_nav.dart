@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-
 import '../../../../core/theme/colors.dart';
 import '../../../../core/values/consts.dart';
 import '../../../widgets/proggress_bar.dart';
@@ -101,7 +100,7 @@ class BottomAppBarNav extends GetView<CourseInfoController> {
                             shape: const StadiumBorder(),
                           ),
                           onPressed: () async {
-                            controller.goToSession(controller.index.value + 1);
+                            controller.goToSession(controller.index.value + 1, );
                           },
                           child: Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,

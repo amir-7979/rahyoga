@@ -1,7 +1,6 @@
 class Profile {
   Profile({
     this.id,
-    this.lastLogin,
     this.username,
     this.firstName,
     this.lastName,
@@ -26,7 +25,6 @@ class Profile {
   });
 
   late  int? id;
-  late final String? lastLogin;
   late final String? username;
   late final String? firstName;
   late final String? lastName;
@@ -47,11 +45,10 @@ class Profile {
   late final bool? isVolunteer;
   late final int? watched;
   late final int? courses;
-  late  double? progress;
+  late  double? progress = 0.0;
 
   Profile.fromJson(Map<String, dynamic> json) {
     id = json['id'];
-    lastLogin = json['last_login'];
     username = json['username'];
     firstName = json['first_name'];
     lastName = json['last_name'];
@@ -63,7 +60,7 @@ class Profile {
     age = json['age'];
     image = json['image'];
     email = json['email'];
-    phoneNumber = json['phone_number'] == null ? null : '0${json['phone_number'].substring(3)}';
+    phoneNumber = json['phone_number'] == null ? null : '0' + json['phone_number'].substring(3);
     address = json['address'];
     postalCode = json['postal_code'];
     isSuperuser = json['is_superuser'];
@@ -72,6 +69,6 @@ class Profile {
     isVolunteer = json['is_volunteer'];
     watched = json['watched'];
     courses = json['courses'];
-    progress = json['progress']??0;
+    progress = json['progress'];
   }
 }

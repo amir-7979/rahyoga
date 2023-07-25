@@ -8,6 +8,8 @@ import '../../../../core/values/border_styles.dart';
 class SignupForm extends StatelessWidget {
   SignupForm({Key? key}) : super(key: key);
   final SignupController _controller = Get.find<SignupController>();
+  //NumberFormat _numberFormat = NumberFormat.decimalPattern('en');
+
 
   @override
   Widget build(BuildContext context) {
@@ -67,14 +69,49 @@ class SignupForm extends StatelessWidget {
                     .textTheme
                     .labelMedium!
                     .copyWith(color: white),
-                controller: _controller.emailController,
-                keyboardType: TextInputType.emailAddress,
+                controller: _controller.phoneNumberController,
+                keyboardType: TextInputType.phone,
+                textAlignVertical: TextAlignVertical.center,
                 onEditingComplete: () => FocusScope.of(context).nextFocus(),
                 decoration: InputDecoration(
                   errorStyle:  Get.theme
                       .textTheme
                       .headlineSmall!
                       .copyWith(color: errorText),
+                  helperText: '',
+                  filled: true,
+                  fillColor: fieldColor,
+                  labelText: Translator.phone.tr,
+                  labelStyle: const TextStyle(color: white),
+                  focusedBorder: focusedBorder,
+                  enabledBorder: enabledBorder,
+                  border: border,
+                  errorBorder: errorBorder,
+                  focusedErrorBorder: errorBorder,
+
+                ),
+                validator: (txt) => _controller.phoneNumberValidation(txt!),
+                //onSubmitted: (txt) => function(controller.text),
+              ),
+            ),
+            const SizedBox(height: 10),
+            SizedBox(
+              height: 70,
+              child: TextFormField(
+                style: Get.theme
+                    .textTheme
+                    .labelMedium!
+                    .copyWith(color: white),
+                controller: _controller.emailController,
+                keyboardType: TextInputType.emailAddress,
+                textAlignVertical: TextAlignVertical.center,
+                textDirection: TextDirection.rtl,
+                onEditingComplete: () => FocusScope.of(context).nextFocus(),
+                decoration: InputDecoration(
+                  errorStyle:  Get.theme
+                      .textTheme
+                      .headlineSmall!
+                      .copyWith(color: errorText, ),
                   helperText: '',
                   filled: true,
                   fillColor: fieldColor,

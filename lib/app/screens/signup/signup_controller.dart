@@ -8,6 +8,7 @@ import '../../widgets/validate_dialog/validate_dialog.dart';
 class SignupController extends GetxController {
   UserApiService userApiService = Get.find<UserApiService>();
   final usernameController = TextEditingController();
+  final phoneNumberController = TextEditingController();
   final emailController = TextEditingController();
   final passwordController = TextEditingController();
   final passwordController2 = TextEditingController();
@@ -25,6 +26,8 @@ class SignupController extends GetxController {
 
   String? usernameValidation(String txt) => checkUsernameSignUp(txt);
 
+  String? phoneNumberValidation(String txt) => checkPhoneNumberSignUp(txt);
+
   String? passwordValidation(String txt1, String text2) => checkPasswordSignUp(txt1, text2);
 
   String? emailValidation(String txt) => checkEmail(txt);
@@ -34,14 +37,17 @@ class SignupController extends GetxController {
       isLoading.value = true;
       errorText.value = '';
       update();
+      String phoneNumber = '+98' + phoneNumberController.text.substring(1);
       final response = await userApiService.signup(
-          usernameController.value.text, emailController.value.text, passwordController.value.text);
+          usernameController.value.text, phoneNumber, emailController.value.text, passwordController.value.text);
       isLoading.value = false;
       update();
-      if (response == 201) {
+      print(response);
+      if (response == '201') {
           Get.dialog(validateDialog(usernameController.value.text, passwordController.value.text), barrierDismissible: false, );
       } else {
-        errorText.value = 'error';
+        errorText.value = 'خطا در سرور';
+        errorText.value = response.toString();
         update();
       }
     }

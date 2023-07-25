@@ -1,16 +1,11 @@
 import 'dart:async';
 import 'dart:convert';
-import 'dart:developer';
 import 'package:dio/dio.dart';
 import 'package:get/get.dart';
 import 'package:mutex/mutex.dart';
-
+import 'dart:developer' as developer;
 import '../../../core/values/consts.dart';
-import '../../../routes/routes.dart';
 import '../models/client.dart';
-import 'interceptors.dart';
-
-//todo see the structure of message erorr
 
 class UserApiService extends GetxService {
   final Client _client = Get.find<Client>();
@@ -29,28 +24,37 @@ class UserApiService extends GetxService {
       _client.fromJson(response.data);
       return response.statusCode.toString();
     } catch (error) {
-      if (error is DioError) {
-        print(error.response!.data['detail'].toString());
-        return error.response!.data['detail'].toString();
-      }else {
-        return userErrorHandler(error);
+      if (error is DioError &&
+          error.response != null &&
+          error.response!.statusCode == 405) {
+        return '405';
+      } else {
+        userErrorHandler(error);
+        return '-1';
       }
     }
   }
 
-  Future<String> signup(String userName, String email, String password) async {
+  Future<String> signup(
+      String userName, String phone, String email, String password) async {
     try {
       final response = await _dio.post(
         '/api/user/register/',
         data: jsonEncode(<String, dynamic>{
           'username': userName,
           'email': email,
+          'phone_number': phone,
           'password': password,
         }),
       );
+      developer.log(
+        response.statusCode.toString() + response.toString(),
+        name: 'my.app.category',
+        error: response.toString(),
+      );
       return response.statusCode.toString();
     } catch (error) {
-      return userErrorHandler(error);
+      return '-1';
     }
   }
 
@@ -66,8 +70,7 @@ class UserApiService extends GetxService {
       return response.statusCode.toString();
     } catch (error) {
       userErrorHandler(error);
-      print(error);
-      return error.toString();
+      return '-1';
     }
   }
 
@@ -82,7 +85,7 @@ class UserApiService extends GetxService {
       return response.data['status'];
     } catch (error) {
       userErrorHandler(error);
-      return error.toString();
+      return '-1';
     }
   }
 
@@ -101,7 +104,7 @@ class UserApiService extends GetxService {
       return response.statusCode;
     } catch (error) {
       userErrorHandler(error);
-      return error.toString();
+      return '-1';
     }
   }
 
@@ -109,20 +112,15 @@ class UserApiService extends GetxService {
     try {
       mutex.acquire();
       print('get token');
-      final response = await _dio.put(
-        '/api/auth/login/refresh/',
-        data: jsonEncode(<String, String>{'refresh': _client.refresh})
-      );
+      final response = await _dio.put('/api/auth/login/refresh/',
+          data: jsonEncode(<String, String>{'refresh': _client.refresh}));
       _client.fromJson(response.data);
     } catch (error) {
       return error.toString();
-    }finally{
-    mutex.release();
+    } finally {
+      mutex.release();
+    }
   }
-  }
-
-  //todo ask arman
-
 
   Future<String> sendPasswordEmail(String email) async {
     try {
@@ -135,11 +133,12 @@ class UserApiService extends GetxService {
       return response.statusCode.toString();
     } catch (error) {
       userErrorHandler(error);
-      return error.toString();
+      return '-1';
     }
   }
 
-  Future<String> changePasswordCode(String email, String code, String pass1) async {
+  Future<String> changePasswordCode(
+      String email, String code, String pass1) async {
     try {
       final response = await _dio.post(
         '/api/user/changePass/',
@@ -153,26 +152,14 @@ class UserApiService extends GetxService {
     } catch (error) {
       if (error is DioError) {
         return error.response!.data['detail'].toString();
-      }else {
-        return userErrorHandler(error);
+      } else {
+        userErrorHandler(error);
+        return '-1';
       }
     }
   }
 
-  String userErrorHandler(dynamic error) {
-    print(error.runtimeType);
-    //log(error.toString());
-    if (error is DioError) {
-      print(error.response!.data['detail'].toString());
-      return error.response!.data['detail'].toString();
-    } else if (error is TimeoutException) {
-      return error.message!;
-    } else if (error is DioErrorType) {
-      return error.name.toString();
-    } else if (error is TypeError) {
-      return error.toString();
-    } else {
-      return 'something went wrong';
-    }
+  void userErrorHandler(dynamic error) {
+    developer.log('rahuoga', name: 'my.app.category', error: error);
   }
 }

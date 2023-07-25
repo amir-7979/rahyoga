@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 import 'package:persistent_bottom_nav_bar/persistent_tab_view.dart';
+import 'package:rahyoga/app/screens/home/home_controller.dart';
 import '../../../core/languages/translator.dart';
 import '../../../core/theme/colors.dart';
 import '../blog/blog_screen.dart';
@@ -88,7 +89,17 @@ class MainController extends GetxController{
   }
 
   void setTab(int i){
-    tabController.jumpToTab(i);
+    //tabController.jumpToTab(i);
+    tabController.index = i;
+    if(i == 0){
+      Get.find<HomeController>().refresh();
+    }
+    update();
+    refresh();
+  }
+
+  void update2(){
+    update();
   }
 
 }

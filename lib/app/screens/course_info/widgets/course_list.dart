@@ -1,6 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
-import 'package:rahyoga/app/screens/course_info/course_info_controller.dart';
 import 'package:rahyoga/app/screens/course_info/widgets/future_item.dart';
 import 'package:rahyoga/app/screens/course_info/widgets/passed_item.dart';
 import 'package:rahyoga/core/values/consts.dart';
