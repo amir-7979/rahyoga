@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
@@ -12,89 +14,51 @@ class SplashScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    Random random = Random();
+    int rnd = random.nextInt(5) + 1;
     screenWidth = MediaQuery.of(context).size.width;
     screenHeight = MediaQuery.of(context).size.height;
     return SafeArea(
       child: Scaffold(
-        backgroundColor: primaryColor,
-        body: (screenHeight > 640) ? Padding(
-          padding: const EdgeInsetsDirectional.only(top: 60),
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: <Widget>[
-              Column(
-                children: [
-                  SvgPicture.asset('assets/images/splash/logo.svg'),
-                  const SizedBox(height: 15),
-                  Text(
-                      Translator.app_name.tr,
-                    style: Theme.of(context).textTheme.labelLarge!.copyWith(color: white),
-                  ),
-                   const SizedBox(height: 30),
-                  /*Text(
-                      Translator.splash_text1.tr,
-                    style: Theme.of(context).textTheme.bodyLarge!.copyWith(color: splashGray),
-                  ),*/
-                ],
-              ),
-              Column(
-                mainAxisAlignment: MainAxisAlignment.spaceAround,
-                children: [
-                  const SizedBox(
-                    width: 24,
-                    height: 24,
-                    child: CircularProgressIndicator(
-                        color: white, strokeWidth: 2, ),
-                  ),
-                  const SizedBox(height: 25),
-                  Text(
-                    Translator.splash_text2.tr,
-                    style: Theme.of(context).textTheme.bodyLarge!.copyWith(color: white),
-                  ),
-                  const SizedBox(height: 40),
-                  //SizedBox(width: screenWidth,),
-                  SizedBox(
-                    width: screenWidth,
-                    child: SvgPicture.asset('assets/images/splash/splash_image.svg',
-                      fit: BoxFit.fitWidth,
-                      width: screenWidth,
-                      height: screenWidth *4/5,
-                      alignment: Alignment.bottomCenter,
-                    ),
-                  ),
-
-                ],
-              ),
-            ],
-          ),
-        ) : Center(
-          child: SingleChildScrollView(
-            child: Column(
+        backgroundColor: Colors.black,
+        body: Stack(
+          fit: StackFit.expand,
+          children: [
+            Image.asset('assets/images/splash/$rnd.jpg',fit: BoxFit.cover),
+            Column(
+              mainAxisAlignment: MainAxisAlignment.start,
               crossAxisAlignment: CrossAxisAlignment.center,
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Image.asset(
-                  'assets/images/logo.png',
-                ),
-                const SizedBox(height: 20),
-
+              children: <Widget>[
+                SizedBox(height: 20),
+                SvgPicture.asset('assets/images/splash/logo.svg'),
+                const SizedBox(height: 15),
                 Text(
                   Translator.app_name.tr,
-                  style: Theme.of(context).textTheme.labelLarge!.copyWith(color: white),
+                  style: Theme.of(context)
+                      .textTheme
+                      .labelLarge!
+                      .copyWith(color: white),
                 ),
-                const SizedBox(height: 20),
-
-                const CircularProgressIndicator(
-                  color: white, strokeWidth: 2, ),
-                const SizedBox(height: 20),
+                const SizedBox(height: 35),
+                const SizedBox(
+                  width: 24,
+                  height: 24,
+                  child: CircularProgressIndicator(
+                    color: white,
+                    strokeWidth: 2,
+                  ),
+                ),
+                const SizedBox(height: 25),
                 Text(
                   Translator.splash_text2.tr,
-                  style: Theme.of(context).textTheme.bodyLarge!.copyWith(color: white),
+                  style: Theme.of(context)
+                      .textTheme
+                      .bodyLarge!
+                      .copyWith(color: white),
                 ),
               ],
             ),
-          ),
+          ],
         ),
       ),
     );

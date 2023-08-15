@@ -250,7 +250,7 @@ class Translator extends Translations {
           generalYogaCourses: 'دوره‌های جامع یوگا',
           app_name: 'رهیـــــوگا',
           splash_text1: 'اینجا میتونه یه جمله الهام بخش بیاد',
-          splash_text2: 'به آرامی نفس عمیقی بکشید',
+          splash_text2: 'یک نفس عمیق بکش.',
           welcome: 'به رهیوگا خوش آمدید!',
           email: 'ایمیل',
           password: 'رمز عبور',

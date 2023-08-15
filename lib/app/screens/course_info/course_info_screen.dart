@@ -53,9 +53,9 @@ class CourseInfoScreen extends GetView<CourseInfoController> {
                 fit: BoxFit.contain,
                 child: SizedBox(
                   width: Get.width,
-                  height: Get.width * 9/16,
+                  height: Get.width * 9 / 16,
                   child: AspectRatio(
-                    aspectRatio: 16/9,
+                    aspectRatio: 16 / 9,
                     child: FlickVideoPlayer(
                       flickManager: controller.flickManager,
                     ),
@@ -116,28 +116,54 @@ class CourseInfoScreen extends GetView<CourseInfoController> {
                             ),
                           ),
                         ),
-                        SizedBox(
-                          height: 32,
-                          width: 100,
-                          child: ElevatedButton(
-                            style: ElevatedButton.styleFrom(
-                              backgroundColor: primaryColor,
-                              padding: const EdgeInsetsDirectional.fromSTEB(
-                                  12, 6, 12, 4),
-                              minimumSize: const Size.fromWidth(100),
-                              elevation: 0,
-                              shape: const StadiumBorder(),
-                            ),
-                            onPressed: () async {
-                              controller.download();
-                            },
-                            child: Obx(
-                                  () => Text(
-                                "${controller.downloadProgress.value.toStringAsFixed(0)}%",
-                                style: TextStyle(fontSize: 20),
-                              ),
-                            ),
-                          ),
+                        SizedBox(width: 7),
+                        Obx(
+                          () => (controller.isExist.value)
+                              ? Container()
+                              : SizedBox(
+                                  height: 32,
+                                  width: 100,
+                                  child: ElevatedButton(
+                                    style: ElevatedButton.styleFrom(
+                                      backgroundColor: fourthColor,
+                                      minimumSize: const Size.fromWidth(100),
+                                      elevation: 0,
+                                      shape: const StadiumBorder(),
+                                    ),
+                                    onPressed: () async {
+                                      controller.download();
+                                    },
+                                    child: Row(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.center,
+                                      children: [
+                                        controller.isDownloading.value
+                                            ? SvgPicture.asset(
+                                                'assets/images/course_info/pause-button.svg',
+                                                height: 21,
+                                                width: 25,
+                                              )
+                                            : SvgPicture.asset(
+                                                'assets/images/course_info/download.svg',
+                                                height: 25,
+                                                width: 25,
+                                              ),
+                                        if (controller.isDownloading.value)
+                                          Padding(
+                                            padding: const EdgeInsetsDirectional
+                                                .fromSTEB(10, 0, 0, 0),
+                                            child: Text(
+                                              "${controller.downloadProgress.value.toStringAsFixed(0)}%",
+                                              style: Get
+                                                  .theme.textTheme.labelMedium!
+                                                  .copyWith(
+                                                      color: primaryColor),
+                                            ),
+                                          ),
+                                      ],
+                                    ),
+                                  ),
+                                ),
                         ),
                       ],
                     ),

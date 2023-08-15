@@ -10,22 +10,21 @@ import '../../../widgets/cache_image.dart';
 class BlogItem extends StatelessWidget {
   BlogItem(this.blog, {Key? key}) : super(key: key);
   BlogController controller = Get.find<BlogController>();
-
   final Blog blog;
 
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      height: yogaMovementHeight,
+      height: yogaMovementHeight - 10,
       width: screenWidth,
       child: InkWell(
-        onTap: () {
-          controller.gotoArticle(blog.id??1, 'مقاله');
-        },
+        onTap: () => controller.gotoArticle(blog.id??1, 'مقاله'),
         child: Row(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             SizedBox(
+              width: 120,
+              height: 80,
               child: ClipRRect(
                 borderRadius: BorderRadius.circular(12),
                 child: CacheImage(url: blog.image??''),

@@ -19,11 +19,9 @@ class BlogList extends GetWidget<BlogController> {
       padding: const EdgeInsetsDirectional.fromSTEB(10, 5, 10, 0),
       child: PagedListView.separated(
         separatorBuilder: (context, item) => const Padding(
-          padding: EdgeInsetsDirectional.symmetric(vertical: 5),
+          padding: EdgeInsetsDirectional.only(bottom: 5),
           child: Divider(),
         ),
-
-        padding: const EdgeInsetsDirectional.fromSTEB(10, 10, 10, 0),
         pagingController: controller.pagingController2,
         builderDelegate: PagedChildBuilderDelegate<Blog>(
           firstPageProgressIndicatorBuilder: (_)=>SimmerScreen(),

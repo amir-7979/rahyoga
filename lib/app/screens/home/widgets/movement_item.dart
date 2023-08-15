@@ -23,9 +23,15 @@ class MovementItem extends StatelessWidget {
           SizedBox(
             width: 330,
             height: 170,
-            child: ClipRRect(
-              borderRadius: BorderRadius.circular(12.0),
-              child: CacheImage(url: movement.image ?? ''),
+            child: Container(
+              decoration: BoxDecoration(
+                  border: Border.all(color: Colors.black12, width: 1),
+                  borderRadius: BorderRadius.circular(12.0)
+              ),
+              child: ClipRRect(
+                borderRadius: BorderRadius.circular(12.0),
+                child: CacheImage(url: movement.image ?? ''),
+              ),
             ),
           ),
           Padding(

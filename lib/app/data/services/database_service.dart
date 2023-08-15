@@ -29,7 +29,6 @@ class DataBaseService extends GetxService{
           '''
           CREATE TABLE video(
             id INTEGER PRIMARY KEY AUTOINCREMENT,
-            name TEXT,
             course INTEGER,
             session INTEGER
           )
@@ -41,7 +40,12 @@ class DataBaseService extends GetxService{
 
   Future<int> insertVideo(Map<String, dynamic> movie) async {
     final db = await database;
-    return await db.insert('video', movie);
+    bool exists = await videoExists(movie['course'], movie['session']);
+    if(!exists) {
+      return await db.insert('video', movie);
+    } else {
+      return 0;
+    }
   }
 
   Future<List<Map<String, dynamic>>> getAllVideo() async {
@@ -64,4 +68,5 @@ class DataBaseService extends GetxService{
     );
     return result.isNotEmpty;
   }
+
 }
