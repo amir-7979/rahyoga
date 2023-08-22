@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:percent_indicator/circular_percent_indicator.dart';
 import 'package:rahyoga/app/widgets/cache_image.dart';
+
 import '../../../../core/languages/translator.dart';
 import '../../../../core/theme/colors.dart';
 import '../../../data/models/profile.dart';
@@ -124,13 +125,13 @@ class ProfileWidget extends StatelessWidget {
               ),
               Container(
                 child: CircularPercentIndicator(
-                  radius: 30,
-                  lineWidth: 4.0,
+                  radius: 27,
+                  lineWidth: 3.5,
                   percent: profile.progress ?? 0.0,
                   center: Text(
                     '${(profile.progress!*100).toInt()}%'
                     '',
-                    style: Get.theme.textTheme.headlineMedium!
+                    style: Get.theme.textTheme.bodyLarge!
                         .copyWith(color: primaryColor),
                   ),
                   circularStrokeCap: CircularStrokeCap.round,

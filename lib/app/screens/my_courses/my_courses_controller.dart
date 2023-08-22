@@ -2,6 +2,7 @@ import 'package:get/get.dart';
 import 'package:infinite_scroll_pagination/infinite_scroll_pagination.dart';
 import 'package:rahyoga/app/data/models/liked_course.dart';
 import 'package:rahyoga/app/data/models/liked_courses.dart';
+
 import '../../../core/utils/snack_bar.dart';
 import '../../../routes/routes.dart';
 import '../../data/models/course.dart';
@@ -38,7 +39,7 @@ class MyCoursesController extends GetxController {
   }
 
   Future<LikedCourses?> fetchliked(int i) async {
-    liked.value = await _contentApiService.getLikedCourse(i);
+    liked.value = await _contentApiService.getCourses(i);
     return liked.value;
   }
 
@@ -104,4 +105,5 @@ class MyCoursesController extends GetxController {
       _fetchPage2(pageKey);
     });    super.onInit();
   }
+
 }

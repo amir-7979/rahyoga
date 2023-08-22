@@ -1,6 +1,6 @@
+import 'course.dart';
 import 'last_course.dart';
 import 'movement.dart';
-import 'course.dart';
 
 class Home {
   Home({

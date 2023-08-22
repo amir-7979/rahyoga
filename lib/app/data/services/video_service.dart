@@ -1,9 +1,11 @@
+import 'dart:async';
 import 'dart:io';
+import 'package:rxdart/rxdart.dart';
 import 'package:dio/dio.dart';
 import 'package:get/get.dart';
-import 'package:rahyoga/app/data/services/database_service.dart';
-import '../../../core/values/consts.dart';
 import 'package:path_provider/path_provider.dart';
+import 'package:rahyoga/app/data/services/database_service.dart';
+
 import '../models/download_task.dart';
 
 class VideoService extends GetxService {
@@ -12,6 +14,9 @@ class VideoService extends GetxService {
   final DataBaseService dataBaseService = Get.find<DataBaseService>();
   List<DownloadTask> downloadTasks = [];
   late final String appDocumentsPath;
+  final StreamController<List<DownloadTask>> streamDownloadTasks = BehaviorSubject<List<DownloadTask>>();
+
+  StreamController<List<DownloadTask>> get downloadTasksStream => streamDownloadTasks;
 
   VideoService() {
     init();
@@ -22,22 +27,19 @@ class VideoService extends GetxService {
     appDocumentsPath = directory.path;
   }
 
-  Future<bool> downloadVideoFile(int course, int session, String url, Function(int) onProgress, int progress) async {
+  Future<bool> downloadVideoFile(int course, int session, String url, int progress) async {
     var downloadTask = findTask(course, session);
+    print(downloadTask?.sessionId);
     if (downloadTask == null) {
-      print('new task');
-      downloadTask = DownloadTask(url, course, session, progress, onProgress);
+      downloadTask = DownloadTask(url, course, session, progress);
       downloadTasks.add(downloadTask);
     }
-
     if (appDocumentsPath.isEmpty) {
       await init();
     }
-
     final movieFilePath = '$appDocumentsPath/${course}_${session}.mp4';
-
     try {
-      await download(url, movieFilePath, downloadTask, onProgress);
+      await download(movieFilePath, downloadTask);
       return await saveToDatabase(downloadTask, movieFilePath);
     } catch (error) {
       print(error.toString());
@@ -45,22 +47,20 @@ class VideoService extends GetxService {
     }
   }
 
-  Future<void> download(url, String movieFilePath, DownloadTask downloadTask,
-      onProgress) async {
+  Future<void> download(String movieFilePath, DownloadTask downloadTask) async {
     if(downloadTask.cancelToken.isCancelled){
-      print('cancelToken.isCancelled');
       downloadTask.cancelToken = CancelToken();
     }
     await dio.download(
-      url,
+      downloadTask.url,
       movieFilePath,
       cancelToken: downloadTask.cancelToken,
       onReceiveProgress: (receivedBytes, totalBytes) {
         if (totalBytes != -1) {
-          onProgress(receivedBytes* 100 ~/ totalBytes);
-          print('${receivedBytes * 100 / totalBytes } ---- $totalBytes');
+          print(receivedBytes * 100 ~/ totalBytes);
           downloadTask.progress = receivedBytes * 100 ~/ totalBytes;
           downloadTask.receivedBytes = downloadTask.receivedBytes + receivedBytes;
+          streamDownloadTasks.add(downloadTasks);
         }
         //dio.options.headers['Range'] = 'bytes=${downloadTask.receivedBytes}-';
       },
@@ -69,29 +69,38 @@ class VideoService extends GetxService {
 
   Future<bool> saveToDatabase(
       DownloadTask downloadTask, String movieFilePath) async {
-    final movieMetadata = {
-      'course': downloadTask.courseId,
-      'session': downloadTask.sessionId,
-    };
-    await dataBaseService.insertVideo(movieMetadata);
-    print('File downloaded and saved at: $movieFilePath');
-    var response = await dataBaseService.getAllVideo();
-    print(response.toString());
-    downloadTasks.remove(downloadTask);
-    return true;
+    try {
+      final movieMetadata = {
+        'course': downloadTask.courseId,
+        'session': downloadTask.sessionId,
+      };
+      await dataBaseService.insertVideo(movieMetadata);
+      downloadTasks.remove(downloadTask);
+      print('download finished');
+      print(await dataBaseService.getAllVideo().toString());
+      return true;
+    }catch(err){
+      return false;
+    }
   }
 
-  void cancelDownload(int course, int session) =>
-      downloadTasks.firstWhereOrNull((element) =>
-      (element.courseId == course && element.sessionId == session))?.cancelToken.cancel("Download cancelled by user");
+  void cancelDownload(int course, int session) {
+    DownloadTask? task = downloadTasks.firstWhereOrNull((element) =>
+      (element.courseId == course && element.sessionId == session));
+    if(task != null) {
+      task.cancelToken.cancel("Download cancelled by user");
+      downloadTasks.remove(task);
+    }
+  }
 
-  void resumeDownload(DownloadTask downloadTask) => downloadVideoFile(
+
+  /*void resumeDownload(DownloadTask downloadTask) => downloadVideoFile(
       downloadTask.courseId,
       downloadTask.sessionId,
       downloadTask.url,
       downloadTask.function,
       downloadTask.progress);
-
+*/
   DownloadTask? findTask(int course, int session) =>
       downloadTasks.firstWhereOrNull((element) =>
       (element.courseId == course && element.sessionId == session));

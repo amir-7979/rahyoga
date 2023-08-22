@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+
 import '../../../../core/languages/translator.dart';
 import '../../../../core/theme/colors.dart';
 import '../../../../core/values/consts.dart';
@@ -39,7 +40,7 @@ class BottomBar extends GetWidget<BasketController> {
                       elevation: 0,
                       shape: const StadiumBorder(),
                     ),
-                    onPressed: () async => controller.showDialog(),
+                    onPressed: controller.gotoPayment,
                     child: Text(
                       Translator.pay.tr,
                       style: Get.theme

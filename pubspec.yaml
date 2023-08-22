@@ -39,7 +39,6 @@ dependencies:
   flutter_secure_storage: ^7.0.1
   mutex: ^3.0.1
   persian_fonts: ^1.0.5
-  regexpattern: ^2.1.0
   persistent_bottom_nav_bar: ^5.0.2
   cached_network_image: ^3.2.3
   dots_indicator: ^2.1.0
@@ -51,20 +50,14 @@ dependencies:
   readmore: ^2.2.0
   shimmer: ^2.0.0
   flutter_widget_from_html: ^0.10.0
-  step_progress_indicator: ^1.0.2
   infinite_scroll_pagination: ^3.2.0
   flutter_launcher_icons: ^0.12.0
-  flutter_native_splash: ^2.2.19
-  webview_flutter: ^4.0.6
-  intl: ^0.17.0
   dio_smart_retry: ^5.0.0
   flutter_html: ^3.0.0-alpha.6
   video_player: ^2.1.6
-  chewie: ^1.4.0
   flick_video_player: ^0.5.0
   sqflite: ^2.2.8+4
-  permission_handler: ^10.3.0
-  al_downloader: ^1.7.4
+  pull_to_refresh: ^2.0.0
 
 dev_dependencies:
   flutter_test:

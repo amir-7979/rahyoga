@@ -1,12 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_html/flutter_html.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:flutter_widget_from_html/flutter_widget_from_html.dart';
 import 'package:get/get.dart';
-import 'package:rahyoga/app/data/models/article.dart';
-import 'package:rahyoga/app/widgets/cache_image.dart';
 import '../../../core/theme/colors.dart';
-import '../../../core/values/consts.dart';
+import '../../data/models/article.dart';
 import '../../widgets/shimmer_screen.dart';
 import 'article_controller.dart';
 

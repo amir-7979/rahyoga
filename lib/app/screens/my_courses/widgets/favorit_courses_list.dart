@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:infinite_scroll_pagination/infinite_scroll_pagination.dart';
+
 import '../../../../core/theme/colors.dart';
 import '../../../data/models/liked_course.dart';
 import '../../../widgets/shimmer_screen.dart';
@@ -20,7 +21,7 @@ class FavoriteCourseList extends  GetWidget<MyCoursesController> {
      builderDelegate: PagedChildBuilderDelegate<LikedCourse>(
        firstPageProgressIndicatorBuilder: (_)=>SimmerScreen(),
        noItemsFoundIndicatorBuilder: (_) =>Center(
-         child: Text('آیتمی یافت نشد', style: Get.theme
+         child: Text('تمام دوره ها خریداری شده', style: Get.theme
              .textTheme
              .labelMedium!
              .copyWith(

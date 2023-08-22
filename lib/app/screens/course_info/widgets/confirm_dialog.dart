@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:rahyoga/app/screens/course_info/course_info_controller.dart';
 
 import '../../../../core/theme/colors.dart';
-import '../profile_controller.dart';
 
-final ProfileController _controller = Get.find<ProfileController>();
+final CourseInfoController _controller = Get.find<CourseInfoController>();
 
-Dialog exitConfirmDialog() {
+Dialog ConfirmDialog() {
   return Dialog(
     elevation: 5,
     backgroundColor: Colors.transparent,
@@ -27,7 +27,7 @@ Dialog exitConfirmDialog() {
                 IconButton(
                     onPressed: () => Get.back(), icon: const Icon(Icons.close)),
                 Text(
-                  'خروج',
+                  'حذف',
                   style: const TextStyle(fontSize: 18),
                 ),
               ],
@@ -36,7 +36,7 @@ Dialog exitConfirmDialog() {
             Spacer(),
             Column(mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                Text('آیا می خواهید خارج شوید؟', style: Get.textTheme.displayLarge!.copyWith(color: black)),
+                Text('آیا می خواهید ویدیو را حدف کنید؟', style: Get.textTheme.displayLarge!.copyWith(color: black)),
                 SizedBox(height: 30,),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
@@ -44,7 +44,10 @@ Dialog exitConfirmDialog() {
                     SizedBox(
                       height: 40,
                       width: 80,
-                      child: ElevatedButton(onPressed: _controller.logout, child: Text('بله', style: Get.textTheme.displayLarge!.copyWith(color: Colors.white)), style: ElevatedButton.styleFrom(
+                      child: ElevatedButton(onPressed: (){
+                        _controller.deleteVideo();
+                        Get.back();
+                      }, child: Text('بله', style: Get.textTheme.displayLarge!.copyWith(color: Colors.black)), style: ElevatedButton.styleFrom(
                         backgroundColor: forgetPasswordColor,
                         elevation: 0,
                         shape: const StadiumBorder(),

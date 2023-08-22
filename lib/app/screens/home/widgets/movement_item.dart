@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:rahyoga/app/screens/home/home_controller.dart';
-import 'package:rahyoga/core/values/consts.dart';
 
 import '../../../../core/theme/colors.dart';
 import '../../../data/models/movement.dart';

@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:rahyoga/app/screens/my_courses/widgets/favorit_courses_list.dart';
 import 'package:rahyoga/app/screens/my_courses/widgets/purchased_courses_list.dart';
-import 'package:rahyoga/core/values/consts.dart';
 import 'package:tab_indicator_styler/tab_indicator_styler.dart';
 
 import '../../../core/languages/translator.dart';
@@ -59,7 +58,7 @@ class MyCoursesScreen extends StatelessWidget {
                         Tab(
                             height: 40,
                             child: Text(
-                              Translator.favoriteCourses.tr,
+                              Translator.generalYogaCourses.tr,
                               style: Theme.of(context)
                                   .textTheme
                                   .headlineMedium!

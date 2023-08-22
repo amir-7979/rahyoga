@@ -6,7 +6,6 @@ import 'package:rahyoga/app/screens/my_courses/widgets/purchased_course_item.dar
 
 import '../../../../core/theme/colors.dart';
 import '../../../data/models/course.dart';
-import '../../../data/models/paid.dart';
 import '../../../widgets/shimmer_screen.dart';
 
 class PurchasedCourseList extends GetWidget<MyCoursesController> {

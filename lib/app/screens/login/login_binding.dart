@@ -1,4 +1,5 @@
 import 'package:get/get.dart';
+
 import '../../widgets/validate_dialog/validate_controller.dart';
 import 'login_controller.dart';
 

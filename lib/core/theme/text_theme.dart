@@ -3,7 +3,6 @@ import 'package:persian_fonts/persian_fonts.dart';
 
 TextTheme persianTextTheme = TextTheme(
 
-  labelLarge: PersianFonts.Yekan.copyWith(fontSize: 40, fontWeight: FontWeight.w900, overflow: TextOverflow.ellipsis),
   headlineLarge: PersianFonts.Yekan.copyWith(fontSize: 18, fontWeight: FontWeight.w700, overflow: TextOverflow.ellipsis),
   bodySmall: PersianFonts.Yekan.copyWith(fontSize: 18, fontWeight: FontWeight.w500, overflow: TextOverflow.ellipsis),
   displayLarge:PersianFonts.Yekan.copyWith(fontSize: 16, fontWeight: FontWeight.w700, overflow: TextOverflow.ellipsis),

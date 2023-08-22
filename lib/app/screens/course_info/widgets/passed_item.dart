@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
+
 import '../../../../core/theme/colors.dart';
 import '../../../data/models/all.dart';
 import '../course_info_controller.dart';

@@ -3,12 +3,13 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
 import 'package:readmore/readmore.dart';
+
 import '../../../core/theme/colors.dart';
 import '../../data/models/paid_course_info.dart';
 import '../../widgets/shimmer_screen.dart';
-import 'widgets/course_list.dart';
 import 'course_info_controller.dart';
 import 'widgets/bottom_app_bar_nav.dart';
+import 'widgets/course_list.dart';
 
 class CourseInfoScreen extends GetView<CourseInfoController> {
   CourseInfoScreen({Key? key}) : super(key: key);
@@ -56,8 +57,11 @@ class CourseInfoScreen extends GetView<CourseInfoController> {
                   height: Get.width * 9 / 16,
                   child: AspectRatio(
                     aspectRatio: 16 / 9,
-                    child: FlickVideoPlayer(
-                      flickManager: controller.flickManager,
+                    child: Directionality(
+                      textDirection: TextDirection.ltr,
+                      child: FlickVideoPlayer(
+                        flickManager: controller.flickManager,
+                      ),
                     ),
                   ),
                 ),
@@ -95,7 +99,7 @@ class CourseInfoScreen extends GetView<CourseInfoController> {
                                             .value!
                                             .progress!
                                             .seasons
-                                            .all![controller.index.value - 1]
+                                            .all![controller.index.value]
                                             .passed!
                                     ? SvgPicture.asset(
                                         'assets/images/course_info/green_check.svg',
@@ -119,10 +123,28 @@ class CourseInfoScreen extends GetView<CourseInfoController> {
                         SizedBox(width: 7),
                         Obx(
                           () => (controller.isExist.value)
-                              ? Container()
+                              ? SizedBox(
+                                  height: 32,
+                                  width: 106,
+                                  child: ElevatedButton(
+                                      style: ElevatedButton.styleFrom(
+                                        backgroundColor: fourthColor,
+                                        minimumSize: const Size.fromWidth(100),
+                                        elevation: 0,
+                                        shape: const StadiumBorder(),
+                                      ),
+                                      onPressed: () async {
+                                        controller.download();
+                                      },
+                                      child: SvgPicture.asset(
+                                        'assets/images/basket/delete.svg',
+                                        height: 21,
+                                        width: 25,
+                                        color: primaryColor,
+                                      ),),)
                               : SizedBox(
                                   height: 32,
-                                  width: 100,
+                                  width: 106,
                                   child: ElevatedButton(
                                     style: ElevatedButton.styleFrom(
                                       backgroundColor: fourthColor,
@@ -133,35 +155,48 @@ class CourseInfoScreen extends GetView<CourseInfoController> {
                                     onPressed: () async {
                                       controller.download();
                                     },
-                                    child: Row(
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.center,
-                                      children: [
-                                        controller.isDownloading.value
-                                            ? SvgPicture.asset(
-                                                'assets/images/course_info/pause-button.svg',
-                                                height: 21,
-                                                width: 25,
-                                              )
-                                            : SvgPicture.asset(
-                                                'assets/images/course_info/download.svg',
-                                                height: 25,
-                                                width: 25,
-                                              ),
-                                        if (controller.isDownloading.value)
-                                          Padding(
-                                            padding: const EdgeInsetsDirectional
-                                                .fromSTEB(10, 0, 0, 0),
-                                            child: Text(
-                                              "${controller.downloadProgress.value.toStringAsFixed(0)}%",
-                                              style: Get
-                                                  .theme.textTheme.labelMedium!
-                                                  .copyWith(
-                                                      color: primaryColor),
+                                    child: (controller.pressDownloading.value)
+                                        ? SizedBox(
+                                            height: 25,
+                                            width: 25,
+                                            child: CircularProgressIndicator(
+                                              color: primaryColor,
+                                              strokeWidth: 2,
                                             ),
+                                          )
+                                        : Row(
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.center,
+                                            children: [
+                                              controller.isDownloading.value
+                                                  ? SvgPicture.asset(
+                                                      'assets/images/course_info/pause-button.svg',
+                                                      height: 21,
+                                                      width: 25,
+                                                    )
+                                                  : SvgPicture.asset(
+                                                      'assets/images/course_info/download.svg',
+                                                      height: 25,
+                                                      width: 25,
+                                                    ),
+                                              if (controller
+                                                  .isDownloading.value)
+                                                Padding(
+                                                  padding:
+                                                      const EdgeInsetsDirectional
+                                                              .fromSTEB(
+                                                          10, 0, 0, 0),
+                                                  child: Text(
+                                                    "${controller.downloadProgress.value.toStringAsFixed(0)}%",
+                                                    style: Get.theme.textTheme
+                                                        .labelMedium!
+                                                        .copyWith(
+                                                            color:
+                                                                primaryColor),
+                                                  ),
+                                                ),
+                                            ],
                                           ),
-                                      ],
-                                    ),
                                   ),
                                 ),
                         ),
@@ -171,7 +206,7 @@ class CourseInfoScreen extends GetView<CourseInfoController> {
                     if (controller
                         .course.value!.progress!.seasons.all!.isNotEmpty)
                       Text(
-                        '${controller.course.value!.progress!.seasons.all![controller.index.value - 1].header ?? ''}',
+                        '${controller.course.value!.progress!.seasons.all![controller.index.value].header ?? ''}',
                         style: Get.theme.textTheme.bodySmall!
                             .copyWith(color: black),
                       ),
@@ -180,7 +215,7 @@ class CourseInfoScreen extends GetView<CourseInfoController> {
                         .course.value!.progress!.seasons.all!.isNotEmpty)
                       ReadMoreText(
                         controller.course.value!.progress!.seasons
-                                .all![controller.index.value - 1].description ??
+                                .all![controller.index.value].description ??
                             '',
                         trimLines: 4,
                         style: Get.theme.textTheme.bodyMedium!

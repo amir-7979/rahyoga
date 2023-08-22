@@ -1,4 +1,5 @@
 import 'package:get/get.dart';
+
 import '../../../core/languages/translator.dart';
 import '../../../routes/routes.dart';
 import '../../data/services/video_service.dart';

@@ -6,6 +6,7 @@ import 'package:get/get.dart';
 import 'package:rahyoga/app/screens/splash/splash_controller.dart';
 import 'package:rahyoga/core/languages/translator.dart';
 import 'package:rahyoga/core/theme/colors.dart';
+
 import '../../../core/values/consts.dart';
 
 class SplashScreen extends StatelessWidget {
@@ -34,10 +35,7 @@ class SplashScreen extends StatelessWidget {
                 const SizedBox(height: 15),
                 Text(
                   Translator.app_name.tr,
-                  style: Theme.of(context)
-                      .textTheme
-                      .labelLarge!
-                      .copyWith(color: white),
+                  style: TextStyle(fontSize: 40, fontWeight: FontWeight.w900, overflow: TextOverflow.ellipsis, color: white),
                 ),
                 const SizedBox(height: 35),
                 const SizedBox(

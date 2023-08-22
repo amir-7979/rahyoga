@@ -1,4 +1,4 @@
-import 'package:get/get.dart';
+
 
 class Seller {
   Seller({

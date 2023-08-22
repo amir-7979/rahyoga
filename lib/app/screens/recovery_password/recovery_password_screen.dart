@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+
 import '../../../core/languages/translator.dart';
 import '../../../core/theme/colors.dart';
 import '../../../core/values/border_styles.dart';
@@ -130,6 +131,21 @@ class RecoveryPasswordScreen extends GetView<RecoveryPasswordController> {
                     validator: (txt) => controller.passwordValidation(txt!, controller.passwordController.value.text),
                   ),
                 ),
+              ),
+              const SizedBox(height: 15),
+              Padding(
+                padding: const EdgeInsetsDirectional.only(start: 10),
+                child: Obx(() => ((controller.errorText.value.isNotEmpty)
+                    ? Align(
+                    alignment: AlignmentDirectional.centerStart,
+                    child: Text(
+                      controller.errorText.value,
+                      style: Get.theme
+                          .textTheme
+                          .headlineSmall!
+                          .copyWith(color: errorText),
+                    ))
+                    : Container(height: 0.01))),
               ),
               const SizedBox(height: 15),
               Padding(

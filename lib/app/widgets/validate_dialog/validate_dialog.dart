@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:rahyoga/app/widgets/validate_dialog/validate_controller.dart';
 import 'package:rahyoga/core/languages/translator.dart';
+
 import '../../../core/theme/colors.dart';
 import '../../../core/values/border_styles.dart';
 
@@ -41,14 +42,14 @@ Dialog validateDialog(String userName, String password) {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   SizedBox(
-                    height: 70,
+                    height: 75,
                     child: TextFormField(
                       textAlign: TextAlign.start,
                       textAlignVertical: TextAlignVertical.center,
                       style: const TextStyle(color: black),
                       controller: _controller.codeController,
                       keyboardType: TextInputType.number,
-                      maxLines: 3,
+                      maxLines: 1,
                       decoration: InputDecoration(
                         errorStyle: Get.textTheme.headlineSmall!
                             .copyWith(color: errorText),

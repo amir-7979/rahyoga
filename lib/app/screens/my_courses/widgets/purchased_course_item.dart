@@ -40,6 +40,7 @@ class PurchasedCourseItem extends StatelessWidget {
               child: Padding(
                 padding: const EdgeInsetsDirectional.fromSTEB(5, 5, 8, 5),
                 child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Row(
@@ -56,7 +57,7 @@ class PurchasedCourseItem extends StatelessWidget {
                                     .displayLarge!
                                     .copyWith(color: black),
                               ),
-                              SizedBox(height: 6),
+                              SizedBox(height: 10),
                               Text(
                                 '${Translator.mentor.tr} : ${course.mentor!.fullname??''}',
                                 style: Get.theme
@@ -70,14 +71,14 @@ class PurchasedCourseItem extends StatelessWidget {
                         Container(
                           padding: EdgeInsetsDirectional.only(start: 10),
                           child: CircularPercentIndicator(
-                            radius:30,
-                            lineWidth: 4.0,
+                            radius:23,
+                            lineWidth: 3.0,
                             percent: course.progress??0.0,
                             center: Text(
-                              '${course.progress.toString().substring(2)}%',
+                                course.progress?.toInt() == 1 ? '100%' : '${course.progress.toString().substring(2)}%',
                               style: Get.theme
                                   .textTheme
-                                  .headlineMedium!
+                                  .bodyMedium!
                                   .copyWith(color: primaryColor),
                             ),
                             circularStrokeCap: CircularStrokeCap.round,
@@ -99,7 +100,7 @@ class PurchasedCourseItem extends StatelessWidget {
                                   color: textGray,
                                 ),
                           ),
-                          Row(
+                          /*Row(
                             children: [
                               Text(
                                 '${Translator.continueCourse.tr}',
@@ -115,7 +116,7 @@ class PurchasedCourseItem extends StatelessWidget {
                                     color: primaryColor,
                                   )
                             ],
-                          )
+                          )*/
                         ],
                     ),
                   ],

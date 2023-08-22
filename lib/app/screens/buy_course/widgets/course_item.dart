@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:rahyoga/core/values/consts.dart';
 
 import '../../../../core/theme/colors.dart';
 import '../../../data/models/all.dart';
@@ -69,9 +68,9 @@ class CourseItem extends StatelessWidget {
                       const EdgeInsetsDirectional.symmetric(horizontal: 47),
                   child: Text(
                     course.description ?? '',
-                    maxLines: 4,
+                    maxLines: 9,
                     style: Get.theme.textTheme.headlineSmall!
-                        .copyWith(color: grayText2),
+                        .copyWith(color: grayText2, fontSize: 13),
                   ),
                 ),
                 const SizedBox(height: 5),

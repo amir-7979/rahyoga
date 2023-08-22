@@ -1,5 +1,6 @@
 import 'package:get/get.dart';
 import 'package:infinite_scroll_pagination/infinite_scroll_pagination.dart';
+
 import '../../../routes/routes.dart';
 import '../../data/models/liked_course.dart';
 
@@ -37,6 +38,7 @@ class MoreController extends GetxController {
       pagingController.error = error;
     }
   }
+
   void gotoBuyCourse(int i) => Get.toNamed(AppRoutes.byuCourseScreen ,arguments: i);
 
 }

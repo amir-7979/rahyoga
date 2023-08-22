@@ -3,6 +3,7 @@ import 'package:get/get.dart';
 import 'package:infinite_scroll_pagination/infinite_scroll_pagination.dart';
 import 'package:rahyoga/app/data/models/liked_course.dart';
 import 'package:rahyoga/app/screens/more/widgets/course_item.dart';
+
 import '../../../core/theme/colors.dart';
 import '../../widgets/shimmer_screen.dart';
 import 'more_controller.dart';
@@ -38,7 +39,8 @@ class MoreScreen extends GetView<MoreController> {
           builderDelegate: PagedChildBuilderDelegate<LikedCourse>(
             firstPageProgressIndicatorBuilder: (_)=>SimmerScreen(),
             noItemsFoundIndicatorBuilder: (_) =>Center(
-              child: Text('آیتمی یافت نشد', style: Get.theme
+              child: Text('تمام دوره ها خریداری شده',
+                style: Get.theme
                   .textTheme
                   .labelMedium!
                   .copyWith(

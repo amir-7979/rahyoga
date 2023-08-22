@@ -3,6 +3,7 @@ import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
 import 'package:readmore/readmore.dart';
 import 'package:webview_flutter/webview_flutter.dart';
+
 import '../../../core/languages/translator.dart';
 import '../../../core/theme/colors.dart';
 import '../../../core/values/consts.dart';

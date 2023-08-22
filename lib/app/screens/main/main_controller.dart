@@ -2,7 +2,13 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 import 'package:persistent_bottom_nav_bar/persistent_tab_view.dart';
+import 'package:pull_to_refresh/pull_to_refresh.dart';
+import 'package:rahyoga/app/screens/basket/basket_controller.dart';
+import 'package:rahyoga/app/screens/blog/blog_controller.dart';
 import 'package:rahyoga/app/screens/home/home_controller.dart';
+import 'package:rahyoga/app/screens/my_courses/my_courses_controller.dart';
+import 'package:rahyoga/app/screens/profile/profile_controller.dart';
+
 import '../../../core/languages/translator.dart';
 import '../../../core/theme/colors.dart';
 import '../blog/blog_screen.dart';
@@ -12,6 +18,22 @@ import '../profile/profile_screen.dart';
 
 class MainController extends GetxController{
   final PersistentTabController tabController = PersistentTabController(initialIndex: 0);
+  RefreshController refreshController = RefreshController(initialRefresh: false);
+
+  void onRefresh() async{
+    Get.find<HomeController>().minorUpdate();
+    Get.find<ProfileController>().minorUpdate();
+
+    Get.find<MyCoursesController>().pagingController1.refresh();
+    Get.find<MyCoursesController>().pagingController2.refresh();
+    Get.find<BlogController>().pagingController1.refresh();
+    Get.find<BlogController>().pagingController2.refresh();
+    try{
+      Get.find<BasketController>().minorUpdate();
+    }catch(err){}
+    refreshController.refreshCompleted();
+  }
+
 
   List<Widget> buildScreens() {
     return [
@@ -98,8 +120,5 @@ class MainController extends GetxController{
     refresh();
   }
 
-  void update2(){
-    update();
-  }
 
 }

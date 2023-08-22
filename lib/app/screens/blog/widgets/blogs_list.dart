@@ -1,11 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:infinite_scroll_pagination/infinite_scroll_pagination.dart';
-import 'package:rahyoga/app/data/models/article.dart';
 
 import '../../../../core/theme/colors.dart';
 import '../../../data/models/blog.dart';
-import '../../../data/models/blogs.dart';
 import '../../../widgets/shimmer_screen.dart';
 import '../blog_controller.dart';
 import 'blogs_item.dart';
@@ -24,17 +22,16 @@ class BlogList extends GetWidget<BlogController> {
         ),
         pagingController: controller.pagingController2,
         builderDelegate: PagedChildBuilderDelegate<Blog>(
-          firstPageProgressIndicatorBuilder: (_)=>SimmerScreen(),
-          noItemsFoundIndicatorBuilder: (_) =>Center(
-            child: Text('آیتمی یافت نشد', style: Get.theme
-                .textTheme
-                .labelMedium!
-                .copyWith(
-              color: primaryColor,
-            ),
+          firstPageProgressIndicatorBuilder: (_) => SimmerScreen(),
+          noItemsFoundIndicatorBuilder: (_) => Center(
+            child: Text(
+              'آیتمی یافت نشد',
+              style: Get.theme.textTheme.labelMedium!.copyWith(
+                color: primaryColor,
+              ),
             ),
           ),
-          newPageProgressIndicatorBuilder: (_)=>Padding(
+          newPageProgressIndicatorBuilder: (_) => Padding(
             padding: const EdgeInsetsDirectional.only(bottom: 10),
             child: Center(
               child: SizedBox(
@@ -55,5 +52,4 @@ class BlogList extends GetWidget<BlogController> {
       ),
     );
   }
-
 }

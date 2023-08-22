@@ -2,6 +2,8 @@ import 'package:get/get.dart';
 import 'package:rahyoga/app/screens/bookmark/bookmark_binding.dart';
 import 'package:rahyoga/app/screens/bookmark/bookmark_screen.dart';
 import 'package:rahyoga/app/screens/more/more_screen.dart';
+import 'package:rahyoga/app/screens/payment/payment_binding.dart';
+import 'package:rahyoga/app/screens/payment/payment_screen.dart';
 import 'package:rahyoga/app/screens/recovery_password/recovery_password_screen.dart';
 
 import '../app/screens/article/article_binding.dart';
@@ -10,8 +12,8 @@ import '../app/screens/basket/basket_binding.dart';
 import '../app/screens/basket/basket_screen.dart';
 import '../app/screens/buy_course/buy_course_binding.dart';
 import '../app/screens/buy_course/buy_course_screen.dart';
-import '../app/screens/course_info/course_info_screen.dart';
 import '../app/screens/course_info/course_info_binding.dart';
+import '../app/screens/course_info/course_info_screen.dart';
 import '../app/screens/home/home_binding.dart';
 import '../app/screens/home/home_screen.dart';
 import '../app/screens/login/login_binding.dart';
@@ -99,6 +101,12 @@ class AppPages {
       name: AppRoutes.bookmarkScreen,
       page: () => BookmarkScreen(),
       binding: BookmarkBinding(),
+    ),
+
+    GetPage(
+      name: AppRoutes.paymentScreen,
+      page: () => PaymentScreen(),
+      binding: PaymentBinding(),
     ),
   ];
 }

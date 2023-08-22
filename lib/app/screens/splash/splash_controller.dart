@@ -1,10 +1,11 @@
 import 'package:get/get.dart';
+import 'package:path_provider/path_provider.dart';
 import 'package:rahyoga/app/data/services/storage_service.dart';
+
 import '../../../core/values/consts.dart';
 import '../../../routes/routes.dart';
 import '../../data/models/client.dart';
 import '../../data/services/user_api_service.dart';
-import 'package:path_provider/path_provider.dart';
 
 class SplashController extends GetxController {
   StorageService storageService = Get.find<StorageService>();

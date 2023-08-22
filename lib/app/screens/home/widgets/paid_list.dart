@@ -6,7 +6,6 @@ import '../../../../core/theme/colors.dart';
 import '../../../../core/values/consts.dart';
 import '../../../data/models/course.dart';
 import '../home_controller.dart';
-import 'course_item.dart';
 import 'paid_item.dart';
 
 class PaidList extends StatelessWidget {

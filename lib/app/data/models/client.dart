@@ -1,4 +1,5 @@
 import 'package:get/get.dart';
+
 import '../services/storage_service.dart';
 
 class Client extends GetxService{

@@ -55,7 +55,7 @@ class Course {
     price = NumberFormat('#,###.##').format(json['price']);
     offer = NumberFormat('#,###.##').format(json['_offer']);
     offer_percent = json['_offer_percent']??0;
-    theNumberOfSeasons = json['the_number_of_seasons'];
+    theNumberOfSeasons = json['the_number_of_sessions'];
     theNumberOfSeasonsPersian = json['the_number_of_seasons_persian'];
     dateModified = json['date_modified'];
     datePublished = json['date_published'];

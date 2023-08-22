@@ -2,6 +2,7 @@ import 'package:get/get_navigation/src/root/internacionalization.dart';
 
 class Translator extends Translations {
   static const app_name = 'app_name';
+  static const phone_or_email = 'phone_or_email';
   static const splash_text1 = 'splash_text1';
   static const splash_text2 = 'splash_text2';
   static const welcome = 'welcome';
@@ -95,6 +96,8 @@ class Translator extends Translations {
   // TODO: implement keys
   Map<String, Map<String, String>> get keys => {
         'en_US': {
+
+          phone_or_email: 'phone or email',
           confirmation: 'confirmation',
           downloaded: 'downloaded',
           saveStaff: 'saved ',
@@ -185,6 +188,7 @@ class Translator extends Translations {
           userOrEmail: 'username or email',
         },
         'fa_IR': {
+          phone_or_email: 'شماره موبایل یا ایمیل',
           confirmation: 'تایید اطلاعات',
           phone: 'شماره موبایل',
           downloaded: 'دانلود ها',

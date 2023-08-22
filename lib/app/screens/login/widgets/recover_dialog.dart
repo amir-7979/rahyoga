@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:rahyoga/core/languages/translator.dart';
+
 import '../../../../core/theme/colors.dart';
 import '../../../../core/values/border_styles.dart';
 import '../login_controller.dart';
@@ -47,7 +48,6 @@ Dialog recoverDialog() {
                         child: TextFormField(
                           style: const TextStyle(color: black),
                           controller: _controller.phoneController,
-                          keyboardType: TextInputType.phone,
                           textAlign: TextAlign.start,
                           textAlignVertical: TextAlignVertical.center,
                           decoration: InputDecoration(
@@ -55,21 +55,19 @@ Dialog recoverDialog() {
                                 .copyWith(color: errorText),
                             filled: true,
                             fillColor: Colors.white,
-                            labelText: Translator.phone.tr,
+                            labelText: Translator.phone_or_email.tr,
                             labelStyle: const TextStyle(color: primaryColor),
                             focusedBorder: focusedBorder3,
                             enabledBorder: enabledBorder3,
                             border: border3,
                             errorBorder: errorBorder3,
                             focusedErrorBorder: errorBorder3,
-
                           ),
                           validator: (txt) => _controller.emailValidation(txt!),
                         ),
                       ),
                       Flexible(child: Container()),
                       Expanded(
-
                           child: Container()),
                       Padding(
                         padding: const EdgeInsets.fromLTRB(6, 16, 6, 0),

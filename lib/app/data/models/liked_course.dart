@@ -40,7 +40,7 @@ class LikedCourse {
     image = json['image'];
     price = NumberFormat('#,###.##').format(json['price']);
     offer = NumberFormat('#,###.##').format(json['_offer']);
-    theNumberOfSeasons = json['the_number_of_seasons'];
+    theNumberOfSeasons = json['the_number_of_sessions'];
     header = json['header'];
     mentor = Mentor.fromJson(json['mentor']);
     liked = json['liked'];

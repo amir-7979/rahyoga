@@ -1,8 +1,11 @@
 import 'dart:async';
 import 'dart:convert';
+import 'dart:developer' as developer;
+
 import 'package:dio/dio.dart';
-import 'package:get/get.dart';
 import 'package:dio_smart_retry/dio_smart_retry.dart';
+import 'package:get/get.dart';
+
 import '../../../core/values/consts.dart';
 import '../models/article.dart';
 import '../models/basket.dart';
@@ -17,7 +20,6 @@ import '../models/paid.dart';
 import '../models/paid_course_info.dart';
 import '../models/profile.dart';
 import 'interceptors.dart';
-import 'dart:developer' as developer;
 
 class ContentApiService extends GetxService {
   late final Client _client;
@@ -54,13 +56,13 @@ class ContentApiService extends GetxService {
     }
   }
 
-
-  Future<String?> getVideoUrl(int courseId, int sessionId) async {
+  Future<String?> getVideoUrl(courseId, sessionId) async {
     try {
-      final response = await _dio.get('/api/season/hls/$sessionId/', queryParameters: {'course': courseId});
+      final response = await _dio.get('/api/season/download/',  data: jsonEncode(<String, Object>{'course': courseId, 'season': sessionId}));
       print(response.data.toString());
-      return response.data['hls_url'].toString();
+      return response.data['url'].toString();
     } catch (error) {
+      print(error.toString());
       userErrorHandler(error);
       return null;
     }
@@ -283,7 +285,6 @@ class ContentApiService extends GetxService {
         name: 'my.app.category',
         error: error.response.toString(),
       );
-      //todo which one??
       return (error.response!.data['messages'] != null && error.response!.data['messages'][0]['message_per'] != null ) ?
       error.response!.data['messages'][0]['message_per'].toString(): 'خظا ذر سرور';
     } else if (error is TimeoutException) {

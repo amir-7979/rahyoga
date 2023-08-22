@@ -1,6 +1,7 @@
 import 'package:get/get.dart';
 import 'package:rahyoga/app/screens/my_courses/my_courses_controller.dart';
 import 'package:webview_flutter/webview_flutter.dart';
+
 import '../../../core/languages/translator.dart';
 import '../../../core/utils/snack_bar.dart';
 import '../../data/models/buy_course_info.dart';

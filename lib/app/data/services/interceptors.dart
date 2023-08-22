@@ -1,16 +1,16 @@
+import 'dart:developer' as developer;
 import 'package:dio/dio.dart';
 import 'package:get/get.dart' hide Response, FormData, MultipartFile;
 import '../../../routes/routes.dart';
 import '../models/client.dart';
 import 'user_api_service.dart';
-import 'dart:developer' as developer;
 
 class TokenInterceptor implements Interceptor {
   final Client _client = Get.find<Client>();
   UserApiService userService = UserApiService();
 
   @override
-  Future<void> onError(DioError error, ErrorInterceptorHandler handler) async {
+  Future<void> onError(DioException error, ErrorInterceptorHandler handler) async {
     developer.log(
       'rahuoga',
       name: 'my.app.category',
@@ -38,8 +38,7 @@ class TokenInterceptor implements Interceptor {
           .addEntries({"Authorization": "Bearer ${_client.access}"}.entries);
     }
     if (_client.access.isEmpty ||
-        _client.accessTime * 1000
-            - DateTime.now().millisecondsSinceEpoch < 60000) {
+        _client.accessTime * 1000 - DateTime.now().millisecondsSinceEpoch < 60000) {
       userService.refreshToken();
     }
     return handler.next(options);

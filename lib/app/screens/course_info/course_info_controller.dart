@@ -1,12 +1,16 @@
+import 'dart:async';
 import 'dart:io';
-
 import 'package:flick_video_player/flick_video_player.dart';
 import 'package:get/get.dart';
+import 'package:rahyoga/app/screens/course_info/widgets/confirm_dialog.dart';
+import 'package:rahyoga/app/screens/my_courses/my_courses_controller.dart';
+import 'package:video_player/video_player.dart';
+
 import '../../../core/languages/translator.dart';
 import '../../data/models/all.dart';
+import '../../data/models/download_task.dart';
 import '../../data/models/paid_course_info.dart';
 import '../../data/services/content_api_services.dart';
-import 'package:video_player/video_player.dart';
 import '../../data/services/database_service.dart';
 import '../../data/services/video_service.dart';
 import '../home/home_controller.dart';
@@ -19,11 +23,10 @@ class CourseInfoController extends GetxController {
   Rx<PaidCourseInfo?> course = PaidCourseInfo().obs;
   int? id;
   RxInt index = 1.obs;
-  RxString link = ''.obs;
   RxInt downloadProgress = 0.obs;
   RxBool isLoading = false.obs;
-  RxBool isPaused = true.obs;
   RxBool isDownloading = false.obs;
+  RxBool pressDownloading = false.obs;
   RxBool isExist = false.obs;
   String fullScreen = Translator.fullScreen.tr;
   String courseDetail = Translator.courseDetail.tr;
@@ -40,32 +43,96 @@ class CourseInfoController extends GetxController {
         formatHint: VideoFormat.hls,
         videoPlayerOptions: VideoPlayerOptions(allowBackgroundPlayback: true)),
   );
+  late Stream<List<DownloadTask>> downloadStream;
+  late StreamSubscription<List<DownloadTask>> sub;
 
   @override
   void onInit() {
     id = Get.arguments;
     fetchCourse(id!);
+    downloadStream = _videoService.downloadTasksStream.stream;
+    sub = downloadStream.listen((event) => getTask(event));
     isLoading.value = false;
+    pressDownloading.value = false;
     update();
     super.onInit();
   }
 
-  void back() => Get.back();
+  void getTask(List<DownloadTask> event) {
+    DownloadTask? task;
+    try{
+    task = event.firstWhereOrNull((task) =>
+      task.courseId == id &&
+          task.sessionId ==
+             course.value!.progress!.seasons.all!.firstWhere((element) => element.order == index.value).id!);
+    }catch(err){
+      print(err.toString());
+    }
+    if (task != null) {
+      isDownloading.value = true;
+      downloadProgress.value = task.progress;
+      pressDownloading.value = false;
+      update();
+      if(task.progress == 100){
+        isExist.value = true;
+        goToSession(index.value);
+      }
+
+    }
+  }
+
+  Future<void> download() async {
+    if (isDownloading.value == false) {
+      pressDownloading.value = true;
+      update();
+      if(await db.videoExists(course.value!.id, course.value!.progress!.seasons.all!.firstWhere((element) => element.order == index.value).id!)){
+        Get.dialog(ConfirmDialog());
+      }else{
+        String? url = await _contentApiService.getVideoUrl(course.value!.id!,
+            course.value!.progress!.seasons.all![index.value - 1].id!);
+        if (url != null) {
+          pressDownloading.value = false;
+          isDownloading.value = true;
+          update();
+          await _videoService.downloadVideoFile(course.value!.id!,
+              course.value!.progress!.seasons.all![index.value - 1].id!,
+              url, 0);
+          goToSession(index.value);
+        }
+        isDownloading.value = false;
+      }
+    } else {
+      isDownloading.value = false;
+      pressDownloading.value = false;
+      update();
+      _videoService.cancelDownload(course.value!.id!, course.value!.progress!.seasons.all![index.value - 1].id!);
+    }
+    update();
+  }
 
   Future<void> goToSession(int i) async {
     index.value = i;
-    bool exist = await db.videoExists(course.value!.id, i);
-    isExist.value = exist;
-    flickManager.handleChangeVideo(
-        exist ? VideoPlayerController.file(File(_videoService.appDocumentsPath+'/${course.value!.id}_${i}.mp4')):
-        VideoPlayerController.network(
-      course.value!.progress!.seasons.all![i].hls ??
-          'https://stream.negavid.com/converted/130/16417/fMp9JB3mkPkGS6RKMjIcK6j8x6YwP95YTu30rKoeiEym62k2VFbt0jFcFcv8WWLVb6XcjT.m3u8',
-      httpHeaders: {'Referer': 'http://open.negavid.com'},
-      formatHint: VideoFormat.hls,
-    ));
-
+    downloadProgress.value = 0;
+    isDownloading.value = false;
+    pressDownloading.value = false;
+    isExist.value = await db.videoExists(course.value!.id, course.value!.progress!.seasons.all!.firstWhere((element) => element.order == index.value).id!);
+    await initVideoPlayer();
     update();
+
+  }
+
+  Future<void> initVideoPlayer() async {
+    isExist.value = await db.videoExists(course.value!.id, course.value!.progress!.seasons.all![index.value - 1].id!);
+    flickManager.handleChangeVideo(isExist.value
+        ? VideoPlayerController.file(File(
+            _videoService.appDocumentsPath + '/${course.value!.id}_${ course.value!.progress!.seasons.all![index.value - 1].id!}.mp4'))
+        : VideoPlayerController.network(
+            course.value!.progress!.seasons.all![index.value - 1].hls ??
+                'https://stream.negavid.com/converted/130/16417/fMp9JB3mkPkGS6RKMjIcK6j8x6YwP95YTu30rKoeiEym62k2VFbt0jFcFcv8WWLVb6XcjT.m3u8',
+            httpHeaders: {'Referer': 'http://open.negavid.com'},
+            formatHint: VideoFormat.hls,
+          ));
+
   }
 
   Future<void> updateSession() async {
@@ -78,44 +145,34 @@ class CourseInfoController extends GetxController {
     if (response != null) {
       course.value = response;
     } else {
-      print('null');
       course.value!.progress!.seasons.all![index.value - 1].passed =
           session.passed!;
     }
     update();
     Get.find<HomeController>().minorUpdate();
     Get.find<ProfileController>().minorUpdate();
+    Get.find<MyCoursesController>().refreshPage2();
   }
 
   Future<PaidCourseInfo?> fetchCourse(int id) async {
     course.value = await _contentApiService.paidCourse(id);
     goToSession(1);
-    update();
     return course.value;
   }
 
-  Future<void> download() async {
-    if (isDownloading.value == false) {
-      print('downloading');
-      isDownloading.value = true;
-      isPaused.value = false;
-      await _videoService.downloadVideoFile(course.value!.id!, index.value,
-          'https://jsoncompare.org/LearningContainer/SampleFiles/Video/MP4/sample-mp4-file.mp4',
-          (progress) {
-        downloadProgress.value = progress;
-      }, 0);
-      isDownloading.value = false;
-    } else {
-      print('canceling');
-      isDownloading.value = false;
-      isPaused.value = true;
-      _videoService.cancelDownload(course.value!.id!, index.value);
-    }
+  Future<void> deleteVideo()async {
+    pressDownloading.value = true;
+    update();
+    await db.deleteVideo(id, course.value!.progress!.seasons.all![index.value - 1].id!);
+    goToSession(index.value);
   }
+
+  void back() => Get.back();
 
   @override
   void onClose() {
     flickManager.dispose();
+    sub.cancel();
     super.onClose();
   }
 }

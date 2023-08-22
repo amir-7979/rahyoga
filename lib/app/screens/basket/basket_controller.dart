@@ -1,14 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:rahyoga/app/screens/my_courses/my_courses_controller.dart';
+
 import '../../../core/languages/translator.dart';
 import '../../../routes/routes.dart';
 import '../../data/models/basket.dart';
 import '../../data/services/content_api_services.dart';
 import '../home/home_controller.dart';
-import 'widget/cart_dialog.dart';
 
 class BasketController extends GetxController{
+
   final ContentApiService _apiService = Get.find<ContentApiService>();
   final discountController = TextEditingController();
   Rx<Basket?> basket =  Basket().obs;
@@ -53,13 +54,17 @@ class BasketController extends GetxController{
     super.onInit();
   }
 
+  void gotoPayment()=> Get.toNamed(AppRoutes.paymentScreen, arguments: [basket.value?.seller, basket.value?.totalOffer]);
+
+  void minorUpdate() {
+    basket.value!.count = null;
+    update();
+    fetchBasket();
+  }
   void closeDialog(){
     back();
     Get.find<MyCoursesController>().refreshPage2();
     update();
   }
 
-  void showDialog(){
-    Get.dialog(CartDialog());
-  }
 }

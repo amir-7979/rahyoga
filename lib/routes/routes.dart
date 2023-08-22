@@ -11,5 +11,6 @@ class AppRoutes {
   static const String byuCourseScreen = '/buy_course_screen';
   static const String moreScreen = '/more_screen';
   static const String bookmarkScreen = '/bookmark_screen';
+  static const String paymentScreen = '/payment_screen';
 
 }

@@ -1,9 +1,11 @@
 import 'dart:async';
 import 'dart:convert';
+import 'dart:developer' as developer;
+
 import 'package:dio/dio.dart';
 import 'package:get/get.dart';
 import 'package:mutex/mutex.dart';
-import 'dart:developer' as developer;
+
 import '../../../core/values/consts.dart';
 import '../models/client.dart';
 
@@ -24,13 +26,11 @@ class UserApiService extends GetxService {
       _client.fromJson(response.data);
       return response.statusCode.toString();
     } catch (error) {
-      if (error is DioError &&
-          error.response != null &&
-          error.response!.statusCode == 405) {
-        return '405';
+      if (error is DioException && error.response != null ){
+        return error.response!.data['detail'];
       } else {
         userErrorHandler(error);
-        return '-1';
+        return 'an error occurred';
       }
     }
   }
@@ -47,14 +47,12 @@ class UserApiService extends GetxService {
           'password': password,
         }),
       );
-      developer.log(
-        response.statusCode.toString() + response.toString(),
-        name: 'my.app.category',
-        error: response.toString(),
-      );
+
       return response.statusCode.toString();
     } catch (error) {
-      return '-1';
+      if (error is DioException && error.response != null ){
+        return error.response!.data['detail'];}
+      return  'an error occurred';
     }
   }
 
@@ -111,7 +109,6 @@ class UserApiService extends GetxService {
   Future<dynamic> refreshToken() async {
     try {
       mutex.acquire();
-      print('get token');
       final response = await _dio.put('/api/auth/login/refresh/',
           data: jsonEncode(<String, String>{'refresh': _client.refresh}));
       _client.fromJson(response.data);
@@ -127,7 +124,7 @@ class UserApiService extends GetxService {
       final response = await _dio.post(
         '/api/user/changePass/',
         data: jsonEncode(<String, String>{
-          'email': email,
+          'phone_number': email,
         }),
       );
       return response.statusCode.toString();
@@ -140,22 +137,24 @@ class UserApiService extends GetxService {
   Future<String> changePasswordCode(
       String email, String code, String pass1) async {
     try {
+      print(email +' : '+ code +' : '+ pass1);
       final response = await _dio.post(
-        '/api/user/changePass/',
+        '/api/user/changePass/check/',
         data: jsonEncode(<String, String>{
-          'username': email,
+          'phone_number': email,
           'code': code,
-          'password': pass1,
+          'new_password': pass1,
         }),
       );
       return response.statusCode.toString();
     } catch (error) {
-      if (error is DioError) {
-        return error.response!.data['detail'].toString();
+      if (error is DioException && error.response != null ){
+        return error.response!.data['detail'];
       } else {
         userErrorHandler(error);
-        return '-1';
+        return error.toString();
       }
+
     }
   }
 

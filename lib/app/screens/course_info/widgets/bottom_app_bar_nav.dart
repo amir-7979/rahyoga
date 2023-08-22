@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+
 import '../../../../core/theme/colors.dart';
 import '../../../../core/values/consts.dart';
 import '../../../widgets/proggress_bar.dart';

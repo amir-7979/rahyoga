@@ -22,41 +22,7 @@ class InfoWidget extends StatelessWidget {
     ),
       child: Column(
         children: [
-          InkWell(
-            onTap: () {},
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Row(
-                  children: [
-                    SvgPicture.asset('assets/images/profile/nav.svg'),
-                    Padding(
-                      padding: const EdgeInsetsDirectional.only(start: 10),
-                      child: Text(
-                        Translator.addresses.tr,
-                        style: Theme.of(context)
-                            .textTheme
-                            .bodyLarge!
-                            .copyWith(
-                            color: textGray),
-                      ),
-                    ),
-                  ],
-                ),
-                const Padding(
-                  padding: EdgeInsetsDirectional.only(end: 10),
-                  child: Icon(Icons.keyboard_arrow_left, color: profileGray,),
-                ),
-
-              ],
-            ),
-          ),
-          const Padding(
-            padding: EdgeInsetsDirectional.fromSTEB(35, 8, 0, 10),
-            child: Divider(),
-          ),
-
-          InkWell(
+        /*  InkWell(
             onTap: () {},
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -89,7 +55,7 @@ class InfoWidget extends StatelessWidget {
             padding: EdgeInsetsDirectional.fromSTEB(35, 8, 0, 10),
             child: Divider(),
           ),
-
+*/
           InkWell(
             onTap: () => _controller.gotoBookmark(),
             child: Row(
@@ -124,7 +90,7 @@ class InfoWidget extends StatelessWidget {
             child: Divider(),
           ),
 
-          InkWell(
+         /* InkWell(
             onTap: () {},
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -156,8 +122,7 @@ class InfoWidget extends StatelessWidget {
           const Padding(
             padding: EdgeInsetsDirectional.fromSTEB(35, 8, 0, 10),
             child: Divider(),
-          ),
-
+          ),*/
           InkWell(
             onTap: () {
               _controller.exit();

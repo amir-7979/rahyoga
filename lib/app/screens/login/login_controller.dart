@@ -4,14 +4,14 @@ import 'package:get/get.dart';
 import '../../../core/utils/authentication _format.dart';
 import '../../../routes/routes.dart';
 import '../../data/services/user_api_service.dart';
-import 'widgets/recover_dialog.dart';
 import '../../widgets/validate_dialog/validate_dialog.dart';
+import 'widgets/recover_dialog.dart';
 
 class LoginController extends GetxController {
   UserApiService userApiService = Get.find<UserApiService>();
   final usernameController = TextEditingController();
   final passwordController = TextEditingController();
-  final phoneController = TextEditingController();
+  TextEditingController phoneController = TextEditingController();
   final codeController = TextEditingController();
   RxBool passwordVisible = true.obs;
   RxBool isLoading = false.obs;
@@ -24,9 +24,9 @@ class LoginController extends GetxController {
 
   void gotoSignupScreen() => Get.offAndToNamed(AppRoutes.signupScreen);
 
-  void gotoRecoveryPasswordScreen() =>
+  void gotoRecoveryPasswordScreen(text) =>
       Get.toNamed(AppRoutes.recoveryPasswordScreen,
-          arguments: phoneController.value.text);
+          arguments: text);
 
   void gotoMainScreen() => Get.offAndToNamed(AppRoutes.mainScreen);
 
@@ -52,13 +52,17 @@ class LoginController extends GetxController {
   }
 
   Future<void> sendPasswordEmail() async {
+    String phone = '';
+    if(phoneController.value.text.isPhoneNumber){
+      phone = '+98' + phoneController.value.text.substring(1);
+      print(phone);
+    }
     final response =
-        await userApiService.sendPasswordEmail(phoneController.value.text);
+        await userApiService.sendPasswordEmail(phoneController.value.text.isPhoneNumber ? phone : phoneController.value.text);
     if (response == '200') {
       Get.back();
-      gotoRecoveryPasswordScreen();
+      gotoRecoveryPasswordScreen(phoneController.value.text.isPhoneNumber ? phone : phoneController.value.text);
     } else {
-      //todo add snackbar
       Get.back();
     }
   }
@@ -77,9 +81,10 @@ class LoginController extends GetxController {
           usernameController.value.text, passwordController.value.text);
       isLoading.value = false;
       update();
+      print(response.toString());
       if (response == '200') {
         gotoMainScreen();
-      } else if (response == '405') {
+      } else if (response == 'Your account is not active') {
         Get.dialog(
           validateDialog(
               usernameController.value.text, passwordController.value.text),

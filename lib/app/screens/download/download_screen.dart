@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+
 import '../../../core/theme/colors.dart';
 import '../../widgets/shimmer_screen.dart';
 import 'download_controller.dart';

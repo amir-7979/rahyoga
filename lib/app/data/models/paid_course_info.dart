@@ -61,7 +61,7 @@ class PaidCourseInfo {
     durationPersian = json['duration_persian'];
     price = json['price'];
     offer = json['_offer'];
-    theNumberOfSeasons = json['the_number_of_seasons']??0;
+    theNumberOfSeasons = json['the_number_of_sessions']??0;
     theNumberOfSeasonsPersian = json['the_number_of_seasons_persian'];
     dateModified = json['date_modified'];
     datePublished = json['date_published'];

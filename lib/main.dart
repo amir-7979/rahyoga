@@ -7,8 +7,8 @@ import 'package:rahyoga/app/data/services/storage_service.dart';
 import 'package:rahyoga/app/data/services/video_service.dart';
 import 'package:rahyoga/app/screens/splash/splash_screen.dart';
 import 'package:rahyoga/core/theme/colors.dart';
-import 'package:rahyoga/core/values/consts.dart';
 import 'package:rahyoga/routes/pages.dart';
+
 import 'app/data/models/client.dart';
 import 'app/data/services/content_api_services.dart';
 import 'app/data/services/database_service.dart';
@@ -18,7 +18,6 @@ import 'app/screens/splash/splash_controller.dart';
 import 'core/languages/translator.dart';
 import 'core/theme/text_theme.dart';
 import 'core/utils/scroll_behavior.dart';
-import 'package:path_provider/path_provider.dart';
 
 Future<void> main() async {
   await initServices();
@@ -41,6 +40,9 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
 
     SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]);
+    SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
+      statusBarColor: Colors.white70, // Replace with your desired status bar color
+    ));
     Get.lazyPut<SplashController>(
           () => SplashController(),
     );
@@ -59,10 +61,10 @@ class MyApp extends StatelessWidget {
       fallbackLocale: const Locale('en', 'US'),
       translations: Translator(),
       theme: ThemeData(
+          brightness: Brightness.light,
           splashColor: Colors.transparent,
           highlightColor: Colors.transparent,
           hoverColor: Colors.transparent,
-
         primarySwatch: Colors.blue,
         appBarTheme: AppBarTheme(toolbarHeight: 60, color: white, titleTextStyle: Theme.of(context).textTheme.headlineLarge!.copyWith(color: black, fontWeight: FontWeight.w700, fontSize: 18), elevation: 0.5),
         textTheme: persianTextTheme

@@ -33,10 +33,10 @@ class RecoveryPasswordController extends GetxController {
       final response = await userApiService.changePasswordCode(email??'', codeController.value.text, passwordController.value.text);
       isLoading.value = false;
       update();
-      if (response == 200) {
+      if (response == '200') {
         gotoLogin();
       } else {
-        errorText.value = 'error';
+        errorText.value = response.toString();
         update();
       }
     }

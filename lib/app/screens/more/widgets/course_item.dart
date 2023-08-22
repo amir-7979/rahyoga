@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:rahyoga/app/data/models/liked_course.dart';
 import 'package:rahyoga/app/screens/more/more_controller.dart';
-import 'package:rahyoga/app/screens/my_courses/my_courses_controller.dart';
 import 'package:rahyoga/core/values/consts.dart';
 
 import '../../../../core/languages/translator.dart';

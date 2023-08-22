@@ -4,7 +4,6 @@ import 'package:infinite_scroll_pagination/infinite_scroll_pagination.dart';
 import 'package:rahyoga/app/screens/bookmark/bookmark_controller.dart';
 import 'package:rahyoga/core/theme/colors.dart';
 
-import '../../../data/models/blog.dart';
 import '../../../widgets/shimmer_screen.dart';
 import 'blogs_item.dart';
 
