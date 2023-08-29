@@ -26,14 +26,12 @@ class ResultItem2 extends GetView<BasketController> {
               children: [
                 SizedBox(
                   height: 120,
+                  width: 140,
                   child: Stack(
                     children: [
-                      AspectRatio(
-                        aspectRatio: 1,
-                        child: ClipRRect(
-                          borderRadius: BorderRadius.circular(12),
-                          child: CacheImage(url: result.image ?? ''),
-                        ),
+                      ClipRRect(
+                        borderRadius: BorderRadius.circular(12),
+                        child: CacheImage(url: result.image ?? ''),
                       ),
                       Padding(
                         padding: const EdgeInsets.all(5.0),

@@ -251,7 +251,7 @@ class Translator extends Translations {
           lastSeen: 'آخرین بازدید',
           session: 'جلسه',
           lastActiveCourse: 'آخرین دوره فعال',
-          generalYogaCourses: 'دوره‌های جامع یوگا',
+          generalYogaCourses: 'دوره‌های یوگا',
           app_name: 'رهیـــــوگا',
           splash_text1: 'اینجا میتونه یه جمله الهام بخش بیاد',
           splash_text2: 'یک نفس عمیق بکش.',

@@ -6,26 +6,23 @@ import 'package:get/get.dart';
 import 'package:rahyoga/app/screens/splash/splash_controller.dart';
 import 'package:rahyoga/core/languages/translator.dart';
 import 'package:rahyoga/core/theme/colors.dart';
-
 import '../../../core/values/consts.dart';
 
-class SplashScreen extends StatelessWidget {
+class SplashScreen extends GetWidget<SplashController> {
   SplashScreen({Key? key}) : super(key: key);
-  final SplashController _ctrl = Get.find<SplashController>();
 
   @override
   Widget build(BuildContext context) {
-    Random random = Random();
-    int rnd = random.nextInt(5) + 1;
-    screenWidth = MediaQuery.of(context).size.width;
-    screenHeight = MediaQuery.of(context).size.height;
+
+    screenWidth = Get.width;
+    screenHeight = Get.height;
     return SafeArea(
       child: Scaffold(
         backgroundColor: Colors.black,
         body: Stack(
           fit: StackFit.expand,
           children: [
-            Image.asset('assets/images/splash/$rnd.jpg',fit: BoxFit.cover),
+            Image.asset('assets/images/splash/${controller.getRandomInt()}.jpg',fit: BoxFit.cover),
             Column(
               mainAxisAlignment: MainAxisAlignment.start,
               crossAxisAlignment: CrossAxisAlignment.center,

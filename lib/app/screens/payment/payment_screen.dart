@@ -27,13 +27,6 @@ class PaymentScreen extends GetView<PaymentController> {
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
               SizedBox(height: 10),
-              Text(
-                'برای خرید دوره به اکانت noushinjavadi در واتساپ یا تلگرام پیام داده و مبلغ مشخص شده را به شماره حساب زیر واریز نمایید.',
-                style: Get.textTheme.labelMedium!
-                    .copyWith(color: primaryColor, fontSize: 14),
-                maxLines: 4,
-              ),
-              SizedBox(height: 10),
               Center(child: Image.asset('assets/images/basket/payment.jpg')),
               SizedBox(height: 5),
               Text(

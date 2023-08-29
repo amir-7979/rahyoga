@@ -1,7 +1,7 @@
+import 'dart:math';
 import 'package:get/get.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:rahyoga/app/data/services/storage_service.dart';
-
 import '../../../core/values/consts.dart';
 import '../../../routes/routes.dart';
 import '../../data/models/client.dart';
@@ -11,6 +11,7 @@ class SplashController extends GetxController {
   StorageService storageService = Get.find<StorageService>();
   UserApiService userService = Get.find<UserApiService>();
   final Client _client = Get.find<Client>();
+  Random random = Random();
 
   Future<void> navigateToNextScreen() async {
     final result2 = await Future.sync(() async {
@@ -26,6 +27,10 @@ class SplashController extends GetxController {
     result2
         ? Get.offAndToNamed(AppRoutes.mainScreen)
         : Get.offAndToNamed(AppRoutes.loginScreen);
+  }
+
+  int getRandomInt(){
+    return random.nextInt(5) + 1;
   }
 
   @override

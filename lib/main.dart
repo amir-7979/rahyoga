@@ -48,7 +48,6 @@ class MyApp extends StatelessWidget {
     );
 
     return GetMaterialApp(
-
       initialBinding: SplashBinding(),
       title: 'RahYoga',
       debugShowCheckedModeBanner: false,
