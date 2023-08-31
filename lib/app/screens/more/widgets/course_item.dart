@@ -22,8 +22,8 @@ class CourseItem extends StatelessWidget {
         child: Row(
           children: [
             SizedBox(
-              height: favoriteItemHeight,
-              width: favoriteItemHeight,
+              height: favoriteItemHeight - 10,
+              width: favoriteItemHeight + 5,
               child: ClipRRect(
                 borderRadius: const BorderRadiusDirectional.all(
                      Radius.circular(12)),

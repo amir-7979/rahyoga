@@ -21,7 +21,7 @@ class PurchasedCourseItem extends StatelessWidget {
     return InkWell(
       onTap: () => controller.gotoCourseInfo(course.id??1),
       child: SizedBox(
-        height: purchasedItemHeight,
+        height: purchasedItemHeight - 13,
         child: Row(
           children: [
             Padding(
@@ -100,23 +100,6 @@ class PurchasedCourseItem extends StatelessWidget {
                                   color: textGray,
                                 ),
                           ),
-                          /*Row(
-                            children: [
-                              Text(
-                                '${Translator.continueCourse.tr}',
-                                style: Get.theme
-                                    .textTheme
-                                    .headlineMedium!
-                                    .copyWith(
-                                      color: primaryColor,
-                                    ),
-                              ),
-                                Icon(
-                                    Icons.arrow_forward_outlined,
-                                    color: primaryColor,
-                                  )
-                            ],
-                          )*/
                         ],
                     ),
                   ],

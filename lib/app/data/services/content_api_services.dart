@@ -31,19 +31,19 @@ class ContentApiService extends GetxService {
     _client = Get.find<Client>();
     _dio = Dio(BaseOptions(baseUrl: baseUrl));
     _dio.interceptors.addAll(
-        [
-          TokenInterceptor(),
-          RetryInterceptor(
-            dio: _dio,
-            logPrint: print,
-            retries: 2,
-            retryDelays: const [
-              Duration(seconds: 3),
-              Duration(seconds: 6),
-            ],
-          ),
-        ],
-      );
+      [
+        TokenInterceptor(),
+        RetryInterceptor(
+          dio: _dio,
+          logPrint: print,
+          retries: 2,
+          retryDelays: const [
+            Duration(seconds: 3),
+            Duration(seconds: 6),
+          ],
+        ),
+      ],
+    );
   }
 
   Future<Home?> home() async {
@@ -58,12 +58,14 @@ class ContentApiService extends GetxService {
 
   Future<String?> getVideoUrl(courseId, sessionId) async {
     try {
-      final response = await _dio.get('/api/season/download/',  data: jsonEncode(<String, Object>{'course': courseId, 'season': sessionId}));
+      final response = await _dio.get('/api/season/download/',
+          data: jsonEncode(
+              <String, Object>{'course': courseId, 'season': sessionId}));
       print(response.data.toString());
       return response.data['url'].toString();
     } catch (error) {
+      print('null here');
       print(error.toString());
-      userErrorHandler(error);
       return null;
     }
   }
@@ -86,6 +88,7 @@ class ContentApiService extends GetxService {
       userErrorHandler(error);
       return null;
     }
+
   }
 
   Future<LikedCourses?> getCourses(int page) async {
@@ -122,9 +125,9 @@ class ContentApiService extends GetxService {
     try {
       final response = await _dio.post('/api/course/makeProgress/',
           data: jsonEncode(<String, int>{
-        'course': course,
-        'season': season,
-      }));
+            'course': course,
+            'season': season,
+          }));
       print(response.data.toString());
       return PaidCourseInfo.fromJson(response.data);
     } catch (error) {
@@ -257,7 +260,8 @@ class ContentApiService extends GetxService {
 
   Future<LikedBlogs?> getLikedMovements(int page) async {
     try {
-      final response = await _dio.get('/api/article/movement/liked/?page=$page');
+      final response =
+          await _dio.get('/api/article/movement/liked/?page=$page');
       return LikedBlogs.fromJson(response.data);
     } catch (error) {
       userErrorHandler(error);
@@ -285,8 +289,14 @@ class ContentApiService extends GetxService {
         name: 'my.app.category',
         error: error.response.toString(),
       );
-      return (error.response!.data['messages'] != null && error.response!.data['messages'][0]['message_per'] != null ) ?
-      error.response!.data['messages'][0]['message_per'].toString(): 'خظا ذر سرور';
+      if (error.response!.data['messages'][0] != null) {
+        return (error.response!.data['messages'] != null &&
+                error.response!.data['messages'][0]['message_per'] != null)
+            ? error.response!.data['messages'][0]['message_per'].toString()
+            : 'خظا ذر سرور';
+      } else {
+        return error.response.toString();
+      }
     } else if (error is TimeoutException) {
       return error.message!;
     } else if (error is DioErrorType) {

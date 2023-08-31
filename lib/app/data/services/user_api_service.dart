@@ -27,10 +27,11 @@ class UserApiService extends GetxService {
       return response.statusCode.toString();
     } catch (error) {
       if (error is DioException && error.response != null ){
-        return error.response!.data['detail'];
+        
+        return 'این اکانت در سیستم وجود ندارد';
       } else {
         userErrorHandler(error);
-        return 'an error occurred';
+        return 'این اکانت در سیستم وجود ندارد';
       }
     }
   }
@@ -50,8 +51,10 @@ class UserApiService extends GetxService {
 
       return response.statusCode.toString();
     } catch (error) {
+
       if (error is DioException && error.response != null ){
-        return error.response!.data['detail'];}
+        return error.response!.data['messages'][0]['message_per'].toString();
+      }
       return  'an error occurred';
     }
   }

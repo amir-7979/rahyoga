@@ -30,13 +30,12 @@ class SplashController extends GetxController {
   }
 
   int getRandomInt(){
-    return random.nextInt(5) + 1;
+    return random.nextInt(10) + 1;
   }
 
   @override
   Future<void> onInit() async {
     appDirectory = await getApplicationDocumentsDirectory();
-
     await navigateToNextScreen();
     super.onInit();
   }

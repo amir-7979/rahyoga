@@ -19,6 +19,7 @@ class HomeScreen extends GetWidget<HomeController> {
 
   @override
   Widget build(BuildContext context) {
+    print(Get.width);
     return Scaffold(
       backgroundColor: white,
       appBar: AppBar(

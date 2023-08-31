@@ -12,8 +12,8 @@ double lastCourseImageWidth2 = 150;
 double generalYogaItemHeight = 230;
 double generalYogaItemWidth = 165;
 
-double purchasedItemHeight = 110;
-double purchasedItemImageWidth = 110;
+double purchasedItemHeight = 100;
+double purchasedItemImageWidth = 100;
 
 double favoriteItemHeight = 100;
 

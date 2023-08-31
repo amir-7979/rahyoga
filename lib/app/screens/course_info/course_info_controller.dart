@@ -100,6 +100,7 @@ class CourseInfoController extends GetxController {
           goToSession(index.value);
         }
         isDownloading.value = false;
+        update();
       }
     } else {
       isDownloading.value = false;

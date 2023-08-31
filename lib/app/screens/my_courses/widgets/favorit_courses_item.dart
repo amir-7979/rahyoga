@@ -26,13 +26,16 @@ class FavoriteCourseItem extends StatelessWidget {
           ),
           child: Row(
             children: [
-              SizedBox(
-                height: favoriteItemHeight,
-                width: favoriteItemHeight,
-                child: ClipRRect(
-                  borderRadius: const BorderRadiusDirectional.horizontal(
-                      start: Radius.circular(12)),
-                  child: CacheImage(url: likedCourse.image ?? ''),
+
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 5),
+                child: SizedBox(
+                  height: favoriteItemHeight - 10,
+                  width: favoriteItemHeight + 5,
+                  child: ClipRRect(
+                    borderRadius: const BorderRadiusDirectional.all(Radius.circular(12)),
+                    child: CacheImage(url: likedCourse.image ?? ''),
+                  ),
                 ),
               ),
               Expanded(
@@ -67,13 +70,14 @@ class FavoriteCourseItem extends StatelessWidget {
                       ),
                       Padding(
                         padding:
-                            const EdgeInsetsDirectional.symmetric(vertical: 6),
+                            const EdgeInsetsDirectional.only(top: 2),
                         child: Text(
                           '${Translator.mentor.tr} : ${likedCourse.mentor!.fullname ?? ''}',
                           style: Get.theme.textTheme.headlineSmall!
                               .copyWith(color: grayText2),
                         ),
                       ),
+                      SizedBox(height: 5),
                       const Divider(height: 1),
                       Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -82,11 +86,11 @@ class FavoriteCourseItem extends StatelessWidget {
                           Text(
                             Translator.toman.trParams(
                                 {'number': likedCourse.offer.toString() ?? ''}),
-                            style: Get.theme.textTheme.displayLarge!
+                            style: Get.theme.textTheme.headlineMedium!
                                 .copyWith(color: black),
                           ),
                           SizedBox(
-                            height: 40,
+                            height: 38,
                             child: Obx(
                               () => (controller.isLoading.value ==
                                       likedCourse.id)
@@ -123,7 +127,7 @@ class FavoriteCourseItem extends StatelessWidget {
                                             child: Text(
                                               '${Translator.buyCourse.tr}',
                                               style: Get
-                                                  .theme.textTheme.bodyMedium!
+                                                  .theme.textTheme.headlineMedium!
                                                   .copyWith(
                                                       color: primaryColor),
                                             ),

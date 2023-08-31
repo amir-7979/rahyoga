@@ -99,7 +99,7 @@ class CourseInfoScreen extends GetView<CourseInfoController> {
                                             .value!
                                             .progress!
                                             .seasons
-                                            .all![controller.index.value]
+                                            .all![controller.index.value -1]
                                             .passed!
                                     ? SvgPicture.asset(
                                         'assets/images/course_info/green_check.svg',
@@ -206,7 +206,7 @@ class CourseInfoScreen extends GetView<CourseInfoController> {
                     if (controller
                         .course.value!.progress!.seasons.all!.isNotEmpty)
                       Text(
-                        '${controller.course.value!.progress!.seasons.all![controller.index.value].header ?? ''}',
+                        '${controller.course.value!.progress!.seasons.all![controller.index.value -1].header ?? ''}',
                         style: Get.theme.textTheme.bodySmall!
                             .copyWith(color: black),
                       ),
@@ -215,7 +215,7 @@ class CourseInfoScreen extends GetView<CourseInfoController> {
                         .course.value!.progress!.seasons.all!.isNotEmpty)
                       ReadMoreText(
                         controller.course.value!.progress!.seasons
-                                .all![controller.index.value].description ??
+                                .all![controller.index.value -1].description ??
                             '',
                         trimLines: 4,
                         style: Get.theme.textTheme.bodyMedium!
