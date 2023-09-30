@@ -15,7 +15,7 @@ class MovementItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return InkWell(
-      onTap: ()=> controller.gotoArticle(movement.id??1, 'حرکت یوگا'),
+      onTap: ()=> controller.gotoArticle(movement.id??1, 'آسانا'),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [

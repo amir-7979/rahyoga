@@ -1,25 +1,20 @@
 import 'package:flutter/material.dart';
-import 'package:rahyoga/app/screens/course_info/widgets/future_item.dart';
-import 'package:rahyoga/app/screens/course_info/widgets/passed_item.dart';
-import 'package:rahyoga/core/values/consts.dart';
-
+import 'future_item.dart';
+import 'passed_item.dart';
 import '../../../data/models/all.dart';
 
 
 class CourseList extends StatelessWidget {
-  CourseList(this.courses, {Key? key}) : super(key: key);
-  List<All> courses;
+  CourseList(this.courses);
+  final List<All> courses;
 
   @override
   Widget build(BuildContext context) {
-    return SizedBox(
-      width: screenWidth,
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: courses.map((item) {
-          return (item.passed == true) ? PassedItem(item) : FutureItem(item);
-        }).toList()
-      ),
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: courses.map((item) {
+        return (item.passed == true) ? PassedItem(item) : FutureItem(item);
+      }).toList()
     );
   }
 }

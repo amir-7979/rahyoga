@@ -2,51 +2,50 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 String? checkUsernameLogin(String txt) {
-  if (txt.isEmpty) return 'Please enter username';
-  if (txt.length < 4) return "Username length must be more than 3";
-  if (txt.contains(' ')) return "Allowing all character except 'whitespace'";
-  if (txt.contains('-')) return "' - ' not allowed";
+  if (txt.isEmpty) return 'یوزر نیم نمیتواند خالی باشد';
+  if (txt.length < 4) return "یوزر نیم باید بیش از چهار حرف باشد";
+  if (txt.contains('-')) return "- مجاز نیست";
   //check for email pattern
   return null;
 }
 
 String? checkUsernameSignUp(String txt) {
-  if (txt.isEmpty) return 'Please enter username';
-  if (txt.length < 4) return "Username length must be more than 3";
-  if (txt.contains(' ')) return "Allowing all character except 'whitespace'";
-  if (txt.contains('-')) return "' - ' not allowed";
-  if (txt.isEmail) return 'cant use email format';
+  if (txt.isEmpty) return 'یوزر نیم نمیتواند خالی باشد';
+  if (txt.length < 4) return "یوزر نیم باید بیش از چهار حرف باشد";
+  if (txt.contains('-')) return "- مجاز نیست";
+  if (txt.isEmail) return 'نمیتوانید از ایمیل استفاده کنید';
 
   //check for email pattern
   return null;
 }
 
 String? checkPasswordSignUp(String txt1, String txt2) {
-  if (txt1.isEmpty) return 'Please enter password';
-  if (!txt1.contains(RegExp(r'[0-9]'))) return "Password must contain a number";
-  if (txt1.length < 6) return "Password length must be more than 5";
-  if (txt1 != txt2) return "Passwords Don't Match";
-  if (txt1.contains(' ')) return "Allowing all character except 'whitespace'";
+  if (txt1.isEmpty) return 'رمز عبور نمیتواند خالی باشد';
+  if (!txt1.contains(RegExp(r'[0-9]'))) return "رمز عبور باید شامل عدد باشد";
+  if (txt1.length < 6) return "رمز عبور باید بیش از پنج حرف باشد";
+  if (txt1 != txt2) return "رمز عبور مطابقت ندارد";
+  if (txt1.contains(' ')) return "کاراکتر فاصله مجاز نیست'";
   return null;
 }
 
 String? checkEmail(String txt) {
-  if (txt.isEmpty) return 'Please enter email';
-  if (!txt.isEmail) return 'Please enter valid email';
+  if (txt.isEmpty) return 'ایمیل نمی تواند خالی باشد';
+  if (!txt.isEmail) return 'لطفا ایمیل معتبر وارد کنید';
   return null;
 }
 
 String? checkPhoneNumberSignUp(String txt) {
-  if (txt.isEmpty) return 'Please enter phone number';
-  if (!txt.isPhoneNumber) return 'Please enter valid phone number';
+  //todo
+  if (txt.isEmpty && GetPlatform.isAndroid) return 'لطفا شماره تلفن همراه را وارد کنید';
+  if (!txt.isPhoneNumber) return 'لطفا شماره تلفن معتبر وارد کنید';
   return null;
 }
 
 String? checkPasswordLogin(String txt1) {
-  if (txt1.isEmpty) return 'Please enter password';
-  if (!txt1.contains(RegExp(r'[0-9]'))) return "Password Must Contain A Number";
-  if (txt1.length < 6) return "Password Length Must Be More Than 5";
-  if (txt1.contains(' ')) return "Allowing all character except 'whitespace'";
+  if (txt1.isEmpty) return 'رمز عبور نمیتواند خالی باشد';
+  if (!txt1.contains(RegExp(r'[0-9]'))) return "رمز عبور باید شامل عدد باشد";
+  if (txt1.length < 6) return "رمز عبور باید بیش از پنج حرف باشد";
+  if (txt1.contains(' ')) return "کاراکتر فاصله مجاز نیست";
   return null;
 }
 

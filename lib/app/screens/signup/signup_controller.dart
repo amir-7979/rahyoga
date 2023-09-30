@@ -38,7 +38,10 @@ class SignupController extends GetxController {
       isLoading.value = true;
       errorText.value = '';
       update();
-      String phoneNumber = '+98' + phoneNumberController.text.substring(1);
+      String phoneNumber ='';
+      //todo
+      if(GetPlatform.isAndroid)
+        phoneNumber = '+98' + phoneNumberController.text.substring(1);
       final response = await userApiService.signup(
           usernameController.value.text, phoneNumber, emailController.value.text, passwordController.value.text);
       isLoading.value = false;

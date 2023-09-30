@@ -8,7 +8,7 @@ import '../course_info_controller.dart';
 
 class PassedItem extends GetView<CourseInfoController> {
   PassedItem(this.session, {Key? key}) : super(key: key);
-  All session;
+  final All session;
 
   @override
   Widget build(BuildContext context) {

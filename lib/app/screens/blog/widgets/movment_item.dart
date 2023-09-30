@@ -14,7 +14,7 @@ class MovementItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return InkWell(
-      onTap: ()=> controller.gotoArticle(movement.id!, 'حرکت یوگا'),
+      onTap: ()=> controller.gotoArticle(movement.id!, 'آسانا'),
       child: Container(
           decoration:  BoxDecoration(
             borderRadius: BorderRadius.circular(12.0),

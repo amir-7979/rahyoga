@@ -62,8 +62,9 @@ class SignupForm extends StatelessWidget {
                 //onSubmitted: (txt) => function(controller.text),
               ),
             ),
-            const SizedBox(height: 10),
-            SizedBox(
+            //todo
+            GetPlatform.isAndroid ? const SizedBox(height: 10) : Container(),
+            GetPlatform.isAndroid ? SizedBox(
               height: 70,
               child: TextFormField(
                 style: Get.theme
@@ -94,7 +95,7 @@ class SignupForm extends StatelessWidget {
                 validator: (txt) => _controller.phoneNumberValidation(txt!),
                 //onSubmitted: (txt) => function(controller.text),
               ),
-            ),
+            ) : Container(),
             const SizedBox(height: 10),
             SizedBox(
               height: 70,

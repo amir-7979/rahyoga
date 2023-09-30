@@ -48,7 +48,7 @@ class BlogScreen extends StatelessWidget {
                       Tab(
                           height: 40,
                           child: Text(
-                            Translator.yogaMovements.tr,
+                            'آسانا',
                             style: Theme.of(context)
                                 .textTheme
                                 .headlineMedium!

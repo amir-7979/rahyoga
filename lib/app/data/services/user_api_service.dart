@@ -51,7 +51,6 @@ class UserApiService extends GetxService {
 
       return response.statusCode.toString();
     } catch (error) {
-
       if (error is DioException && error.response != null ){
         return error.response!.data['messages'][0]['message_per'].toString();
       }

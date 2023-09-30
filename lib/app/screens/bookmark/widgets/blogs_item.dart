@@ -20,7 +20,7 @@ class BlogItem extends StatelessWidget {
       width: screenWidth,
       child: InkWell(
         onTap: () {
-          controller.gotoArticle(blog.id??1, 'مقاله');
+          controller.gotoArticle(blog.id??1, 'مطلب ذخیره شده');
         },
         child: Row(
           crossAxisAlignment: CrossAxisAlignment.start,

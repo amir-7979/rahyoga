@@ -3,13 +3,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
 import 'package:readmore/readmore.dart';
-
 import '../../../core/theme/colors.dart';
 import '../../data/models/paid_course_info.dart';
 import '../../widgets/shimmer_screen.dart';
+import 'widgets/course_list.dart';
 import 'course_info_controller.dart';
 import 'widgets/bottom_app_bar_nav.dart';
-import 'widgets/course_list.dart';
 
 class CourseInfoScreen extends GetView<CourseInfoController> {
   CourseInfoScreen({Key? key}) : super(key: key);
@@ -47,7 +46,7 @@ class CourseInfoScreen extends GetView<CourseInfoController> {
 
   Widget favoriteCourses(PaidCourseInfo? course) {
     return course == null
-        ? Container()
+        ? Container() 
         : ListView(
             children: [
               FittedBox(
