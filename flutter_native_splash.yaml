@@ -25,7 +25,7 @@ flutter_native_splash:
   # parameters from above. If the image_dark parameter is specified, color_dark or
   # background_image_dark must be specified.  color_dark and background_image_dark cannot both be
   # set.
-  image: assets/images/splash/logo2.png
+  image: assets/images/splash/logo.png
   color: "#425C5A"
   icon_background_color: "#FFFFFF"
   #branding_dark: assets/dart_dark.png
@@ -40,7 +40,7 @@ flutter_native_splash:
   # 640 pixels in diameter.
   # App icon without an icon background: This should be 1152×1152 pixels, and fit within a circle
   # 768 pixels in diameter.
-    image: assets/images/splash/logo2.png
+    image: assets/images/splash/logo.png
     color: "#425C5A"
     icon_background_color: "#FFFFFF"
 
@@ -50,7 +50,7 @@ flutter_native_splash:
   # The image_dark, color_dark, icon_background_color_dark, and branding_dark set values that
   # apply when the device is in dark mode. If they are not specified, the app will use the
   # parameters from above.
-  #  image_dark: assets/images/splash/logo2.png
+  #  image_dark: assets/images/splash/logo.png
   #  color_dark: "#425C5A"
   #  icon_background_color_dark: "#FFFFFF"
 

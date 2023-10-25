@@ -48,6 +48,7 @@ class CourseInfoScreen extends GetView<CourseInfoController> {
     return course == null
         ? Container() 
         : ListView(
+            controller: controller.scrollController,
             children: [
               FittedBox(
                 fit: BoxFit.contain,

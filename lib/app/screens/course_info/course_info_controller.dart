@@ -1,6 +1,7 @@
 import 'dart:async';
 import 'dart:io';
 import 'package:flick_video_player/flick_video_player.dart';
+import 'package:flutter/widgets.dart';
 import 'package:get/get.dart';
 import 'package:rahyoga/app/screens/course_info/widgets/confirm_dialog.dart';
 import 'package:rahyoga/app/screens/my_courses/my_courses_controller.dart';
@@ -45,6 +46,7 @@ class CourseInfoController extends GetxController {
   );
   late Stream<List<DownloadTask>> downloadStream;
   late StreamSubscription<List<DownloadTask>> sub;
+  final ScrollController scrollController = ScrollController();
 
   @override
   void onInit() {
@@ -118,6 +120,7 @@ class CourseInfoController extends GetxController {
     pressDownloading.value = false;
     isExist.value = await db.videoExists(course.value!.id, course.value!.progress!.seasons.all!.firstWhere((element) => element.order == index.value).id!);
     await initVideoPlayer();
+    scrollUp();
     update();
 
   }
@@ -169,6 +172,14 @@ class CourseInfoController extends GetxController {
   }
 
   void back() => Get.back();
+
+  scrollUp(){
+      scrollController.animateTo(
+        0.0,
+        duration: Duration(milliseconds: 500),
+        curve: Curves.easeOut,
+      );
+  }
 
   @override
   void onClose() {
