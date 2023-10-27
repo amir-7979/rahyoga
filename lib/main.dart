@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
@@ -38,13 +37,13 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-
     SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]);
     SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
-      statusBarColor: Colors.white70, // Replace with your desired status bar color
+      statusBarColor:
+      Colors.white.withAlpha(10), // Replace with your desired status bar color
     ));
     Get.lazyPut<SplashController>(
-          () => SplashController(),
+      () => SplashController(),
     );
 
     return GetMaterialApp(
@@ -55,7 +54,8 @@ class MyApp extends StatelessWidget {
         GlobalCupertinoLocalizations.delegate,
         GlobalMaterialLocalizations.delegate,
         GlobalWidgetsLocalizations.delegate,
-      ], // set this property
+      ],
+      // set this property
       locale: const Locale('fa', 'IR'),
       fallbackLocale: const Locale('en', 'US'),
       translations: Translator(),
@@ -64,10 +64,22 @@ class MyApp extends StatelessWidget {
           splashColor: Colors.transparent,
           highlightColor: Colors.transparent,
           hoverColor: Colors.transparent,
-        primarySwatch: Colors.blue,
-        appBarTheme: AppBarTheme(toolbarHeight: 60, color: white, titleTextStyle: Theme.of(context).textTheme.headlineLarge!.copyWith(color: black, fontWeight: FontWeight.w700, fontSize: 18), elevation: 0.5),
-        textTheme: persianTextTheme
-      ),
+          primarySwatch: Colors.blue,
+          appBarTheme: AppBarTheme(
+              toolbarHeight: 60,
+              color: white,
+              titleTextStyle: Theme.of(context)
+                  .textTheme
+                  .headlineLarge!
+                  .copyWith(
+                      color: black, fontWeight: FontWeight.w700, fontSize: 18),
+              elevation: 0.5,
+            systemOverlayStyle: const SystemUiOverlayStyle(
+              statusBarColor: Colors.green,
+              statusBarIconBrightness: Brightness.dark,
+              statusBarBrightness: Brightness.light,
+            ),),
+          textTheme: persianTextTheme),
       getPages: AppPages.pages,
       builder: (context, child) {
         return ScrollConfiguration(

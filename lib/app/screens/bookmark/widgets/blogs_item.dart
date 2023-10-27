@@ -26,6 +26,8 @@ class BlogItem extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             SizedBox(
+              width: 120,
+              height: 80,
               child: ClipRRect(
                 borderRadius: BorderRadius.circular(12),
                 child: CacheImage(url: blog.image??''),
