@@ -87,7 +87,9 @@ class InfoWidget extends StatelessWidget {
           ),
           const Padding(
             padding: EdgeInsetsDirectional.fromSTEB(35, 8, 0, 10),
-            child: Divider(),
+            child: Divider(
+              color: tertiaryColor2,
+            ),
           ),
 
          /* InkWell(

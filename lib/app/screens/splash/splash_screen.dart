@@ -1,4 +1,3 @@
-import 'dart:math';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
@@ -13,7 +12,6 @@ class SplashScreen extends GetWidget<SplashController> {
 
   @override
   Widget build(BuildContext context) {
-
     screenWidth = Get.width;
     screenHeight = Get.height;
     return SafeArea(

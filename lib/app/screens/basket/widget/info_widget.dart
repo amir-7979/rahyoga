@@ -65,7 +65,7 @@ class InfoWidget extends StatelessWidget {
                 ),
                 const Padding(
                   padding: EdgeInsetsDirectional.symmetric(horizontal: 10),
-                  child: Divider(height: 1),
+                  child: Divider(height: 1,  color: tertiaryColor2),
                 ),
 
                 Padding(
@@ -92,7 +92,7 @@ class InfoWidget extends StatelessWidget {
                 ),
                 const Padding(
                   padding: EdgeInsetsDirectional.symmetric(horizontal: 10),
-                  child: Divider(height: 1),
+                  child: Divider(height: 1,  color: tertiaryColor2),
                 ),
 
                 Padding(
@@ -119,7 +119,7 @@ class InfoWidget extends StatelessWidget {
                 ),
                 const Padding(
                   padding: EdgeInsetsDirectional.symmetric(horizontal: 10),
-                  child: Divider(height: 1),
+                  child: Divider(height: 1,  color: tertiaryColor2),
                 ),
             ],),
           ),

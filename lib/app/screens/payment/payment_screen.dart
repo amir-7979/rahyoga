@@ -2,7 +2,6 @@ import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:rahyoga/app/screens/payment/payment_controller.dart';
-import '../../../core/languages/translator.dart';
 import '../../../core/theme/colors.dart';
 import 'package:url_launcher/url_launcher.dart';
 
@@ -13,6 +12,9 @@ class PaymentScreen extends GetView<PaymentController> {
       child: Scaffold(
         backgroundColor: white,
         appBar: AppBar(
+            elevation: 0.5,
+            surfaceTintColor: Colors.transparent,
+            shadowColor: Colors.black,
             leading: BackButton(
               onPressed: controller.back,
               color: black,

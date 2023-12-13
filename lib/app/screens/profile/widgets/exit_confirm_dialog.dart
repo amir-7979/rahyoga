@@ -8,6 +8,7 @@ final ProfileController _controller = Get.find<ProfileController>();
 
 AlertDialog exitConfirmDialog() {
   return AlertDialog(
+    surfaceTintColor: white,
     title: Text('آیا می خواهید خارج شوید؟', style: Get.textTheme.displayLarge!.copyWith(color: black)),
     actions: [
       TextButton(

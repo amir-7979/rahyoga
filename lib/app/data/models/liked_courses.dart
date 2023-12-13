@@ -1,4 +1,3 @@
-import 'package:get/get.dart';
 
 import 'liked_course.dart';
 

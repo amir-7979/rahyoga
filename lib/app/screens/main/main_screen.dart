@@ -22,7 +22,7 @@ class MainScreen extends GetWidget<MainController> {
           navBarHeight: 60,
           padding: const NavBarPadding.symmetric(horizontal: 5),
           context,
-          onItemSelected: (val){
+          onItemSelected: (val) {
             controller.setTab(val);
           },
           controller: controller.tabController,
@@ -40,7 +40,6 @@ class MainScreen extends GetWidget<MainController> {
             // Navigation Bar's items animation properties.
             duration: Duration(milliseconds: 200),
             curve: Curves.ease,
-
           ),
           screenTransitionAnimation: const ScreenTransitionAnimation(
             // Screen transition animation on change of selected tab.
@@ -54,11 +53,9 @@ class MainScreen extends GetWidget<MainController> {
               top: Radius.circular(35),
             ),
           ),
-          navBarStyle:
-              NavBarStyle.style3,
+          navBarStyle: NavBarStyle.style3,
         ),
       ),
-
     );
   }
 }

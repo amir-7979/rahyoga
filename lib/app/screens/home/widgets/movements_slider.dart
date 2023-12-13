@@ -24,7 +24,7 @@ class MovementsSlider extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             Text(
-             'آسانا',
+              'آسانا',
               style: Theme.of(context)
                   .textTheme
                   .displayLarge!

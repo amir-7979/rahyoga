@@ -37,4 +37,25 @@ final darkThem = ThemeData(
   colorScheme: ColorScheme.fromSwatch()
       .copyWith(secondary: Colors.white)
       .copyWith(background: Colors.white),
+  buttonTheme: ButtonThemeData(
+    splashColor: Colors.transparent
+  ),
+  textButtonTheme: TextButtonThemeData(
+    style: ButtonStyle(
+      overlayColor: MaterialStateProperty.resolveWith<Color?>(
+            (Set<MaterialState> states) {
+          if (states.contains(MaterialState.pressed)) {
+            return Colors.transparent; // Set to Colors.transparent or any other color as desired
+          }
+          return null;
+        },
+      ),
+
+  ),
+  ),
+  splashColor: Colors.transparent,
+  splashFactory: NoSplash.splashFactory,
+  shadowColor: Colors.transparent,
+    hoverColor: Colors.transparent,
+  applyElevationOverlayColor: false
 );

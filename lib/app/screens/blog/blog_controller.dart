@@ -10,11 +10,13 @@ import '../../data/services/content_api_services.dart';
 
 class BlogController extends GetxController {
   final ContentApiService _contentApiService = Get.find<ContentApiService>();
-  final PagingController<int, Movement> pagingController1 = PagingController(firstPageKey: 1);
-  final PagingController<int, Blog> pagingController2 = PagingController(firstPageKey: 1);
+  final PagingController<int, Movement> pagingController1 =
+      PagingController(firstPageKey: 1);
+  final PagingController<int, Blog> pagingController2 =
+      PagingController(firstPageKey: 1);
 
-  Rx<Movements?> movements =  Movements().obs;
-  Rx<Blogs?> blogs =  Blogs().obs;
+  Rx<Movements?> movements = Movements().obs;
+  Rx<Blogs?> blogs = Blogs().obs;
 
   Future<Movements?> fetchMovements(int i) async {
     movements.value = await _contentApiService.movements(i);
@@ -28,23 +30,23 @@ class BlogController extends GetxController {
     return blogs.value;
   }
 
-  void gotoArticle(int i, String txt){
+  void gotoArticle(int i, String txt) {
     Get.toNamed(AppRoutes.articleScreen, arguments: [i, txt]);
   }
 
   Future<void> _fetchPage1(int pageKey) async {
     try {
       final newItems = await fetchMovements(pageKey);
-      if(newItems == null || newItems.movements == []) {
+      if (newItems == null || newItems.movements == []) {
         pagingController1.appendLastPage([]);
         return;
       }
       final isLastPage = newItems.next == null;
       if (isLastPage) {
-        pagingController1.appendLastPage(newItems.movements??[]);
+        pagingController1.appendLastPage(newItems.movements ?? []);
       } else {
         final nextPageKey = pageKey + 1;
-        pagingController1.appendPage(newItems.movements??[], nextPageKey);
+        pagingController1.appendPage(newItems.movements ?? [], nextPageKey);
       }
     } catch (error) {
       pagingController1.error = error;
@@ -55,22 +57,21 @@ class BlogController extends GetxController {
   Future<void> _fetchPage2(int pageKey) async {
     try {
       final newItems = await fetchBlogs(pageKey);
-      if(newItems == null || newItems.articles == []) {
+      if (newItems == null || newItems.articles == []) {
         pagingController2.appendLastPage([]);
         return;
       }
       final isLastPage = newItems.next == null;
       if (isLastPage) {
-        pagingController2.appendLastPage(newItems.articles??[]);
+        pagingController2.appendLastPage(newItems.articles ?? []);
       } else {
         final nextPageKey = pageKey + 1;
-        pagingController2.appendPage(newItems.articles??[], nextPageKey);
+        pagingController2.appendPage(newItems.articles ?? [], nextPageKey);
       }
     } catch (error) {
       pagingController2.error = error;
     }
     update();
-
   }
 
   @override
@@ -83,5 +84,4 @@ class BlogController extends GetxController {
     });
     super.onInit();
   }
-
 }

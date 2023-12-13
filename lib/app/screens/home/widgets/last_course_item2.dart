@@ -11,8 +11,9 @@ import '../../../widgets/cache_image.dart';
 import '../../../widgets/proggress_bar.dart';
 
 class LastCourseItem2 extends GetWidget<HomeController> {
-   LastCourseItem2(this.lastCourse, {super.key});
-   LastCourse lastCourse;
+  LastCourseItem2(this.lastCourse, {super.key});
+
+  LastCourse lastCourse;
 
   @override
   Widget build(BuildContext context) {
@@ -39,14 +40,16 @@ class LastCourseItem2 extends GetWidget<HomeController> {
                   child: Text(
                     Translator.myCourses.tr,
                     style: Theme.of(context).textTheme.displayMedium!.copyWith(
-                        color: primaryColor, decoration: TextDecoration.underline),
+                        color: primaryColor,
+                        decoration: TextDecoration.underline),
                   ),
                 ),
               ],
             ),
           ),
           InkWell(
-            onTap: () => controller.gotoCourseInfo(lastCourse.course!.id!.toInt()),
+            onTap: () =>
+                controller.gotoCourseInfo(lastCourse.course!.id!.toInt()),
             child: Padding(
               padding: const EdgeInsetsDirectional.only(end: 15),
               child: Container(
@@ -66,14 +69,15 @@ class LastCourseItem2 extends GetWidget<HomeController> {
                             ClipRRect(
                               borderRadius: BorderRadius.circular(8.0),
                               child: CacheImage(
-                                  url: lastCourse.course!.image??''
-                              ),
+                                  url: lastCourse.course!.image ?? ''),
                             ),
                             Padding(
-                              padding: const EdgeInsetsDirectional.fromSTEB(5, 5, 0, 0),
+                              padding: const EdgeInsetsDirectional.fromSTEB(
+                                  5, 5, 0, 0),
                               child: Align(
                                 alignment: AlignmentDirectional.topStart,
-                                child: SvgPicture.asset('assets/images/red_dot.svg'),
+                                child: SvgPicture.asset(
+                                    'assets/images/red_dot.svg'),
                               ),
                             ),
                           ],
@@ -92,7 +96,7 @@ class LastCourseItem2 extends GetWidget<HomeController> {
                               children: [
                                 Expanded(
                                   child: Text(
-                                    lastCourse.course!.header??'',
+                                    lastCourse.course!.header ?? '',
                                     style: Theme.of(context)
                                         .textTheme
                                         .displayLarge!
@@ -100,7 +104,7 @@ class LastCourseItem2 extends GetWidget<HomeController> {
                                   ),
                                 ),
                                 Text(
-                                  '${Translator.session.tr} ${lastCourse.season!.orderPersian??''}',
+                                  '${Translator.session.tr} ${lastCourse.season!.orderPersian ?? ''}',
                                   style: Theme.of(context)
                                       .textTheme
                                       .headlineSmall!
@@ -116,7 +120,7 @@ class LastCourseItem2 extends GetWidget<HomeController> {
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
                                 Text(
-                                  '${Translator.mentor.tr} : ${lastCourse.course!.mentor!.fullname??''}',
+                                  '${Translator.mentor.tr} : ${lastCourse.course!.mentor!.fullname ?? ''}',
                                   style: Theme.of(context)
                                       .textTheme
                                       .headlineSmall!
@@ -134,13 +138,13 @@ class LastCourseItem2 extends GetWidget<HomeController> {
                                   width: 50,
                                   child: Center(
                                     child: Text(
-                                      '${(lastCourse.progress!*100).toInt()}%',
+                                      '${(lastCourse.progress! * 100).toInt()}%',
                                       style: Theme.of(context)
                                           .textTheme
                                           .displayMedium!
                                           .copyWith(
-                                        color: black,
-                                      ),
+                                            color: black,
+                                          ),
                                     ),
                                   ),
                                 ),

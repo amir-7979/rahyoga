@@ -17,6 +17,9 @@ class ProfileScreen extends GetView<ProfileController> {
     return Scaffold(
       backgroundColor: white,
       appBar: AppBar(
+        elevation: 0.5,
+        surfaceTintColor: Colors.transparent,
+        shadowColor: Colors.black,
           title: Text(
             Translator.profile.tr,
             style: Theme.of(context)
@@ -45,7 +48,8 @@ class ProfileScreen extends GetView<ProfileController> {
                 ],
               ),
             )
-          ]*/),
+          ]*/
+      ),
       body: GetBuilder<ProfileController>(
           init: controller,
           builder: (context) => controller.profile.value!.id == null

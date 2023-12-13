@@ -16,6 +16,9 @@ class ArticleScreen extends GetWidget<ArticleController> {
       child: Scaffold(
         backgroundColor: white,
         appBar: AppBar(
+          elevation: 0.5,
+          surfaceTintColor: Colors.transparent,
+          shadowColor: Colors.black,
           leading: BackButton(
             onPressed: controller.back,
             color: black,

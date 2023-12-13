@@ -10,8 +10,9 @@ import 'paid_item.dart';
 
 class PaidList extends StatelessWidget {
   PaidList(this.title, this.courses, {super.key});
-    final String title;
-    final List<Course> courses;
+
+  final String title;
+  final List<Course> courses;
   HomeController controller = Get.find<HomeController>();
 
   @override
@@ -31,13 +32,10 @@ class PaidList extends StatelessWidget {
                     .copyWith(color: black),
               ),
               TextButton(
-                onPressed: ()=> controller.gotoTab(1),
+                onPressed: () => controller.gotoTab(1),
                 child: Text(
                   Translator.seeAll.tr,
-                  style: Theme.of(context)
-                      .textTheme
-                      .displayMedium!
-                      .copyWith(
+                  style: Theme.of(context).textTheme.displayMedium!.copyWith(
                       color: primaryColor,
                       decoration: TextDecoration.underline),
                 ),
@@ -52,19 +50,20 @@ class PaidList extends StatelessWidget {
         ),
       ],
     );
-
   }
-    Widget coursesList (List<Course>? courses) {
-      return courses == null || courses.isEmpty ?  Container() : Padding(
-        padding: const EdgeInsetsDirectional.fromSTEB(0, 10, 5, 0),
-        child: ListView.builder(
-          scrollDirection: Axis.horizontal,
-          itemCount: courses.length,
-          itemBuilder: (BuildContext ctx, index) {
-            return PaidItem(courses[index]);
-          },
-        ),
-      );
-    }
 
+  Widget coursesList(List<Course>? courses) {
+    return courses == null || courses.isEmpty
+        ? Container()
+        : Padding(
+            padding: const EdgeInsetsDirectional.fromSTEB(0, 10, 5, 0),
+            child: ListView.builder(
+              scrollDirection: Axis.horizontal,
+              itemCount: courses.length,
+              itemBuilder: (BuildContext ctx, index) {
+                return PaidItem(courses[index]);
+              },
+            ),
+          );
+  }
 }

@@ -87,7 +87,7 @@ class PurchasedCourseItem extends StatelessWidget {
                         ),
                       ],
                     ),
-                    SizedBox(height: 15),
+                    SizedBox(height: 11),
                     Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [

@@ -2,16 +2,16 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 String? checkUsernameLogin(String txt) {
-  if (txt.isEmpty) return 'یوزر نیم نمیتواند خالی باشد';
-  if (txt.length < 4) return "یوزر نیم باید بیش از چهار حرف باشد";
+  if (txt.isEmpty) return 'نام کاربری یا ایمیل نمیتواند خالی باشد';
+  if (txt.length < 4) return "نام کاربری باید بیش از چهار حرف باشد";
   if (txt.contains('-')) return "- مجاز نیست";
   //check for email pattern
   return null;
 }
 
 String? checkUsernameSignUp(String txt) {
-  if (txt.isEmpty) return 'یوزر نیم نمیتواند خالی باشد';
-  if (txt.length < 4) return "یوزر نیم باید بیش از چهار حرف باشد";
+  if (txt.isEmpty) return 'نام کاربری نمیتواند خالی باشد';
+  if (txt.length < 4) return "نام کاربری باید بیش از چهار حرف باشد";
   if (txt.contains('-')) return "- مجاز نیست";
   if (txt.isEmail) return 'نمیتوانید از ایمیل استفاده کنید';
 

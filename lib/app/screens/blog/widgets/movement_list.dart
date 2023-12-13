@@ -17,19 +17,19 @@ class MovementList extends GetWidget<BlogController> {
     return PagedGridView(
       padding: const EdgeInsetsDirectional.fromSTEB(10, 10, 10, 10),
       pagingController: controller.pagingController1,
-      gridDelegate: SliverGridDelegateWithMaxCrossAxisExtent(maxCrossAxisExtent: screenWidth > 450 ? 280 : 190),
+      gridDelegate: SliverGridDelegateWithMaxCrossAxisExtent(
+          maxCrossAxisExtent: screenWidth > 450 ? 280 : 190),
       builderDelegate: PagedChildBuilderDelegate<Movement>(
-        firstPageProgressIndicatorBuilder: (_)=>SimmerScreen(),
-        noItemsFoundIndicatorBuilder: (_) =>Center(
-          child: Text('آیتمی یافت نشد', style: Get.theme
-              .textTheme
-              .labelMedium!
-              .copyWith(
-            color: primaryColor,
-          ),
+        firstPageProgressIndicatorBuilder: (_) => SimmerScreen(),
+        noItemsFoundIndicatorBuilder: (_) => Center(
+          child: Text(
+            'آیتمی یافت نشد',
+            style: Get.theme.textTheme.labelMedium!.copyWith(
+              color: primaryColor,
+            ),
           ),
         ),
-        newPageProgressIndicatorBuilder: (_)=>Padding(
+        newPageProgressIndicatorBuilder: (_) => Padding(
           padding: const EdgeInsetsDirectional.only(bottom: 10),
           child: Center(
             child: SizedBox(
@@ -50,8 +50,6 @@ class MovementList extends GetWidget<BlogController> {
           child: MovementItem(item),
         ),
       ),
-
     );
   }
-
 }

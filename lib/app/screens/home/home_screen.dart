@@ -19,21 +19,19 @@ class HomeScreen extends GetWidget<HomeController> {
 
   @override
   Widget build(BuildContext context) {
-    print(Get.width);
     return Scaffold(
       backgroundColor: white,
       appBar: AppBar(
+        elevation: 0.5,
+        surfaceTintColor: Colors.transparent,
+        shadowColor: Colors.black,
+        backgroundColor: white,
+        scrolledUnderElevation: 0.5,
         title: Text(
           Translator.app_name.tr,
-          style:
-              Theme.of(context).textTheme.headlineLarge!.copyWith(color: black),
+          style: Get.textTheme.headlineLarge!.copyWith(color: black),
         ),
         actions: [
-          /*IconButton(
-            onPressed: () {
-            },
-            icon: SvgPicture.asset('assets/images/search.svg'),
-          ),*/
           Padding(
             padding: const EdgeInsetsDirectional.only(end: 10),
             child: Container(
@@ -106,49 +104,45 @@ class HomeScreen extends GetWidget<HomeController> {
                 ? CourseList(Translator.generalYogaCourses.tr, home.courses!,
                     controller.gotoMoreScreen)
                 : Column(
-                  children: [
-                    Padding(
-                      padding: const EdgeInsetsDirectional.symmetric(
-                          horizontal: 5),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Padding(
+                        padding: const EdgeInsetsDirectional.symmetric(
+                            horizontal: 5),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Text(
+                              Translator.generalYogaCourses.tr,
+                              style: Get.theme.textTheme.displayLarge!
+                                  .copyWith(color: black),
+                            ),
+                            TextButton(
+                              onPressed: () => controller.gotoMoreScreen(),
+                              child: Text(
+                                Translator.seeAll.tr,
+                                style: Get.theme.textTheme.displayMedium!
+                                    .copyWith(
+                                        color: primaryColor,
+                                        decoration: TextDecoration.underline),
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                      SizedBox(height: 40),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
                         children: [
                           Text(
-                            Translator.generalYogaCourses.tr,
-                            style: Get.theme.textTheme.displayLarge!
-                                .copyWith(color: black),
+                            'تمام دوره ها خریداری شده',
+                            style: Get.theme.textTheme.displayMedium!
+                                .copyWith(color: primaryColor),
                           ),
-                          TextButton(
-                            onPressed: () => controller.gotoMoreScreen(),
-                            child: Text(
-                              Translator.seeAll.tr,
-                              style: Get.theme
-                                  .textTheme
-                                  .displayMedium!
-                                  .copyWith(
-                                  color: primaryColor,
-                                  decoration: TextDecoration.underline),
-                            ),
-                          ),
-
                         ],
                       ),
-
-                    ),
-                    SizedBox(height: 40),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Text(
-                          'تمام دوره ها خریداری شده',
-                          style: Get.theme.textTheme.displayMedium!
-                              .copyWith(color: primaryColor),
-                        ),
-                      ],
-                    ),
-                    SizedBox(height: 15),
-                  ],
-                ),
+                      SizedBox(height: 15),
+                    ],
+                  ),
           if (home.courses != null) const SizedBox(height: 25),
           if (home.paid != null && home.paid!.isNotEmpty)
             PaidList(Translator.purchasedCourses.tr, home.paid!),

@@ -18,6 +18,9 @@ class BasketScreen extends GetView<BasketController> {
       child: Scaffold(
         backgroundColor: white,
         appBar: AppBar(
+          elevation: 0.5,
+          surfaceTintColor: Colors.transparent,
+          shadowColor: Colors.black,
           leading: BackButton(
             onPressed: controller.back,
             color: black,

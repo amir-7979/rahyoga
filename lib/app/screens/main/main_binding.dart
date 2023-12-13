@@ -9,11 +9,10 @@ import '../home/home_controller.dart';
 class MainScreenBinding implements Bindings {
   @override
   void dependencies() {
-    Get.lazyPut<MainController>(() =>MainController());
-    Get.lazyPut<HomeController>(() =>HomeController());
-    Get.lazyPut<MyCoursesController>(() =>MyCoursesController());
-    Get.lazyPut<ProfileController>(() =>ProfileController());
-    Get.lazyPut<BlogController>(() =>BlogController());
-
+    Get.lazyPut<MainController>(() => MainController());
+    Get.lazyPut<HomeController>(() => HomeController());
+    Get.lazyPut<MyCoursesController>(() => MyCoursesController());
+    Get.lazyPut<ProfileController>(() => ProfileController());
+    Get.lazyPut<BlogController>(() => BlogController());
   }
 }

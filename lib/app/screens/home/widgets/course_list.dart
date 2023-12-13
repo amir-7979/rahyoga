@@ -8,10 +8,11 @@ import '../../../data/models/course.dart';
 import 'course_item.dart';
 
 class CourseList extends StatelessWidget {
-    const CourseList(this.title, this.courses, this.function, {Key? key}) : super(key: key);
-    final String title;
-    final List<Course> courses;
-    final Function function;
+  const CourseList(this.title, this.courses, this.function, {Key? key})
+      : super(key: key);
+  final String title;
+  final List<Course> courses;
+  final Function function;
 
   @override
   Widget build(BuildContext context) {
@@ -33,10 +34,7 @@ class CourseList extends StatelessWidget {
                 onPressed: () => function(),
                 child: Text(
                   Translator.seeAll.tr,
-                  style: Theme.of(context)
-                      .textTheme
-                      .displayMedium!
-                      .copyWith(
+                  style: Theme.of(context).textTheme.displayMedium!.copyWith(
                       color: primaryColor,
                       decoration: TextDecoration.underline),
                 ),
@@ -44,26 +42,26 @@ class CourseList extends StatelessWidget {
             ],
           ),
         ),
-
         SizedBox(
           height: generalYogaItemHeight,
           child: coursesList(courses),
         ),
       ],
     );
-
   }
-    Widget coursesList (List<Course>? courses) {
-      return courses == null || courses.isEmpty ?  Container() : Padding(
-        padding: const EdgeInsetsDirectional.fromSTEB(0, 10, 5, 0),
-        child: ListView.builder(
-          scrollDirection: Axis.horizontal,
-          itemCount: courses.length,
-          itemBuilder: (BuildContext ctx, index) {
-            return CourseItem(courses[index]);
-          },
-        ),
-      );
-    }
 
+  Widget coursesList(List<Course>? courses) {
+    return courses == null || courses.isEmpty
+        ? Container()
+        : Padding(
+            padding: const EdgeInsetsDirectional.fromSTEB(0, 10, 5, 0),
+            child: ListView.builder(
+              scrollDirection: Axis.horizontal,
+              itemCount: courses.length,
+              itemBuilder: (BuildContext ctx, index) {
+                return CourseItem(courses[index]);
+              },
+            ),
+          );
+  }
 }

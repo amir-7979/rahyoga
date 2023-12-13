@@ -10,14 +10,14 @@ import '../main/main_controller.dart';
 class HomeController extends GetxController {
   final ContentApiService _apiService = Get.find<ContentApiService>();
   final MainController mainController = Get.find<MainController>();
-  Rx<Home?> home =  Home().obs;
+  Rx<Home?> home = Home().obs;
   RxInt sliderIndex = 0.obs;
 
   void setSliderIndex(int i) {
     sliderIndex.value = i;
   }
 
-  void gotoTab(int i){
+  void gotoTab(int i) {
     mainController.setTab(i);
   }
 
@@ -37,13 +37,17 @@ class HomeController extends GetxController {
     fetchHome();
   }
 
-  void gotoCourseInfo(int i) => Get.toNamed(AppRoutes.courseInfoScreen ,arguments: i);
+  void gotoCourseInfo(int i) =>
+      Get.toNamed(AppRoutes.courseInfoScreen, arguments: i);
 
-  void gotoBuyCourse(int i) => Get.toNamed(AppRoutes.byuCourseScreen ,arguments: i);
+  void gotoBuyCourse(int i) =>
+      Get.toNamed(AppRoutes.byuCourseScreen, arguments: i);
 
-  void gotoMoreScreen() => Get.toNamed(AppRoutes.moreScreen, arguments: [Translator.generalYogaCourses.tr, getCourses]);
+  void gotoMoreScreen() => Get.toNamed(AppRoutes.moreScreen,
+      arguments: [Translator.generalYogaCourses.tr, getCourses]);
 
-  void gotoMiniMoreScreen() => Get.toNamed(AppRoutes.moreScreen, arguments: [Translator.miniYogaCourses.tr, getMiniCourses]);
+  void gotoMiniMoreScreen() => Get.toNamed(AppRoutes.moreScreen,
+      arguments: [Translator.miniYogaCourses.tr, getMiniCourses]);
 
   Future<Home?> fetchHome() async {
     home.value = await _apiService.home();
@@ -51,7 +55,7 @@ class HomeController extends GetxController {
     return home.value;
   }
 
-  void gotoArticle(int i, String txt){
+  void gotoArticle(int i, String txt) {
     Get.toNamed(AppRoutes.articleScreen, arguments: [i, txt]);
   }
 
@@ -60,7 +64,4 @@ class HomeController extends GetxController {
     fetchHome();
     super.onInit();
   }
-
-
-
 }

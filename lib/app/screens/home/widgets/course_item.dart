@@ -41,16 +41,23 @@ class CourseItem extends GetWidget<HomeController> {
                           child: CacheImage(url: course.image ?? ''),
                         ),
                       ),
-                      if(course.offer_percent! > 0)Container(
-                        height: 20,width: 37,
-                        decoration: BoxDecoration(
-                          color: Colors.redAccent,
-                          borderRadius: BorderRadius.all(Radius.circular(10)),
-                        ),child: Center(
-                          child: Text('% ${course.offer_percent}',style: Theme.of(context)
-                              .textTheme
-                              .labelSmall!
-                              .copyWith(color: black),)),)
+                      if (course.offer_percent! > 0)
+                        Container(
+                          height: 20,
+                          width: 37,
+                          decoration: BoxDecoration(
+                            color: Colors.redAccent,
+                            borderRadius: BorderRadius.all(Radius.circular(10)),
+                          ),
+                          child: Center(
+                              child: Text(
+                            '% ${course.offer_percent}',
+                            style: Theme.of(context)
+                                .textTheme
+                                .labelSmall!
+                                .copyWith(color: black),
+                          )),
+                        )
                     ],
                   ),
                   const SizedBox(height: 10),
@@ -86,14 +93,13 @@ class CourseItem extends GetWidget<HomeController> {
                     mainAxisAlignment: MainAxisAlignment.end,
                     children: [
                       Text(
-                        Translator.toman.trParams(
-                            {'number': course.offer??''}),
+                        Translator.toman
+                            .trParams({'number': course.offer ?? ''}),
                         style: Theme.of(context)
                             .textTheme
                             .bodyMedium!
                             .copyWith(color: black),
                       ),
-
                     ],
                   ),
                   const SizedBox(height: 15),

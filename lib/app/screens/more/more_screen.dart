@@ -17,6 +17,9 @@ class MoreScreen extends GetView<MoreController> {
       child: Scaffold(
         backgroundColor: white,
         appBar: AppBar(
+          elevation: 0.5,
+          surfaceTintColor: Colors.transparent,
+          shadowColor: Colors.black,
           leading: BackButton(
             onPressed: controller.back,
             color: black,
@@ -32,7 +35,9 @@ class MoreScreen extends GetView<MoreController> {
         body:PagedListView.separated(
           separatorBuilder: (context, item) => const Padding(
             padding: EdgeInsetsDirectional.only(bottom: 10),
-            child: Divider(),
+            child: Divider(
+              color: tertiaryColor2,
+            ),
           ),
           padding: const EdgeInsetsDirectional.fromSTEB(15, 15, 10, 15),
           pagingController: controller.pagingController,

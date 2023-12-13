@@ -39,8 +39,8 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]);
     SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
-      statusBarColor:
-      Colors.white.withAlpha(10), // Replace with your desired status bar color
+      statusBarColor: Colors.white
+          .withAlpha(10),
     ));
     Get.lazyPut<SplashController>(
       () => SplashController(),
@@ -66,20 +66,85 @@ class MyApp extends StatelessWidget {
           hoverColor: Colors.transparent,
           primarySwatch: Colors.blue,
           appBarTheme: AppBarTheme(
-              toolbarHeight: 60,
-              color: white,
-              titleTextStyle: Theme.of(context)
-                  .textTheme
-                  .headlineLarge!
-                  .copyWith(
-                      color: black, fontWeight: FontWeight.w700, fontSize: 18),
-              elevation: 0.5,
+            toolbarHeight: 60,
+            color: white,
+            titleTextStyle: Theme.of(context).textTheme.headlineLarge!.copyWith(
+                color: black, fontWeight: FontWeight.w700, fontSize: 18),
+            elevation: 0.5,
             systemOverlayStyle: const SystemUiOverlayStyle(
               statusBarColor: Colors.green,
               statusBarIconBrightness: Brightness.dark,
               statusBarBrightness: Brightness.light,
-            ),),
-          textTheme: persianTextTheme),
+            ),
+          ),
+          textTheme: persianTextTheme,
+          buttonTheme: ButtonThemeData(splashColor: Colors.transparent),
+          textButtonTheme: TextButtonThemeData(
+            style: ButtonStyle(
+              overlayColor: MaterialStateProperty.resolveWith<Color?>(
+                (Set<MaterialState> states) {
+                  if (states.contains(MaterialState.pressed)) {
+                    return Colors
+                        .transparent; // Set to Colors.transparent or any other color as desired
+                  }
+                  return null;
+                },
+              ),
+              splashFactory: NoSplash.splashFactory,
+              shadowColor: MaterialStateProperty.resolveWith<Color?>(
+                (Set<MaterialState> states) {
+                  if (states.contains(MaterialState.pressed)) {
+                    return Colors
+                        .transparent; // Set to Colors.transparent or any other color as desired
+                  }
+                  return null;
+                },
+              ),
+              surfaceTintColor: MaterialStateProperty.resolveWith<Color?>(
+                (Set<MaterialState> states) {
+                  if (states.contains(MaterialState.pressed)) {
+                    return Colors.transparent; // Set to Colors.transparent or any other color as desired
+                  }
+                  return null;
+                },
+              ),
+            ),
+          ),
+          elevatedButtonTheme: ElevatedButtonThemeData(
+            style: ButtonStyle(
+              overlayColor: MaterialStateProperty.resolveWith<Color?>(
+                    (Set<MaterialState> states) {
+                  if (states.contains(MaterialState.pressed)) {
+                    return Colors
+                        .transparent; // Set to Colors.transparent or any other color as desired
+                  }
+                  return null;
+                },
+              ),
+              splashFactory: NoSplash.splashFactory,
+              shadowColor: MaterialStateProperty.resolveWith<Color?>(
+                    (Set<MaterialState> states) {
+                  if (states.contains(MaterialState.pressed)) {
+                    return Colors
+                        .transparent; // Set to Colors.transparent or any other color as desired
+                  }
+                  return null;
+                },
+              ),
+              surfaceTintColor: MaterialStateProperty.resolveWith<Color?>(
+                    (Set<MaterialState> states) {
+                  if (states.contains(MaterialState.pressed)) {
+                    return Colors.transparent; // Set to Colors.transparent or any other color as desired
+                  }
+                  return null;
+                },
+              ),
+            ),
+          ),
+          dividerColor: tertiaryColor2,
+          splashFactory: NoSplash.splashFactory,
+          shadowColor: Colors.transparent,
+          applyElevationOverlayColor: false),
       getPages: AppPages.pages,
       builder: (context, child) {
         return ScrollConfiguration(

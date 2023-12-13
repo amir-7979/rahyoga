@@ -18,7 +18,9 @@ class BlogList extends GetWidget<BlogController> {
       child: PagedListView.separated(
         separatorBuilder: (context, item) => const Padding(
           padding: EdgeInsetsDirectional.only(bottom: 5),
-          child: Divider(),
+          child: Divider(
+            color: tertiaryColor2,
+          ),
         ),
         pagingController: controller.pagingController2,
         builderDelegate: PagedChildBuilderDelegate<Blog>(

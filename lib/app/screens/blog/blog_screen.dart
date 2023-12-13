@@ -12,91 +12,108 @@ class BlogScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return DefaultTabController(
-      length: 2,
-      child: Scaffold(
-        backgroundColor: white,
-        appBar: AppBar(
-            title: Text(
-              Translator.myCourses.tr,
-              style: Theme.of(context)
-                  .textTheme
-                  .headlineLarge!
-                  .copyWith(color: black),
-            )
-        ),
-        body: Column(
-          children: <Widget>[
-            Padding(
-              padding: const EdgeInsetsDirectional.fromSTEB(15, 10, 15, 10),
-              child: SizedBox(
-                height: 50,
-                child: AppBar(
-                  toolbarHeight: 50,
+    return SafeArea(
+      child: DefaultTabController(
+        length: 2,
+        child: Scaffold(
+          backgroundColor: white,
+          appBar: AppBar(
+              elevation: 0.5,
+              surfaceTintColor: Colors.transparent,
+              shadowColor: Colors.black,
+              title: Text(
+                Translator.myCourses.tr,
+                style: Theme.of(context)
+                    .textTheme
+                    .headlineLarge!
+                    .copyWith(color: black),
+              )),
+          body: Column(
+            children: <Widget>[
+              Padding(
+                padding: const EdgeInsetsDirectional.fromSTEB(15, 10, 15, 10),
+                child: SizedBox(
+                  height: 50,
+                  child: AppBar(
+                    elevation: 0,
+                    toolbarHeight: 50,
                     titleSpacing: 5,
+                    surfaceTintColor: Colors.transparent,
                     shape: const RoundedRectangleBorder(
-                      borderRadius: BorderRadius.all(
-                        Radius.circular(30),
+                        borderRadius: BorderRadius.all(
+                          Radius.circular(30),
+                        ),
+                        side: BorderSide(color: moreTextColor)),
+                    title: TabBar(
+                      indicatorSize: TabBarIndicatorSize.label,
+                      labelPadding: EdgeInsets.zero,
+                      indicator: RectangularIndicator(
+                        color: fourthColor,
+                        horizontalPadding: 0,
+                        // Adjust this padding as needed
+                        verticalPadding: 6,
+                        bottomLeftRadius: 30,
+                        bottomRightRadius: 30,
+                        topLeftRadius: 30,
+                        topRightRadius: 30,
                       ),
-                      side: BorderSide(color: moreTextColor)
-                  ),
-                  title: TabBar(
-                    automaticIndicatorColorAdjustment: true,
-                    padding: EdgeInsetsDirectional.zero,
-                    indicatorPadding: EdgeInsetsDirectional.zero,
-                    tabs: [
-                      Tab(
-                          height: 40,
-                          child: Text(
-                            'آسانا',
-                            style: Theme.of(context)
-                                .textTheme
-                                .headlineMedium!
-                                .copyWith(color: primaryColor),
-                          )
+                      splashBorderRadius: BorderRadius.zero,
+                      splashFactory: NoSplash.splashFactory,
+                      overlayColor: MaterialStateProperty.resolveWith(
+                        (Set states) {
+                          return states.contains(MaterialState.focused)
+                              ? null
+                              : Colors.transparent;
+                        },
                       ),
-                      Tab(
-                          height: 40,
-                          child: Text(
-                            Translator.articles.tr,
-                            style: Theme.of(context)
-                                .textTheme
-                                .headlineMedium!
-                                .copyWith(color: primaryColor),
-                          )
-                      ),
-                    ],
-                    indicator: RectangularIndicator(
-                      color: fourthColor,
-                      bottomLeftRadius: 30,
-                      bottomRightRadius: 30,
-                      topLeftRadius: 30,
-                      topRightRadius: 30,
-                      paintingStyle: PaintingStyle.fill,
+                      tabs: [
+                        Tab(
+                            height: 50,
+                            child: Container(
+                              height: 50,
+                              alignment: Alignment.center,
+                              child: Text(
+                                'آسانا',
+                                style: Theme.of(context)
+                                    .textTheme
+                                    .headlineMedium!
+                                    .copyWith(color: primaryColor),
+                              ),
+                            )),
+                        Tab(
+                            height: 50,
+                            child: Container(
+                              height: 50,
+                              alignment: Alignment.center,
+                              child: Text(
+                                Translator.articles.tr,
+                                style: Theme.of(context)
+                                    .textTheme
+                                    .headlineMedium!
+                                    .copyWith(color: primaryColor),
+                              ),
+                            )),
+                      ],
                     ),
                   ),
-
-
                 ),
               ),
-            ),
-            const Expanded(
-              child: Padding(
-                padding: EdgeInsetsDirectional.symmetric(horizontal: 7),
-                child: TabBarView(
-                  children: [
-                    MovementList(),
-                    BlogList(),
-                  ],
+              const Expanded(
+                child: Padding(
+                  padding: EdgeInsetsDirectional.symmetric(horizontal: 7),
+                  child: TabBarView(
+                    children: [
+                      MovementList(),
+                      BlogList(),
+                    ],
+                  ),
                 ),
               ),
-            ),
-            const SizedBox(height: 35),
-
-          ],
+              const SizedBox(height: 35),
+            ],
+          ),
         ),
       ),
     );
   }
-
 }

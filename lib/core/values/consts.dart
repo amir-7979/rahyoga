@@ -3,6 +3,8 @@ const String baseUrl = 'https://server.rahyoga.ir';
 const waitTime = Duration(seconds: 4);
 late double screenWidth;
 late double screenHeight;
+
+double textFieldHeight = 80;
 double lastCourseHeight = 104;
 double lastCourseImageWidth = 115;
 

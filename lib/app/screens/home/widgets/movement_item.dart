@@ -7,15 +7,14 @@ import '../../../data/models/movement.dart';
 import '../../../widgets/cache_image.dart';
 
 class MovementItem extends StatelessWidget {
-   MovementItem(this.movement, {Key? key})
-      : super(key: key);
+  MovementItem(this.movement, {Key? key}) : super(key: key);
   final Movement movement;
   HomeController controller = Get.find<HomeController>();
 
   @override
   Widget build(BuildContext context) {
     return InkWell(
-      onTap: ()=> controller.gotoArticle(movement.id??1, 'آسانا'),
+      onTap: () => controller.gotoArticle(movement.id ?? 1, 'آسانا'),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
@@ -25,8 +24,7 @@ class MovementItem extends StatelessWidget {
             child: Container(
               decoration: BoxDecoration(
                   border: Border.all(color: Colors.black12, width: 1),
-                  borderRadius: BorderRadius.circular(12.0)
-              ),
+                  borderRadius: BorderRadius.circular(12.0)),
               child: ClipRRect(
                 borderRadius: BorderRadius.circular(12.0),
                 child: CacheImage(url: movement.image ?? ''),

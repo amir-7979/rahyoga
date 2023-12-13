@@ -4,6 +4,7 @@ import 'package:get/get.dart';
 import '../../../../core/languages/translator.dart';
 import '../../../../core/theme/colors.dart';
 import '../../../../core/values/border_styles.dart';
+import '../../../../core/values/consts.dart';
 import '../login_controller.dart';
 import 'recover_dialog.dart';
 
@@ -32,7 +33,7 @@ class LoginForm extends StatelessWidget {
             ),
             const SizedBox(height: 35),
             SizedBox(
-              height: 70,
+              height: textFieldHeight,
               child: TextFormField(
                 style: Get.theme
                     .textTheme
@@ -63,7 +64,7 @@ class LoginForm extends StatelessWidget {
             ),
             const SizedBox(height: 10),
             SizedBox(
-              height: 70,
+              height: textFieldHeight,
               child: Obx(()=> TextFormField(
                   style: Get.theme
                       .textTheme

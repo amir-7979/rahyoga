@@ -17,7 +17,7 @@ class BottomAppBarNav extends GetView<CourseInfoController> {
       builder: (context) => context.course.value!.id == null
           ? const SimmerScreen()
           : Container(
-              padding: const EdgeInsetsDirectional.fromSTEB(16, 20, 16, 22),
+              padding: const EdgeInsetsDirectional.fromSTEB(16, 20, 16, 16),
               height: 80,
               width: screenWidth,
               decoration: const BoxDecoration(
@@ -73,6 +73,12 @@ class BottomAppBarNav extends GetView<CourseInfoController> {
                             minimumSize: const Size.fromWidth(70),
                             elevation: 0,
                             shape: const StadiumBorder(),
+                            foregroundColor: Colors.transparent,
+                            splashFactory: NoSplash.splashFactory,
+                            surfaceTintColor: Colors.transparent,
+                            shadowColor: Colors.transparent,
+                            backgroundColor: Colors.transparent
+
                           ),
                           onPressed: () async {
                             controller.goToSession(controller.index.value - 1);
@@ -96,6 +102,9 @@ class BottomAppBarNav extends GetView<CourseInfoController> {
                           style: ElevatedButton.styleFrom(
                             padding: EdgeInsetsDirectional.zero,
                             minimumSize: const Size.fromWidth(110),
+                            splashFactory: NoSplash.splashFactory,
+                            surfaceTintColor: Colors.transparent,
+                            shadowColor: Colors.transparent,
                             backgroundColor: primaryColor,
                             elevation: 0,
                             shape: const StadiumBorder(),
@@ -113,7 +122,7 @@ class BottomAppBarNav extends GetView<CourseInfoController> {
                                 style: Get.theme.textTheme.headlineMedium!
                                     .copyWith(color: white),
                               ),
-                              Icon(Icons.chevron_right)
+                              Icon(Icons.chevron_right, color: white,)
                             ],
                           ),
                         ),
