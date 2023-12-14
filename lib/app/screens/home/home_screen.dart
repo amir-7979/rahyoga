@@ -50,8 +50,8 @@ class HomeScreen extends GetWidget<HomeController> {
                       () => (controller.home.value!.courseCartCounter != null &&
                               controller.home.value!.courseCartCounter! > 0)
                           ? Positioned(
-                              right: 5,
-                              bottom: 8,
+                              right: 4,
+                              bottom: 3,
                               child: Container(
                                 padding: EdgeInsets.all(2.5),
                                 decoration: BoxDecoration(

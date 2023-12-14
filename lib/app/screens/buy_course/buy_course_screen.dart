@@ -117,7 +117,7 @@ class BuyCourseScreen extends GetView<BuyCourseController> {
               ),
               const SizedBox(height: 25),
               Container(
-                padding: const EdgeInsetsDirectional.fromSTEB(14, 12, 14, 12),
+                padding: const EdgeInsetsDirectional.fromSTEB(10, 12, 14, 12),
                 decoration: const BoxDecoration(
                     color: fourthColor,
                     borderRadius:
@@ -143,7 +143,7 @@ class BuyCourseScreen extends GetView<BuyCourseController> {
                                 style: Get.theme.textTheme.headlineSmall!
                                     .copyWith(color: black),
                               ),
-                              const SizedBox(height: 12),
+                              const SizedBox(height: 5),
                               Text(
                                 course.mentor!.fullname ?? '',
                                 style: Get.theme.textTheme.headlineMedium!

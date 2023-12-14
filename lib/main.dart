@@ -57,6 +57,7 @@ class MyApp extends StatelessWidget {
       ],
       // set this property
       locale: const Locale('fa', 'IR'),
+      
       fallbackLocale: const Locale('en', 'US'),
       translations: Translator(),
       theme: ThemeData(
@@ -68,14 +69,17 @@ class MyApp extends StatelessWidget {
           appBarTheme: AppBarTheme(
             toolbarHeight: 60,
             color: white,
-            titleTextStyle: Theme.of(context).textTheme.headlineLarge!.copyWith(
+            titleTextStyle: Get.textTheme.headlineLarge!.copyWith(
                 color: black, fontWeight: FontWeight.w700, fontSize: 18),
             elevation: 0.5,
             systemOverlayStyle: const SystemUiOverlayStyle(
-              statusBarColor: Colors.green,
-              statusBarIconBrightness: Brightness.dark,
-              statusBarBrightness: Brightness.light,
+              statusBarColor: Colors.black,
             ),
+          ),
+          textSelectionTheme: TextSelectionThemeData(
+              cursorColor: Colors.white,
+                  selectionColor: Colors.white,
+              selectionHandleColor: Colors.blueAccent,
           ),
           textTheme: persianTextTheme,
           buttonTheme: ButtonThemeData(splashColor: Colors.transparent),

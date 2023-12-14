@@ -13,10 +13,7 @@ class FavoriteCourseList extends  GetWidget<MyCoursesController> {
 
    Widget build(BuildContext context) => PagedListView.separated(
      separatorBuilder: (context, item) => const Padding(
-       padding: EdgeInsetsDirectional.symmetric(vertical: 3),
-       child: Divider(
-         color: tertiaryColor2,
-       ),
+       padding: EdgeInsetsDirectional.symmetric(vertical: 6),
      ),
      padding: const EdgeInsetsDirectional.fromSTEB(10, 10, 10, 0),
      pagingController: controller.pagingController1,

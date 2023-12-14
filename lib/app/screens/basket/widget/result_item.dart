@@ -144,7 +144,7 @@ class ResultItem extends GetView<BasketController> {
           ),
         ),
         const SizedBox(height: 8),
-        const Divider(height: 1),
+        const Divider(height: 1, color: tertiaryColor2),
         const SizedBox(height: 5),
       ],
     );

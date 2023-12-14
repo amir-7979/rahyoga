@@ -40,23 +40,16 @@ class BottomBar extends GetView<BuyCourseController> {
                   child: Obx(
                     () => (controller.isLoading.value)
                         ? Center(
-                            child: Row(
-                              children: const [
-                                SizedBox(
-                                  height: 30,
-                                  width: 30,
-                                  child: AspectRatio(
-                                    aspectRatio: 1,
-                                    child: CircularProgressIndicator(
-                                      color: primaryColor,
-                                      strokeWidth: 2,
-                                    ),
-                                  ),
+                            child: SizedBox(
+                              height: 30,
+                              width: 30,
+                              child: AspectRatio(
+                                aspectRatio: 1,
+                                child: CircularProgressIndicator(
+                                  color: Colors.white,
+                                  strokeWidth: 2,
                                 ),
-                                SizedBox(
-                                  width: 15,
-                                )
-                              ],
+                              ),
                             ),
                           )
                         : Text(

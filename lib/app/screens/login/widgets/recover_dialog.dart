@@ -15,15 +15,15 @@ Dialog recoverDialog() {
     shape: const RoundedRectangleBorder(
         borderRadius: BorderRadius.all(Radius.circular(16.0))),
     child: SizedBox(
-      height: 350,
+      height: 400,
       child: Container(
         decoration: const BoxDecoration(
-          color: Colors.white,
+          color: white,
           borderRadius: BorderRadius.all(Radius.circular(16)),
         ),
         child: Column(
           children: [
-            SizedBox(height: 5,),
+            SizedBox(height: 5),
             Row(
               children: [
                 IconButton(
@@ -34,7 +34,7 @@ Dialog recoverDialog() {
                 ),
               ],
             ),
-            const Divider(height: 5),
+            const Divider(height: 5, color: tertiaryColor2),
             Expanded(
               child: Form(
                 key: _controller.formKey2,
@@ -44,7 +44,7 @@ Dialog recoverDialog() {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       SizedBox(
-                        height: 70,
+                        height: 50,
                         child: TextFormField(
                           style: const TextStyle(color: black),
                           controller: _controller.phoneController,

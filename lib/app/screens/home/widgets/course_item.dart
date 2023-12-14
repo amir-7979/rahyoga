@@ -68,7 +68,7 @@ class CourseItem extends GetWidget<HomeController> {
                         .headlineMedium!
                         .copyWith(color: black),
                   ),
-                  const SizedBox(height: 15),
+                  const SizedBox(height: 12),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
@@ -102,7 +102,7 @@ class CourseItem extends GetWidget<HomeController> {
                       ),
                     ],
                   ),
-                  const SizedBox(height: 15),
+                  const SizedBox(height: 10),
                 ],
               ),
             ),

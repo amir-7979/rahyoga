@@ -5,6 +5,7 @@ import 'package:rahyoga/app/screens/signup/signup_controller.dart';
 import '../../../../core/languages/translator.dart';
 import '../../../../core/theme/colors.dart';
 import '../../../../core/values/border_styles.dart';
+import '../../../../core/values/consts.dart';
 
 class SignupForm extends StatelessWidget {
   SignupForm({Key? key}) : super(key: key);
@@ -33,7 +34,7 @@ class SignupForm extends StatelessWidget {
             ),
             const SizedBox(height: 35),
             SizedBox(
-              height: 70,
+              height: textFieldHeight,
               child: TextFormField(
                 style: Get.theme
                     .textTheme
@@ -64,7 +65,7 @@ class SignupForm extends StatelessWidget {
             ),
             const SizedBox(height: 10),
             SizedBox(
-              height: 70,
+              height: textFieldHeight,
               child: TextFormField(
                 style: Get.theme
                     .textTheme
@@ -97,7 +98,7 @@ class SignupForm extends StatelessWidget {
             ),
             const SizedBox(height: 10),
             SizedBox(
-              height: 70,
+              height: textFieldHeight,
               child: TextFormField(
                 style: Get.theme
                     .textTheme
@@ -131,7 +132,7 @@ class SignupForm extends StatelessWidget {
             ),
             const SizedBox(height: 10),
             SizedBox(
-              height: 70,
+              height: textFieldHeight,
               child: Obx(
                   ()=> TextFormField(
                   style: Get.theme
@@ -175,7 +176,7 @@ class SignupForm extends StatelessWidget {
             ),
             const SizedBox(height: 10),
             SizedBox(
-              height: 70,
+              height: textFieldHeight,
               child: Obx(
                   ()=> TextFormField(
                   style: Get.theme
@@ -283,7 +284,8 @@ class SignupForm extends StatelessWidget {
                     child: Text(
                       Translator.login.tr,
                       style: Theme.of(context).textTheme.bodyLarge!.copyWith(
-                          color: white, decoration: TextDecoration.underline),
+                          color: white, decoration: TextDecoration.underline,
+                          decorationColor: white),
                     ),
                   ),
                 ],

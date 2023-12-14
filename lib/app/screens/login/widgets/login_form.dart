@@ -114,7 +114,8 @@ class LoginForm extends StatelessWidget {
                   Translator.forget_password.tr,
                   style: Get.theme.textTheme.displayMedium!.copyWith(
                       color: forgetPasswordColor,
-                      decoration: TextDecoration.underline),
+                      decoration: TextDecoration.underline,
+                  decorationColor: forgetPasswordColor),
                 ),
               ),
             ),
@@ -180,7 +181,8 @@ class LoginForm extends StatelessWidget {
                     child: Text(
                       Translator.signup.tr,
                       style: Get.theme.textTheme.bodyLarge!.copyWith(
-                          color: white, decoration: TextDecoration.underline),
+                          color: white, decoration: TextDecoration.underline,
+                          decorationColor: white),
                     ),
                   ),
                 ],

@@ -26,7 +26,6 @@ class FavoriteCourseItem extends StatelessWidget {
           ),
           child: Row(
             children: [
-
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 5),
                 child: SizedBox(
@@ -78,7 +77,7 @@ class FavoriteCourseItem extends StatelessWidget {
                         ),
                       ),
                       SizedBox(height: 5),
-                      const Divider(height: 1),
+                      const Divider(height: 1, color: tertiaryColor2),
                       Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         crossAxisAlignment: CrossAxisAlignment.center,

@@ -78,7 +78,7 @@ class CourseItem extends StatelessWidget {
         ),
         const Padding(
           padding: EdgeInsetsDirectional.symmetric(horizontal: 47),
-          child: Divider(height: 1),
+          child: Divider(height: 1, color: tertiaryColor2),
         ),
       ],
     );
