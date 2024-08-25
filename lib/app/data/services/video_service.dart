@@ -31,13 +31,17 @@ class VideoService extends GetxService {
     var downloadTask = findTask(course, session);
     print(downloadTask?.sessionId);
     if (downloadTask == null) {
+      print(url);
       downloadTask = DownloadTask(url, course, session, progress);
       downloadTasks.add(downloadTask);
     }
     if (appDocumentsPath.isEmpty) {
       await init();
     }
-    final movieFilePath = '$appDocumentsPath/${course}_${session}.mp4';
+    final extension = url.split('.').last;
+
+    final movieFilePath = '$appDocumentsPath/${course}_${session}.${extension}';
+    print(movieFilePath);
     try {
       await download(movieFilePath, downloadTask);
       return await saveToDatabase(downloadTask, movieFilePath);
@@ -80,6 +84,7 @@ class VideoService extends GetxService {
       print(await dataBaseService.getAllVideo().toString());
       return true;
     }catch(err){
+      print(err.toString());
       return false;
     }
   }

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:get/get.dart';
+import 'package:media_kit/media_kit.dart';
 import 'package:rahyoga/app/data/services/storage_service.dart';
 import 'package:rahyoga/app/data/services/video_service.dart';
 import 'package:rahyoga/app/screens/splash/splash_screen.dart';
@@ -20,6 +21,8 @@ import 'core/utils/scroll_behavior.dart';
 
 Future<void> main() async {
   await initServices();
+  WidgetsFlutterBinding.ensureInitialized();
+  MediaKit.ensureInitialized();
   runApp(const MyApp());
 }
 

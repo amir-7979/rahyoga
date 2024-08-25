@@ -20,7 +20,7 @@ publish_to: 'none' # Remove this line if you wish to publish to pub.dev
 version: 1.0.0+1
 
 environment:
-  sdk: '>=2.18.6 <3.0.0'
+  sdk: '>=3.3.2 <4.0.0'
 
 # Dependencies specify other packages that your package needs in order to work.
 # To automatically upgrade your package dependencies to the latest versions
@@ -36,7 +36,7 @@ dependencies:
   cupertino_icons: ^1.0.2
   get: ^4.6.5
   dio: ^5.1.1
-  flutter_secure_storage: ^7.0.1
+  flutter_secure_storage: ^8.1.0
   mutex: ^3.0.1
   persian_fonts: ^1.0.5
   persistent_bottom_nav_bar: ^5.0.2
@@ -49,16 +49,18 @@ dependencies:
   dotted_line: ^3.1.0
   readmore: ^2.2.0
   shimmer: ^2.0.0
-  flutter_widget_from_html: ^0.10.0
+  flutter_widget_from_html: ^0.15.2
   infinite_scroll_pagination: ^3.2.0
   flutter_launcher_icons: ^0.12.0
   dio_smart_retry: ^5.0.0
   flutter_html: ^3.0.0-alpha.6
-  video_player: ^2.1.6
-  flick_video_player: ^0.5.0
+  video_player: ^2.9.1
   sqflite: ^2.2.8+4
   pull_to_refresh: ^2.0.0
-
+  media_kit: ^1.1.11
+  media_kit_video: ^1.2.5
+  media_kit_libs_video: ^1.0.5
+  flick_video_player: ^0.9.0
 dev_dependencies:
   flutter_test:
     sdk: flutter

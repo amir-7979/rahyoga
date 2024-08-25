@@ -1,7 +1,7 @@
-import 'package:flick_video_player/flick_video_player.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
+import 'package:media_kit_video/media_kit_video.dart';
 import 'package:readmore/readmore.dart';
 import '../../../core/theme/colors.dart';
 import '../../data/models/paid_course_info.dart';
@@ -62,8 +62,9 @@ class CourseInfoScreen extends GetView<CourseInfoController> {
                     aspectRatio: 16 / 9,
                     child: Directionality(
                       textDirection: TextDirection.ltr,
-                      child: FlickVideoPlayer(
-                        flickManager: controller.flickManager,
+                      child: Video(
+
+                        controller: controller.videoController,
                       ),
                     ),
                   ),

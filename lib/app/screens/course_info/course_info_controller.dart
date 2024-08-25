@@ -1,12 +1,11 @@
 import 'dart:async';
 import 'dart:io';
-import 'package:flick_video_player/flick_video_player.dart';
-import 'package:flutter/widgets.dart';
+import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:media_kit/media_kit.dart';
+import 'package:media_kit_video/media_kit_video.dart';
 import 'package:rahyoga/app/screens/course_info/widgets/confirm_dialog.dart';
 import 'package:rahyoga/app/screens/my_courses/my_courses_controller.dart';
-import 'package:video_player/video_player.dart';
-
 import '../../../core/languages/translator.dart';
 import '../../data/models/all.dart';
 import '../../data/models/download_task.dart';
@@ -37,13 +36,10 @@ class CourseInfoController extends GetxController {
   String next = Translator.nextSession.tr;
   String prev = Translator.prevSession.tr;
   String duration = '${1} ${Translator.hour.tr} ${40} ${Translator.min.tr}';
-  late FlickManager flickManager = FlickManager(
-    autoPlay: false,
-    videoPlayerController: VideoPlayerController.network('',
-        httpHeaders: {'Referer': 'http://open.negavid.com'},
-        formatHint: VideoFormat.hls,
-        videoPlayerOptions: VideoPlayerOptions(allowBackgroundPlayback: true)),
-  );
+
+  late Player videoPlayer;
+  late VideoController videoController;
+
   late Stream<List<DownloadTask>> downloadStream;
   late StreamSubscription<List<DownloadTask>> sub;
   final ScrollController scrollController = ScrollController();
@@ -54,6 +50,8 @@ class CourseInfoController extends GetxController {
     fetchCourse(id!);
     downloadStream = _videoService.downloadTasksStream.stream;
     sub = downloadStream.listen((event) => getTask(event));
+    videoPlayer = Player();
+    videoController = VideoController(videoPlayer);
     isLoading.value = false;
     pressDownloading.value = false;
     update();
@@ -62,12 +60,12 @@ class CourseInfoController extends GetxController {
 
   void getTask(List<DownloadTask> event) {
     DownloadTask? task;
-    try{
-    task = event.firstWhereOrNull((task) =>
+    try {
+      task = event.firstWhereOrNull((task) =>
       task.courseId == id &&
           task.sessionId ==
-             course.value!.progress!.seasons.all!.firstWhere((element) => element.order == index.value).id!);
-    }catch(err){
+              course.value!.progress!.seasons.all!.firstWhere((element) => element.order == index.value).id!);
+    } catch (err) {
       print(err.toString());
     }
     if (task != null) {
@@ -75,11 +73,10 @@ class CourseInfoController extends GetxController {
       downloadProgress.value = task.progress;
       pressDownloading.value = false;
       update();
-      if(task.progress == 100){
+      if (task.progress == 100) {
         isExist.value = true;
         goToSession(index.value);
       }
-
     }
   }
 
@@ -87,16 +84,18 @@ class CourseInfoController extends GetxController {
     if (isDownloading.value == false) {
       pressDownloading.value = true;
       update();
-      if(await db.videoExists(course.value!.id, course.value!.progress!.seasons.all!.firstWhere((element) => element.order == index.value).id!)){
+      if (await db.videoExists(course.value!.id, course.value!.progress!.seasons.all!.firstWhere((element) => element.order == index.value).id!)) {
         Get.dialog(ConfirmDialog());
-      }else{
-        String? url = await _contentApiService.getVideoUrl(course.value!.id!,
+      } else {
+        String? url = await _contentApiService.getVideoUrl(
+            course.value!.id!,
             course.value!.progress!.seasons.all![index.value - 1].id!);
         if (url != null) {
           pressDownloading.value = false;
           isDownloading.value = true;
           update();
-          await _videoService.downloadVideoFile(course.value!.id!,
+          await _videoService.downloadVideoFile(
+              course.value!.id!,
               course.value!.progress!.seasons.all![index.value - 1].id!,
               url, 0);
           goToSession(index.value);
@@ -108,7 +107,9 @@ class CourseInfoController extends GetxController {
       isDownloading.value = false;
       pressDownloading.value = false;
       update();
-      _videoService.cancelDownload(course.value!.id!, course.value!.progress!.seasons.all![index.value - 1].id!);
+      _videoService.cancelDownload(
+          course.value!.id!,
+          course.value!.progress!.seasons.all![index.value - 1].id!);
     }
     update();
   }
@@ -122,35 +123,46 @@ class CourseInfoController extends GetxController {
     await initVideoPlayer();
     scrollUp();
     update();
-
   }
 
   Future<void> initVideoPlayer() async {
     isExist.value = await db.videoExists(course.value!.id, course.value!.progress!.seasons.all![index.value - 1].id!);
-    flickManager.handleChangeVideo(isExist.value
-        ? VideoPlayerController.file(File(
-            _videoService.appDocumentsPath + '/${course.value!.id}_${ course.value!.progress!.seasons.all![index.value - 1].id!}.mp4'))
-        : VideoPlayerController.network(
+    final videoFilePath = _videoService.appDocumentsPath + '/${course.value!.id}_${course.value!.progress!.seasons.all![index.value - 1].id!}.mkv';
+  /*  try {
+      final videoData = await db.getAllVideo();
+      for (var video in videoData) {
+        print('Video Data:');
+        video.forEach((key, value) {
+          print('$key: $value');
+        });
+        print('---'); // Separator for clarity
+      }
+    } catch (e) {
+      print('Error fetching video data: $e');
+    }
+*/
+    if (isExist.value && File(videoFilePath).existsSync()) {
+      videoPlayer.open(Media(videoFilePath));
+    } else {
+
+      videoPlayer.open(
+          Media(
             course.value!.progress!.seasons.all![index.value - 1].hls ??
                 'https://stream.negavid.com/converted/130/16417/fMp9JB3mkPkGS6RKMjIcK6j8x6YwP95YTu30rKoeiEym62k2VFbt0jFcFcv8WWLVb6XcjT.m3u8',
             httpHeaders: {'Referer': 'http://open.negavid.com'},
-            formatHint: VideoFormat.hls,
-          ));
-
+          )
+      );
+    }
   }
-
   Future<void> updateSession() async {
     All session = course.value!.progress!.seasons.all![index.value - 1];
-    course.value!.progress!.seasons.all![index.value - 1].passed =
-        !session.passed!;
+    course.value!.progress!.seasons.all![index.value - 1].passed = !session.passed!;
     update();
-    var response = await _contentApiService.updateSessionState(
-        session.course!, session.id!);
+    var response = await _contentApiService.updateSessionState(session.course!, session.id!);
     if (response != null) {
       course.value = response;
     } else {
-      course.value!.progress!.seasons.all![index.value - 1].passed =
-          session.passed!;
+      course.value!.progress!.seasons.all![index.value - 1].passed = session.passed!;
     }
     update();
     Get.find<HomeController>().minorUpdate();
@@ -164,7 +176,7 @@ class CourseInfoController extends GetxController {
     return course.value;
   }
 
-  Future<void> deleteVideo()async {
+  Future<void> deleteVideo() async {
     pressDownloading.value = true;
     update();
     await db.deleteVideo(id, course.value!.progress!.seasons.all![index.value - 1].id!);
@@ -173,17 +185,17 @@ class CourseInfoController extends GetxController {
 
   void back() => Get.back();
 
-  scrollUp(){
-      scrollController.animateTo(
-        0.0,
-        duration: Duration(milliseconds: 500),
-        curve: Curves.easeOut,
-      );
+  void scrollUp() {
+    scrollController.animateTo(
+      0.0,
+      duration: Duration(milliseconds: 500),
+      curve: Curves.easeOut,
+    );
   }
 
   @override
   void onClose() {
-    flickManager.dispose();
+    videoPlayer.dispose();
     sub.cancel();
     super.onClose();
   }
